@@ -5,11 +5,10 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
-import java.util.Collection;
 
 public abstract class Database {
-    private MongoClient mongoClient = new MongoClient("localhost",27017);
-    private MongoDatabase database = mongoClient.getDatabase("Divar");
+    private MongoClient mongoClient;
+    private MongoDatabase database;
     private MongoCollection<Document> collection;
     private Document document = new Document();
 
@@ -21,6 +20,8 @@ public abstract class Database {
         return document;
     }
 
-    public void connectToDatabase(){
+    public void connectToDatabase() {
+        mongoClient = new MongoClient("localhost",27017);
+        database = mongoClient.getDatabase("Divar");
     }
 }
