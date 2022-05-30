@@ -34,7 +34,7 @@ javafx {
 }
 
 dependencies {
-
+    implementation group: 'org.mongodb', name: 'mongo-java-driver', version: '3.12.11'
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
