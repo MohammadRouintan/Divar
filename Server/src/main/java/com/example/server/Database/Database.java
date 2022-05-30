@@ -7,10 +7,10 @@ import org.bson.Document;
 
 
 public abstract class Database {
-    private MongoClient mongoClient;
-    private MongoDatabase database;
-    private MongoCollection<Document> collection;
-    private Document document = new Document();
+    protected MongoClient mongoClient;
+    protected MongoDatabase database;
+    protected MongoCollection<Document> collection;
+    protected Document document = new Document();
 
     public void setCollection(String collectionName){
         collection = database.getCollection(collectionName);
