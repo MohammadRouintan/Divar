@@ -22,6 +22,5 @@ public abstract class Database {
     }
 
     public void connectToDatabase(){
-        
     }
 }
