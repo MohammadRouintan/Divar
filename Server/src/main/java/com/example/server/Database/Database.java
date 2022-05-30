@@ -24,4 +24,8 @@ public abstract class Database {
         mongoClient = new MongoClient("localhost",27017);
         database = mongoClient.getDatabase("Divar");
     }
+
+    public void disConnect(){
+        mongoClient.close();
+    }
 }
