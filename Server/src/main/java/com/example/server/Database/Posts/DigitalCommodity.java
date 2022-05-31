@@ -1,9 +1,8 @@
 package com.example.server.Database.Posts;
 
 import com.example.server.Database.Database;
+import com.mongodb.client.FindIterable;
 import org.bson.Document;
-
-import java.util.ArrayList;
 
 public class DigitalCommodity extends Database implements PostFunctions {
 
@@ -54,13 +53,18 @@ public class DigitalCommodity extends Database implements PostFunctions {
 
     @Override
     public void updateFromDatabase() {
+        connectToDatabase();
         for (int i = 0; i < super.getUpdateKeys().size(); i++) {
             super.collection.updateOne(new Document("postId", super.getPostId()),new Document("$set",new Document(getUpdateKeys().get(i), getUpdateValues().get(i))));
         }
+        disConnect();
     }
 
     @Override
-    public void findFromDatabase() {
-        super.collection.find(new Document("postId", super.getPostId()));
+    public Document findFromDatabase() {
+        connectToDatabase();
+        Document d = super.collection.find(new Document("postId", super.getPostId())).cursor().next();
+        disConnect();
+        return d;
     }
 }
