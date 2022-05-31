@@ -31,7 +31,7 @@ public class PersonalItems extends Database implements PostFunctions {
         super.document.append("price" ,super.getPrice());
         super.document.append("time" ,super.getTime());
         super.document.append("phoneNumber" ,super.getPhoneNumber());
-        super.document.append("postId" ,super.getPostId());
+        super.document.append("postId", super.lastPostId() + 1);
         super.document.append("numberOfViews" ,super.getNumberOfViews());
         super.document.append("accept" ,super.isAccept());
         super.document.append("inNardeban" ,super.isInNardeban());
@@ -74,7 +74,7 @@ public class PersonalItems extends Database implements PostFunctions {
 
     @Override
     public String getPost() {
-        return document.toJson();
+        return findFromDatabase().toJson();
     }
 
     @Override
