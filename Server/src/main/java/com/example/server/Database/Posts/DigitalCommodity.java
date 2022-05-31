@@ -22,6 +22,7 @@ public class DigitalCommodity extends Database implements PostFunctions {
 
     @Override
     public void addToDatabase() {
+        super.connectToDatabase();
         super.document.append("branchMain" ,branchMain);
         super.document.append("branch1" ,branch1);
         super.document.append("branch2" ,branch2);
@@ -41,11 +42,14 @@ public class DigitalCommodity extends Database implements PostFunctions {
         super.document.append("dataArray2" ,super.getDataArray2());
         super.document.append("dataArray3" ,super.getDataArray3());
         super.collection.insertOne(super.document);
+        super.disConnect();
     }
 
     @Override
     public void deleteFromDatabase() {
+        connectToDatabase();
         super.collection.deleteOne(new Document("postId" ,super.getPostId()));
+        disConnect();
     }
 
     @Override
