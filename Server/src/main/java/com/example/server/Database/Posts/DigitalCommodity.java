@@ -3,6 +3,7 @@ package com.example.server.Database.Posts;
 import com.example.server.Database.Database;
 import com.mongodb.client.FindIterable;
 import org.bson.Document;
+import org.bson.json.JsonObject;
 
 public class DigitalCommodity extends Database implements PostFunctions {
 
@@ -41,6 +42,9 @@ public class DigitalCommodity extends Database implements PostFunctions {
         super.document.append("dataArray2" ,super.getDataArray2());
         super.document.append("dataArray3" ,super.getDataArray3());
         super.collection.insertOne(super.document);
+        super.document.append("auction" ,super.isAuction());
+        super.document.append("exchange" ,super.isExchange());
+        super.document.append("agreement" ,super.isAgreement());
         super.disConnect();
     }
 
@@ -66,5 +70,10 @@ public class DigitalCommodity extends Database implements PostFunctions {
         Document d = super.collection.find(new Document("postId", super.getPostId())).cursor().next();
         disConnect();
         return d;
+    }
+
+    @Override
+    public String getPost() {
+        return document.toJson();
     }
 }
