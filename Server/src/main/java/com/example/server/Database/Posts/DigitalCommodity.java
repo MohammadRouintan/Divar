@@ -3,6 +3,8 @@ package com.example.server.Database.Posts;
 import com.example.server.Database.Database;
 import org.bson.Document;
 
+import java.util.ArrayList;
+
 public class DigitalCommodity extends Database implements PostFunctions {
 
     private String branchMain = "Digital Commodity";
@@ -48,7 +50,9 @@ public class DigitalCommodity extends Database implements PostFunctions {
 
     @Override
     public void updateFromDatabase() {
-        
+        for (int i = 0; i < super.getUpdateKeys().size(); i++) {
+            super.collection.updateOne(new Document("postId", super.getPostId()),new Document("$set",new Document(getUpdateKeys().get(i), getUpdateValues().get(i))));
+        }
     }
 
     @Override

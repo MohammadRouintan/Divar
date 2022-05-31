@@ -29,6 +29,8 @@ public abstract class Database {
     private ArrayList<String> dataArray1;
     private ArrayList<String> dataArray2;
     private ArrayList<String> dataArray3;
+    private ArrayList<String> updateKeys;
+    private ArrayList<Object> updateValues;
 
     public void setCollection(String collectionName){
         collection = database.getCollection(collectionName);
@@ -165,5 +167,21 @@ public abstract class Database {
 
     public void setDataArray3(ArrayList<String> dataArray3) {
         this.dataArray3 = dataArray3;
+    }
+
+    public ArrayList<String> getUpdateKeys() {
+        return updateKeys;
+    }
+
+    public void setUpdateKeys(ArrayList<String> updateKeys) {
+        this.updateKeys = updateKeys;
+    }
+
+    public ArrayList<Object> getUpdateValues() {
+        return updateValues;
+    }
+
+    public void setUpdateValues(ArrayList<Object> updateValues) {
+        this.updateValues = updateValues;
     }
 }
