@@ -23,7 +23,7 @@ public abstract class Database {
     private String price;
     private String city;
     private String time;
-    private int phoneNumber;
+    private String phoneNumber;
     private int postId;
     private int numberOfViews;
     private boolean accept;
@@ -135,11 +135,11 @@ public abstract class Database {
         this.time = time;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
