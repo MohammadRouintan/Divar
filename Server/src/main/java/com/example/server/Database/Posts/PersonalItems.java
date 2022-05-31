@@ -79,10 +79,6 @@ public class PersonalItems extends Database implements PostFunctions {
 
     @Override
     public boolean isPostExists() {
-        if (super.collection.find(new Document("postId", super.getPostId())).cursor().hasNext()) {
-            return true;
-        }
-
-        return false;
+        return super.collection.find(new Document("postId", super.getPostId())).cursor().hasNext();
     }
 }
