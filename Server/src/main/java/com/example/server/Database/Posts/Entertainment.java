@@ -76,6 +76,6 @@ public class Entertainment extends Database implements PostFunctions {
 
     @Override
     public String getPost() {
-        return document.toJson();
+        return findFromDatabase().toJson();
     }
 }

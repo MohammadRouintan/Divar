@@ -75,7 +75,7 @@ public class HomeCommodity extends Database implements PostFunctions {
 
     @Override
     public String getPost() {
-        return document.toJson();
+        return findFromDatabase().toJson();
     }
 
 }
