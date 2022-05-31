@@ -67,7 +67,10 @@ public class DigitalCommodity extends Database implements PostFunctions {
     @Override
     public Document findFromDatabase() {
         connectToDatabase();
-        Document d = super.collection.find(new Document("postId", super.getPostId())).cursor().next();
+        Document d = new Document("", "");
+        if (super.collection.find(new Document("postId", super.getPostId())).cursor().hasNext()) {
+            d = super.collection.find(new Document("postId", super.getPostId())).cursor().next();
+        }
         disConnect();
         return d;
     }
