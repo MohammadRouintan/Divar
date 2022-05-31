@@ -31,17 +31,17 @@ public class Services extends Database implements PostFunctions {
         super.document.append("price" ,super.getPrice());
         super.document.append("time" ,super.getTime());
         super.document.append("phoneNumber" ,super.getPhoneNumber());
-        super.document.append("postId" ,super.getPostId());
+        super.document.append("postId", super.lastPostId() + 1);
         super.document.append("numberOfViews" ,super.getNumberOfViews());
         super.document.append("accept" ,super.isAccept());
         super.document.append("inNardeban" ,super.isInNardeban());
         super.document.append("dataArray1" ,super.getDataArray1());
         super.document.append("dataArray2" ,super.getDataArray2());
         super.document.append("dataArray3" ,super.getDataArray3());
-        super.collection.insertOne(super.document);
         super.document.append("auction" ,super.isAuction());
         super.document.append("exchange" ,super.isExchange());
         super.document.append("agreement" ,super.isAgreement());
+        super.collection.insertOne(super.document);
         super.disConnect();
     }
 

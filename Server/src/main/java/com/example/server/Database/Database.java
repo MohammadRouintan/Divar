@@ -5,6 +5,7 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -73,6 +74,16 @@ public abstract class Database {
         mongoClient = MongoClients.create();
         database = mongoClient.getDatabase("Divar");
         collection = database.getCollection(this.collectionName);
+    }
+
+    public int lastPostId() {
+        int lastId = 0;
+        if (collection.find().sort(new Document("postId", -1)).limit(1).cursor().hasNext()) {
+            String jsonString = collection.find().sort(new Document("postId", -1)).limit(1).cursor().next().toJson();
+            JSONObject obj = new JSONObject(jsonString);
+            lastId = obj.getInt("postId");
+        }
+        return lastId;
     }
 
     public void disConnect(){
