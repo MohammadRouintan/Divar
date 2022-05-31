@@ -16,7 +16,7 @@ public abstract class Database {
 
     private String bio;
     private String title;
-    private String imageName;
+    private ArrayList<String> imageName;
     private String address;
     private String price;
     private String city;
@@ -63,11 +63,11 @@ public abstract class Database {
         this.title = title;
     }
 
-    public String getImageName() {
+    public ArrayList<String> getImageName() {
         return imageName;
     }
 
-    public void setImageName(String imageName) {
+    public void setImageName(ArrayList<String> imageName) {
         this.imageName = imageName;
     }
 

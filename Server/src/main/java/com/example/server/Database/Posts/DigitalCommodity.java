@@ -38,6 +38,7 @@ public class DigitalCommodity extends Database implements PostFunctions {
         super.document.append("dataArray1" ,super.getDataArray1());
         super.document.append("dataArray2" ,super.getDataArray2());
         super.document.append("dataArray3" ,super.getDataArray3());
+        super.collection.insertOne(super.document);
     }
 
     @Override
@@ -47,11 +48,11 @@ public class DigitalCommodity extends Database implements PostFunctions {
 
     @Override
     public void updateFromDatabase() {
-
+        
     }
 
     @Override
     public void findFromDatabase() {
-
+        super.collection.find(new Document("postId", super.getPostId()));
     }
 }
