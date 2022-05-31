@@ -79,4 +79,13 @@ public class DigitalCommodity extends Database implements PostFunctions {
     public String getPost() {
         return document.toJson();
     }
+
+    @Override
+    public boolean isPostExists() {
+        if (super.collection.find(new Document("postId", super.getPostId())).cursor().hasNext()) {
+            return true;
+        }
+
+        return false;
+    }
 }
