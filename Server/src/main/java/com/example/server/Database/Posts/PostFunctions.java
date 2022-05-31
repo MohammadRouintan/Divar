@@ -9,5 +9,6 @@ public interface PostFunctions {
     public void updateFromDatabase();
     public Document findFromDatabase();
     public String getPost();
+    public boolean isPostExists();
 
 }
