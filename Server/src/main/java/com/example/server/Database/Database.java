@@ -27,12 +27,39 @@ public abstract class Database {
     private int postId;
     private int numberOfViews;
     private boolean accept;
+    private boolean auction;
     private boolean inNardeban;
+    private boolean exchange;
+    private boolean agreement;
     private ArrayList<String> dataArray1;
     private ArrayList<String> dataArray2;
     private ArrayList<String> dataArray3;
     private ArrayList<String> updateKeys;
     private ArrayList<Object> updateValues;
+
+    public boolean isAuction() {
+        return auction;
+    }
+
+    public boolean isExchange() {
+        return exchange;
+    }
+
+    public boolean isAgreement() {
+        return agreement;
+    }
+
+    public void setAuction(boolean auction) {
+        this.auction = auction;
+    }
+
+    public void setExchange(boolean exchange) {
+        this.exchange = exchange;
+    }
+
+    public void setAgreement(boolean agreement) {
+        this.agreement = agreement;
+    }
 
     public void setCollectionName(String collectionName) {
         this.collectionName = collectionName;

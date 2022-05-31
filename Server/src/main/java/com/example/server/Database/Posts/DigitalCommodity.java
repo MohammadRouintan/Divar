@@ -2,6 +2,7 @@ package com.example.server.Database.Posts;
 
 import com.example.server.Database.Database;
 import org.bson.Document;
+import org.bson.json.JsonObject;
 
 import java.util.ArrayList;
 
@@ -42,6 +43,9 @@ public class DigitalCommodity extends Database implements PostFunctions {
         super.document.append("dataArray2" ,super.getDataArray2());
         super.document.append("dataArray3" ,super.getDataArray3());
         super.collection.insertOne(super.document);
+        super.document.append("auction" ,super.isAuction());
+        super.document.append("exchange" ,super.isExchange());
+        super.document.append("agreement" ,super.isAgreement());
         super.disConnect();
     }
 
@@ -62,5 +66,10 @@ public class DigitalCommodity extends Database implements PostFunctions {
     @Override
     public void findFromDatabase() {
         super.collection.find(new Document("postId", super.getPostId()));
+    }
+
+    @Override
+    public String getPost() {
+        return document.toJson();
     }
 }
