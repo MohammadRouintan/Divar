@@ -76,7 +76,7 @@ public class DigitalCommodity extends Post implements PostFunctions {
 
     @Override
     public String getPost() {
-        return document.toJson();
+        return findFromDatabase().toJson();
     }
 
     @Override
