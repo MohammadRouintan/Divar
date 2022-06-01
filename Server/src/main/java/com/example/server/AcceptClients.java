@@ -31,8 +31,9 @@ public class AcceptClients {
                 Socket socket = serverSocket.accept();
                 ClientSockets.add(socket);
                 DIS = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
-                numbers.add(DIS.readUTF());
-                Client c = new Client(socket);
+                String number = DIS.readUTF();
+                numbers.add(number);
+                Client c = new Client(socket, number);
                 c.start();
             } catch (IOException e) {
                 System.err.println(e.getMessage());
