@@ -1,21 +1,13 @@
-package com.example.server.Database;
+package com.example.server.Database.Posts;
 
-import com.mongodb.client.MongoClient;
+import com.example.server.Database.Database;
 import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-
-public abstract class Database {
-    protected MongoClient mongoClient;
-    protected MongoDatabase database;
-    protected MongoCollection<Document> collection;
-    protected Document document = new Document();
-    protected String collectionName;
+public class Post extends Database {
 
     private String bio;
     private String title;
@@ -70,12 +62,6 @@ public abstract class Database {
         return document;
     }
 
-    public void connectToDatabase() {
-        mongoClient = MongoClients.create();
-        database = mongoClient.getDatabase("Divar");
-        collection = database.getCollection(this.collectionName);
-    }
-
     public int lastPostId() {
         int lastId = 0;
         if (collection.find().sort(new Document("postId", -1)).limit(1).cursor().hasNext()) {
@@ -84,10 +70,6 @@ public abstract class Database {
             lastId = obj.getInt("postId");
         }
         return lastId;
-    }
-
-    public void disConnect(){
-        mongoClient.close();
     }
 
     public String getBio() {

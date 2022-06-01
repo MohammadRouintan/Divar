@@ -4,7 +4,7 @@ import com.example.server.Database.Database;
 import org.bson.Document;
 import org.bson.json.JsonObject;
 
-public class Entertainment extends Database implements PostFunctions {
+public class Entertainment extends Post implements PostFunctions {
 
     private String branchMain = "Entertainment";
     private String branch1;
