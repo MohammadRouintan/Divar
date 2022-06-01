@@ -9,6 +9,11 @@ import java.util.ArrayList;
 
 public class Post extends Database {
 
+    Post(){
+        super.collectionName = "Posts";
+        super.connectToDatabase();
+    }
+
     private String bio;
     private String title;
     private ArrayList<String> imageName;
