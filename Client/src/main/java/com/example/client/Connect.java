@@ -1,20 +1,25 @@
 package com.example.client;
 
+
+import org.json.JSONObject;
 import java.io.*;
 import java.net.Socket;
 
-public class connect {
+
+public class Connect {
 
     Socket socket;
     DataOutputStream DOS;
     DataInputStream DIS;
-
-    public connect(String IP, int port, String phoneNumber) {
+    String confirmationCode;
+    public Connect(String IP, String phoneNumber) {
         try {
-            socket = new Socket(IP, port);
+            socket = new Socket(IP, 5570);
             DOS = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
             DIS = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
             DOS.writeUTF(phoneNumber);
+            confirmationCode = DIS.readUTF();
+            DOS.writeBoolean(GetInfo.confirmationCheck(confirmationCode));
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
@@ -24,7 +29,6 @@ public class connect {
         String post = null;
         try {
             DOS.writeInt(1);
-            DataInputStream DIS = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
             post = DIS.readUTF();
         } catch (IOException e) {
             System.err.println(e.getMessage());
@@ -32,10 +36,10 @@ public class connect {
         return post;
     }
 
-    public void sendPost(String json){
+    public void sendPost(JSONObject json){
         try {
             DOS.writeInt(2);
-            DOS.writeUTF(json);
+            DOS.writeUTF(json.toString());
         } catch (IOException e){
             System.err.println(e.getMessage());
         }
@@ -44,8 +48,10 @@ public class connect {
     public void sendMessage (String message, String number) {
         try {
             DOS.writeInt(3);
-            DOS.writeUTF(message);
-            DOS.writeUTF(number);
+            JSONObject json = new JSONObject();
+            json.put("messageText", message);
+            json.put("messageReceiver", number);
+            DOS.writeUTF(json.toString());
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
