@@ -31,6 +31,20 @@ public class GetInfo {
      * TODO FOR ME send message
      */
     public static void newMessage (String senderNumber, String receiverNumber, String message) {
+        for (int i = 0; i < AcceptClients.numbers.size(); i++) {
+            if (AcceptClients.numbers.get(i).equals(receiverNumber)) {
 
+            }
+        }
+    }
+
+    /**
+     *
+     * @param number to send code
+     * @return confirmation code
+     * TODO implement and connect to sms server
+     */
+    public static String getConfirmationCode (String number) {
+        return null;
     }
 }
