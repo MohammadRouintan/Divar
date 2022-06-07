@@ -16,6 +16,9 @@ public class Social extends Post implements PostFunctions {
         this.branch2 = branch2;
     }
 
+    public Social(){
+        super();
+    }
 
     @Override
     public void addToDatabase() {

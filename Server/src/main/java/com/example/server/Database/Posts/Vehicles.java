@@ -16,6 +16,9 @@ public class Vehicles extends Post implements PostFunctions {
         this.branch2 = branch2;
     }
 
+    public Vehicles(){
+        super();
+    }
 
     @Override
     public void addToDatabase() {
