@@ -1,7 +1,5 @@
-package com.example.server;
+package com.example.server.socket;
 
-
-import org.json.JSONObject;
 
 import java.io.*;
 import java.net.Socket;

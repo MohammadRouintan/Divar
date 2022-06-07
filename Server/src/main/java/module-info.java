@@ -8,5 +8,7 @@
 
     opens com.example.server to javafx.fxml;
     exports com.example.server;
+     exports com.example.server.socket;
+     opens com.example.server.socket to javafx.fxml;
 
-}
+ }
