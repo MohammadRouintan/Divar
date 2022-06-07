@@ -1,0 +1,28 @@
+@font-face {
+    font-family: 'IRANSansRegular';
+    src: url('../font/IRANSansRegular.ttf');
+}
+@font-face {
+    font-family: 'IRANSansBold';
+    src: url('../font/IRANSansBold.ttf');
+}
+.bck-img{
+    -fx-background-image: url("../image/background.png"),url(../image/logo.png);
+    -fx-background-repeat: no-repeat,no-repeat;
+    -fx-background-size: cover, 110px;
+    -fx-background-position: center, center;
+}
+
+.entrance-btn{
+    -fx-background-color: #ffc000;
+    -fx-background-radius: 30;
+    -fx-heigth:50px;
+    -fx-padding: 0 0 20px 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+.entrance-btn:hover{
+    -fx-effect:none;
+}
+.divar-lable{
+    -fx-color:#ffc000;
+}
