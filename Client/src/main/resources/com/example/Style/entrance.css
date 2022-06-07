@@ -14,6 +14,8 @@
 }
 
 .entrance-btn{
+    -fx-font-family: 'IRANSansRegular';
+    -fx-font-size: 35px;
     -fx-background-color: #ffc000;
     -fx-background-radius: 30;
     -fx-heigth:50px;
@@ -23,6 +25,11 @@
 .entrance-btn:hover{
     -fx-effect:none;
 }
+.ditails-lable{
+    -fx-font-family: 'IRANSansRegular';
+    -fx-font-size: 18px;
+}
 .divar-lable{
+    -fx-font-family: 'IRANSansBold';
     -fx-color:#ffc000;
 }
