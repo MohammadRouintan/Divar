@@ -28,14 +28,9 @@ public class GetInfo {
      * @param receiverNumber number of whom receives message
      * @param message message text
      * TODO save in database
-     * TODO FOR ME send message
      */
     public static void newMessage (String senderNumber, String receiverNumber, String message) {
-        for (int i = 0; i < AcceptClients.numbers.size(); i++) {
-            if (AcceptClients.numbers.get(i).equals(receiverNumber)) {
 
-            }
-        }
     }
 
     /**

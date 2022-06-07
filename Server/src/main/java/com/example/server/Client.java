@@ -25,34 +25,42 @@ public class Client extends Thread {
 
     @Override
     public void run() {
-        try {
-        DIS = new DataInputStream(new BufferedInputStream(AcceptClients.clientSockets.get(count).getInputStream()));
-        number = DIS.readUTF();
-        DataOutputStream DOS = new DataOutputStream(new BufferedOutputStream(AcceptClients.clientSockets.get(count).getOutputStream()));
-        DOS.writeUTF(GetInfo.getConfirmationCode(number));
-        boolean confirmed = DIS.readBoolean();
-        if (!confirmed) {
-            closeSocket();
-        } else {
-            AcceptClients.numbers.add(number);
-            while (true) {
-                int task = DIS.readInt();
-                if (task == 1) {
-                    sendPost();
-                } else if (task == 2) {
-                    GetInfo.newPost(number, getPost());
-                } else if (task == 3) { // sending a new message
-                    JSONObject json = new JSONObject(getPost());
-                    messageText = json.getString("messageText");
-                    messageReceiver = json.getString("messageReceiver");
-                    GetInfo.newMessage(number, messageReceiver, messageText);
-                }else if (task == -1){
+        while (true) {
+            try {
+                DIS = new DataInputStream(new BufferedInputStream(AcceptClients.clientSockets.get(count).getInputStream()));
+                number = DIS.readUTF();
+                DataOutputStream DOS = new DataOutputStream(new BufferedOutputStream(AcceptClients.clientSockets.get(count).getOutputStream()));
+                DOS.writeUTF(GetInfo.getConfirmationCode(number));
+                boolean confirmed = DIS.readBoolean();
+                if (!confirmed) {
                     closeSocket();
+                } else {
+                    AcceptClients.numbers.add(number);
+                    while (true) {
+                        int task = DIS.readInt();
+                        if (task == 1) {
+                            sendPost();
+                        } else if (task == 2) {
+                            GetInfo.newPost(number, getPost());
+                        } else if (task == 3) { // sending a new message
+                            messageText = DIS.readUTF();
+                            messageReceiver = DIS.readUTF();
+                            GetInfo.newMessage(number, messageReceiver, messageText);
+                            for (int i = 0; i < AcceptClients.numbers.size(); i++) {
+                                if (AcceptClients.numbers.get(i).equals(messageReceiver)) {
+                                    DataOutputStream DOSNotification = new DataOutputStream(new BufferedOutputStream(AcceptClients.notificationSockets.get(i).getOutputStream()));
+                                    DOSNotification.writeUTF(messageText);
+                                    DOSNotification.writeUTF(number);
+                                }
+                            }
+                        } else if (task == -1) {
+                            closeSocket();
+                        }
+                    }
                 }
+            } catch (IOException e) {
+                System.err.println(e.getMessage());
             }
-        }
-        }catch (IOException e) {
-            System.err.println(e.getMessage());
         }
     }
 
