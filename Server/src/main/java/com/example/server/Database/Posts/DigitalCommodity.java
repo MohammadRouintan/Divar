@@ -56,6 +56,10 @@ public class DigitalCommodity extends Post implements PostFunctions {
         disConnect();
     }
 
+    public DigitalCommodity() {
+        super();
+    }
+
     @Override
     public void updateFromDatabase() {
         for (int i = 0; i < super.getUpdateKeys().size(); i++) {

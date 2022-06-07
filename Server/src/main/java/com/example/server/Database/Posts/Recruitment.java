@@ -16,6 +16,9 @@ public class Recruitment extends Post implements PostFunctions {
         this.branch2 = branch2;
     }
 
+    public Recruitment(){
+        super();
+    }
 
     @Override
     public void addToDatabase() {

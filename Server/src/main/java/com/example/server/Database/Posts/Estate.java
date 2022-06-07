@@ -8,6 +8,10 @@ public class Estate extends Post implements PostFunctions {
     private String branch1;
     private String branch2;
 
+    public Estate(){
+        super();
+    }
+
     public void setBranch1(String branch1) {
         this.branch1 = branch1;
     }

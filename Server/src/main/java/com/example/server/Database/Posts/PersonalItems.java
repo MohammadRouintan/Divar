@@ -17,6 +17,10 @@ public class PersonalItems extends Post implements PostFunctions {
     }
 
 
+    public PersonalItems(){
+        super();
+    }
+
     @Override
     public void addToDatabase() {
         super.document.append("postId", super.lastPostId() + 1);
