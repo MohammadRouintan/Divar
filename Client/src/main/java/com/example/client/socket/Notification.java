@@ -1,4 +1,4 @@
-package com.example.client;
+package com.example.client.socket;
 
 import java.io.*;
 import java.net.Socket;
@@ -22,12 +22,14 @@ public class Notification extends Thread{
 
     @Override
     public void run() {
-        try{
-            String message = DIS.readUTF();
-            String number = DIS.readUTF();
-            showNotification(message, number);
-        }catch (IOException e) {
-            System.err.println(e.getMessage());
+        while (true) {
+            try {
+                String message = DIS.readUTF();
+                String number = DIS.readUTF();
+                showNotification(message, number);
+            } catch (IOException e) {
+                System.err.println(e.getMessage());
+            }
         }
     }
 

@@ -1,4 +1,4 @@
-package com.example.client;
+package com.example.client.socket;
 
 
 import org.json.JSONObject;
@@ -15,6 +15,8 @@ public class Connect {
     public Connect(String IP, String phoneNumber) {
         try {
             socket = new Socket(IP, 5570);
+            Notification n = new Notification("localhost", 5571, phoneNumber);
+            n.start();
             DOS = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
             DIS = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
             DOS.writeUTF(phoneNumber);
