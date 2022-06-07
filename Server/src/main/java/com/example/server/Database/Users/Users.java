@@ -44,6 +44,9 @@ public class Users extends Database {
         super.document.append("bookmarkPost", bookmarkPost);
         super.document.append("lastSeenPost", lastSeenPost);
         super.document.append("usersPost", usersPost);
+        if (!isUserExists()) {
+            super.collection.insertOne(super.document);
+        }
         super.disConnect();
     }
 
