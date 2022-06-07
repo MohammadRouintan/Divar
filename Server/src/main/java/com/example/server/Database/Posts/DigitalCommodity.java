@@ -19,6 +19,9 @@ public class DigitalCommodity extends Post implements PostFunctions {
         this.branch2 = branch2;
     }
 
+    public DigitalCommodity() {
+        super();
+    }
     @Override
     public void addToDatabase() {
         super.document.append("postId", super.lastPostId() + 1);
@@ -56,9 +59,6 @@ public class DigitalCommodity extends Post implements PostFunctions {
         disConnect();
     }
 
-    public DigitalCommodity() {
-        super();
-    }
 
     @Override
     public void updateFromDatabase() {
