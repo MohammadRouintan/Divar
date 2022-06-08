@@ -11,7 +11,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Login.LoginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Login.LoginController">
    <top>
       <AnchorPane prefHeight="171.0" prefWidth="800.0" styleClass="bck-img" stylesheets="@../Style/entrance.css" BorderPane.alignment="CENTER" />
    </top>
@@ -20,7 +20,7 @@
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="63.0" prefWidth="151.0" styleClass="divar-lable" stylesheets="@../Style/entrance.css" text="دیوار" textFill="#ffbf00" textOverrun="CLIP">
                <font>
-                  <Font name="Georgia Bold" size="61.0" />
+                  <Font name="IRANSans" size="61.0" />
                </font>
                <VBox.margin>
                   <Insets bottom="10.0" />
@@ -35,7 +35,7 @@
             </Label>
             <Label alignment="CENTER" prefHeight="58.0" prefWidth="314.0" styleClass="ditails-lable" stylesheets="@../Style/entrance.css" text="خرید و فروش آنلاین ، بدون واسطه" textFill="#605f5f">
                <font>
-                  <Font name="Georgia" size="20.0" />
+                  <Font name="IRANSans" size="18.0" />
                </font>
                <VBox.margin>
                   <Insets bottom="50.0" />
@@ -46,7 +46,7 @@
                   <Insets />
                </opaqueInsets>
                <font>
-                  <Font name="Georgia Bold" size="39.0" />
+                  <Font name="IRANSans" size="29.0" />
                </font>
                <effect>
                   <DropShadow blurType="ONE_PASS_BOX" height="32.75" offsetY="5.0" radius="16.0225" width="33.34">
