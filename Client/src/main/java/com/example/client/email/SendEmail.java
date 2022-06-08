@@ -17,7 +17,7 @@ public class SendEmail {
     private String textMassage;
 
     public SendEmail(){
-        
+
     }
 
     public String getServerEmail() {

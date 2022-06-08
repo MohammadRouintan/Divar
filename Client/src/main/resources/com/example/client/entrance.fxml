@@ -20,7 +20,7 @@
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="63.0" prefWidth="151.0" styleClass="divar-lable" stylesheets="@../Style/entrance.css" text="دیوار" textFill="#ffbf00" textOverrun="CLIP">
                <font>
-                  <Font name="Garamond Bold" size="59.0" />
+                  <Font name="Georgia Bold" size="61.0" />
                </font>
                <VBox.margin>
                   <Insets bottom="10.0" />
@@ -46,7 +46,7 @@
                   <Insets />
                </opaqueInsets>
                <font>
-                  <Font name="Garamond Bold" size="38.0" />
+                  <Font name="Georgia Bold" size="39.0" />
                </font>
                <effect>
                   <DropShadow blurType="ONE_PASS_BOX" height="32.75" offsetY="5.0" radius="16.0225" width="33.34">
