@@ -42,4 +42,9 @@ public class GetInfo {
     public static String getConfirmationCode (String number) {
         return null;
     }
+
+    public static String getImageID(){
+        return null;
+    }
+
 }

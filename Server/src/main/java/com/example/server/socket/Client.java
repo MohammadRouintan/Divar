@@ -5,9 +5,7 @@ import java.io.*;
 import java.net.Socket;
 
 
-/**
- * TODO implement check online for sending notification
- */
+
 public class Client extends Thread {
     String messageText;
     String messageReceiver;
@@ -88,6 +86,7 @@ public class Client extends Thread {
     public String getPost () {
         String out = null;
         try {
+            DOS.writeUTF(GetInfo.getImageID());
             out = DIS.readUTF();
         } catch (IOException e){
             System.err.println(e.getMessage());
