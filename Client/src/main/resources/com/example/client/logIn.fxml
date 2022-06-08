@@ -15,12 +15,12 @@
          <children>
             <Label alignment="CENTER" prefHeight="51.0" prefWidth="378.0" styleClass="number-lable" stylesheets="@../Style/logIn.css" text="ایمیل خود را وارد کنید" textAlignment="CENTER">
                <font>
-                  <Font name="Georgia Bold" size="22.0" />
+                  <Font size="25.0" />
                </font>
             </Label>
             <Label prefHeight="66.0" prefWidth="366.0" text="برای استفاده از امکانات دیوار،لطفاً ایمیل خود را وارد کنید. کد تایید به این آدرس ایمیل خواهد شد." textAlignment="CENTER" textFill="#7e7e7e" wrapText="true">
                <font>
-                  <Font name="Garamond" size="14.0" />
+                  <Font size="14.0" />
                </font>
                <VBox.margin>
                   <Insets bottom="30.0" />
@@ -28,7 +28,7 @@
             </Label>
             <TextField fx:id="inputPhoneNumberIDField" maxHeight="40.0" maxWidth="350.0" minHeight="20.0" minWidth="300.0" onAction="#getInputNumberField" prefHeight="39.0" prefWidth="338.0" promptText="abcdefgh@gmail.com" styleClass="text-field" stylesheets="@../Style/logIn.css">
                <font>
-                  <Font name="Segoe UI" size="17.0" />
+                  <Font size="18.0" />
                </font>
                <VBox.margin>
                   <Insets bottom="50.0" />
@@ -39,7 +39,7 @@
             </TextField>
             <Button fx:id="sendButtonPhoneID" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#sendButtonPhoneNumber" prefHeight="43.0" prefWidth="222.0" styleClass="number-btn" stylesheets="@../Style/logIn.css" text="بعدی" textAlignment="CENTER">
                <font>
-                  <Font name="Garamond Bold" size="24.0" />
+                  <Font size="24.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
