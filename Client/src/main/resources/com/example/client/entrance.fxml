@@ -11,7 +11,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Login.LoginController">
    <top>
       <AnchorPane prefHeight="171.0" prefWidth="800.0" styleClass="bck-img" stylesheets="@../Style/entrance.css" BorderPane.alignment="CENTER" />
    </top>
@@ -41,7 +41,7 @@
                   <Insets bottom="50.0" />
                </VBox.margin>
             </Label>
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="66.0" prefWidth="342.0" styleClass="entrance-btn" stylesheets="@../Style/entrance.css" text="ورود" textAlignment="CENTER">
+            <Button fx:id="loginButtonID" alignment="CENTER" mnemonicParsing="false" onAction="#loginOnFirstPage" prefHeight="66.0" prefWidth="342.0" styleClass="entrance-btn" stylesheets="@../Style/entrance.css" text="ورود" textAlignment="CENTER">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

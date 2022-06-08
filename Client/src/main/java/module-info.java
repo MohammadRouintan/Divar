@@ -8,4 +8,6 @@ module com.example.client {
     exports com.example.client;
     exports com.example.client.socket;
     opens com.example.client.socket to javafx.fxml;
+    exports com.example.client.Login;
+    opens com.example.client.Login to javafx.fxml;
 }
