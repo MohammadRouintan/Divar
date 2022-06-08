@@ -20,7 +20,7 @@
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="63.0" prefWidth="151.0" styleClass="divar-lable" stylesheets="@../Style/entrance.css" text="دیوار" textFill="#ffbf00" textOverrun="CLIP">
                <font>
-                  <Font name="Arial Black" size="55.0" />
+                  <Font name="Arial" size="51.0" />
                </font>
                <VBox.margin>
                   <Insets bottom="10.0" />
@@ -33,9 +33,9 @@
                   </DropShadow>
                </effect>
             </Label>
-            <Label alignment="CENTER" prefHeight="58.0" prefWidth="314.0" styleClass="ditails-lable" stylesheets="@../Style/entrance.css" text="خرید و فروش آنلاین ، بدون واسطه" textFill="#605f5f">
+            <Label alignment="CENTER" prefHeight="58.0" prefWidth="314.0" styleClass="ditails-lable" stylesheets="@../Style/entrance.css" text="خرید و فروش آنلاین ، بدون واسطه" textFill="#605f5f" textOverrun="CLIP">
                <font>
-                  <Font name="Gadugi Bold" size="19.0" />
+                  <Font name="Arial" size="22.0" />
                </font>
                <VBox.margin>
                   <Insets bottom="50.0" />
@@ -46,7 +46,7 @@
                   <Insets />
                </opaqueInsets>
                <font>
-                  <Font name="IRAN Sans Bold" size="21.0" />
+                  <Font name="Arial Bold" size="18.0" />
                </font>
                <effect>
                   <DropShadow blurType="ONE_PASS_BOX" height="32.75" offsetY="5.0" radius="16.0225" width="33.34">

@@ -1,11 +1,14 @@
 @font-face {
-    font-family: 'IRANSansRegular';
     src: url('../font/IRANSansRegular.ttf');
 }
 @font-face {
     font-family: 'IRANSansBold';
     src: url('../font/IRANSansBold.ttf');
 }
+@font-face {
+    src: url('../font/BKoodakBold.TTF');
+}
+
 .bck-img{
     -fx-background-image: url("../image/background.png"),url(../image/logo.png);
     -fx-background-repeat: no-repeat,no-repeat;
@@ -14,8 +17,7 @@
 }
 
 .entrance-btn{
-    -fx-font-family: 'IRANSansRegular';
-    -fx-font-size: 35px;
+    -fx-font-size: 40px;
     -fx-background-color: #ffc000;
     -fx-background-radius: 30;
     -fx-heigth:50px;
@@ -26,10 +28,7 @@
     -fx-effect:none;
 }
 .ditails-lable{
-    -fx-font-family: 'IRANSansRegular';
-    -fx-font-size: 18px;
 }
 .divar-lable{
-    -fx-font-family: 'IRANSansBold';
     -fx-color:#ffc000;
 }

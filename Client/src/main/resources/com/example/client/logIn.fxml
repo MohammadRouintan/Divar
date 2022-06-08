@@ -9,19 +9,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" prefHeight="51.0" prefWidth="378.0" styleClass="number-lable" stylesheets="@../Style/logIn.css" text="شماره تلفن خود را وارد کنید" textAlignment="CENTER">
                <font>
-                  <Font name="IRAN Sans Bold" size="24.0" />
+                  <Font name="Arial" size="23.0" />
                </font>
             </Label>
-            <Label prefHeight="66.0" prefWidth="366.0" text="برای استفاده از امکانات دیوار،لطفاً شمارۀ موبایل خود را وارد کنید. کد تایید به این شماره پیامک خواهد شد." textAlignment="CENTER" textFill="#7e7e7e" wrapText="true">
+            <Label prefHeight="66.0" prefWidth="366.0" styleClass="ditals-lable" stylesheets="@../Style/logIn.css" text="برای استفاده از امکانات دیوار،لطفاً شمارۀ موبایل خود را وارد کنید. کد تایید به این شماره پیامک خواهد شد." textAlignment="CENTER" textFill="#7e7e7e" wrapText="true">
                <font>
-                  <Font name="IRAN Sans Bold" size="15.0" />
+                  <Font name="Arial Bold" size="12.0" />
                </font>
                <VBox.margin>
                   <Insets bottom="30.0" />
@@ -29,18 +28,18 @@
             </Label>
             <TextField maxHeight="40.0" maxWidth="350.0" minHeight="20.0" minWidth="300.0" prefHeight="39.0" prefWidth="338.0" promptText="0 9 1 3 * * * 2 5 7 9" styleClass="text-field" stylesheets="@../Style/logIn.css">
                <font>
-                  <Font name="IRAN Sans Bold" size="23.0" />
+                  <Font size="20.0" />
                </font>
                <VBox.margin>
                   <Insets bottom="40.0" />
                </VBox.margin>
                <padding>
-                  <Insets left="50.0" />
+                  <Insets left="75.0" />
                </padding>
             </TextField>
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="43.0" prefWidth="222.0" styleClass="number-btn" stylesheets="@../Style/logIn.css" text="بعدی" textAlignment="CENTER">
                <font>
-                  <Font name="IRAN Sans Bold" size="24.0" />
+                  <Font name="Arial Bold" size="23.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />

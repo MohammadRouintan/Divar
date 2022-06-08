@@ -1,5 +1,14 @@
+@font-face {
+    font-family: 'IRANSansRegular';
+    src: url('../font/IRANSansRegular.ttf');
+}
+@font-face {
+    font-family: 'IRANSansBold';
+    src: url('../font/IRANSansBold.ttf');
+}
 
 .text-field{
+    -fx-font-size: 20px;
     -fx-border-color: #ffc000;
     -fx-border-radius: 15px;
     -fx-background-radius: 15;
@@ -7,6 +16,10 @@
 }
 .text-field:active{
     -fx-border-color: #ffc000;
+}
+.number-lable{
+}
+.ditals-lable{
 }
 .number-btn{
     -fx-background-color: #ffc000;
