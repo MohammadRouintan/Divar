@@ -58,9 +58,7 @@ public class LoginController {
 
     @FXML
     private Button sendButtonPhoneID;
-
-    @FXML
-    private Label test;
+    
 
     @FXML
     private void sendButtonPhoneNumber(ActionEvent e){
@@ -70,14 +68,13 @@ public class LoginController {
         Pattern pattern = Pattern.compile("09[0-9]{9}");
         Matcher matcher = pattern.matcher(inputPhoneNumberIDField.getText());
 
-        test.setText(String.valueOf(matcher.matches()));
-
-
         if(matcher.matches()){
 
             new Connect("localhost" ,"localhost", inputPhoneNumberIDField.getText());
 
             try{
+
+                label1CodeFile.setText("لطفا کد تایید را به شماره ی " + phoneNumber + "ارسال شده را وارد کنید .");
                 Parent layout = FXMLLoader.load(Main.class.getResource("Code.fxml"));
                 Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
                 Scene scene = new Scene(layout,800,600);
@@ -86,6 +83,7 @@ public class LoginController {
                 stage.setMinWidth(800);
                 stage.setScene(scene);
                 stage.show();
+
 
             }catch (IOException ex){
                 ex.printStackTrace();
@@ -100,7 +98,7 @@ public class LoginController {
 
     @FXML
     public void initialize(){
-//        label1CodeFile.setText("لطفا کد تایید را به شماره ی " + phoneNumber + "ارسال شده را وارد کنید .");
+//
     }
 
     @FXML
