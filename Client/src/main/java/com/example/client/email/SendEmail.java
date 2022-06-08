@@ -17,7 +17,7 @@
 //    private String textMassage;
 //
 //    public SendEmail(){
-//
+//        properties = Systm.get
 //    }
 //
 //    public String getServerEmail() {
