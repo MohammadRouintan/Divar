@@ -25,8 +25,10 @@ public class LoginController {
         try {
             Parent layout = FXMLLoader.load(Main.class.getResource("logIn.fxml"));
             Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
-            Scene scene = new Scene(layout);
+            Scene scene = new Scene(layout,800,600);
             stage.setTitle("Dashboard");
+            stage.setMinHeight(600);
+            stage.setMinWidth(800);
             stage.setScene(scene);
             stage.show();
         } catch (IOException ex) {
