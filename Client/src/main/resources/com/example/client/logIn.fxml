@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Login.LoginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Login.LoginController">
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" prefHeight="51.0" prefWidth="378.0" styleClass="number-lable" stylesheets="@../Style/logIn.css" text="ایمیل خود را وارد کنید" textAlignment="CENTER">
+            <Label fx:id="test" alignment="CENTER" prefHeight="51.0" prefWidth="378.0" styleClass="number-lable" stylesheets="@../Style/logIn.css" text="ایمیل خود را وارد کنید" textAlignment="CENTER">
                <font>
                   <Font name="Georgia Bold" size="22.0" />
                </font>
