@@ -13,7 +13,7 @@
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" prefHeight="51.0" prefWidth="378.0" styleClass="number-lable" stylesheets="@../Style/logIn.css" text="کد تایید را وارد کنید" textAlignment="CENTER">
+            <Label fx:id="test" alignment="CENTER" prefHeight="51.0" prefWidth="378.0" styleClass="number-lable" stylesheets="@../Style/logIn.css" text="کد تایید را وارد کنید" textAlignment="CENTER">
                <font>
                   <Font name="Georgia" size="27.0" />
                </font>
@@ -64,7 +64,7 @@
             </Button>
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#loginButtonOnCodeFile" prefHeight="50.0" prefWidth="222.0" styleClass="number-btn" stylesheets="@../Style/code.css" text="ورود" textAlignment="CENTER">
                <font>
-                  <Font size="27.0" />
+                  <Font name="Georgia" size="27.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />

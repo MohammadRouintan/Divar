@@ -37,7 +37,7 @@
                   <Insets left="30.0" />
                </padding>
             </TextField>
-            <Button fx:id="sendButtonPhoneID" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#sendButtonPhoneNumber" prefHeight="43.0" prefWidth="222.0" styleClass="number-btn" stylesheets="@../Style/logIn.css" text="بعدی" textAlignment="CENTER">
+            <Button fx:id="sendButtonPhoneID" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#sendButtonPhoneNumber" onMousePressed="#testfunction" prefHeight="43.0" prefWidth="222.0" styleClass="number-btn" stylesheets="@../Style/logIn.css" text="بعدی" textAlignment="CENTER">
                <font>
                   <Font name="Georgia" size="25.0" />
                </font>

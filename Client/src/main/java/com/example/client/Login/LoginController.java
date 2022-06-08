@@ -19,6 +19,9 @@ import java.util.regex.Pattern;
 
 public class LoginController {
     @FXML
+    private Label label1CodeFile;
+
+    @FXML
     private Button loginButtonID;
 
     private String phoneNumber;
@@ -49,6 +52,9 @@ public class LoginController {
     private TextField inputPhoneNumberIDField;
 
     @FXML
+    private Label test;
+
+    @FXML
     /**
      * TODO
      */
@@ -58,7 +64,9 @@ public class LoginController {
 
     @FXML
     private Button sendButtonPhoneID;
-    
+
+
+    private boolean flag = false;
 
     @FXML
     private void sendButtonPhoneNumber(ActionEvent e){
@@ -68,13 +76,16 @@ public class LoginController {
         Pattern pattern = Pattern.compile("09[0-9]{9}");
         Matcher matcher = pattern.matcher(inputPhoneNumberIDField.getText());
 
+        test.setText(String.valueOf(matcher.matches()));
+
+
         if(matcher.matches()){
 
-            new Connect("localhost" ,"localhost", inputPhoneNumberIDField.getText());
+            phoneNumber = inputPhoneNumberIDField.getText();
+            new Connect("localhost" ,"localhost", phoneNumber);
 
             try{
 
-                label1CodeFile.setText("لطفا کد تایید را به شماره ی " + phoneNumber + "ارسال شده را وارد کنید .");
                 Parent layout = FXMLLoader.load(Main.class.getResource("Code.fxml"));
                 Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
                 Scene scene = new Scene(layout,800,600);
@@ -83,8 +94,7 @@ public class LoginController {
                 stage.setMinWidth(800);
                 stage.setScene(scene);
                 stage.show();
-
-
+                flag = true;
             }catch (IOException ex){
                 ex.printStackTrace();
             }
@@ -94,11 +104,13 @@ public class LoginController {
     }
 
     @FXML
-    private Label label1CodeFile = null;
+    public void initialize() {
+
+    }
 
     @FXML
-    public void initialize(){
-//
+    private void testfunction(){
+        label1CodeFile.setText("لطفا کد تایید را به شماره ی " + phoneNumber + "ارسال شده را وارد کنید .");
     }
 
     @FXML
