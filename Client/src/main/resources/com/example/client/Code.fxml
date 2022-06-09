@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Login.LoginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Login.CodeController">
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
@@ -51,7 +51,7 @@
                   <Font size="28.0" />
                </font>
             </Label>
-            <Button fx:id="ReDoceButtonID" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#ReCodePhoneCode" prefHeight="50.0" prefWidth="222.0" styleClass="code-btn" stylesheets="@../Style/code.css" text="درخواست کد" textAlignment="CENTER" visible="false">
+            <Button fx:id="ReCodeButtonID" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#ReCodePhoneCode" prefHeight="50.0" prefWidth="222.0" styleClass="code-btn" stylesheets="@../Style/code.css" text="درخواست کد" textAlignment="CENTER" visible="false">
                <font>
                   <Font name="Georgia" size="24.0" />
                </font>

@@ -15,7 +15,14 @@ public class Connect {
     DataOutputStream DOS;
     DataInputStream DIS;
     String confirmationCode;
+
+    public static String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    static String phoneNumber;
     public Connect(String imageIP, String IP, String phoneNumber) {
+        this.phoneNumber = phoneNumber;
         try {
             socket = new Socket(IP, 5570);
             Notification n = new Notification("localhost", 5571, phoneNumber);

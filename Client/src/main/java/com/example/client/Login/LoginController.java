@@ -18,19 +18,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LoginController {
-    @FXML
-    private Label label1CodeFile;
 
     @FXML
     private Button loginButtonID;
 
     private String phoneNumber;
 
-    @FXML
-    private Button ReCodeButtonID;
-
-    @FXML
-    private Label counterID;
 
     @FXML
     private void loginOnFirstPage(ActionEvent e){
@@ -104,21 +97,7 @@ public class LoginController {
     }
 
     @FXML
-    public void initialize() {
-
-    }
-
-    @FXML
     private void testfunction(){
-        label1CodeFile.setText("لطفا کد تایید را به شماره ی " + phoneNumber + "ارسال شده را وارد کنید .");
     }
 
-    @FXML
-    private TextField inputPhoneNumberCodeID;
-
-    @FXML
-    private void ReCodePhoneCode(){}
-
-    @FXML
-    private void loginButtonOnCodeFile(){}
 }
