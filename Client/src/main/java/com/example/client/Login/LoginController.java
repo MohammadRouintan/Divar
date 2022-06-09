@@ -69,9 +69,6 @@ public class LoginController {
         Pattern pattern = Pattern.compile("09[0-9]{9}");
         Matcher matcher = pattern.matcher(inputPhoneNumberIDField.getText());
 
-        test.setText(String.valueOf(matcher.matches()));
-
-
         if(matcher.matches()){
 
             phoneNumber = inputPhoneNumberIDField.getText();
