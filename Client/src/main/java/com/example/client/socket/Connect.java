@@ -14,7 +14,7 @@ public class Connect {
     DataInputStream imageDIS;
     DataOutputStream DOS;
     DataInputStream DIS;
-    String confirmationCode;
+    public static String confirmationCode;
 
     public static String getPhoneNumber() {
         return phoneNumber;
