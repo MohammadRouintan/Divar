@@ -45,9 +45,10 @@ public class CodeController {
     ));
 
     private void timerHandler(){
-        counter = 120;
+        counter = 5;
         counterID.setVisible(false);
         ReCodeButtonID.setVisible(true);
+        timeline.stop();
     }
 
     /*
@@ -86,7 +87,7 @@ public class CodeController {
 
     @FXML
     public void initialize() {
-        counter = 120;
+        counter = 5;
         label1CodeFile.setText(" لطفا کد تایید را به شماره ی  " + Connect.getPhoneNumber() + " ارسال شده را وارد کنید . ");
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
