@@ -9,7 +9,7 @@ public class GetInfo {
      * TODO get user confirmation code and check the code with server code
      */
     public static boolean confirmationCheck(String code){
-        if(Connect.confirmationCode == code){
+        if(Connect.confirmationCode.equals(code)){
             return true;
         } else {
             return false;
