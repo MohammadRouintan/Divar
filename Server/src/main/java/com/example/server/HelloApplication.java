@@ -1,5 +1,6 @@
 package com.example.server;
 
+import com.example.server.socket.AcceptClients;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -18,6 +19,8 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
+        AcceptClients acceptClients = new AcceptClients();
+        acceptClients.run();
         launch();
     }
 }
