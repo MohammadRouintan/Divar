@@ -1,7 +1,10 @@
 package com.example.server.Database.Users;
 
 import com.example.server.Database.Database;
+import com.example.server.Database.Posts.Post;
 import org.bson.Document;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -20,6 +23,14 @@ public class Users extends Database {
 //        private ArrayList<Integer> usersPost;
     private ArrayList<String> UpdateKeys;
     private ArrayList<Object> UpdateValues;
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
     public void setUpdateKeys(ArrayList<String> updateKeys) {
         UpdateKeys = updateKeys;
@@ -72,5 +83,19 @@ public class Users extends Database {
 
     public boolean isUserExists() {
         return super.collection.find(new Document("PhoneNumber", phoneNumber)).cursor().hasNext();
+    }
+
+    public ArrayList<String> lastSeenPost() {
+        String user = getUser();
+        JSONObject jsonObject = new JSONObject(user);
+        JSONArray jsonArray = jsonObject.getJSONArray("lastSeenPost");
+        Post post;
+        ArrayList<String> lastSeen = new ArrayList<>();
+        for (int i = 0; i < jsonArray.length(); i++) {
+            post = new Post();
+            post.setPostId(jsonArray.getInt(i));
+            lastSeen.add(post.getPost());
+        }
+        return lastSeen;
     }
 }
