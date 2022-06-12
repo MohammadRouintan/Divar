@@ -45,7 +45,7 @@ public class CodeController {
     ));
 
     private void timerHandler(){
-        counter = 5;
+        counter = 120;
         counterID.setVisible(false);
         ReCodeButtonID.setVisible(true);
         timeline.stop();
@@ -61,6 +61,7 @@ public class CodeController {
             Integer.parseInt(inputPhoneNumberCodeID.getText());
             code = inputPhoneNumberCodeID.getText();
             if (GetInfo.confirmationCheck(code) && counter > 0){
+                System.out.println("0000000000");
                 Parent layout = FXMLLoader.load(Main.class.getResource("?.fxml"));
                 Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
                 Scene scene = new Scene(layout,800,600);
@@ -89,7 +90,7 @@ public class CodeController {
 
     @FXML
     public void initialize() {
-        counter = 5;
+        counter = 120;
         label1CodeFile.setText(" لطفا کد تایید را به شماره ی  " + Connect.getPhoneNumber() + " ارسال شده را وارد کنید . ");
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();

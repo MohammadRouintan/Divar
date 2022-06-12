@@ -46,4 +46,6 @@ public class GetInfo {
     public static void addPost(JSONObject data){}
 
     public static String getLastSeenPost(){return null;}
+
+    public static String getUserPosts() {return null;}
 }
