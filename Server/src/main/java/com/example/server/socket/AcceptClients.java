@@ -13,8 +13,10 @@ public class AcceptClients{
     private DataInputStream DIS;
     ServerSocket serverSocket;
     ServerSocket serverNotificationSocket;
+    ServerSocket SMSSocket;
     public AcceptClients () {
         try{
+
             serverSocket = new ServerSocket(5570);
             serverNotificationSocket = new ServerSocket(5571);
         }catch (IOException e) {
