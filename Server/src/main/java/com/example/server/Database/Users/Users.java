@@ -105,14 +105,15 @@ public class Users extends Database {
     private static int numberForUsersPost;
 
     public ArrayList<String> getMarkedPost(int size){
-        Post post = new Post();
+        Post post;
         String user = getUser();
         JSONObject object = new JSONObject(user);
         JSONArray jsonArray = object.getJSONArray("bookmarkPost");
         ArrayList<String> markedPost = new ArrayList<>();
         for (int i = numberForMarkedPost * size; i < (size * numberForMarkedPost) + size; i++) {
-                if(i < jsonArray.length()) {
-                    post.setPostId(jsonArray.getInt(i));
+            post = new Post();
+            if(i < jsonArray.length()) {
+                post.setPostId(jsonArray.getInt(i));
                 markedPost.add(post.getPost());
             }
         }
@@ -121,12 +122,13 @@ public class Users extends Database {
     }
 
     public ArrayList<String> getUsersPost(int size){
-        Post post = new Post();
+        Post post;
         String user = getUser();
         JSONObject object = new JSONObject(user);
-        JSONArray jsonArray = object.getJSONArray("bookmarkPost");
+        JSONArray jsonArray = object.getJSONArray("usersPost");
         ArrayList<String> markedPost = new ArrayList<>();
         for (int i = numberForUsersPost * size; i < (size * numberForUsersPost) + size; i++) {
+            post = new Post();
             if(i < jsonArray.length()) {
                 post.setPostId(jsonArray.getInt(i));
                 markedPost.add(post.getPost());
