@@ -1,5 +1,9 @@
 package com.example.client.socket;
 
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 public class GetInfo {
 
     /**
@@ -16,4 +20,27 @@ public class GetInfo {
         }
     }
 
+    public static void addUser(String phoneNumber){}
+
+    public static void updateUser(JSONObject data){}
+
+    public static void deleteUser(JSONObject data){}
+
+    public static boolean isUserExists(String phoneNumber){return true;}
+
+    public static String getUser(String phoneNumber){return null;}
+
+    public static String getMarkedPost(int index){return null;}
+
+    public static String getPost(int postID){return null;}
+
+    public static String getPosts(int sizePosts ,String mainBranch){return null;}
+
+    public static void updatePost(ArrayList<String> keys ,ArrayList<Object> values){}
+
+    public static void deletePost(int postID){}
+
+    public static void addPost(JSONObject data){}
+
+    public static String getLastSeenPost(){return null;}
 }
