@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="CENTER" prefHeight="600.0" prefWidth="230.0" style="-fx-background-color: #f1c40f;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -79,9 +79,23 @@
          <content>
             <VBox alignment="TOP_CENTER" prefHeight="977.0" prefWidth="574.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="40.0" prefWidth="75.0" text="city : ">
+                  <Label alignment="CENTER" prefHeight="40.0" prefWidth="103.0" text="Categories :">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
                      <VBox.margin>
-                        <Insets top="20.0" />
+                        <Insets bottom="10.0" top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ComboBox prefHeight="34.0" prefWidth="346.0">
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </ComboBox>
+                  <Line endX="218.0929412841797" endY="-162.39212036132812" startX="-190.704345703125" startY="-162.1850128173828" style="-fx-opacity: 0.3;" />
+                  <Label alignment="CENTER" prefHeight="40.0" prefWidth="75.0" text="City : ">
+                     <VBox.margin>
+                        <Insets top="10.0" />
                      </VBox.margin>
                      <font>
                         <Font size="18.0" />
@@ -101,6 +115,9 @@
                      <font>
                         <Font size="18.0" />
                      </font>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
                   </Label>
                   <TextField maxWidth="350.0" prefHeight="34.0" prefWidth="350.0" />
                   <Line endX="218.0929412841797" endY="-162.39212036132812" startX="-190.704345703125" startY="-162.1850128173828" style="-fx-opacity: 0.3;">
@@ -121,7 +138,7 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Button>
-                  <ListView maxWidth="500.0" prefHeight="113.0" prefWidth="500.0">
+                  <ListView fixedCellSize="4.0" maxWidth="500.0" prefHeight="113.0" prefWidth="500.0">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
@@ -159,6 +176,24 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                   </CheckBox>
+                  <Line endX="218.0929412841797" endY="-162.39212036132812" startX="-190.704345703125" startY="-162.1850128173828" style="-fx-opacity: 0.3;">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Line>
+                  <Label alignment="CENTER" prefHeight="40.0" prefWidth="75.0" text="Name :">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField maxWidth="350.0" prefHeight="34.0" prefWidth="350.0">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </TextField>
                </children>
             </VBox>
          </content>
