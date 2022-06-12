@@ -12,6 +12,8 @@ public class Users extends Database {
     public Users() {
         super.collectionName = "Users";
         super.connectToDatabase();
+        numberForMarkedPost = 0;
+        numberForUsersPost = 0;
     }
 
     private String phoneNumber;
@@ -97,5 +99,40 @@ public class Users extends Database {
             lastSeen.add(post.getPost());
         }
         return lastSeen;
+    }
+
+    private static int numberForMarkedPost;
+    private static int numberForUsersPost;
+
+    public ArrayList<String> getMarkedPost(int size){
+        Post post = new Post();
+        String user = getUser();
+        JSONObject object = new JSONObject(user);
+        JSONArray jsonArray = object.getJSONArray("bookmarkPost");
+        ArrayList<String> markedPost = new ArrayList<>();
+        for (int i = numberForMarkedPost * size; i < (size * numberForMarkedPost) + size; i++) {
+                if(i < jsonArray.length()) {
+                    post.setPostId(jsonArray.getInt(i));
+                markedPost.add(post.getPost());
+            }
+        }
+        numberForMarkedPost++;
+        return markedPost;
+    }
+
+    public ArrayList<String> getUsersPost(int size){
+        Post post = new Post();
+        String user = getUser();
+        JSONObject object = new JSONObject(user);
+        JSONArray jsonArray = object.getJSONArray("bookmarkPost");
+        ArrayList<String> markedPost = new ArrayList<>();
+        for (int i = numberForUsersPost * size; i < (size * numberForUsersPost) + size; i++) {
+            if(i < jsonArray.length()) {
+                post.setPostId(jsonArray.getInt(i));
+                markedPost.add(post.getPost());
+            }
+        }
+        numberForUsersPost++;
+        return markedPost;
     }
 }
