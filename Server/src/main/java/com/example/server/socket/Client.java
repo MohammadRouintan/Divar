@@ -26,8 +26,10 @@ public class Client extends Thread {
                 DIS = new DataInputStream(new BufferedInputStream(AcceptClients.clientSockets.get(count).getInputStream()));
                 number = DIS.readUTF();
                 DataOutputStream DOS = new DataOutputStream(new BufferedOutputStream(AcceptClients.clientSockets.get(count).getOutputStream()));
-                DOS.writeUTF(GetInfo.getConfirmationCode(number));
-                boolean confirmed = DIS.readBoolean();
+                String token = GetInfo.getConfirmationCode(number);
+                String userToken = DIS.readUTF();
+                boolean confirmed = token.equals(userToken);
+                DOS.writeBoolean(confirmed);
                 if (!confirmed) {
                     closeSocket();
                 } else {

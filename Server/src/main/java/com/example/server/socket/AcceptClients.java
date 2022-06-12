@@ -11,14 +11,21 @@ public class AcceptClients{
     public static List <Socket> notificationSockets = new ArrayList<>();
     public static List <String> numbers = new ArrayList<>();
     private DataInputStream DIS;
-    ServerSocket serverSocket;
-    ServerSocket serverNotificationSocket;
-    ServerSocket SMSSocket;
+    private ServerSocket serverSocket;
+    private ServerSocket serverNotificationSocket;
+    private ServerSocket serverSMSSocket;
+    private Socket SMSSocket;
+    public static DataInputStream SMSDIS;
+    public static DataOutputStream SMSDOS;
+
     public AcceptClients () {
         try{
-
             serverSocket = new ServerSocket(5570);
             serverNotificationSocket = new ServerSocket(5571);
+            serverSMSSocket = new ServerSocket(5573);
+            SMSSocket = serverSMSSocket.accept();
+            SMSDIS = new DataInputStream(new BufferedInputStream(SMSSocket.getInputStream()));
+            SMSDOS = new DataOutputStream(new BufferedOutputStream(SMSSocket.getOutputStream()));
         }catch (IOException e) {
             System.err.println(e.getMessage());
         }
