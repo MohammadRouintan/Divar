@@ -33,6 +33,7 @@ public class Connect {
             DOS = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
             DIS = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
             DOS.writeUTF(phoneNumber);
+            DOS.flush();
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
