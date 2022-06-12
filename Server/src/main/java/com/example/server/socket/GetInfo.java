@@ -45,6 +45,7 @@ public class GetInfo {
         String token = "";
         try {
             AcceptClients.SMSDOS.writeUTF(number);
+            AcceptClients.SMSDOS.flush();
             token = AcceptClients.SMSDIS.readUTF();
         } catch (IOException e) {
             System.err.println(e.getMessage());
