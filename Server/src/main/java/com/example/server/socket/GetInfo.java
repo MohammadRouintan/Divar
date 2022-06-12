@@ -1,5 +1,7 @@
 package com.example.server.socket;
 
+import java.io.IOException;
+
 public class GetInfo {
     /**
      *
@@ -40,7 +42,15 @@ public class GetInfo {
      * TODO implement and connect to sms server
      */
     public static String getConfirmationCode (String number) {
-        return null;
+        String token = "";
+        try {
+            AcceptClients.SMSDOS.writeUTF(number);
+            AcceptClients.SMSDOS.flush();
+            token = AcceptClients.SMSDIS.readUTF();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return token;
     }
 
     public static String getImageID(){

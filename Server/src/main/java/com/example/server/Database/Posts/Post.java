@@ -101,9 +101,29 @@ public class Post extends Database {
         return lastId;
     }
 
+<<<<<<< HEAD
     private String branchMain;
     private String branch1;
     private String branch2;
+=======
+    public ArrayList<String> getPosts(int number, String branchMain) {
+        int temp = number;
+        ArrayList<String> posts = new ArrayList<>();
+        Document document = new Document("branchMain", branchMain);
+        for (int i = lastPostId(); i > 0; i--) {
+            if(temp == 0) {
+                break;
+            }
+            document.append("postId", i);
+            if (super.collection.find(document).cursor().hasNext()) {
+                posts.add(super.collection.find(document).cursor().next().toJson());
+                temp--;
+            }
+            document.remove("postId", i);
+        }
+        return posts;
+    }
+>>>>>>> a265f6c83ef2ade36f9d7bde4c8499eddac21614
 
     public String getBio() {
         return bio;

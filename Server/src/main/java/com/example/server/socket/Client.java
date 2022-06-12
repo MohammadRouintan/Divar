@@ -9,7 +9,6 @@ import java.net.Socket;
 public class Client extends Thread {
     String messageText;
     String messageReceiver;
-    Socket socket;
     private DataInputStream DIS;
     private DataOutputStream DOS;
     String number;
@@ -26,8 +25,11 @@ public class Client extends Thread {
                 DIS = new DataInputStream(new BufferedInputStream(AcceptClients.clientSockets.get(count).getInputStream()));
                 number = DIS.readUTF();
                 DataOutputStream DOS = new DataOutputStream(new BufferedOutputStream(AcceptClients.clientSockets.get(count).getOutputStream()));
-                DOS.writeUTF(GetInfo.getConfirmationCode(number));
-                boolean confirmed = DIS.readBoolean();
+                String token = GetInfo.getConfirmationCode(number);
+                String userToken = DIS.readUTF();
+                boolean confirmed = token.equals(userToken);
+                DOS.writeBoolean(confirmed);
+                DOS.flush();
                 if (!confirmed) {
                     closeSocket();
                 } else {
@@ -46,7 +48,9 @@ public class Client extends Thread {
                                 if (AcceptClients.numbers.get(i).equals(messageReceiver)) {
                                     DataOutputStream DOSNotification = new DataOutputStream(new BufferedOutputStream(AcceptClients.notificationSockets.get(i).getOutputStream()));
                                     DOSNotification.writeUTF(messageText);
+                                    DOSNotification.flush();
                                     DOSNotification.writeUTF(number);
+                                    DOSNotification.flush();
                                 }
                             }
                         } else if (task == -1) {
@@ -87,6 +91,7 @@ public class Client extends Thread {
         String out = null;
         try {
             DOS.writeUTF(GetInfo.getImageID());
+            DOS.flush();
             out = DIS.readUTF();
         } catch (IOException e){
             System.err.println(e.getMessage());
