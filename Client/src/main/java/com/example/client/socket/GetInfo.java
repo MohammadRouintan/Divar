@@ -2,6 +2,7 @@ package com.example.client.socket;
 
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GetInfo {
@@ -12,12 +13,14 @@ public class GetInfo {
      * @return true if code was correct
      * TODO get user confirmation code and check the code with server code
      */
-    public static boolean confirmationCheck(String code){
-        if(Connect.confirmationCode.equals(code)){
-            return true;
-        } else {
-            return false;
+    public static boolean confirmationCheck(String code) {
+        boolean check = false;
+        try {
+            check = Connect.DIS.readBoolean();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
         }
+        return check;
     }
 
     public static void addUser(String phoneNumber){}

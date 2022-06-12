@@ -69,6 +69,8 @@ public class CodeController {
                 stage.setMinWidth(800);
                 stage.setScene(scene);
                 stage.show();
+            } else {
+                System.out.println("not successful");
             }
         }catch (IOException ex){
             ex.printStackTrace();
