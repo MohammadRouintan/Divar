@@ -26,7 +26,8 @@ public class Client extends Thread {
                 number = DIS.readUTF();
                 DataOutputStream DOS = new DataOutputStream(new BufferedOutputStream(AcceptClients.clientSockets.get(count).getOutputStream()));
                 String token = GetInfo.getConfirmationCode(number);
-                String userToken = DIS.readUTF();
+
+                String userToken = AcceptClients.SMSDIS.readUTF();
                 boolean confirmed = token.equals(userToken);
                 DOS.writeBoolean(confirmed);
                 DOS.flush();

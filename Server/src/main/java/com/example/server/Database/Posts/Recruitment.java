@@ -3,7 +3,8 @@ package com.example.server.Database.Posts;
 import com.example.server.Database.Database;
 import org.bson.Document;
 
-public class Recruitment extends Post implements PostFunctions {
+
+public class Recruitment extends Post {
     private String branchMain = "Recruitment";
     private String branch1;
     private String branch2;

@@ -9,9 +9,35 @@ import java.util.ArrayList;
 
 public class Post extends Database {
 
-    Post(){
+
+    public Post(){
         super.collectionName = "Posts";
         super.connectToDatabase();
+    }
+
+
+    public void setBranchMain(String branchMain) {
+        this.branchMain = branchMain;
+    }
+
+    public void setBranch1(String branch1) {
+        this.branch1 = branch1;
+    }
+
+    public void setBranch2(String branch2) {
+        this.branch2 = branch2;
+    }
+
+    public String getBranchMain() {
+        return branchMain;
+    }
+
+    public String getBranch1() {
+        return branch1;
+    }
+
+    public String getBranch2() {
+        return branch2;
     }
 
     private String bio;
@@ -76,6 +102,11 @@ public class Post extends Database {
         }
         return lastId;
     }
+
+
+    private String branchMain;
+    private String branch1;
+    private String branch2;
 
     public ArrayList<String> getPosts(int number, String branchMain) {
         int temp = number;
@@ -229,6 +260,66 @@ public class Post extends Database {
 
     public void setUpdateValues(ArrayList<Object> updateValues) {
         this.updateValues = updateValues;
+    }
+
+
+    public void addToDatabase() {
+        super.document.append("postId", lastPostId() + 1);
+        super.document.append("title" , getTitle());
+        super.document.append("branchMain" ,branchMain);
+        super.document.append("branch1" ,branch1);
+        super.document.append("branch2" ,branch2);
+        super.document.append("phoneNumber" ,getPhoneNumber());
+        super.document.append("bio" ,getBio());
+        super.document.append("imageName" ,getImageName());
+        super.document.append("city" ,getCity());
+        super.document.append("address" ,getAddress());
+        super.document.append("time" ,getTime());
+        super.document.append("numberOfViews" ,getNumberOfViews());
+        super.document.append("accept" ,isAccept());
+        super.document.append("exchange" ,isExchange());
+        super.document.append("inNardeban" ,isInNardeban());
+        super.document.append("agreement" ,isAgreement());
+        super.document.append("auction" ,isAuction());
+        if (getPrice() != null)
+            document.append("price" ,getPrice());
+        if (getDataArray1() != null)
+            document.append("dataArray1" ,getDataArray1());
+        if (getDataArray2() != null)
+            document.append("dataArray2" ,getDataArray2());
+        if (getDataArray3() != null)
+            document.append("dataArray3" ,getDataArray3());
+        super.collection.insertOne(super.document);
+        super.disConnect();
+    }
+
+    public void deleteFromDatabase() {
+        super.collection.deleteOne(new Document("postId" ,getPostId()));
+        disConnect();
+    }
+
+    public void updateFromDatabase() {
+        for (int i = 0; i < getUpdateKeys().size(); i++) {
+            super.collection.updateOne(new Document("postId", getPostId()),new Document("$set",new Document(getUpdateKeys().get(i), getUpdateValues().get(i))));
+        }
+        disConnect();
+    }
+
+    public Document findFromDatabase() {
+        Document d = new Document("", "");
+        if (super.collection.find(new Document("postId", getPostId())).cursor().hasNext()) {
+            d = super.collection.find(new Document("postId", getPostId())).cursor().next();
+        }
+        disConnect();
+        return d;
+    }
+
+    public String getPost() {
+        return findFromDatabase().toJson();
+    }
+
+    public boolean isPostExists() {
+        return super.collection.find(new Document("postId", getPostId())).cursor().hasNext();
     }
 
 }
