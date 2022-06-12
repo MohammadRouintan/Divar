@@ -16,6 +16,9 @@ public class Services extends Post implements PostFunctions {
         this.branch2 = branch2;
     }
 
+    public Services(){
+        super();
+    }
 
     @Override
     public void addToDatabase() {

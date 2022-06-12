@@ -77,6 +77,24 @@ public class Post extends Database {
         return lastId;
     }
 
+    public ArrayList<String> getPosts(int number, String branchMain) {
+        int temp = number;
+        ArrayList<String> posts = new ArrayList<>();
+        Document document = new Document("branchMain", branchMain);
+        for (int i = lastPostId(); i > 0; i--) {
+            if(temp == 0) {
+                break;
+            }
+            document.append("postId", i);
+            if (super.collection.find(document).cursor().hasNext()) {
+                posts.add(super.collection.find(document).cursor().next().toJson());
+                temp--;
+            }
+            document.remove("postId", i);
+        }
+        return posts;
+    }
+
     public String getBio() {
         return bio;
     }
