@@ -16,6 +16,9 @@ public class Equipment extends Post implements PostFunctions {
         this.branch2 = branch2;
     }
 
+    public Equipment(){
+        super();
+    }
 
     @Override
     public void addToDatabase() {

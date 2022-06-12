@@ -1,0 +1,25 @@
+.text-field{
+    -fx-border-color: #ffc000;
+    -fx-border-radius: 15px;
+    -fx-prompt-text-fill:#d1d1d1;
+}
+.code-btn{
+    -fx-background-color: #fff;
+    -fx-border-color: #ffc000;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-heigth:50px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+.code-btn:hover{
+    -fx-effect: none;
+}
+.number-btn{
+    -fx-background-color: #ffc000;
+    -fx-background-radius: 15;
+    -fx-heigth:50px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+.number-btn:hover{
+    -fx-effect: none;
+}

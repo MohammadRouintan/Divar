@@ -17,6 +17,9 @@ public class HomeCommodity extends Post implements PostFunctions {
         this.branch2 = branch2;
     }
 
+    public HomeCommodity(){
+        super();
+    }
 
     @Override
     public void addToDatabase() {

@@ -18,6 +18,10 @@ public class Entertainment extends Post implements PostFunctions {
         this.branch2 = branch2;
     }
 
+    public Entertainment(){
+        super();
+    }
+
     @Override
     public void addToDatabase() {
         super.document.append("postId", super.lastPostId() + 1);
