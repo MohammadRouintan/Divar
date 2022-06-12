@@ -13,8 +13,8 @@ public class Connect {
     DataOutputStream imageDOS;
     DataInputStream imageDIS;
     DataOutputStream DOS;
-    DataInputStream DIS;
-    String confirmationCode;
+    public static DataInputStream DIS;
+    public static String confirmationCode;
 
     public static String getPhoneNumber() {
         return phoneNumber;
@@ -33,8 +33,7 @@ public class Connect {
             DOS = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
             DIS = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
             DOS.writeUTF(phoneNumber);
-            confirmationCode = DIS.readUTF();
-            DOS.writeBoolean(GetInfo.confirmationCheck(confirmationCode));
+            DOS.flush();
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
