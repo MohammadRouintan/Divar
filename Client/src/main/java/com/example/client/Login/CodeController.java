@@ -91,7 +91,8 @@ public class CodeController {
     @FXML
     public void initialize() {
         counter = 120;
-        label1CodeFile.setText(" لطفا کد تایید را به شماره ی  " + Connect.getPhoneNumber() + " ارسال شده را وارد کنید . ");
+        ReCodeButtonID.setVisible(false);
+        label1CodeFile.setText("Enter the verification code that was sent to the mobile number "+ Connect.getPhoneNumber());
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
     }
