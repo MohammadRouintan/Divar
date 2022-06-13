@@ -18,6 +18,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Dashboard.AddADSController">
+
    <children>
       <VBox alignment="CENTER" prefHeight="600.0" prefWidth="230.0" style="-fx-background-color: #f1c40f;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -98,17 +99,12 @@
                         <Insets bottom="10.0" top="20.0" />
                      </VBox.margin>
                   </Label>
-                  <ComboBox fx:id="MainBranchCategoties" onAction="#MainBranchCategotiesFunction" prefHeight="34.0" prefWidth="400.0">
+                  <ComboBox fx:id="MainBranchCategories" onAction="#MainBranchCategotiesFunction" prefHeight="34.0" prefWidth="400.0">
                      <VBox.margin>
                         <Insets bottom="20.0" />
                      </VBox.margin>
                   </ComboBox>
                   <ComboBox fx:id="branchTwoCategories" onAction="#branchTwoCategoriesFunction" prefHeight="34.0" prefWidth="400.0">
-                     <VBox.margin>
-                        <Insets bottom="20.0" />
-                     </VBox.margin>
-                  </ComboBox>
-                  <ComboBox fx:id="branchThreeCategories" prefHeight="34.0" prefWidth="400.0">
                      <VBox.margin>
                         <Insets bottom="20.0" />
                      </VBox.margin>

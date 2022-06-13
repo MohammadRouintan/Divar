@@ -17,6 +17,27 @@ import java.util.ArrayList;
 public class AddADSController {
 
         @FXML
+        public void initialize() {
+                setMainCategories();
+                setCity();
+        }
+
+        private void setMainCategories(){
+                String[] mainCategories = {"Digital Commodity" ,"Entertainment" ,"Equipment" ,"Estate" ,"Home Commodity" ,"Personal Items " ,"Recruitment" ,"Services" ,"Social" ," Vehicles"};
+                ObservableList<String> temp = FXCollections.observableArrayList();
+                temp.addAll(mainCategories);
+                MainBranchCategories.setItems(temp);
+        }
+
+        private void setCity(){
+                String[] cityes = {"Tehran" ,"Shiraz" ,"Mashhad" ,"Arak" ,"Ardabil" ,"Orumieh" ,"Esfahan" ,"Ahwaz" ,"Ilam" ," Bojnord" ,
+                        "Bandar Abbas" ,"Bushehr" ,"Birjand" ,"Tabriz" ,"Khorramabad" ,"Rasht" ,"Zahedan" ,"Zanjan" ,"Sari" ,"Semnan" ,"Sanandaj" ,"Shahr e Kord" ,"Qazvin" ,"Qom" ,"Karaj" ,"Kerman" ,"Kermanshah" ,"Gorgan" ,"Hamedan" ,"Yasuj" ,"Yazd"};
+                ObservableList<String> temp = FXCollections.observableArrayList();
+                temp.addAll(cityes);
+                selectCityComboBox.setItems(temp);
+        }
+
+        @FXML
         private ComboBox<String> MainBranchCategories;
 
         @FXML
@@ -83,7 +104,7 @@ public class AddADSController {
         private TextField postPriceFiled;
 
         @FXML
-        private ComboBox<?> selectCityComboBox;
+        private ComboBox<String> selectCityComboBox;
 
         @FXML
         private Button uploadImage;
