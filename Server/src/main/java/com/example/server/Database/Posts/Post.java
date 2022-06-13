@@ -3,6 +3,7 @@ package com.example.server.Database.Posts;
 import com.example.server.Database.Database;
 import com.mongodb.client.MongoClients;
 import org.bson.Document;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -97,6 +98,17 @@ public class Post extends Database {
             String jsonString = collection.find().sort(new Document("postId", -1)).limit(1).cursor().next().toJson();
             JSONObject obj = new JSONObject(jsonString);
             lastId = obj.getInt("postId");
+        }
+        return lastId;
+    }
+
+    public int lastImageId() {
+        int lastId = 0;
+        if (collection.find().sort(new Document("postId", -1)).limit(1).cursor().hasNext()) {
+            String jsonString = collection.find().sort(new Document("postId", -1)).limit(1).cursor().next().toJson();
+            JSONObject obj = new JSONObject(jsonString);
+            JSONArray jsonArray = obj.getJSONArray("imageName");
+            lastId =  jsonArray.getInt(jsonArray.length() - 1);
         }
         return lastId;
     }
@@ -261,22 +273,22 @@ public class Post extends Database {
 
     public void addToDatabase() {
         super.document.append("postId", lastPostId() + 1);
-        super.document.append("title" , getTitle());
-        super.document.append("branchMain" ,branchMain);
-        super.document.append("branch1" ,branch1);
-        super.document.append("branch2" ,branch2);
-        super.document.append("phoneNumber" ,getPhoneNumber());
+//        super.document.append("title" , getTitle());
+//        super.document.append("branchMain" ,branchMain);
+//        super.document.append("branch1" ,branch1);
+//        super.document.append("branch2" ,branch2);
+//        super.document.append("phoneNumber" ,getPhoneNumber());
         super.document.append("bio" ,getBio());
         super.document.append("imageName" ,getImageName());
-        super.document.append("city" ,getCity());
-        super.document.append("address" ,getAddress());
-        super.document.append("time" ,getTime());
-        super.document.append("numberOfViews" ,getNumberOfViews());
-        super.document.append("accept" ,isAccept());
-        super.document.append("exchange" ,isExchange());
-        super.document.append("inNardeban" ,isInNardeban());
-        super.document.append("agreement" ,isAgreement());
-        super.document.append("auction" ,isAuction());
+//        super.document.append("city" ,getCity());
+//        super.document.append("address" ,getAddress());
+//        super.document.append("time" ,getTime());
+//        super.document.append("numberOfViews" ,getNumberOfViews());
+//        super.document.append("accept" ,isAccept());
+//        super.document.append("exchange" ,isExchange());
+//        super.document.append("inNardeban" ,isInNardeban());
+//        super.document.append("agreement" ,isAgreement());
+//        super.document.append("auction" ,isAuction());
         if (getPrice() != null)
             document.append("price" ,getPrice());
         if (getDataArray1() != null)
