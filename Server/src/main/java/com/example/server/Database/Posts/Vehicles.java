@@ -3,6 +3,7 @@ package com.example.server.Database.Posts;
 import com.example.server.Database.Database;
 import org.bson.Document;
 
+
 public class Vehicles extends Post {
     private String branchMain = "Vehicles";
     private String branch1;

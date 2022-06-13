@@ -4,6 +4,7 @@ import com.example.server.Database.Database;
 import org.bson.Document;
 import org.bson.json.JsonObject;
 
+
 public class Entertainment extends Post {
 
     private String branchMain = "Entertainment";

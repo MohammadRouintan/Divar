@@ -5,6 +5,7 @@ import com.mongodb.client.FindIterable;
 import org.bson.Document;
 import org.bson.json.JsonObject;
 
+
 public class DigitalCommodity extends Post {
 
     private String branchMain = "Digital Commodity";
