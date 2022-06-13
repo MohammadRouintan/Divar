@@ -1,5 +1,7 @@
 package com.example.server.socket;
 
+import java.io.BufferedOutputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 
 public class GetInfo {
@@ -27,12 +29,25 @@ public class GetInfo {
     /**
      *
      * @param senderNumber number of who sent message
-     * @param receiverNumber number of whom receives message
-     * @param message message text
+     * @param messageReceiver number of whom receives message
+     * @param messageText message text
      * TODO save in database
      */
-    public static void newMessage (String senderNumber, String receiverNumber, String message) {
-
+    public static void newMessage (String senderNumber, String messageReceiver, String messageText) {
+        try {
+            for (int i = 0; i < AcceptClients.numbers.size(); i++) {
+                if (AcceptClients.numbers.get(i).equals(messageReceiver)) {
+                    DataOutputStream DOSNotification = new DataOutputStream(new BufferedOutputStream(AcceptClients.notificationSockets.get(i).getOutputStream()));
+                    DOSNotification.writeUTF(messageText);
+                    DOSNotification.flush();
+                    DOSNotification.writeUTF(senderNumber);
+                    DOSNotification.flush();
+                    DOSNotification.close();
+                }
+            }
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     /**
