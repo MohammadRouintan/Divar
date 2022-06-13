@@ -102,13 +102,13 @@ public class Post extends Database {
         return lastId;
     }
 
-    public int lastImageId() {
-        int lastId = 0;
+    public String  lastImageId() {
+        String lastId = "";
         if (collection.find().sort(new Document("postId", -1)).limit(1).cursor().hasNext()) {
             String jsonString = collection.find().sort(new Document("postId", -1)).limit(1).cursor().next().toJson();
             JSONObject obj = new JSONObject(jsonString);
             JSONArray jsonArray = obj.getJSONArray("imageName");
-            lastId =  jsonArray.getInt(jsonArray.length() - 1);
+            lastId = String.valueOf(jsonArray.getInt(jsonArray.length() - 1));
         }
         return lastId;
     }
