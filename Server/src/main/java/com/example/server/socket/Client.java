@@ -71,6 +71,7 @@ public class Client extends Thread {
                         DOS.writeInt(list.size());
                         for (String str : list){
                             DOS.writeUTF(str);
+
                         }
                     } else if (task == 8) {
                         int postID = DIS.readInt();

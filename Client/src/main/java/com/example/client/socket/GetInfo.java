@@ -18,6 +18,7 @@ public class GetInfo {
         try {
             Connect.DOS.writeUTF(code);
             Connect.DOS.flush();
+
             check = Connect.DIS.readBoolean();
         } catch (IOException e) {
             System.err.println(e.getMessage());
@@ -180,4 +181,5 @@ public class GetInfo {
             System.err.println(e.getMessage());
         }
     }
+
 }
