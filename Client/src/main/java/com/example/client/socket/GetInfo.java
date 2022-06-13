@@ -133,7 +133,7 @@ public class GetInfo {
         return null;
     }
 
-    public static boolean sendFile(String fileName){return false;}
+    public static boolean sendFile(String url ,String newName){return false;}
 
     public static String getLastNameImage(){return null;}
 

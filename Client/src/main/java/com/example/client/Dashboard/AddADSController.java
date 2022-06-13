@@ -1,5 +1,6 @@
 package com.example.client.Dashboard;
 
+import com.example.client.socket.Connect;
 import com.example.client.socket.GetInfo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,9 +20,14 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import org.json.JSONObject;
 
 import java.io.*;
+import java.security.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -33,12 +39,12 @@ public class AddADSController {
                 setMainCategories();
                 setCity();
                 HBox hBox;
-                hBox = makeNewHBox();
+                hBox = makeNewHBox(0);
                 hBox.setId("featureRowTextField0");
                 featureRowVbox.getChildren().add(hBox);
 
                 VBox vBox;
-                vBox = makeNewVBox();
+                vBox = makeNewVBox(0);
                 vBox.setId("featureColumnTextField0");
                 featureColumnVbox.getChildren().add(vBox);
 
@@ -149,7 +155,7 @@ public class AddADSController {
         void addFeatureRow(ActionEvent event) {
             if(addFeatureRowCounter < 6) {
                 HBox hBox = new HBox();
-                hBox = makeNewHBox();
+                hBox = makeNewHBox(addFeatureRowCounter);
                 hBox.setId("featureRowTextField"+addFeatureRowCounter);
                 featureRowVbox.getChildren().add(hBox);
                 addFeatureRowCounter++;
@@ -167,7 +173,7 @@ public class AddADSController {
         void addFeatureColumn(ActionEvent event){
             if(addFeatureColumnCounter < 6){
                 VBox vBox = new VBox();
-                vBox = makeNewVBox();
+                vBox = makeNewVBox(addFeatureColumnCounter);
                 vBox.setId("featureColumnTextField"+addFeatureColumnCounter);
                 featureColumnVbox.getChildren().add(vBox);
                 addFeatureColumnCounter++;
@@ -180,6 +186,16 @@ public class AddADSController {
                 addFeatureColumnCounter--;
             }
         }
+
+        @FXML
+        private TextField RowName0 ,RowName1 ,RowName2 ,RowName3 ,RowName4 ,RowName5;
+        @FXML
+        private TextField RowValue0 ,RowValue1 ,RowValue2 ,RowValue3 ,RowValue4 ,RowValue5;
+        @FXML
+        private TextField ColumnName0 ,ColumnName1 ,ColumnName2 ,ColumnName3 ,ColumnName4 ,ColumnName5;
+        @FXML
+        private TextField ColumnValue0 ,ColumnValue1 ,ColumnValue2 ,ColumnValue3 ,ColumnValue4 ,ColumnValue5;
+
         @FXML
         void addPost(ActionEvent event) {
 
@@ -208,7 +224,99 @@ public class AddADSController {
                 createErrorMassage("");
             }else if(description.equals("")){
                 createErrorMassage("");
-            }else {
+            }else if(RowName0.getText().equals("") || RowValue0.getText().equals("")){
+                createErrorMassage("");
+            }else if(ColumnName0.getText().equals("") || ColumnValue0.getText().equals("")){
+                createErrorMassage("");
+            }else{
+                ArrayList<String> RowName = new ArrayList<>();
+                ArrayList<String> RowValue = new ArrayList<>();
+                ArrayList<String> ColumnName = new ArrayList<>();
+                ArrayList<String> ColumnValue = new ArrayList<>();
+
+                for(int i=0; i <= addFeatureColumnCounter; i++ ){
+                    switch (i){
+                        case 0:
+                            ColumnName.add(ColumnName0.getText());
+                            ColumnValue.add(ColumnValue0.getText());
+                            break;
+                        case 1:
+                            ColumnName.add(ColumnName1.getText());
+                            ColumnValue.add(ColumnValue1.getText());
+                            break;
+                        case 2:
+                            ColumnName.add(ColumnName2.getText());
+                            ColumnValue.add(ColumnValue2.getText());
+                            break;
+                        case 3:
+                            ColumnName.add(ColumnName3.getText());
+                            ColumnValue.add(ColumnValue3.getText());
+                            break;
+                        case 4:
+                            ColumnName.add(ColumnName4.getText());
+                            ColumnValue.add(ColumnValue4.getText());
+                            break;
+                        case 5:
+                            ColumnName.add(ColumnName5.getText());
+                            ColumnValue.add(ColumnValue5.getText());
+                            break;
+                    }
+                }
+
+                for (int i = 0; i <= addFeatureRowCounter; i++) {
+                    switch (i){
+                        case 0:
+                            RowName.add(RowName0.getText());
+                            RowValue.add(RowValue0.getText());
+                            break;
+                        case 1:
+                            RowName.add(RowName1.getText());
+                            RowValue.add(RowValue1.getText());
+                            break;
+                        case 2:
+                            RowName.add(RowName2.getText());
+                            RowValue.add(RowValue2.getText());
+                            break;
+                        case 3:
+                            RowName.add(RowName3.getText());
+                            RowValue.add(RowValue3.getText());
+                            break;
+                        case 4:
+                            RowName.add(RowName4.getText());
+                            RowValue.add(RowValue4.getText());
+                            break;
+                        case 5:
+                            RowName.add(RowName5.getText());
+                            RowValue.add(RowValue5.getText());
+                            break;
+                    }
+                }
+
+
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+                LocalDateTime now = LocalDateTime.now();
+
+                JSONObject jsonObject =  new JSONObject();
+                jsonObject.put("title" ,name);
+                jsonObject.put("branchMain" ,mainBranch);
+                jsonObject.put("branch1" ,branchTwo);
+                jsonObject.put("phoneNumber" , Connect.getPhoneNumber());
+                jsonObject.put("bio" ,description);
+                jsonObject.put("imageName" ,imagesName);
+                jsonObject.put("city" ,city);
+                jsonObject.put("address" ,address);
+                jsonObject.put("time" ,dtf.format(now));
+                jsonObject.put("accept" ,false);
+                jsonObject.put("exchange" ,exchangeCheckBox.isSelected());
+                jsonObject.put("agreement" ,agreedPriceCheckBox.isSelected());
+                jsonObject.put("auction" ,auctionCheckBox.isSelected());
+                jsonObject.put("price" ,price);
+                jsonObject.put("RowName" ,RowName);
+                jsonObject.put("RowValue" ,RowValue);
+                jsonObject.put("ColumnName" ,ColumnName);
+                jsonObject.put("ColumnValue" ,ColumnValue);
+
+                GetInfo.addPost(jsonObject);
 
             }
 
@@ -216,6 +324,10 @@ public class AddADSController {
 
         @FXML
         void branchTwoCategoriesFunction(ActionEvent event) {
+        }
+
+        @FXML
+        void cancelPost(ActionEvent event) {
             MainBranchCategories.setValue("");
             branchTwoCategories.setValue("");
             selectCityComboBox.setValue("");
@@ -224,11 +336,6 @@ public class AddADSController {
             postDescriptionFiled.setText("");
             postPriceFiled.setText("");
             img1.setImage(new Image(""));
-        }
-
-        @FXML
-        void cancelPost(ActionEvent event) {
-
         }
 
         @FXML
@@ -378,7 +485,7 @@ public class AddADSController {
 
             branchTwoCategories.setItems(branchTwo);
         }
-        private HBox makeNewHBox(){
+        private HBox makeNewHBox(int counter){
             HBox hBox = new HBox();
             hBox.setPadding(new Insets(10, 0, 10, 0));
             hBox.setAlignment(Pos.CENTER);
@@ -386,22 +493,26 @@ public class AddADSController {
             nameTxt.setMinHeight(35);
             nameTxt.setPrefWidth(110);
             nameTxt.setPrefHeight(35);
+            nameTxt.setId("RowName" + counter);
             TextField detailsTxt = new TextField();
             detailsTxt.setMinHeight(35);
             detailsTxt.setPrefWidth(285);
             detailsTxt.setPrefHeight(35);
+            detailsTxt.setId("RowValue" + counter);
             hBox.getChildren().add(nameTxt);
             hBox.getChildren().add(detailsTxt);
             return hBox;
         }
-    private VBox makeNewVBox(){
+    private VBox makeNewVBox(int counter){
         VBox vBox = new VBox();
         vBox.setPadding(new Insets(10, 0, 5, 0));
         vBox.setAlignment(Pos.CENTER);
         TextField nameTxt = new TextField();
+        nameTxt.setId("ColumnName" + counter);
         nameTxt.setMinHeight(35);
         nameTxt.setMaxWidth(150);
         TextField detailsTxt = new TextField();
+        detailsTxt.setId("ColumnValue" + counter);
         detailsTxt.setMinHeight(35);
         detailsTxt.setMaxWidth(345);
         vBox.getChildren().add(nameTxt);
