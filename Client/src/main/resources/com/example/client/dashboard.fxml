@@ -17,7 +17,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Dashboard.AddADSController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Dashboard.AddADSController">
 
    <children>
       <VBox alignment="CENTER" prefHeight="600.0" prefWidth="230.0" style="-fx-background-color: #f1c40f;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -163,44 +163,42 @@
                         <Insets bottom="20.0" top="20.0" />
                      </VBox.margin>
                   </Label>
-                  <Button mnemonicParsing="false" onAction="#addFeatureRow" text="+">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="15.0" />
-                     </VBox.margin>
-                  </Button>
-                  <HBox alignment="CENTER" prefHeight="72.0" prefWidth="574.0">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <TextField minHeight="35.0" onAction="#featureRowName" prefHeight="35.0" prefWidth="110.0">
-                           <HBox.margin>
-                              <Insets right="5.0" />
-                           </HBox.margin>
-                        </TextField>
-                        <TextField alignment="CENTER" minHeight="35.0" onAction="#featureValueRow" prefHeight="35.0" prefWidth="285.0">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin></TextField>
+                        <Button maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#addFeatureRow" prefHeight="30.0" prefWidth="30.0" text="+">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="283.0" layoutY="11.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#removeFeatureRow" prefHeight="30.0" prefWidth="30.0" text="-">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
                      </children>
                      <VBox.margin>
                         <Insets bottom="20.0" />
                      </VBox.margin>
                   </HBox>
-                  <Button fx:id="addFeatureColumn" mnemonicParsing="false" text="+">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
+                  <VBox fx:id="featureRowVbox" prefHeight="200.0" prefWidth="100.0" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#addFeatureColumn" prefHeight="30.0" prefWidth="30.0" text="+">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="283.0" layoutY="11.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#removeFeatureColumn" prefHeight="30.0" prefWidth="30.0" text="-">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
                      <VBox.margin>
-                        <Insets bottom="10.0" />
+                        <Insets bottom="20.0" />
                      </VBox.margin>
-                  </Button>
-                  <TextArea fx:id="featureColumnName" maxHeight="35.0" maxWidth="150.0" minHeight="35.0" prefHeight="40.0" prefWidth="542.0">
-                     <VBox.margin>
-                        <Insets bottom="15.0" />
-                     </VBox.margin>
-                  </TextArea>
-                  <TextArea fx:id="featureColumnValue" maxHeight="35.0" maxWidth="345.0" minHeight="35.0" prefHeight="35.0" prefWidth="345.0" />
+                  </HBox>
+                  <VBox fx:id="featureColumnVbox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" />
                   <Label alignment="CENTER" prefHeight="40.0" prefWidth="161.0" text="description :">
                      <font>
                         <Font size="18.0" />

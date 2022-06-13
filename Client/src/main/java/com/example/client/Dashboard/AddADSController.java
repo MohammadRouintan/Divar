@@ -4,12 +4,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 
@@ -36,7 +40,10 @@ public class AddADSController {
                 temp.addAll(cityes);
                 selectCityComboBox.setItems(temp);
         }
-
+        @FXML
+        private VBox featureRowVbox;
+        @FXML
+        private VBox featureColumnVbox;
         @FXML
         private ComboBox<String> MainBranchCategories;
 
@@ -114,11 +121,54 @@ public class AddADSController {
             setBranchTwoCategories();
         }
 
+        private static int addFeatureRowCounter = 0;
         @FXML
         void addFeatureRow(ActionEvent event) {
-
+            if(addFeatureRowCounter < 6) {
+                HBox hBox = new HBox();
+                hBox.setId("row"+addFeatureRowCounter);
+                hBox.setPadding(new Insets(10, 0, 10, 0));
+                hBox.setAlignment(Pos.CENTER);
+                TextField nameTxt = new TextField();
+                nameTxt.setMinHeight(35);
+                nameTxt.setPrefWidth(110);
+                nameTxt.setPrefHeight(35);
+                TextField detailsTxt = new TextField();
+                detailsTxt.setMinHeight(35);
+                detailsTxt.setPrefWidth(285);
+                detailsTxt.setPrefHeight(35);
+                hBox.getChildren().add(nameTxt);
+                hBox.getChildren().add(detailsTxt);
+                featureRowVbox.getChildren().add(hBox);
+                addFeatureRowCounter++;
+            }
         }
-
+        @FXML
+        void removeFeatureRow(ActionEvent event){
+        }
+        private static int addFeatureColumnCounter = 0;
+        @FXML
+        void addFeatureColumn(ActionEvent event){
+            if(addFeatureColumnCounter < 6){
+                VBox vBox = new VBox();
+                vBox.setId("row"+addFeatureColumnCounter);
+                vBox.setPadding(new Insets(10, 0, 5, 0));
+                vBox.setAlignment(Pos.CENTER);
+                TextField nameTxt = new TextField();
+                nameTxt.setMinHeight(35);
+                nameTxt.setMaxWidth(150);
+                TextField detailsTxt = new TextField();
+                detailsTxt.setMinHeight(35);
+                detailsTxt.setMaxWidth(345);
+                vBox.getChildren().add(nameTxt);
+                vBox.getChildren().add(detailsTxt);
+                featureColumnVbox.getChildren().add(vBox);
+                addFeatureColumnCounter++;
+            }
+        }
+        @FXML
+        void removeFeatureColumn(ActionEvent event){
+        }
         @FXML
         void addPost(ActionEvent event) {
 
