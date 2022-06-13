@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Post extends Database {
 
-    Post(){
+    public Post(){
         super.collectionName = "Posts";
         super.connectToDatabase();
     }

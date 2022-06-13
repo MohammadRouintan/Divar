@@ -20,6 +20,7 @@ public class HelloApplication extends Application {
 
     public static void main(String[] args) {
         AcceptClients acceptClients = new AcceptClients();
+        acceptClients.run();
         launch();
     }
 }
