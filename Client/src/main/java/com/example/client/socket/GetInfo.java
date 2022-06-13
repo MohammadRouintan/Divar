@@ -134,12 +134,7 @@ public class GetInfo {
         }
         return null;
     }
-
-<<<<<<< HEAD
-    public static boolean sendFile(String url ,String newName){return false;}
-=======
->>>>>>> 72b82036e4d0deec9e5a2bd53f9319b6b9e9ab5f
-
+    
     public static String getLastNameImage(){
         String result = null;
         try {
