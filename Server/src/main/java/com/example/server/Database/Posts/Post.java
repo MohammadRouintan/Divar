@@ -5,6 +5,7 @@ import org.bson.Document;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.security.Timestamp;
 import java.util.ArrayList;
 
 public class Post extends Database {
@@ -22,20 +23,8 @@ public class Post extends Database {
         this.branch1 = branch1;
     }
 
-    public void setBranch2(String branch2) {
-        this.branch2 = branch2;
-    }
-
     public String getBranchMain() {
         return branchMain;
-    }
-
-    public String getBranch1() {
-        return branch1;
-    }
-
-    public String getBranch2() {
-        return branch2;
     }
 
     private String bio;
@@ -44,7 +33,7 @@ public class Post extends Database {
     private String address;
     private String price;
     private String city;
-    private String time;
+    private Timestamp time;
     private String phoneNumber;
     private int postId;
     private int numberOfViews;
@@ -115,7 +104,6 @@ public class Post extends Database {
 
     private String branchMain;
     private String branch1;
-    private String branch2;
 
     public ArrayList<String> getPosts(int number, String branchMain) {
         int temp = number;
@@ -183,11 +171,11 @@ public class Post extends Database {
         this.city = city;
     }
 
-    public String getTime() {
+    public Timestamp getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(Timestamp time) {
         this.time = time;
     }
 
@@ -284,17 +272,14 @@ public class Post extends Database {
         super.document.append("title" , getTitle());
         super.document.append("branchMain" ,branchMain);
         super.document.append("branch1" ,branch1);
-        super.document.append("branch2" ,branch2);
         super.document.append("phoneNumber" ,getPhoneNumber());
         super.document.append("bio" ,getBio());
         super.document.append("imageName" ,getImageName());
         super.document.append("city" ,getCity());
         super.document.append("address" ,getAddress());
         super.document.append("time" ,getTime());
-        super.document.append("numberOfViews" ,getNumberOfViews());
         super.document.append("accept" ,isAccept());
         super.document.append("exchange" ,isExchange());
-        super.document.append("inNardeban" ,isInNardeban());
         super.document.append("agreement" ,isAgreement());
         super.document.append("auction" ,isAuction());
         if (getPrice() != null)
