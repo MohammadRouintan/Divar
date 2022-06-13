@@ -13,17 +13,17 @@
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="test" alignment="CENTER" prefHeight="51.0" prefWidth="378.0" styleClass="number-lable" stylesheets="@../Style/logIn.css" text="کد تایید را وارد کنید" textAlignment="CENTER">
+            <Label fx:id="test" alignment="CENTER" prefHeight="51.0" prefWidth="378.0" styleClass="number-lable" stylesheets="@../Style/logIn.css" text="Enter the verification code" textAlignment="CENTER">
                <font>
-                  <Font name="Georgia" size="27.0" />
+                  <Font name="Segoe UI" size="27.0" />
                </font>
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="label1CodeFile" alignment="CENTER" prefHeight="62.0" prefWidth="481.0" text="لطفا کد تایید که به آدرس ایمیل abcdefghigklmnopr@gmail.com ارسال شده را واردکنید" textAlignment="CENTER" textFill="#7e7e7e" wrapText="true">
+            <Label fx:id="label1CodeFile" alignment="CENTER" prefHeight="62.0" prefWidth="481.0" text="Enter the verification code that was sent to the mobile number 09381495505" textAlignment="CENTER" textFill="#7e7e7e" wrapText="true">
                <font>
-                  <Font name="Georgia" size="17.0" />
+                  <Font name="Segoe UI" size="17.0" />
                </font>
                <VBox.margin>
                   <Insets bottom="30.0" />
@@ -37,7 +37,7 @@
                   <Insets left="50.0" />
                </padding>
                <VBox.margin>
-                  <Insets bottom="40.0" />
+                  <Insets bottom="10.0" />
                </VBox.margin>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -46,25 +46,28 @@
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </opaqueInsets>
             </TextField>
-            <Label fx:id="counterID" text="5">
+            <Label fx:id="counterID" text="120">
                <font>
                   <Font size="28.0" />
                </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </Label>
-            <Button fx:id="ReCodeButtonID" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#ReCodePhoneCode" prefHeight="50.0" prefWidth="222.0" styleClass="code-btn" stylesheets="@../Style/code.css" text="درخواست کد" textAlignment="CENTER" visible="false">
+            <Button fx:id="ReCodeButtonID" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#ReCodePhoneCode" prefHeight="50.0" prefWidth="222.0" styleClass="code-btn" stylesheets="@../Style/code.css" text="Send code" textAlignment="CENTER">
                <font>
-                  <Font name="Georgia" size="24.0" />
+                  <Font name="Segoe UI" size="25.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <VBox.margin>
-                  <Insets bottom="30.0" />
+                  <Insets bottom="20.0" />
                </VBox.margin>
             </Button>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#loginButtonOnCodeFile" prefHeight="50.0" prefWidth="222.0" styleClass="number-btn" stylesheets="@../Style/code.css" text="ورود" textAlignment="CENTER">
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#loginButtonOnCodeFile" prefHeight="50.0" prefWidth="222.0" styleClass="number-btn" stylesheets="@../Style/code.css" text="Enter" textAlignment="CENTER">
                <font>
-                  <Font name="Georgia" size="27.0" />
+                  <Font name="Segoe UI" size="27.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
