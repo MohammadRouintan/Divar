@@ -1,20 +1,18 @@
 package com.example.server.Database.Posts;
 
 import com.example.server.Database.Database;
-import com.mongodb.client.MongoClients;
 import org.bson.Document;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 public class Post extends Database {
 
-
     public Post(){
         super.collectionName = "Posts";
         super.connectToDatabase();
     }
-
 
     public void setBranchMain(String branchMain) {
         this.branchMain = branchMain;
@@ -55,9 +53,10 @@ public class Post extends Database {
     private boolean inNardeban;
     private boolean exchange;
     private boolean agreement;
-    private ArrayList<String> dataArray1;
-    private ArrayList<String> dataArray2;
-    private ArrayList<String> dataArray3;
+    private ArrayList<String> rowName;
+    private ArrayList<String> rowValue;
+    private ArrayList<String> columnName;
+    private ArrayList<String> columnValue;
     private ArrayList<String> updateKeys;
     private ArrayList<Object> updateValues;
 
@@ -103,6 +102,16 @@ public class Post extends Database {
         return lastId;
     }
 
+    public String  lastImageId() {
+        String lastId = "";
+        if (collection.find().sort(new Document("postId", -1)).limit(1).cursor().hasNext()) {
+            String jsonString = collection.find().sort(new Document("postId", -1)).limit(1).cursor().next().toJson();
+            JSONObject obj = new JSONObject(jsonString);
+            JSONArray jsonArray = obj.getJSONArray("imageName");
+            lastId = String.valueOf(jsonArray.getInt(jsonArray.length() - 1));
+        }
+        return lastId;
+    }
 
     private String branchMain;
     private String branch1;
@@ -222,28 +231,36 @@ public class Post extends Database {
         this.inNardeban = inNardeban;
     }
 
-    public ArrayList<String> getDataArray1() {
-        return dataArray1;
+    public ArrayList<String> getRowName() {
+        return rowName;
     }
 
-    public void setDataArray1(ArrayList<String> dataArray1) {
-        this.dataArray1 = dataArray1;
+    public void setRowName(ArrayList<String> rowName) {
+        this.rowName = rowName;
     }
 
-    public ArrayList<String> getDataArray2() {
-        return dataArray2;
+    public ArrayList<String> getRowValue() {
+        return rowValue;
     }
 
-    public void setDataArray2(ArrayList<String> dataArray2) {
-        this.dataArray2 = dataArray2;
+    public void setRowValue(ArrayList<String> rowValue) {
+        this.rowValue = rowValue;
     }
 
-    public ArrayList<String> getDataArray3() {
-        return dataArray3;
+    public ArrayList<String> getColumnName() {
+        return columnName;
     }
 
-    public void setDataArray3(ArrayList<String> dataArray3) {
-        this.dataArray3 = dataArray3;
+    public void setColumnName(ArrayList<String> columnName) {
+        this.columnName = columnName;
+    }
+
+    public ArrayList<String> getColumnValue() {
+        return columnValue;
+    }
+
+    public void setColumnValue(ArrayList<String> columnValue) {
+        this.columnValue = columnValue;
     }
 
     public ArrayList<String> getUpdateKeys() {
@@ -261,7 +278,6 @@ public class Post extends Database {
     public void setUpdateValues(ArrayList<Object> updateValues) {
         this.updateValues = updateValues;
     }
-
 
     public void addToDatabase() {
         super.document.append("postId", lastPostId() + 1);
@@ -283,12 +299,14 @@ public class Post extends Database {
         super.document.append("auction" ,isAuction());
         if (getPrice() != null)
             document.append("price" ,getPrice());
-        if (getDataArray1() != null)
-            document.append("dataArray1" ,getDataArray1());
-        if (getDataArray2() != null)
-            document.append("dataArray2" ,getDataArray2());
-        if (getDataArray3() != null)
-            document.append("dataArray3" ,getDataArray3());
+        if (getRowName() != null)
+            document.append("rowName" , getRowName());
+        if (getRowValue() != null)
+            document.append("rowValue" , getRowValue());
+        if (getColumnName() != null)
+            document.append("columnName" , getColumnName());
+        if (getColumnValue() != null)
+            document.append("columnValue" , getColumnValue());
         super.collection.insertOne(super.document);
         super.disConnect();
     }
