@@ -6,16 +6,18 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="CENTER" prefHeight="600.0" prefWidth="230.0" style="-fx-background-color: #f1c40f;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -101,6 +103,16 @@
                         <Insets bottom="20.0" />
                      </VBox.margin>
                   </ComboBox>
+                  <ComboBox prefHeight="34.0" prefWidth="400.0">
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </ComboBox>
+                  <ComboBox prefHeight="34.0" prefWidth="400.0">
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </ComboBox>
                   <Line endX="218.0929412841797" endY="-162.39212036132812" startX="-190.704345703125" startY="-162.1850128173828" style="-fx-opacity: 0.3;" />
                   <Label alignment="CENTER" prefHeight="40.0" prefWidth="75.0" text="City : ">
                      <VBox.margin>
@@ -142,11 +154,34 @@
                         <Insets top="20.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField maxWidth="400.0" prefHeight="34.0" prefWidth="400.0">
+                  <TextField maxWidth="400.0" prefHeight="35.0" prefWidth="400.0">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
                   </TextField>
+                  <Label alignment="CENTER" prefHeight="40.0" prefWidth="152.0" text="Add Feature :">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Button mnemonicParsing="false" text="+">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <HBox alignment="CENTER" prefHeight="55.0" prefWidth="530.0">
+                     <children>
+                        <TextField prefHeight="35.0" prefWidth="110.0">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <TextField alignment="CENTER" prefHeight="35.0" prefWidth="285.0" />
+                     </children>
+                  </HBox>
                   <Label alignment="CENTER" prefHeight="40.0" prefWidth="161.0" text="description :">
                      <font>
                         <Font size="18.0" />
@@ -156,29 +191,6 @@
                      </VBox.margin>
                   </Label>
                   <TextArea maxWidth="400.0" prefHeight="200.0" prefWidth="400.0" />
-                  <Label alignment="CENTER" prefHeight="40.0" prefWidth="75.0" text="Image :">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="145.0" text="upload">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </Button>
-                  <ListView fixedCellSize="4.0" maxWidth="500.0" prefHeight="113.0" prefWidth="500.0">
-                     <VBox.margin>
-                        <Insets top="20.0" />
-                     </VBox.margin>
-                  </ListView>
-                  <Line endX="218.0929412841797" endY="-162.39212036132812" startX="-190.704345703125" startY="-162.1850128173828" style="-fx-opacity: 0.3;">
-                     <VBox.margin>
-                        <Insets top="20.0" />
-                     </VBox.margin>
-                  </Line>
                   <Label alignment="CENTER" prefHeight="40.0" prefWidth="75.0" text="Price :">
                      <font>
                         <Font size="18.0" />
@@ -212,6 +224,103 @@
                         <Insets top="20.0" />
                      </VBox.margin>
                   </Line>
+                  <Label alignment="CENTER" prefHeight="40.0" prefWidth="75.0" text="Image :">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" text="upload">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Button>
+                  <HBox prefHeight="150.0" prefWidth="541.0" spacing="30.0">
+                     <VBox.margin>
+                        <Insets bottom="20.0" top="30.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/code1.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/code1.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/code1.jpg" />
+                           </image>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="150.0" prefWidth="541.0" spacing="30.0">
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/code1.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/code1.jpg" />
+                           </image>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/code1.jpg" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="150.0" prefWidth="541.0" spacing="30.0">
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/code1.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/code1.jpg" />
+                           </image>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/code1.jpg" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </HBox>
                </children>
             </VBox>
          </content>
