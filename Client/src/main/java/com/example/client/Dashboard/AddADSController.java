@@ -211,18 +211,19 @@ public class AddADSController {
             Matcher matcher = pattern.matcher(price);
 
             if(!matcher.matches()){
-                createErrorMassage("");
+                createErrorMassage("Price is invalid !!");
             }else if (mainBranch == null){
-                createErrorMassage("");
+                createErrorMassage("Please select MainBranch !!");
             }else if(branchTwo == null){
-                createErrorMassage("");
+                createErrorMassage("Please select BranchTwo !!");
             }else if(city == null){
-                createErrorMassage("");
+                createErrorMassage("Please select city !!");
             }else if(address.equals("")){
-                createErrorMassage("");
+                createErrorMassage("Please write address correctly !!");
             }else if(name.equals("")){
-                createErrorMassage("");
+                createErrorMassage("Please write name correctly !!");
             }else if(description.equals("")){
+<<<<<<< HEAD
                 createErrorMassage("");
             }else if(RowName0.getText().equals("") || RowValue0.getText().equals("")){
                 createErrorMassage("");
@@ -317,6 +318,10 @@ public class AddADSController {
                 jsonObject.put("ColumnValue" ,ColumnValue);
 
                 GetInfo.addPost(jsonObject);
+=======
+                createErrorMassage("Please write description correctly !!");
+            }else {
+>>>>>>> 72b82036e4d0deec9e5a2bd53f9319b6b9e9ab5f
 
             }
 
@@ -324,6 +329,10 @@ public class AddADSController {
 
         @FXML
         void branchTwoCategoriesFunction(ActionEvent event) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 72b82036e4d0deec9e5a2bd53f9319b6b9e9ab5f
         }
 
         @FXML
