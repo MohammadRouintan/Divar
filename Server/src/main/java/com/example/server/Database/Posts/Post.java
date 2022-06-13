@@ -273,22 +273,22 @@ public class Post extends Database {
 
     public void addToDatabase() {
         super.document.append("postId", lastPostId() + 1);
-//        super.document.append("title" , getTitle());
-//        super.document.append("branchMain" ,branchMain);
-//        super.document.append("branch1" ,branch1);
-//        super.document.append("branch2" ,branch2);
-//        super.document.append("phoneNumber" ,getPhoneNumber());
+        super.document.append("title" , getTitle());
+        super.document.append("branchMain" ,branchMain);
+        super.document.append("branch1" ,branch1);
+        super.document.append("branch2" ,branch2);
+        super.document.append("phoneNumber" ,getPhoneNumber());
         super.document.append("bio" ,getBio());
         super.document.append("imageName" ,getImageName());
-//        super.document.append("city" ,getCity());
-//        super.document.append("address" ,getAddress());
-//        super.document.append("time" ,getTime());
-//        super.document.append("numberOfViews" ,getNumberOfViews());
-//        super.document.append("accept" ,isAccept());
-//        super.document.append("exchange" ,isExchange());
-//        super.document.append("inNardeban" ,isInNardeban());
-//        super.document.append("agreement" ,isAgreement());
-//        super.document.append("auction" ,isAuction());
+        super.document.append("city" ,getCity());
+        super.document.append("address" ,getAddress());
+        super.document.append("time" ,getTime());
+        super.document.append("numberOfViews" ,getNumberOfViews());
+        super.document.append("accept" ,isAccept());
+        super.document.append("exchange" ,isExchange());
+        super.document.append("inNardeban" ,isInNardeban());
+        super.document.append("agreement" ,isAgreement());
+        super.document.append("auction" ,isAuction());
         if (getPrice() != null)
             document.append("price" ,getPrice());
         if (getDataArray1() != null)
