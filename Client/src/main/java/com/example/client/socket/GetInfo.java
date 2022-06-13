@@ -16,6 +16,8 @@ public class GetInfo {
     public static boolean confirmationCheck(String code) {
         boolean check = false;
         try {
+            Connect.DOS.writeUTF(code);
+            Connect.DOS.flush();
             check = Connect.DIS.readBoolean();
         } catch (IOException e) {
             System.err.println(e.getMessage());
@@ -23,29 +25,111 @@ public class GetInfo {
         return check;
     }
 
-    public static void addUser(String phoneNumber){}
+    public static void updateUser(ArrayList<String> keys ,ArrayList<Object> values){
+        try {
+            Connect.DOS.writeInt(4);
+            JSONObject json = new JSONObject();
+            json.put("keys", keys);
+            json.put("values", values);
+            Connect.DOS.writeUTF(json.toString());
+            Connect.DOS.flush();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
 
-    public static void updateUser(JSONObject data){}
+    public static void deleteUser(String phoneNumber){
+        try {
+            Connect.DOS.writeInt(5);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
 
-    public static void deleteUser(JSONObject data){}
+    public static boolean isUserExists(String phoneNumber){
+        try {
+            Connect.DOS.writeInt(6);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return true;
+    }
 
-    public static boolean isUserExists(String phoneNumber){return true;}
+    public static String getUser(String phoneNumber){
+        try {
+            Connect.DOS.writeInt(7);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
 
-    public static String getUser(String phoneNumber){return null;}
+    public static String getMarkedPost(int index){
+        try {
+            Connect.DOS.writeInt(8);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
 
-    public static String getMarkedPost(int index){return null;}
+    public static String getPost(int postID){
+        try {
+            Connect.DOS.writeInt(9);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
 
-    public static String getPost(int postID){return null;}
+    public static String getPosts(int sizePosts ,String mainBranch){
+        try {
+            Connect.DOS.writeInt(10);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
 
-    public static String getPosts(int sizePosts ,String mainBranch){return null;}
+    public static void updatePost(ArrayList<String> keys ,ArrayList<Object> values){
+        try {
+            Connect.DOS.writeInt(11);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
 
-    public static void updatePost(ArrayList<String> keys ,ArrayList<Object> values){}
+    public static void deletePost(int postID){
+        try {
+            Connect.DOS.writeInt(12);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
 
-    public static void deletePost(int postID){}
+    public static void addPost(JSONObject data){
+        try {
+            Connect.DOS.writeInt(13);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
 
-    public static void addPost(JSONObject data){}
+    public static String getLastSeenPost(){
+        try {
+            Connect.DOS.writeInt(14);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
 
-    public static String getLastSeenPost(){return null;}
-
-    public static String getUserPosts() {return null;}
+    public static String getUserPosts() {
+        try {
+            Connect.DOS.writeInt(15);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
 }
