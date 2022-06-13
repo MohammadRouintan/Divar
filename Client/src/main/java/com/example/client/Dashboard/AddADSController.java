@@ -13,7 +13,7 @@ import javafx.scene.image.ImageView;
 public class AddADSController {
 
         @FXML
-        private ComboBox<?> MainBranchCategoties;
+        private ComboBox<?> MainBranchCategories;
 
         @FXML
         private Button addFeatureColumn;
@@ -73,10 +73,10 @@ public class AddADSController {
         private TextField nameTextFiled;
 
         @FXML
-        private TextArea psotDescriptionFiled;
+        private TextArea postDescriptionFiled;
 
         @FXML
-        private TextField psotPriceFiled;
+        private TextField postPriceFiled;
 
         @FXML
         private ComboBox<?> selectCityComboBox;
