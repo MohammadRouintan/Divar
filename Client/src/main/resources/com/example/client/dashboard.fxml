@@ -208,7 +208,7 @@
                      </VBox.margin>
                   </Label>
                   <TextArea fx:id="psotDescriptionFiled" maxHeight="400.0" maxWidth="400.0" minHeight="150.0" prefHeight="400.0" prefWidth="400.0" />
-                  <Label alignment="CENTER" prefHeight="40.0" prefWidth="75.0" text="Price :">
+                  <Label fx:id="priceLabel" alignment="CENTER" prefHeight="23.0" prefWidth="133.0" text="Price :">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -221,12 +221,12 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                   </TextField>
-                  <CheckBox fx:id="agreedPriceCheckBox" mnemonicParsing="false" text="Agreed price">
+                  <CheckBox fx:id="agreedPriceCheckBox" mnemonicParsing="false" onAction="#agreedPriceCheckBoxFunction" text="Agreed price">
                      <VBox.margin>
                         <Insets left="-35.0" top="20.0" />
                      </VBox.margin>
                   </CheckBox>
-                  <CheckBox fx:id="auctionCheckBox" mnemonicParsing="false" text="I want to put it up for auction">
+                  <CheckBox fx:id="auctionCheckBox" mnemonicParsing="false" onAction="#auctionCheckBoxFunction" text="I want to put it up for auction">
                      <VBox.margin>
                         <Insets left="55.0" top="10.0" />
                      </VBox.margin>
@@ -249,7 +249,7 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Button fx:id="uploadImage" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" text="upload">
+                  <Button fx:id="uploadImage" mnemonicParsing="false" onAction="#uploadImageFunction" prefHeight="40.0" prefWidth="130.0" text="upload">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
