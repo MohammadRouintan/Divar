@@ -1,12 +1,14 @@
 package com.example.server.socket;
 
 
+import com.example.server.Database.Posts.Post;
 import com.example.server.Database.Users.Users;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.*;
 import java.net.Socket;
+import java.security.cert.PolicyNode;
 import java.util.ArrayList;
 
 
@@ -38,12 +40,12 @@ public class Client extends Thread {
             } else {
                 AcceptClients.numbers.add(number);
                 Users user = new Users(number);
-
+                Post post = new Post();
                 // 1 : send post to client | 2 : get post from client | 3 : new message from user
-                // 4 : update user | 5 : delete user | 6 : check user exists | 7 : get user info
-                // 8 : get marked posts | 9 : get a specified post | 10 : get a branch posts
-                // 11: update a post | 12 : delete a post | 13 : add new post | 14 : last seen post
-                // 15: get users posts
+                // 4 : update user | 5 : check user exists | 6 : get user info
+                // 7 : get marked posts | 8 : get a specified post | 9 : get a branch posts
+                // 10: update a post | 11 : delete a post | 12 : add new post | 13 : last seen post
+                // 14: get users posts | 15 : add user
                 while (true) {
                     int task = DIS.readInt();
                     if (task == 1) {
@@ -59,27 +61,37 @@ public class Client extends Thread {
                         user.updateUser(getStringArray(json.getJSONArray("keys")), getObjectArray(json.getJSONArray("values")));
                         //user.updateUser((ArrayList<String>) json.get("keys"), json.get("values"));
                     } else if (task == 5) {
-
+                        DOS.writeBoolean(user.isUserExists());
                     } else if (task == 6) {
-
+                        DOS.writeUTF(user.getUser());
                     } else if (task == 7) {
-
+                        int index = DIS.readInt();
+                        user.getMarkedPost(index);
+                        ArrayList <String> list = user.getMarkedPost(index);
+                        DOS.writeInt(list.size());
+                        for (String str : list){
+                            DOS.writeUTF(str);
+                        }
                     } else if (task == 8) {
-
+                        int postID = DIS.readInt();
+                        DOS.writeUTF("");
                     } else if (task == 9) {
-
+                        int sizePosts = DIS.readInt();
+                        String mainBranch = DIS.readUTF();
+                        DOS.writeUTF("");
                     } else if (task == 10) {
+                        JSONObject json = new JSONObject(DIS.readUTF());
 
                     } else if (task == 11) {
-
+                        int postID = DIS.readInt();
                     } else if (task == 12) {
-
+                        String data = DIS.readUTF();
                     } else if (task == 13) {
-
+                        DOS.writeUTF("");
                     } else if (task == 14) {
-
-                    } else if (task == 15) {
-
+                        DOS.writeUTF("");
+                    }else if (task == 15) {
+                        user.addUser();
                     }else if (task == -1) {
                         closeSocket();
                         break;
