@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Login.LoginController">
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
@@ -26,6 +27,7 @@
                   <Insets bottom="30.0" />
                </VBox.margin>
             </Label>
+
             <TextField fx:id="inputPhoneNumberIDField" maxHeight="40.0" maxWidth="350.0" minHeight="20.0" minWidth="300.0" onAction="#getInputNumberField" prefHeight="39.0" prefWidth="338.0" promptText="abcdefgh@gmail.com" styleClass="text-field" stylesheets="@../Style/logIn.css">
                <font>
                   <Font size="18.0" />

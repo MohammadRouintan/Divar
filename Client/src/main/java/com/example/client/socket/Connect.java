@@ -12,7 +12,8 @@ public class Connect {
     Socket imageSocket;
     DataOutputStream imageDOS;
     DataInputStream imageDIS;
-    DataOutputStream DOS;
+    public static DataOutputStream DOS;
+
     public static DataInputStream DIS;
     public static String confirmationCode;
 

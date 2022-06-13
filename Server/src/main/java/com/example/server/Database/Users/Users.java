@@ -1,6 +1,7 @@
 package com.example.server.Database.Users;
 
 import com.example.server.Database.Database;
+
 import com.example.server.Database.Posts.Post;
 import org.bson.Document;
 import org.json.JSONArray;
@@ -9,58 +10,32 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class Users extends Database {
-    public Users() {
-        super.collectionName = "Users";
-        super.connectToDatabase();
-        numberForMarkedPost = 0;
-        numberForUsersPost = 0;
-    }
 
     private String phoneNumber;
+    private static int numberForMarkedPost;
+    private static int numberForUsersPost;
 //        private String lastName;
 //        private String firstName;
 //        private String imageName;
 //        private ArrayList<Integer> bookmarkPost;
 //        private ArrayList<Integer> lastSeenPost;
 //        private ArrayList<Integer> usersPost;
-    private ArrayList<String> UpdateKeys;
-    private ArrayList<Object> UpdateValues;
+
+    public Users(String phoneNumber) {
+        super.collectionName = "Users";
+        super.connectToDatabase();
+        this.phoneNumber = phoneNumber;
+        numberForMarkedPost = 0;
+        numberForUsersPost = 0;
+    }
 
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public void setUpdateKeys(ArrayList<String> updateKeys) {
-        UpdateKeys = updateKeys;
-    }
-
-    public void setUpdateValues(ArrayList<Object> updateValues) {
-        UpdateValues = updateValues;
-    }
-
-    public ArrayList<String> getUpdateKeys() {
-        return UpdateKeys;
-    }
-
-    public ArrayList<Object> getUpdateValues() {
-        return UpdateValues;
-    }
-
-    public void addUser() {
-        super.document.append("PhoneNumber", phoneNumber);
-        if (!isUserExists()) {
-            super.collection.insertOne(super.document);
-        }
-        super.disConnect();
-    }
-
-    public void updateUser() {
-        for (int i = 0; i < getUpdateKeys().size(); i++) {
-            super.collection.updateOne(new Document("PhoneNumber", phoneNumber), new Document("$set", new Document(getUpdateKeys().get(i), getUpdateValues().get(i))));
+    public void updateUser(ArrayList<String> UpdateKeys, ArrayList<Object> UpdateValues) {
+        for (int i = 0; i < UpdateKeys.size(); i++) {
+            super.collection.updateOne(new Document("PhoneNumber", phoneNumber), new Document("$set", new Document(UpdateKeys.get(i), UpdateValues.get(i))));
         }
         disConnect();
     }
@@ -83,9 +58,18 @@ public class Users extends Database {
         disConnect();
     }
 
+    public void addUser() {
+        super.document.append("PhoneNumber", phoneNumber);
+        if (!isUserExists()) {
+            super.collection.insertOne(super.document);
+        }
+        super.disConnect();
+    }
+
     public boolean isUserExists() {
         return super.collection.find(new Document("PhoneNumber", phoneNumber)).cursor().hasNext();
     }
+
 
     public ArrayList<String> lastSeenPost() {
         String user = getUser();
@@ -100,9 +84,6 @@ public class Users extends Database {
         }
         return lastSeen;
     }
-
-    private static int numberForMarkedPost;
-    private static int numberForUsersPost;
 
     public ArrayList<String> getMarkedPost(int size){
         Post post;

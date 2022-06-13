@@ -19,6 +19,7 @@ public class AcceptClients{
     public static DataOutputStream SMSDOS;
 
     public AcceptClients () {
+
             try {
                 serverSocket = new ServerSocket(5570);
                 serverNotificationSocket = new ServerSocket(5571);
@@ -38,6 +39,7 @@ public class AcceptClients{
 
     public void run() {
         String number;
+
         while (true) {
             try {
                 Socket socket = serverSocket.accept();

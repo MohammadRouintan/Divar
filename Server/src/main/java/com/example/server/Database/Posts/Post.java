@@ -1,10 +1,11 @@
 package com.example.server.Database.Posts;
 
 import com.example.server.Database.Database;
-import com.mongodb.client.MongoClients;
 import org.bson.Document;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.security.Timestamp;
 import java.util.ArrayList;
 
 public class Post extends Database {
@@ -22,20 +23,8 @@ public class Post extends Database {
         this.branch1 = branch1;
     }
 
-    public void setBranch2(String branch2) {
-        this.branch2 = branch2;
-    }
-
     public String getBranchMain() {
         return branchMain;
-    }
-
-    public String getBranch1() {
-        return branch1;
-    }
-
-    public String getBranch2() {
-        return branch2;
     }
 
     private String bio;
@@ -53,9 +42,10 @@ public class Post extends Database {
     private boolean inNardeban;
     private boolean exchange;
     private boolean agreement;
-    private ArrayList<String> dataArray1;
-    private ArrayList<String> dataArray2;
-    private ArrayList<String> dataArray3;
+    private ArrayList<String> rowName;
+    private ArrayList<String> rowValue;
+    private ArrayList<String> columnName;
+    private ArrayList<String> columnValue;
     private ArrayList<String> updateKeys;
     private ArrayList<Object> updateValues;
 
@@ -101,11 +91,21 @@ public class Post extends Database {
         return lastId;
     }
 
+    public String  lastImageId() {
+        String lastId = "";
+        if (collection.find().sort(new Document("postId", -1)).limit(1).cursor().hasNext()) {
+            String jsonString = collection.find().sort(new Document("postId", -1)).limit(1).cursor().next().toJson();
+            JSONObject obj = new JSONObject(jsonString);
+            JSONArray jsonArray = obj.getJSONArray("imageName");
+            lastId = String.valueOf(jsonArray.getInt(jsonArray.length() - 1));
+        }
+        return lastId;
+    }
+
     private String branchMain;
     private String branch1;
-    private String branch2;
 
-    public ArrayList<String> getPosts(int number, String branchMain) {
+    public synchronized ArrayList<String> getPosts(int number, String branchMain) {
         int temp = number;
         ArrayList<String> posts = new ArrayList<>();
         Document document = new Document("branchMain", branchMain);
@@ -219,28 +219,36 @@ public class Post extends Database {
         this.inNardeban = inNardeban;
     }
 
-    public ArrayList<String> getDataArray1() {
-        return dataArray1;
+    public ArrayList<String> getRowName() {
+        return rowName;
     }
 
-    public void setDataArray1(ArrayList<String> dataArray1) {
-        this.dataArray1 = dataArray1;
+    public void setRowName(ArrayList<String> rowName) {
+        this.rowName = rowName;
     }
 
-    public ArrayList<String> getDataArray2() {
-        return dataArray2;
+    public ArrayList<String> getRowValue() {
+        return rowValue;
     }
 
-    public void setDataArray2(ArrayList<String> dataArray2) {
-        this.dataArray2 = dataArray2;
+    public void setRowValue(ArrayList<String> rowValue) {
+        this.rowValue = rowValue;
     }
 
-    public ArrayList<String> getDataArray3() {
-        return dataArray3;
+    public ArrayList<String> getColumnName() {
+        return columnName;
     }
 
-    public void setDataArray3(ArrayList<String> dataArray3) {
-        this.dataArray3 = dataArray3;
+    public void setColumnName(ArrayList<String> columnName) {
+        this.columnName = columnName;
+    }
+
+    public ArrayList<String> getColumnValue() {
+        return columnValue;
+    }
+
+    public void setColumnValue(ArrayList<String> columnValue) {
+        this.columnValue = columnValue;
     }
 
     public ArrayList<String> getUpdateKeys() {
@@ -264,27 +272,26 @@ public class Post extends Database {
         super.document.append("title" , getTitle());
         super.document.append("branchMain" ,branchMain);
         super.document.append("branch1" ,branch1);
-        super.document.append("branch2" ,branch2);
         super.document.append("phoneNumber" ,getPhoneNumber());
         super.document.append("bio" ,getBio());
         super.document.append("imageName" ,getImageName());
         super.document.append("city" ,getCity());
         super.document.append("address" ,getAddress());
         super.document.append("time" ,getTime());
-        super.document.append("numberOfViews" ,getNumberOfViews());
         super.document.append("accept" ,isAccept());
         super.document.append("exchange" ,isExchange());
-        super.document.append("inNardeban" ,isInNardeban());
         super.document.append("agreement" ,isAgreement());
         super.document.append("auction" ,isAuction());
         if (getPrice() != null)
             document.append("price" ,getPrice());
-        if (getDataArray1() != null)
-            document.append("dataArray1" ,getDataArray1());
-        if (getDataArray2() != null)
-            document.append("dataArray2" ,getDataArray2());
-        if (getDataArray3() != null)
-            document.append("dataArray3" ,getDataArray3());
+        if (getRowName() != null)
+            document.append("rowName" , getRowName());
+        if (getRowValue() != null)
+            document.append("rowValue" , getRowValue());
+        if (getColumnName() != null)
+            document.append("columnName" , getColumnName());
+        if (getColumnValue() != null)
+            document.append("columnValue" , getColumnValue());
         super.collection.insertOne(super.document);
         super.disConnect();
     }
