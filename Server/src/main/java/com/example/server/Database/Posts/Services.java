@@ -23,33 +23,33 @@ public class Services extends Post {
 
     @Override
     public void addToDatabase() {
-        super.document.append("postId", super.lastPostId() + 1);
-        super.document.append("title" ,super.getTitle());
-        super.document.append("branchMain" ,branchMain);
-        super.document.append("branch1" ,branch1);
-        super.document.append("branch2" ,branch2);
-        super.document.append("phoneNumber" ,super.getPhoneNumber());
-        super.document.append("bio" ,super.getBio());
-        super.document.append("imageName" ,super.getImageName());
-        super.document.append("city" ,super.getCity());
-        super.document.append("address" ,super.getAddress());
-        super.document.append("time" ,super.getTime());
-        super.document.append("numberOfViews" ,super.getNumberOfViews());
-        super.document.append("accept" ,super.isAccept());
-        super.document.append("exchange" ,super.isExchange());
-        super.document.append("inNardeban" ,super.isInNardeban());
-        super.document.append("agreement" ,super.isAgreement());
-        super.document.append("auction" ,super.isAuction());
-        if (super.getPrice() != null)
-            super.document.append("price" ,super.getPrice());
-        if (super.getDataArray1() != null)
-            super.document.append("dataArray1" ,super.getDataArray1());
-        if (super.getDataArray2() != null)
-            super.document.append("dataArray2" ,super.getDataArray2());
-        if (super.getDataArray3() != null)
-            super.document.append("dataArray3" ,super.getDataArray3());
-        super.collection.insertOne(super.document);
-        super.disConnect();
+//        super.document.append("postId", super.lastPostId() + 1);
+//        super.document.append("title" ,super.getTitle());
+//        super.document.append("branchMain" ,branchMain);
+//        super.document.append("branch1" ,branch1);
+//        super.document.append("branch2" ,branch2);
+//        super.document.append("phoneNumber" ,super.getPhoneNumber());
+//        super.document.append("bio" ,super.getBio());
+//        super.document.append("imageName" ,super.getImageName());
+//        super.document.append("city" ,super.getCity());
+//        super.document.append("address" ,super.getAddress());
+//        super.document.append("time" ,super.getTime());
+//        super.document.append("numberOfViews" ,super.getNumberOfViews());
+//        super.document.append("accept" ,super.isAccept());
+//        super.document.append("exchange" ,super.isExchange());
+//        super.document.append("inNardeban" ,super.isInNardeban());
+//        super.document.append("agreement" ,super.isAgreement());
+//        super.document.append("auction" ,super.isAuction());
+//        if (super.getPrice() != null)
+//            super.document.append("price" ,super.getPrice());
+//        if (super.getRowName() != null)
+//            super.document.append("dataArray1" ,super.getRowName());
+//        if (super.getRowValue() != null)
+//            super.document.append("dataArray2" ,super.getRowValue());
+//        if (super.getColumnName() != null)
+//            super.document.append("dataArray3" ,super.getColumnName());
+//        super.collection.insertOne(super.document);
+//        super.disConnect();
     }
 
     @Override
