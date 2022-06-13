@@ -24,6 +24,17 @@ public class AddADSController {
         public void initialize() {
                 setMainCategories();
                 setCity();
+                HBox hBox;
+                hBox = makeNewHBox();
+                hBox.setId("featureRowTextField0");
+                featureRowVbox.getChildren().add(hBox);
+
+                VBox vBox;
+                vBox = makeNewVBox();
+                vBox.setId("featureColumnTextField0");
+                featureColumnVbox.getChildren().add(vBox);
+
+
         }
 
         private void setMainCategories(){
@@ -121,53 +132,41 @@ public class AddADSController {
             setBranchTwoCategories();
         }
 
-        private static int addFeatureRowCounter = 0;
+        private static int addFeatureRowCounter = 1;
         @FXML
         void addFeatureRow(ActionEvent event) {
             if(addFeatureRowCounter < 6) {
                 HBox hBox = new HBox();
-                hBox.setId("row"+addFeatureRowCounter);
-                hBox.setPadding(new Insets(10, 0, 10, 0));
-                hBox.setAlignment(Pos.CENTER);
-                TextField nameTxt = new TextField();
-                nameTxt.setMinHeight(35);
-                nameTxt.setPrefWidth(110);
-                nameTxt.setPrefHeight(35);
-                TextField detailsTxt = new TextField();
-                detailsTxt.setMinHeight(35);
-                detailsTxt.setPrefWidth(285);
-                detailsTxt.setPrefHeight(35);
-                hBox.getChildren().add(nameTxt);
-                hBox.getChildren().add(detailsTxt);
+                hBox = makeNewHBox();
+                hBox.setId("featureRowTextField"+addFeatureRowCounter);
                 featureRowVbox.getChildren().add(hBox);
                 addFeatureRowCounter++;
             }
         }
         @FXML
         void removeFeatureRow(ActionEvent event){
+            if(addFeatureRowCounter > 1){
+                featureRowVbox.getChildren().remove(0);
+                addFeatureRowCounter--;
+            }
         }
-        private static int addFeatureColumnCounter = 0;
+        private static int addFeatureColumnCounter = 1;
         @FXML
         void addFeatureColumn(ActionEvent event){
             if(addFeatureColumnCounter < 6){
                 VBox vBox = new VBox();
-                vBox.setId("row"+addFeatureColumnCounter);
-                vBox.setPadding(new Insets(10, 0, 5, 0));
-                vBox.setAlignment(Pos.CENTER);
-                TextField nameTxt = new TextField();
-                nameTxt.setMinHeight(35);
-                nameTxt.setMaxWidth(150);
-                TextField detailsTxt = new TextField();
-                detailsTxt.setMinHeight(35);
-                detailsTxt.setMaxWidth(345);
-                vBox.getChildren().add(nameTxt);
-                vBox.getChildren().add(detailsTxt);
+                vBox = makeNewVBox();
+                vBox.setId("featureColumnTextField"+addFeatureColumnCounter);
                 featureColumnVbox.getChildren().add(vBox);
                 addFeatureColumnCounter++;
             }
         }
         @FXML
         void removeFeatureColumn(ActionEvent event){
+            if(addFeatureColumnCounter > 1){
+                featureColumnVbox.getChildren().remove(0);
+                addFeatureColumnCounter--;
+            }
         }
         @FXML
         void addPost(ActionEvent event) {
@@ -250,6 +249,35 @@ public class AddADSController {
 
             branchTwoCategories.setItems(branchTwo);
         }
-
+        private HBox makeNewHBox(){
+            HBox hBox = new HBox();
+            hBox.setPadding(new Insets(10, 0, 10, 0));
+            hBox.setAlignment(Pos.CENTER);
+            TextField nameTxt = new TextField();
+            nameTxt.setMinHeight(35);
+            nameTxt.setPrefWidth(110);
+            nameTxt.setPrefHeight(35);
+            TextField detailsTxt = new TextField();
+            detailsTxt.setMinHeight(35);
+            detailsTxt.setPrefWidth(285);
+            detailsTxt.setPrefHeight(35);
+            hBox.getChildren().add(nameTxt);
+            hBox.getChildren().add(detailsTxt);
+            return hBox;
+        }
+    private VBox makeNewVBox(){
+        VBox vBox = new VBox();
+        vBox.setPadding(new Insets(10, 0, 5, 0));
+        vBox.setAlignment(Pos.CENTER);
+        TextField nameTxt = new TextField();
+        nameTxt.setMinHeight(35);
+        nameTxt.setMaxWidth(150);
+        TextField detailsTxt = new TextField();
+        detailsTxt.setMinHeight(35);
+        detailsTxt.setMaxWidth(345);
+        vBox.getChildren().add(nameTxt);
+        vBox.getChildren().add(detailsTxt);
+        return vBox;
+    }
 }
 
