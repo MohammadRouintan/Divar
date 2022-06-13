@@ -9,7 +9,6 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -209,8 +208,8 @@
                         <Insets bottom="20.0" top="30.0" />
                      </VBox.margin>
                   </Label>
-                  <TextArea fx:id="psotDescriptionFiled" maxHeight="400.0" maxWidth="400.0" minHeight="150.0" prefHeight="400.0" prefWidth="400.0" />
-                  <Label fx:id="priceLabel" alignment="CENTER" prefHeight="23.0" prefWidth="133.0" text="Price :">
+                  <TextArea fx:id="postDescriptionFiled" maxHeight="400.0" maxWidth="400.0" minHeight="150.0" prefHeight="400.0" prefWidth="400.0" />
+                  <Label fx:id="priceLabel" alignment="CENTER" prefHeight="23.0" prefWidth="399.0" text="Price :">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -218,11 +217,16 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="psotPriceFiled" maxHeight="35.0" maxWidth="400.0" minHeight="35.0" prefHeight="34.0" prefWidth="400.0">
+                  <TextField fx:id="postPriceFiled" maxHeight="35.0" maxWidth="400.0" minHeight="35.0" prefHeight="34.0" prefWidth="400.0">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
                   </TextField>
+                  <Label fx:id="errorLabel" text="ERROR">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
                   <CheckBox fx:id="agreedPriceCheckBox" mnemonicParsing="false" onAction="#agreedPriceCheckBoxFunction" text="Agreed price">
                      <VBox.margin>
                         <Insets left="-35.0" top="20.0" />
@@ -264,20 +268,9 @@
                         <Insets left="30.0" />
                      </padding>
                      <children>
-                        <ImageView fx:id="img1" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/code1.jpg" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="img2" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/code1.jpg" />
-                           </image>
-                        </ImageView>
+                        <ImageView fx:id="img1" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="img2" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="img3" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/code1.jpg" />
-                           </image>
                            <HBox.margin>
                               <Insets right="10.0" />
                            </HBox.margin>
@@ -289,24 +282,13 @@
                         <Insets left="30.0" />
                      </padding>
                      <children>
-                        <ImageView fx:id="img4" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/code1.jpg" />
-                           </image>
-                        </ImageView>
+                        <ImageView fx:id="img4" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="img5" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/code1.jpg" />
-                           </image>
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                         </ImageView>
-                        <ImageView fx:id="img6" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/code1.jpg" />
-                           </image>
-                        </ImageView>
+                        <ImageView fx:id="img6" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="20.0" />
@@ -317,24 +299,13 @@
                         <Insets left="30.0" />
                      </padding>
                      <children>
-                        <ImageView fx:id="img7" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/code1.jpg" />
-                           </image>
-                        </ImageView>
+                        <ImageView fx:id="img7" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="img8" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/code1.jpg" />
-                           </image>
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                         </ImageView>
-                        <ImageView fx:id="img9" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/code1.jpg" />
-                           </image>
-                        </ImageView>
+                        <ImageView fx:id="img9" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="20.0" />
@@ -343,7 +314,7 @@
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                      <children>
                         <Button maxHeight="60.0" minHeight="40.0" mnemonicParsing="false" onAction="#addPost" prefHeight="40.0" prefWidth="223.0" text="Post" />
-                        <Button maxHeight="60.0" minHeight="40.0" mnemonicParsing="false" onAction="#canclePost" prefHeight="40.0" prefWidth="213.0" text="Cancle" />
+                        <Button maxHeight="60.0" minHeight="40.0" mnemonicParsing="false" onAction="#cancelPost" prefHeight="40.0" prefWidth="213.0" text="Cancle" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="20.0" top="20.0" />
