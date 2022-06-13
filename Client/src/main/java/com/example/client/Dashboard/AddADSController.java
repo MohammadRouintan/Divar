@@ -23,7 +23,7 @@ public class AddADSController {
         }
 
         private void setMainCategories(){
-                String[] mainCategories = {"Digital Commodity" ,"Entertainment" ,"Equipment" ,"Estate" ,"Home Commodity" ,"Personal Items " ,"Recruitment" ,"Services" ,"Social" ," Vehicles"};
+                String[] mainCategories = {"Digital Commodity", "Entertainment", "Equipment", "Estate", "Home Commodity", "Personal Items", "Recruitment", "Services", "Social", "Vehicles"};
                 ObservableList<String> temp = FXCollections.observableArrayList();
                 temp.addAll(mainCategories);
                 MainBranchCategories.setItems(temp);
@@ -170,13 +170,16 @@ public class AddADSController {
                 case "Vehicles":
                     branchTwo.addAll(vehicles);
                     break;
-                case "DigitalCommodity":
+                case "Digital Commodity":
                     branchTwo.addAll(digitalCommodity);
+                    break;
+                case "Home Commodity":
+                    branchTwo.addAll(homeCommodity);
                     break;
                 case "Services":
                     branchTwo.addAll(services);
                     break;
-                case "PersonalItems":
+                case "Personal Items":
                     branchTwo.addAll(personalItems);
                     break;
                 case "Entertainment":
