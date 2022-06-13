@@ -1,4 +1,4 @@
-package com.example.client;
+package com.example.client.Dashboard;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
