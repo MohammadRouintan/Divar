@@ -17,7 +17,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="CENTER" prefHeight="600.0" prefWidth="230.0" style="-fx-background-color: #f1c40f;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -80,7 +80,7 @@
       </VBox>
       <ScrollPane layoutX="243.0" layoutY="26.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="228.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <content>
-            <VBox alignment="TOP_CENTER" prefHeight="1388.0" prefWidth="574.0">
+            <VBox alignment="TOP_CENTER" prefHeight="2000.0" prefWidth="575.0">
                <children>
                   <Label text="Add Ads">
                      <font>
@@ -140,7 +140,7 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField maxWidth="400.0" prefHeight="34.0" prefWidth="350.0" />
+                  <TextField maxWidth="400.0" minHeight="35.0" prefHeight="34.0" prefWidth="350.0" />
                   <Line endX="218.0929412841797" endY="-162.39212036132812" startX="-190.704345703125" startY="-162.1850128173828" style="-fx-opacity: 0.3;">
                      <VBox.margin>
                         <Insets top="30.0" />
@@ -154,7 +154,7 @@
                         <Insets top="20.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField maxWidth="400.0" prefHeight="35.0" prefWidth="400.0">
+                  <TextField maxWidth="400.0" minHeight="35.0" prefHeight="35.0" prefWidth="400.0">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
@@ -164,24 +164,47 @@
                         <Font size="18.0" />
                      </font>
                      <VBox.margin>
-                        <Insets top="20.0" />
+                        <Insets bottom="20.0" top="20.0" />
                      </VBox.margin>
                   </Label>
                   <Button mnemonicParsing="false" text="+">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <VBox.margin>
+                        <Insets bottom="15.0" />
+                     </VBox.margin>
                   </Button>
-                  <HBox alignment="CENTER" prefHeight="55.0" prefWidth="530.0">
+                  <HBox alignment="CENTER" prefHeight="72.0" prefWidth="574.0">
                      <children>
-                        <TextField prefHeight="35.0" prefWidth="110.0">
+                        <TextField minHeight="35.0" prefHeight="35.0" prefWidth="110.0">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
                         </TextField>
-                        <TextField alignment="CENTER" prefHeight="35.0" prefWidth="285.0" />
+                        <TextField alignment="CENTER" minHeight="35.0" prefHeight="35.0" prefWidth="285.0">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin></TextField>
                      </children>
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
                   </HBox>
+                  <Button mnemonicParsing="false" text="+">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Button>
+                  <TextArea maxHeight="35.0" maxWidth="150.0" minHeight="35.0" prefHeight="40.0" prefWidth="542.0">
+                     <VBox.margin>
+                        <Insets bottom="15.0" />
+                     </VBox.margin>
+                  </TextArea>
+                  <TextArea maxHeight="35.0" maxWidth="345.0" minHeight="35.0" prefHeight="35.0" prefWidth="345.0" />
                   <Label alignment="CENTER" prefHeight="40.0" prefWidth="161.0" text="description :">
                      <font>
                         <Font size="18.0" />
@@ -190,7 +213,7 @@
                         <Insets bottom="20.0" top="30.0" />
                      </VBox.margin>
                   </Label>
-                  <TextArea maxWidth="400.0" prefHeight="200.0" prefWidth="400.0" />
+                  <TextArea maxHeight="400.0" maxWidth="400.0" minHeight="150.0" prefHeight="400.0" prefWidth="400.0" />
                   <Label alignment="CENTER" prefHeight="40.0" prefWidth="75.0" text="Price :">
                      <font>
                         <Font size="18.0" />
@@ -199,12 +222,12 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField maxWidth="400.0" prefHeight="34.0" prefWidth="400.0">
+                  <TextField maxHeight="35.0" maxWidth="400.0" minHeight="35.0" prefHeight="34.0" prefWidth="400.0">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
                   </TextField>
-                  <CheckBox mnemonicParsing="false" text="agreed price">
+                  <CheckBox mnemonicParsing="false" text="Agreed price">
                      <VBox.margin>
                         <Insets left="-35.0" top="20.0" />
                      </VBox.margin>
@@ -217,6 +240,11 @@
                   <CheckBox mnemonicParsing="false" text="I want to exchange">
                      <VBox.margin>
                         <Insets top="10.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <CheckBox mnemonicParsing="false" text="Enable Divar chat">
+                     <VBox.margin>
+                        <Insets left="-10.0" top="10.0" />
                      </VBox.margin>
                   </CheckBox>
                   <Line endX="218.0929412841797" endY="-162.39212036132812" startX="-190.704345703125" startY="-162.1850128173828" style="-fx-opacity: 0.3;">
@@ -319,6 +347,15 @@
                      </children>
                      <VBox.margin>
                         <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+                     <children>
+                        <Button maxHeight="60.0" minHeight="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="223.0" text="Post" />
+                        <Button maxHeight="60.0" minHeight="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="213.0" text="Cancle" />
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="20.0" top="20.0" />
                      </VBox.margin>
                   </HBox>
                </children>
