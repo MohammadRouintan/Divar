@@ -13,6 +13,8 @@ import javafx.stage.FileChooser;
 import java.io.*;
 import java.util.ArrayList;
 
+import java.util.ArrayList;
+
 
 public class AddADSController {
 
@@ -23,7 +25,7 @@ public class AddADSController {
         }
 
         private void setMainCategories(){
-                String[] mainCategories = {"Digital Commodity" ,"Entertainment" ,"Equipment" ,"Estate" ,"Home Commodity" ,"Personal Items " ,"Recruitment" ,"Services" ,"Social" ," Vehicles"};
+                String[] mainCategories = {"Digital Commodity", "Entertainment", "Equipment", "Estate", "Home Commodity", "Personal Items", "Recruitment", "Services", "Social", "Vehicles"};
                 ObservableList<String> temp = FXCollections.observableArrayList();
                 temp.addAll(mainCategories);
                 MainBranchCategories.setItems(temp);
@@ -56,7 +58,7 @@ public class AddADSController {
         private ComboBox<?> branchThreeCategories;
 
         @FXML
-        private ComboBox<?> branchTwoCategories;
+        private ComboBox<String> branchTwoCategories;
 
         @FXML
         private CheckBox exchangeCheckBox;
@@ -98,10 +100,10 @@ public class AddADSController {
         private TextField nameTextFiled;
 
         @FXML
-        private TextArea psotDescriptionFiled;
+        private TextArea postDescriptionFiled;
 
         @FXML
-        private TextField psotPriceFiled;
+        private TextField postPriceFiled;
 
         @FXML
         private ComboBox<String> selectCityComboBox;
@@ -111,7 +113,7 @@ public class AddADSController {
 
         @FXML
         void MainBranchCategotiesFunction(ActionEvent event) {
-
+            setBranchTwoCategories();
         }
 
         @FXML
@@ -149,6 +151,7 @@ public class AddADSController {
 
         }
 
+<<<<<<< HEAD
         @FXML
         void agreedPriceCheckBoxFunction(ActionEvent event){
                 if(agreedPriceCheckBox.isSelected()){
@@ -189,5 +192,59 @@ public class AddADSController {
 
                 }
         }
+=======
+        public void setBranchTwoCategories() {
+            ObservableList<String> branchTwo = FXCollections.observableArrayList();
+            String[] estate = {"ResidentialSales", "ResidentialRent", "OfficeSales", "OfficeRent", "ShortTermRent", "ConstructionProject"};
+            String[] vehicles = {"Car", "CarSparePartsAndAccessories", "MotorcyclesAndAccessories", "BoatsAndAccessories"};
+            String[] digitalCommodity = {"MobileAndTablet", "PC", "Console", "VideoAndAudio", "Telephone"};
+            String[] homeCommodity = {"ElectricalAppliance", "kitchenware", "FoodAndDrink", "SewingAccessories", "Sofa", "Lighting", "Carpet", "Mattress", "DecorativeAccessories", "VentilationAppliances", "WashingSupplies", "BathroomUtensils"};
+            String[] services = {"EngineAndMachine", "ReceptionAndCeremony", "ComputerAndMobileServices", "FinanceAndAccountingAndInsurance", "Transportation", "ProfessionAndSkill", "HairdressingAndBeauty", "entertainment", "cleaning", "GardeningAndTreePlanting", "educational"};
+            String[] personalItems = {"BagsAndShoes", "Accessories", "Cosmetics", "KidsClothes", "Toy"};
+            String[] entertainment = {"Ticket", "Tour", "Book", "Bike", "Animals", "Collection", "MusicInstrument", "Sport"};
+            String[] social = {"Event", "Voluntarily", "Losts"};
+            String[] equipment = {"BuildingMaterials", "Tools", "IndustrialMachinery", "BusinessEquipment", "Wholesale"};
+            String[] recruitment = {"Management", "Caretaker", "Architect", "StoreServices", "ComputerAndIT", "Accountants", "Marketer", "Engineer", "Teacher", "Driver", "DoctorAndBeautician", "Artist"};
+
+            String mainBranch = MainBranchCategories.getValue();
+            switch (mainBranch) {
+                case "Estate":
+                    branchTwo.addAll(estate);
+                    break;
+                case "Vehicles":
+                    branchTwo.addAll(vehicles);
+                    break;
+                case "Digital Commodity":
+                    branchTwo.addAll(digitalCommodity);
+                    break;
+                case "Home Commodity":
+                    branchTwo.addAll(homeCommodity);
+                    break;
+                case "Services":
+                    branchTwo.addAll(services);
+                    break;
+                case "Personal Items":
+                    branchTwo.addAll(personalItems);
+                    break;
+                case "Entertainment":
+                    branchTwo.addAll(entertainment);
+                    break;
+                case "Social":
+                    branchTwo.addAll(social);
+                    break;
+                case "Equipment":
+                    branchTwo.addAll(equipment);
+                    break;
+                case "Recruitment":
+                    branchTwo.addAll(recruitment);
+                    break;
+                default:
+                    break;
+            }
+
+            branchTwoCategories.setItems(branchTwo);
+        }
+
+>>>>>>> 000957263518548ecb45416a2f4c7263df2a43c2
 }
 
