@@ -223,20 +223,19 @@ public class AddADSController {
             }else if(name.equals("")){
                 createErrorMassage("Please write name correctly !!");
             }else if(description.equals("")){
-<<<<<<< HEAD
                 createErrorMassage("");
             }else if(RowName0.getText().equals("") || RowValue0.getText().equals("")){
                 createErrorMassage("");
             }else if(ColumnName0.getText().equals("") || ColumnValue0.getText().equals("")){
                 createErrorMassage("");
-            }else{
+            }else {
                 ArrayList<String> RowName = new ArrayList<>();
                 ArrayList<String> RowValue = new ArrayList<>();
                 ArrayList<String> ColumnName = new ArrayList<>();
                 ArrayList<String> ColumnValue = new ArrayList<>();
 
-                for(int i=0; i <= addFeatureColumnCounter; i++ ){
-                    switch (i){
+                for (int i = 0; i <= addFeatureColumnCounter; i++) {
+                    switch (i) {
                         case 0:
                             ColumnName.add(ColumnName0.getText());
                             ColumnValue.add(ColumnValue0.getText());
@@ -265,7 +264,7 @@ public class AddADSController {
                 }
 
                 for (int i = 0; i <= addFeatureRowCounter; i++) {
-                    switch (i){
+                    switch (i) {
                         case 0:
                             RowName.add(RowName0.getText());
                             RowValue.add(RowValue0.getText());
@@ -297,42 +296,33 @@ public class AddADSController {
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
                 LocalDateTime now = LocalDateTime.now();
 
-                JSONObject jsonObject =  new JSONObject();
-                jsonObject.put("title" ,name);
-                jsonObject.put("branchMain" ,mainBranch);
-                jsonObject.put("branch1" ,branchTwo);
-                jsonObject.put("phoneNumber" , Connect.getPhoneNumber());
-                jsonObject.put("bio" ,description);
-                jsonObject.put("imageName" ,imagesName);
-                jsonObject.put("city" ,city);
-                jsonObject.put("address" ,address);
-                jsonObject.put("time" ,dtf.format(now));
-                jsonObject.put("accept" ,false);
-                jsonObject.put("exchange" ,exchangeCheckBox.isSelected());
-                jsonObject.put("agreement" ,agreedPriceCheckBox.isSelected());
-                jsonObject.put("auction" ,auctionCheckBox.isSelected());
-                jsonObject.put("price" ,price);
-                jsonObject.put("RowName" ,RowName);
-                jsonObject.put("RowValue" ,RowValue);
-                jsonObject.put("ColumnName" ,ColumnName);
-                jsonObject.put("ColumnValue" ,ColumnValue);
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("title", name);
+                jsonObject.put("branchMain", mainBranch);
+                jsonObject.put("branch1", branchTwo);
+                jsonObject.put("phoneNumber", Connect.getPhoneNumber());
+                jsonObject.put("bio", description);
+                jsonObject.put("imageName", imagesName);
+                jsonObject.put("city", city);
+                jsonObject.put("address", address);
+                jsonObject.put("time", dtf.format(now));
+                jsonObject.put("accept", false);
+                jsonObject.put("exchange", exchangeCheckBox.isSelected());
+                jsonObject.put("agreement", agreedPriceCheckBox.isSelected());
+                jsonObject.put("auction", auctionCheckBox.isSelected());
+                jsonObject.put("price", price);
+                jsonObject.put("RowName", RowName);
+                jsonObject.put("RowValue", RowValue);
+                jsonObject.put("ColumnName", ColumnName);
+                jsonObject.put("ColumnValue", ColumnValue);
 
                 GetInfo.addPost(jsonObject);
-=======
                 createErrorMassage("Please write description correctly !!");
-            }else {
->>>>>>> 72b82036e4d0deec9e5a2bd53f9319b6b9e9ab5f
-
             }
-
         }
 
         @FXML
         void branchTwoCategoriesFunction(ActionEvent event) {
-<<<<<<< HEAD
-=======
-
->>>>>>> 72b82036e4d0deec9e5a2bd53f9319b6b9e9ab5f
         }
 
         @FXML
