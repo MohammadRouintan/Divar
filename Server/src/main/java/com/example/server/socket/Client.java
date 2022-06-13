@@ -92,6 +92,8 @@ public class Client extends Thread {
                         DOS.writeUTF("");
                     }else if (task == 15) {
                         user.addUser();
+                    }else if (task == 16) {
+                        DOS.writeUTF(post.lastImageId());
                     }else if (task == -1) {
                         closeSocket();
                         break;
