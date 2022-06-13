@@ -2,6 +2,8 @@ package com.example.client.socket;
 
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -133,8 +135,40 @@ public class GetInfo {
         return null;
     }
 
-    public static boolean sendFile(String fileName){return false;}
 
-    public static String getLastNameImage(){return null;}
+    public static String getLastNameImage(){
+        String result = null;
+        try {
+            Connect.DOS.writeInt(16);
+            result = Connect.DIS.readUTF();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return result;
+    }
+
+
+    public static boolean sendFile(String url, String fileName){
+
+        try {
+            Connect.imageDOS.writeInt(2);
+            Connect.imageDOS.writeUTF(fileName);
+            int bytes = 0;
+            File file = new File(url);
+            FileInputStream fileInputStream = new FileInputStream(file);
+            Connect.imageDOS.writeLong(file.length());
+            byte[] buffer = new byte[4 * 1024];
+            while ((bytes = fileInputStream.read(buffer)) != -1) {
+                Connect.imageDOS.write(buffer, 0, bytes);
+                Connect.imageDOS.flush();
+            }
+            fileInputStream.close();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return false;
+    }
+
+
 
 }
