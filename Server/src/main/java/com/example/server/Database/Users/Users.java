@@ -27,12 +27,6 @@ public class Users extends Database {
         this.phoneNumber = phoneNumber;
         numberForMarkedPost = 0;
         numberForUsersPost = 0;
-
-        super.document.append("PhoneNumber", phoneNumber);
-        if (!isUserExists()) {
-            super.collection.insertOne(super.document);
-        }
-        super.disConnect();
     }
 
     public String getPhoneNumber() {
@@ -62,6 +56,14 @@ public class Users extends Database {
     public void deleteUser() {
         super.collection.deleteOne(new Document("PhoneNumber" ,phoneNumber));
         disConnect();
+    }
+
+    public void addUser() {
+        super.document.append("PhoneNumber", phoneNumber);
+        if (!isUserExists()) {
+            super.collection.insertOne(super.document);
+        }
+        super.disConnect();
     }
 
     public boolean isUserExists() {

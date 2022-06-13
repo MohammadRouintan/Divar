@@ -105,7 +105,7 @@ public class Post extends Database {
     private String branchMain;
     private String branch1;
 
-    public ArrayList<String> getPosts(int number, String branchMain) {
+    public synchronized ArrayList<String> getPosts(int number, String branchMain) {
         int temp = number;
         ArrayList<String> posts = new ArrayList<>();
         Document document = new Document("branchMain", branchMain);
