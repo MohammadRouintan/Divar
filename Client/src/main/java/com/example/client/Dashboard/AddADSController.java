@@ -1,15 +1,17 @@
 package com.example.client.Dashboard;
 
+import com.example.client.socket.Connect;
+import com.example.client.socket.GetInfo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+
+import java.io.*;
+import java.util.ArrayList;
 
 
 public class AddADSController {
@@ -147,5 +149,45 @@ public class AddADSController {
 
         }
 
+        @FXML
+        void agreedPriceCheckBoxFunction(ActionEvent event){
+                if(agreedPriceCheckBox.isSelected()){
+                        psotPriceFiled.setEditable(false);
+                        psotPriceFiled.setText("");
+                }else{
+                        psotPriceFiled.setEditable(true);
+                }
+        }
+
+        @FXML
+        private Label priceLabel;
+
+        @FXML
+        void auctionCheckBoxFunction(ActionEvent event){
+                if(auctionCheckBox.isSelected()){
+                        priceLabel.setText("Base Price : ");
+                }else{
+                        priceLabel.setText("Price : ");
+                }
+        }
+
+        private FileChooser chooser = new FileChooser();
+        private File file = null;
+
+        @FXML
+        void uploadImageFunction (ActionEvent event) throws IOException {
+                ArrayList<String> imagesName = new ArrayList<>();
+                choicePhoto();
+        }
+
+        void choicePhoto() throws IOException {
+                file = chooser.showOpenDialog(null);
+                if(file != null){
+                        FileInputStream in = new FileInputStream(file.getPath());
+                        GetInfo.sendFile(String.valueOf(Integer.parseInt(GetInfo.getLastNameImage()) + 1));
+                        in.close();
+
+                }
+        }
 }
 
