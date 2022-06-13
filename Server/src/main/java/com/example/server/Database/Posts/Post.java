@@ -33,7 +33,7 @@ public class Post extends Database {
     private String address;
     private String price;
     private String city;
-    private Timestamp time;
+    private String time;
     private String phoneNumber;
     private int postId;
     private int numberOfViews;
@@ -171,11 +171,11 @@ public class Post extends Database {
         this.city = city;
     }
 
-    public Timestamp getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Timestamp time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
