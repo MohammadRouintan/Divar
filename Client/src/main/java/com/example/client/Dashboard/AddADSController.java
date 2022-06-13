@@ -1,6 +1,5 @@
 package com.example.client.Dashboard;
 
-import com.example.client.socket.Connect;
 import com.example.client.socket.GetInfo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,17 +16,18 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 
 import java.io.*;
 import java.util.ArrayList;
-
-import java.util.ArrayList;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AddADSController {
 
+        private static int numberOFUploadedImage;
         @FXML
         public void initialize() {
                 setMainCategories();
@@ -43,21 +43,25 @@ public class AddADSController {
                 featureColumnVbox.getChildren().add(vBox);
 
 
+            setMainCategories();
+            setCity();
+            numberOFUploadedImage = 0;
+            imagesName = new ArrayList<>();
         }
 
         private void setMainCategories(){
-                String[] mainCategories = {"Digital Commodity", "Entertainment", "Equipment", "Estate", "Home Commodity", "Personal Items", "Recruitment", "Services", "Social", "Vehicles"};
-                ObservableList<String> temp = FXCollections.observableArrayList();
-                temp.addAll(mainCategories);
-                MainBranchCategories.setItems(temp);
+            String[] mainCategories = {"Digital Commodity", "Entertainment", "Equipment", "Estate", "Home Commodity", "Personal Items", "Recruitment", "Services", "Social", "Vehicles"};
+            ObservableList<String> temp = FXCollections.observableArrayList();
+            temp.addAll(mainCategories);
+            MainBranchCategories.setItems(temp);
         }
 
         private void setCity(){
-                String[] cityes = {"Tehran" ,"Shiraz" ,"Mashhad" ,"Arak" ,"Ardabil" ,"Orumieh" ,"Esfahan" ,"Ahwaz" ,"Ilam" ," Bojnord" ,
-                        "Bandar Abbas" ,"Bushehr" ,"Birjand" ,"Tabriz" ,"Khorramabad" ,"Rasht" ,"Zahedan" ,"Zanjan" ,"Sari" ,"Semnan" ,"Sanandaj" ,"Shahr e Kord" ,"Qazvin" ,"Qom" ,"Karaj" ,"Kerman" ,"Kermanshah" ,"Gorgan" ,"Hamedan" ,"Yasuj" ,"Yazd"};
-                ObservableList<String> temp = FXCollections.observableArrayList();
-                temp.addAll(cityes);
-                selectCityComboBox.setItems(temp);
+            String[] cityes = {"Tehran" ,"Shiraz" ,"Mashhad" ,"Arak" ,"Ardabil" ,"Orumieh" ,"Esfahan" ,"Ahwaz" ,"Ilam" ," Bojnord" ,
+                    "Bandar Abbas" ,"Bushehr" ,"Birjand" ,"Tabriz" ,"Khorramabad" ,"Rasht" ,"Zahedan" ,"Zanjan" ,"Sari" ,"Semnan" ,"Sanandaj" ,"Shahr e Kord" ,"Qazvin" ,"Qom" ,"Karaj" ,"Kerman" ,"Kermanshah" ,"Gorgan" ,"Hamedan" ,"Yasuj" ,"Yazd"};
+            ObservableList<String> temp = FXCollections.observableArrayList();
+            temp.addAll(cityes);
+            selectCityComboBox.setItems(temp);
         }
         @FXML
         private VBox featureRowVbox;
@@ -179,15 +183,51 @@ public class AddADSController {
         @FXML
         void addPost(ActionEvent event) {
 
+            String mainBranch = MainBranchCategories.getValue();
+            String branchTwo = branchTwoCategories.getValue();
+            String city = selectCityComboBox.getValue();
+            String address = addressTextFiled.getText();
+            String name = nameTextFiled.getText();
+            String description = postDescriptionFiled.getText();
+            String price = postPriceFiled.getText();
+
+            Pattern pattern = Pattern.compile("[0-9]+");
+            Matcher matcher = pattern.matcher(price);
+
+            if(!matcher.matches()){
+                createErrorMassage("");
+            }else if (mainBranch == null){
+                createErrorMassage("");
+            }else if(branchTwo == null){
+                createErrorMassage("");
+            }else if(city == null){
+                createErrorMassage("");
+            }else if(address.equals("")){
+                createErrorMassage("");
+            }else if(name.equals("")){
+                createErrorMassage("");
+            }else if(description.equals("")){
+                createErrorMassage("");
+            }else {
+
+            }
+
         }
 
         @FXML
         void branchTwoCategoriesFunction(ActionEvent event) {
-
+            MainBranchCategories.setValue("");
+            branchTwoCategories.setValue("");
+            selectCityComboBox.setValue("");
+            addressTextFiled.setText("");
+            nameTextFiled.setText("");
+            postDescriptionFiled.setText("");
+            postPriceFiled.setText("");
+            img1.setImage(new Image(""));
         }
 
         @FXML
-        void canclePost(ActionEvent event) {
+        void cancelPost(ActionEvent event) {
 
         }
 
@@ -230,21 +270,62 @@ public class AddADSController {
 
         private FileChooser chooser = new FileChooser();
         private File file = null;
+        private ArrayList<String> imagesName;
 
         @FXML
         void uploadImageFunction (ActionEvent event) throws IOException {
-                ArrayList<String> imagesName = new ArrayList<>();
-                choicePhoto();
-        }
-
-        void choicePhoto() throws IOException {
-                file = chooser.showOpenDialog(null);
-                if(file != null){
-                        FileInputStream in = new FileInputStream(file.getPath());
-                        GetInfo.sendFile(String.valueOf(Integer.parseInt(GetInfo.getLastNameImage()) + 1));
-                        in.close();
-
+            file = chooser.showOpenDialog(null);
+            if(file != null) {
+                // GetInfo.sendFile(String.valueOf(Integer.parseInt(GetInfo.getLastNameImage()) + 1));
+                imagesName.add(String.valueOf(Integer.parseInt(GetInfo.getLastNameImage()) + 1));
+                priceLabel.setText(file.getPath());
+                numberOFUploadedImage++;
+                Image img;
+                switch (numberOFUploadedImage) {
+                    case 1:
+                        img = new Image(file.toURI().toString());
+                        img1.setImage(img);
+                        break;
+                    case 2:
+                        img = new Image(file.toURI().toString());
+                        img2.setImage(img);
+                        break;
+                    case 3:
+                        img = new Image(file.toURI().toString());
+                        img3.setImage(img);
+                        break;
+                    case 4:
+                        img = new Image(file.toURI().toString());
+                        img4.setImage(img);
+                        break;
+                    case 5:
+                        img = new Image(file.toURI().toString());
+                        img5.setImage(img);
+                        break;
+                    case 6:
+                        img = new Image(file.toURI().toString());
+                        img6.setImage(img);
+                        break;
+                    case 7:
+                        img = new Image(file.toURI().toString());
+                        img7.setImage(img);
+                        break;
+                    case 8:
+                        img = new Image(file.toURI().toString());
+                        img8.setImage(img);
+                        break;
+                    case 9:
+                        img = new Image(file.toURI().toString());
+                        img9.setImage(img);
+                        break;
                 }
+            }
+        }
+        @FXML
+        private Label errorLabel;
+
+        public void createErrorMassage(String message){
+            errorLabel.setText(message);
         }
         public void setBranchTwoCategories() {
             ObservableList<String> branchTwo = FXCollections.observableArrayList();
