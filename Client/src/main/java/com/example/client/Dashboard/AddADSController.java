@@ -5,6 +5,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,6 +30,19 @@ public class AddADSController {
         private static int numberOFUploadedImage;
         @FXML
         public void initialize() {
+                setMainCategories();
+                setCity();
+                HBox hBox;
+                hBox = makeNewHBox();
+                hBox.setId("featureRowTextField0");
+                featureRowVbox.getChildren().add(hBox);
+
+                VBox vBox;
+                vBox = makeNewVBox();
+                vBox.setId("featureColumnTextField0");
+                featureColumnVbox.getChildren().add(vBox);
+
+
             setMainCategories();
             setCity();
             numberOFUploadedImage = 0;
@@ -40,7 +63,10 @@ public class AddADSController {
             temp.addAll(cityes);
             selectCityComboBox.setItems(temp);
         }
-
+        @FXML
+        private VBox featureRowVbox;
+        @FXML
+        private VBox featureColumnVbox;
         @FXML
         private ComboBox<String> MainBranchCategories;
 
@@ -118,11 +144,42 @@ public class AddADSController {
             setBranchTwoCategories();
         }
 
+        private static int addFeatureRowCounter = 1;
         @FXML
         void addFeatureRow(ActionEvent event) {
-
+            if(addFeatureRowCounter < 6) {
+                HBox hBox = new HBox();
+                hBox = makeNewHBox();
+                hBox.setId("featureRowTextField"+addFeatureRowCounter);
+                featureRowVbox.getChildren().add(hBox);
+                addFeatureRowCounter++;
+            }
         }
-
+        @FXML
+        void removeFeatureRow(ActionEvent event){
+            if(addFeatureRowCounter > 1){
+                featureRowVbox.getChildren().remove(0);
+                addFeatureRowCounter--;
+            }
+        }
+        private static int addFeatureColumnCounter = 1;
+        @FXML
+        void addFeatureColumn(ActionEvent event){
+            if(addFeatureColumnCounter < 6){
+                VBox vBox = new VBox();
+                vBox = makeNewVBox();
+                vBox.setId("featureColumnTextField"+addFeatureColumnCounter);
+                featureColumnVbox.getChildren().add(vBox);
+                addFeatureColumnCounter++;
+            }
+        }
+        @FXML
+        void removeFeatureColumn(ActionEvent event){
+            if(addFeatureColumnCounter > 1){
+                featureColumnVbox.getChildren().remove(0);
+                addFeatureColumnCounter--;
+            }
+        }
         @FXML
         void addPost(ActionEvent event) {
 
@@ -138,19 +195,19 @@ public class AddADSController {
             Matcher matcher = pattern.matcher(price);
 
             if(!matcher.matches()){
-                createErrorMassage("");
+                createErrorMassage("Price is invalid !!");
             }else if (mainBranch == null){
-                createErrorMassage("");
+                createErrorMassage("Please select MainBranch !!");
             }else if(branchTwo == null){
-                createErrorMassage("");
+                createErrorMassage("Please select BranchTwo !!");
             }else if(city == null){
-                createErrorMassage("");
+                createErrorMassage("Please select city !!");
             }else if(address.equals("")){
-                createErrorMassage("");
+                createErrorMassage("Please write address correctly !!");
             }else if(name.equals("")){
-                createErrorMassage("");
+                createErrorMassage("Please write name correctly !!");
             }else if(description.equals("")){
-                createErrorMassage("");
+                createErrorMassage("Please write description correctly !!");
             }else {
 
             }
@@ -159,6 +216,11 @@ public class AddADSController {
 
         @FXML
         void branchTwoCategoriesFunction(ActionEvent event) {
+
+        }
+
+        @FXML
+        void cancelPost(ActionEvent event) {
             MainBranchCategories.setValue("");
             branchTwoCategories.setValue("");
             selectCityComboBox.setValue("");
@@ -167,11 +229,6 @@ public class AddADSController {
             postDescriptionFiled.setText("");
             postPriceFiled.setText("");
             img1.setImage(new Image(""));
-        }
-
-        @FXML
-        void cancelPost(ActionEvent event) {
-
         }
 
         @FXML
@@ -264,14 +321,12 @@ public class AddADSController {
                 }
             }
         }
-
         @FXML
         private Label errorLabel;
 
         public void createErrorMassage(String message){
             errorLabel.setText(message);
         }
-
         public void setBranchTwoCategories() {
             ObservableList<String> branchTwo = FXCollections.observableArrayList();
             String[] estate = {"ResidentialSales", "ResidentialRent", "OfficeSales", "OfficeRent", "ShortTermRent", "ConstructionProject"};
@@ -323,5 +378,35 @@ public class AddADSController {
 
             branchTwoCategories.setItems(branchTwo);
         }
+        private HBox makeNewHBox(){
+            HBox hBox = new HBox();
+            hBox.setPadding(new Insets(10, 0, 10, 0));
+            hBox.setAlignment(Pos.CENTER);
+            TextField nameTxt = new TextField();
+            nameTxt.setMinHeight(35);
+            nameTxt.setPrefWidth(110);
+            nameTxt.setPrefHeight(35);
+            TextField detailsTxt = new TextField();
+            detailsTxt.setMinHeight(35);
+            detailsTxt.setPrefWidth(285);
+            detailsTxt.setPrefHeight(35);
+            hBox.getChildren().add(nameTxt);
+            hBox.getChildren().add(detailsTxt);
+            return hBox;
+        }
+    private VBox makeNewVBox(){
+        VBox vBox = new VBox();
+        vBox.setPadding(new Insets(10, 0, 5, 0));
+        vBox.setAlignment(Pos.CENTER);
+        TextField nameTxt = new TextField();
+        nameTxt.setMinHeight(35);
+        nameTxt.setMaxWidth(150);
+        TextField detailsTxt = new TextField();
+        detailsTxt.setMinHeight(35);
+        detailsTxt.setMaxWidth(345);
+        vBox.getChildren().add(nameTxt);
+        vBox.getChildren().add(detailsTxt);
+        return vBox;
+    }
 }
 
