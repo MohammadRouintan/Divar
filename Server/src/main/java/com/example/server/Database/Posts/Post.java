@@ -8,7 +8,7 @@ import org.json.JSONObject;
 import java.security.Timestamp;
 import java.util.ArrayList;
 
-public class Post extends Database {
+public class Post {
 
     public Post(){
         super.collectionName = "Posts";
@@ -91,7 +91,7 @@ public class Post extends Database {
         return lastId;
     }
 
-    public String  lastImageId() {
+    public int lastImageId() {
         String lastId = "";
         if (collection.find().sort(new Document("postId", -1)).limit(1).cursor().hasNext()) {
             String jsonString = collection.find().sort(new Document("postId", -1)).limit(1).cursor().next().toJson();
