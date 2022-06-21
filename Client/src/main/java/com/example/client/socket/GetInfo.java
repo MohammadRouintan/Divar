@@ -2,6 +2,8 @@ package com.example.client.socket;
 
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -18,7 +20,6 @@ public class GetInfo {
         try {
             Connect.DOS.writeUTF(code);
             Connect.DOS.flush();
-
             check = Connect.DIS.readBoolean();
         } catch (IOException e) {
             System.err.println(e.getMessage());
@@ -38,6 +39,49 @@ public class GetInfo {
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
+    }
+
+
+    public static boolean isUserExist() {
+        boolean flag = false;
+        try {
+            Connect.DOS.writeInt(5);
+            flag = Connect.DIS.readBoolean();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return flag;
+    }
+
+
+    public static void deleteUser(String phoneNumber) {
+        try {
+            Connect.DOS.writeInt(5);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+
+    public static boolean isUserExists(String phoneNumber){
+        try {
+            Connect.DOS.writeInt(6);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return true;
+    }
+
+
+    public static int getLastImageName() {
+        int result = 0;
+        try {
+            Connect.DOS.writeInt(16);
+            result = Connect.DIS.readInt();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return result;
     }
 
 
@@ -67,13 +111,12 @@ public class GetInfo {
     }
 
 
-    public static ArrayList<String> getMarkedPost(int index){
+    public static ArrayList<String> getMarkedPost(int size){
         ArrayList<String> result = new ArrayList<>();
         try {
             Connect.DOS.writeInt(7);
-            Connect.DOS.writeInt(index);
+            Connect.DOS.writeInt(size);
             Connect.DOS.flush();
-            int size = Connect.DIS.readInt();
             for (int i = 0; i < size; i++) {
                 result.add(Connect.DIS.readUTF());
             }
@@ -95,6 +138,28 @@ public class GetInfo {
             System.err.println(e.getMessage());
         }
         return result;
+    }
+
+
+    public static boolean sendFile(String url, String fileName){
+
+        try {
+            Connect.imageDOS.writeInt(2);
+            Connect.imageDOS.writeUTF(fileName);
+            int bytes = 0;
+            File file = new File(url);
+            FileInputStream fileInputStream = new FileInputStream(file);
+            Connect.imageDOS.writeLong(file.length());
+            byte[] buffer = new byte[4 * 1024];
+            while ((bytes = fileInputStream.read(buffer)) != -1) {
+                Connect.imageDOS.write(buffer, 0, bytes);
+                Connect.imageDOS.flush();
+            }
+            fileInputStream.close();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return false;
     }
 
 
@@ -173,6 +238,8 @@ public class GetInfo {
         }
         return result;
     }
+
+
     public static void addUser(){
         try {
             Connect.DOS.writeInt(15);
