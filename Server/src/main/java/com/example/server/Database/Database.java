@@ -186,4 +186,34 @@ public class Database {
         connectToDatabase();
         return collection.find(post.getFilterDocument()).cursor().hasNext();
     }
+
+    private static int numberForMarkedPost = 0;
+    public ArrayList<String> getMarkedPost(int size, Document filter){
+        String user = getUser(filter);
+        JSONObject object = new JSONObject(user);
+        JSONArray jsonArray = object.getJSONArray("bookmarkPost");
+        ArrayList<String> markedPost = new ArrayList<>();
+        for (int i = numberForMarkedPost * size; i < (size * numberForMarkedPost) + size; i++) {
+            if(i < jsonArray.length()) {
+                markedPost.add(getPost(new Document("postId", jsonArray.get(i))));
+            }
+        }
+        numberForMarkedPost++;
+        return markedPost;
+    }
+
+    private static int numberForUsersPost = 0;
+    public ArrayList<String> getUsersPost(int size, Document filter){
+        String user = getUser(filter);
+        JSONObject object = new JSONObject(user);
+        JSONArray jsonArray = object.getJSONArray("usersPost");
+        ArrayList<String> usersPost = new ArrayList<>();
+        for (int i = numberForUsersPost * size; i < (size * numberForUsersPost) + size; i++) {
+            if(i < jsonArray.length()) {
+                usersPost.add(getPost(new Document("postId", jsonArray.get(i))));
+            }
+        }
+        numberForUsersPost++;
+        return usersPost;
+    }
 }
