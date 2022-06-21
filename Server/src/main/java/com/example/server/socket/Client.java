@@ -63,17 +63,14 @@ public class Client extends Thread {
                         GetInfo.newMessage(number, messageReceiver, messageText);
                     } else if (task == 4) {
                         JSONObject json = new JSONObject(DIS.readUTF());
-                        Users user1 = new Users(new Document("phoneNumber", json.getInt("phoneNumber")), new Document("$set", new Document(json.getString("updateUserKeys"), json.get("updateUserValues"))));
+                        Users user1 = new Users(new Document("phoneNumber", number), new Document("$set", new Document(json.getString("updateUserKeys"), json.get("updateUserValues"))));
                         Database.updateUsers(user1);
                         //user.updateUser((ArrayList<String>) json.get("keys"), json.get("values"));
                     } else if (task == 5) {
-
-                        JSONObject json = new JSONObject(DIS.readUTF());
-                        Users user1 = new Users(new Document("phoneNumber", json.getInt("phoneNumber")), new Document("$set", new Document(json.getString("updateUserKeys"), json.get("updateUserValues"))));
-                        Database.updateUsers(user1);
-                        DOS.writeBoolean(user.isUserExists());
+                        Users user1 = new Users(new Document("phoneNumber", number));
+                        DOS.writeBoolean(Database.isUserExits(user1));
                     } else if (task == 6) {
-                        DOS.writeUTF(user.getUser());
+                        DOS.writeUTF(Database.getUser(new Document("phoneNumber", number)));
                     } else if (task == 7) {
                         int index = DIS.readInt();
                         user.getMarkedPost(index);
