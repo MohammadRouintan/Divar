@@ -12,4 +12,6 @@ module com.example.client {
     opens com.example.client.Login to javafx.fxml;
     exports com.example.client.Dashboard;
     opens com.example.client.Dashboard to javafx.fxml;
+    exports com.example.client.Dashboard.MyDivarPages;
+    opens com.example.client.Dashboard.MyDivarPages to javafx.fxml;
 }
