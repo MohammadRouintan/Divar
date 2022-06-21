@@ -126,7 +126,7 @@ public class Database {
         if (collection.find().sort(new Document("PhoneNumber", -1)).limit(1).cursor().hasNext()) {
             String jsonString = collection.find().sort(new Document("PhoneNumber", -1)).limit(1).cursor().next().toJson();
             JSONObject obj = new JSONObject(jsonString);
-            lastId = obj.getInt("imageId");
+            lastId = obj.getInt("profileNameImage");
         }
         disconnect();
         return lastId;
