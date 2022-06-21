@@ -88,6 +88,24 @@ public class Database {
         return document;
     }
 
+    public synchronized static void deletePost(Post post) {
+        connectToDatabase();
+        collection = database.getCollection("Posts");
+        if (collection.find(post.getFilterDocument()).cursor().hasNext()) {
+            collection.deleteOne(post.getFilterDocument());
+        }
+        disconnect();
+    }
+
+    public synchronized static void deleteUser(Users users) {
+        connectToDatabase();
+        collection = database.getCollection("Users");
+        if (collection.find(users.getFilterDocument()).cursor().hasNext()) {
+            collection.deleteOne(users.getFilterDocument());
+        }
+        disconnect();
+    }
+
     public static int lastPostId() {
         connectToDatabase();
         collection = database.getCollection("Posts");
