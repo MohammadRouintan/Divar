@@ -48,7 +48,7 @@ public class Database {
     public synchronized static void updateUsers(Users users) {
         connectToDatabase();
         collection = database.getCollection("Users");
-        collection.updateOne(users.getFilter(), users.getUpdate());
+        collection.updateOne(users.getFilterDocument(), users.getUpdateDocument());
         disconnect();
     }
 
