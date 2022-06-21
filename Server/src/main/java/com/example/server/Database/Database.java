@@ -41,7 +41,12 @@ public class Database {
     public synchronized static void updatePost(Post post) {
         connectToDatabase();
         collection = database.getCollection("Posts");
-        collection.updateOne(post.getFilterDocument(), post.getUpdateDocument());
+        JSONObject json = new JSONObject(post.getUpdateDocument().toJson());
+        JSONArray updateKeys = json.getJSONArray("updateKeys");
+        JSONArray updateValues = json.getJSONArray("updateValues");
+        for (int i=0; i < updateKeys.length(); i++) {
+            collection.updateOne(post.getFilterDocument() ,new Document("$set" ,new Document(updateKeys.getString(i) ,updateValues.get(i))));
+        }
         disconnect();
     }
 
