@@ -15,13 +15,13 @@ public class Post extends Database {
     private Document updateDocument;
 
     public Post(int lastPostID,String bio, String title, ArrayList<String> imageName, String address, String price, String city, String time, String phoneNumber, boolean accept, boolean auction, boolean exchange, boolean agreement, ArrayList<String> rowName, ArrayList<String> rowValue, ArrayList<String> columnName, ArrayList<String> columnValue, String branchMain, String branch1) {
+
         document.append("postId", lastPostID);
         document.append("title" , title);
         document.append("branchMain" ,branchMain);
         document.append("branch1" ,branch1);
         document.append("phoneNumber" ,phoneNumber);
         document.append("bio" ,bio);
-
         document.append("imageName" ,imageName);
         document.append("city" ,city);
         document.append("address" ,address);
