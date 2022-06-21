@@ -45,7 +45,7 @@ public class Database {
         disconnect();
     }
 
-    public synchronized static void updateUsers(Users users) {
+    public synchronized static void updateUsers(Users users, int size) {
         connectToDatabase();
         collection = database.getCollection("Users");
         collection.updateOne(users.getFilterDocument(), users.getUpdateDocument());
@@ -75,16 +75,21 @@ public class Database {
     }
 
     public static int lastPostId() {
+        connectToDatabase();
+        collection = database.getCollection("Posts");
         int lastId = 0;
         if (collection.find().sort(new Document("postId", -1)).limit(1).cursor().hasNext()) {
             String jsonString = collection.find().sort(new Document("postId", -1)).limit(1).cursor().next().toJson();
             JSONObject obj = new JSONObject(jsonString);
             lastId = obj.getInt("postId");
         }
+        disconnect();
         return lastId;
     }
 
     public static String lastImageId() {
+        connectToDatabase();
+        collection = database.getCollection("Posts");
         String lastId = "";
         if (collection.find().sort(new Document("postId", -1)).limit(1).cursor().hasNext()) {
             String jsonString = collection.find().sort(new Document("postId", -1)).limit(1).cursor().next().toJson();
@@ -92,10 +97,13 @@ public class Database {
             JSONArray jsonArray = obj.getJSONArray("imageName");
             lastId = String.valueOf(jsonArray.getInt(jsonArray.length() - 1));
         }
+        disconnect();
         return lastId;
     }
 
     public static ArrayList<String> getPosts(int number, String branchMain) {
+        connectToDatabase();
+        collection = database.getCollection("Posts");
         int temp = number;
         ArrayList<String> posts = new ArrayList<>();
         Document document = new Document("branchMain", branchMain);
@@ -110,6 +118,7 @@ public class Database {
             }
             document.remove("postId", i);
         }
+        disconnect();
         return posts;
     }
 

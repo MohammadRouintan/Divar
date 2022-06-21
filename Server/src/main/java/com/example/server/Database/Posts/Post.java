@@ -15,6 +15,7 @@ public class Post {
     private Document updateDocument;
 
     public Post(int lastPostID,String bio, String title, ArrayList<String> imageName, String address, String price, String city, String time, String phoneNumber, boolean accept, boolean auction, boolean exchange, boolean agreement, ArrayList<String> rowName, ArrayList<String> rowValue, ArrayList<String> columnName, ArrayList<String> columnValue, String branchMain, String branch1) {
+        document = new Document();
         document.append("postId", lastPostID);
         document.append("title" , title);
         document.append("branchMain" ,branchMain);
