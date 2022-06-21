@@ -48,8 +48,8 @@ public class AcceptClients{
                 clientSockets.add(socket);
                 numbers.add(null);
                 int count = numbers.size() - 1;
-//                Client client = new Client(count);
-//                client.start();
+                Client client = new Client(count);
+                client.start();
             } catch (IOException e) {
                 System.err.println(e.getMessage());
             }

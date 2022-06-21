@@ -41,11 +41,6 @@ public class Client extends Thread {
                 closeSocket();
             } else {
                 AcceptClients.numbers.add(number);
-                /**
-                 * TODO
-                 */
-                Users user = new Users(number);
-                Post post = new Post();
                 // 1 : send post to client | 2 : get post from client | 3 : new message from user
                 // 4 : update user | 5 : check user exists | 6 : get user info
                 // 7 : get marked posts | 8 : get a specified post | 9 : get a branch posts
@@ -54,9 +49,10 @@ public class Client extends Thread {
                 while (true) {
                     int task = DIS.readInt();
                     if (task == 1) {
-                        sendPost();
+                        //int size = DIS.readInt();
+                        //ArrayList<String> list = Database.getPosts()
                     } else if (task == 2) {
-                        GetInfo.newPost(number, getPost());
+                        //GetInfo.newPost(number, getPost());
                     } else if (task == 3) { // sending a new message
                         messageText = DIS.readUTF();
                         messageReceiver = DIS.readUTF();
@@ -72,9 +68,8 @@ public class Client extends Thread {
                     } else if (task == 6) {
                         DOS.writeUTF(Database.getUser(new Document("phoneNumber", number)));
                     } else if (task == 7) {
-                        int index = DIS.readInt();
-                        user.getMarkedPost(index);
-                        ArrayList <String> list = user.getMarkedPost(index);
+                        int size = DIS.readInt();
+                        ArrayList <String> list = Database.getMarkedPosts(size, new Document("phoneNumber", number));
                         DOS.writeInt(list.size());
                         for (String str : list){
                             DOS.writeUTF(str);
@@ -86,23 +81,36 @@ public class Client extends Thread {
                     } else if (task == 9) {
                         int sizePosts = DIS.readInt();
                         String mainBranch = DIS.readUTF();
-                        DOS.writeUTF("");
+                        ArrayList <String> list = Database.getPosts(sizePosts, mainBranch);
+                        for (String str : list){
+                            DOS.writeUTF(str);
+                        }
                     } else if (task == 10) {
                         JSONObject json = new JSONObject(DIS.readUTF());
                         Post post1 = new Post(new Document("postId", json.getInt("postId")), new Document("$set", new Document(json.getString("updateKeys"), json.get("updateValues"))));
                         Database.updatePost(post1);
                     } else if (task == 11) {
                         int postID = DIS.readInt();
+                        Post post1 = new Post(new Document("postId", postID));
+                        Database.deletePost(post1);
                     } else if (task == 12) {
                         String data = DIS.readUTF();
                     } else if (task == 13) {
-                        DOS.writeUTF("");
+                        ArrayList <String> list = Database.lastSeenPost(new Document("phoneNumber", number));
+                        DOS.writeInt(list.size());
+                        for (String str : list){
+                            DOS.writeUTF(str);
+                        }
                     } else if (task == 14) {
-                        DOS.writeUTF("");
+                        int size = DIS.readInt();
+                        ArrayList <String> list = Database.getUsersPosts(size, new Document("phoneNumber", number));
+                        DOS.writeInt(list.size());
+                        for (String str : list){
+                            DOS.writeUTF(str);
+                        }
                     }else if (task == 15) {
-                        user.addUser();
-                    }else if (task == 16) {
-                        DOS.writeUTF(post.lastImageId());
+                        Users users = new Users(number);
+                        Database.addUsers(users);
                     }else if (task == -1) {
                         closeSocket();
                         break;
@@ -126,26 +134,6 @@ public class Client extends Thread {
         }
     }
 
-    synchronized public void sendPost () {
-        try {
-            DOS.writeUTF(GetInfo.getJson(number));
-            DOS.flush();
-        } catch (IOException e){
-            System.err.println(e.getMessage());
-        }
-    }
-
-    public String getPost () {
-        String out = null;
-        try {
-            DOS.writeUTF(GetInfo.getImageID());
-            DOS.flush();
-            out = DIS.readUTF();
-        } catch (IOException e){
-            System.err.println(e.getMessage());
-        }
-        return out;
-    }
     public ArrayList<String> getStringArray (JSONArray JArray) {
         ArrayList<String> list = new ArrayList<>();
         for (int i = 0; i < JArray.length(); i++) {
