@@ -119,14 +119,14 @@ public class Database {
         return lastId;
     }
 
-    public static int lastUserImageId() {
+    public static String lastUserImageId() {
         connectToDatabase();
         collection = database.getCollection("Users");
-        int lastId = 0;
+        String lastId = "";
         if (collection.find().sort(new Document("PhoneNumber", -1)).limit(1).cursor().hasNext()) {
             String jsonString = collection.find().sort(new Document("PhoneNumber", -1)).limit(1).cursor().next().toJson();
             JSONObject obj = new JSONObject(jsonString);
-            lastId = obj.getInt("profileNameImage");
+            lastId = String.valueOf(obj.getInt("profileNameImage"));
         }
         disconnect();
         return lastId;
