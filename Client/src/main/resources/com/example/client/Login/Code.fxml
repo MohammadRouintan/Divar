@@ -22,6 +22,7 @@
                </VBox.margin>
             </Label>
             <Label fx:id="label1CodeFile" alignment="CENTER" prefHeight="62.0" prefWidth="481.0" text="Enter the verification code that was sent to the mobile number 09381495505" textAlignment="CENTER" textFill="#7e7e7e" wrapText="true">
+
                <font>
                   <Font name="Segoe UI" size="17.0" />
                </font>
@@ -30,6 +31,7 @@
                </VBox.margin>
             </Label>
             <TextField fx:id="inputPhoneNumberCodeID" focusTraversable="false" maxHeight="40.0" maxWidth="350.0" minHeight="20.0" minWidth="300.0" prefHeight="39.0" prefWidth="338.0" styleClass="text-field" stylesheets="@../../Style/code.css">
+
                <font>
                   <Font size="24.0" />
                </font>
@@ -47,6 +49,7 @@
                </opaqueInsets>
             </TextField>
             <Label fx:id="counterID" text="120">
+
                <font>
                   <Font size="28.0" />
                </font>
@@ -57,6 +60,7 @@
             <Button fx:id="ReCodeButtonID" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#ReCodePhoneCode" prefHeight="50.0" prefWidth="222.0" styleClass="code-btn" stylesheets="@../../Style/code.css" text="Send code" textAlignment="CENTER">
                <font>
                   <Font name="Segoe UI" size="25.0" />
+
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -66,6 +70,7 @@
                </VBox.margin>
             </Button>
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#loginButtonOnCodeFile" prefHeight="50.0" prefWidth="222.0" styleClass="number-btn" stylesheets="@../../Style/code.css" text="Enter" textAlignment="CENTER">
+
                <font>
                   <Font name="Segoe UI" size="27.0" />
                </font>

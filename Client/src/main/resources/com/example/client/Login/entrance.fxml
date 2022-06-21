@@ -11,6 +11,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
+
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Login.LoginController">
    <top>
       <AnchorPane prefHeight="171.0" prefWidth="800.0" styleClass="bck-img" stylesheets="@../../Style/entrance.css" BorderPane.alignment="CENTER" />
@@ -21,6 +22,7 @@
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="75.0" prefWidth="176.0" styleClass="divar-lable" stylesheets="@../../Style/entrance.css" text="Divar" textFill="#ffbf00" textOverrun="CLIP">
                <font>
                   <Font name="Segoe UI Bold" size="61.0" />
+
                </font>
                <VBox.margin>
                   <Insets bottom="10.0" />
@@ -34,6 +36,7 @@
                </effect>
             </Label>
             <Label alignment="CENTER" prefHeight="48.0" prefWidth="242.0" styleClass="ditails-lable" stylesheets="@../../Style/entrance.css" text="Wellcome to the Divar app " textAlignment="CENTER" textFill="#605f5f" wrapText="true">
+
                <font>
                   <Font name="Segoe UI" size="18.0" />
                </font>
@@ -50,11 +53,13 @@
                </VBox.margin>
             </Label>
             <Button fx:id="loginButtonID" alignment="CENTER" maxWidth="300.0" minHeight="58.0" mnemonicParsing="false" onAction="#loginOnFirstPage" prefHeight="60.0" prefWidth="300.0" styleClass="entrance-btn" stylesheets="@../../Style/entrance.css" text="Start" textAlignment="CENTER">
+
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
                <font>
                   <Font name="Segoe UI" size="35.0" />
+
                </font>
                <effect>
                   <DropShadow blurType="ONE_PASS_BOX" height="32.75" offsetY="5.0" radius="16.0225" width="33.34">
