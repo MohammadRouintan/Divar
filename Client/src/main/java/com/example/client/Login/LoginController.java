@@ -28,7 +28,7 @@ public class LoginController {
     @FXML
     private void loginOnFirstPage(ActionEvent e){
         try {
-            Parent layout = FXMLLoader.load(Main.class.getResource("logIn.fxml"));
+            Parent layout = FXMLLoader.load(Main.class.getResource("Login/logIn.fxml"));
             Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
             Scene scene = new Scene(layout,800,600);
             stage.setTitle("Dashboard");
@@ -76,7 +76,7 @@ public class LoginController {
 
             try{
 
-                Parent layout = FXMLLoader.load(Main.class.getResource("Code.fxml"));
+                Parent layout = FXMLLoader.load(Main.class.getResource("Login/Code.fxml"));
                 Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
                 Scene scene = new Scene(layout,800,600);
                 stage.setTitle("Dashboard");

@@ -13,7 +13,7 @@
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="test" alignment="CENTER" prefHeight="51.0" prefWidth="378.0" styleClass="number-lable" stylesheets="@../Style/logIn.css" text="Enter the verification code" textAlignment="CENTER">
+            <Label fx:id="test" alignment="CENTER" prefHeight="51.0" prefWidth="378.0" styleClass="number-lable" stylesheets="@../../Style/logIn.css" text="Enter the verification code" textAlignment="CENTER">
                <font>
                   <Font name="Segoe UI" size="27.0" />
                </font>
@@ -29,7 +29,7 @@
                   <Insets bottom="30.0" />
                </VBox.margin>
             </Label>
-            <TextField fx:id="inputPhoneNumberCodeID" focusTraversable="false" maxHeight="40.0" maxWidth="350.0" minHeight="20.0" minWidth="300.0" prefHeight="39.0" prefWidth="338.0" styleClass="text-field" stylesheets="@../Style/code.css">
+            <TextField fx:id="inputPhoneNumberCodeID" focusTraversable="false" maxHeight="40.0" maxWidth="350.0" minHeight="20.0" minWidth="300.0" prefHeight="39.0" prefWidth="338.0" styleClass="text-field" stylesheets="@../../Style/code.css">
                <font>
                   <Font size="24.0" />
                </font>
@@ -54,7 +54,7 @@
                   <Insets />
                </VBox.margin>
             </Label>
-            <Button fx:id="ReCodeButtonID" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#ReCodePhoneCode" prefHeight="50.0" prefWidth="222.0" styleClass="code-btn" stylesheets="@../Style/code.css" text="Send code" textAlignment="CENTER">
+            <Button fx:id="ReCodeButtonID" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#ReCodePhoneCode" prefHeight="50.0" prefWidth="222.0" styleClass="code-btn" stylesheets="@../../Style/code.css" text="Send code" textAlignment="CENTER">
                <font>
                   <Font name="Segoe UI" size="25.0" />
                </font>
@@ -65,7 +65,7 @@
                   <Insets bottom="20.0" />
                </VBox.margin>
             </Button>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#loginButtonOnCodeFile" prefHeight="50.0" prefWidth="222.0" styleClass="number-btn" stylesheets="@../Style/code.css" text="Enter" textAlignment="CENTER">
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#loginButtonOnCodeFile" prefHeight="50.0" prefWidth="222.0" styleClass="number-btn" stylesheets="@../../Style/code.css" text="Enter" textAlignment="CENTER">
                <font>
                   <Font name="Segoe UI" size="27.0" />
                </font>

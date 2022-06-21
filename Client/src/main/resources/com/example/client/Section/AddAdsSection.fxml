@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" prefHeight="2000.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Dashboard.AddADSController">
+   <children>
+      <Label text="Add Ads">
+         <font>
+            <Font size="21.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="30.0" />
+         </VBox.margin>
+      </Label>
+      <Label alignment="CENTER" prefHeight="40.0" prefWidth="103.0" text="Categories :">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <VBox.margin>
+            <Insets bottom="10.0" top="20.0" />
+         </VBox.margin>
+      </Label>
+      <ComboBox fx:id="MainBranchCategories" onAction="#MainBranchCategotiesFunction" prefHeight="34.0" prefWidth="400.0">
+         <VBox.margin>
+            <Insets bottom="20.0" />
+         </VBox.margin>
+      </ComboBox>
+      <ComboBox fx:id="branchTwoCategories" onAction="#branchTwoCategoriesFunction" prefHeight="34.0" prefWidth="400.0">
+         <VBox.margin>
+            <Insets bottom="20.0" />
+         </VBox.margin>
+      </ComboBox>
+      <Line endX="218.0929412841797" endY="-162.39212036132812" startX="-190.704345703125" startY="-162.1850128173828" style="-fx-opacity: 0.3;" />
+      <Label alignment="CENTER" prefHeight="40.0" prefWidth="75.0" text="City : ">
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="selectCityComboBox" onAction="#selectCityComboBoxFunction" prefHeight="34.0" prefWidth="400.0">
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </ComboBox>
+      <Line endX="218.0929412841797" endY="-162.39212036132812" startX="-190.704345703125" startY="-162.1850128173828" style="-fx-opacity: 0.3;">
+         <VBox.margin>
+            <Insets top="30.0" />
+         </VBox.margin>
+      </Line>
+      <Label alignment="CENTER" prefHeight="40.0" prefWidth="75.0" text="Address :">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </Label>
+      <TextField fx:id="addressTextFiled" maxWidth="400.0" minHeight="35.0" prefHeight="34.0" prefWidth="350.0" />
+      <Line endX="218.0929412841797" endY="-162.39212036132812" startX="-190.704345703125" startY="-162.1850128173828" style="-fx-opacity: 0.3;">
+         <VBox.margin>
+            <Insets top="30.0" />
+         </VBox.margin>
+      </Line>
+      <Label alignment="CENTER" prefHeight="40.0" prefWidth="75.0" text="Name :">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </Label>
+      <TextField fx:id="nameTextFiled" maxWidth="400.0" minHeight="35.0" prefHeight="35.0" prefWidth="400.0">
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </TextField>
+      <Label alignment="CENTER" prefHeight="40.0" prefWidth="152.0" text="Add Feature :">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <VBox.margin>
+            <Insets bottom="20.0" top="20.0" />
+         </VBox.margin>
+      </Label>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#addFeatureRow" prefHeight="30.0" prefWidth="30.0" text="+">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button layoutX="283.0" layoutY="11.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#removeFeatureRow" prefHeight="30.0" prefWidth="30.0" text="-">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets bottom="20.0" />
+         </VBox.margin>
+      </HBox>
+      <VBox fx:id="featureRowVbox" prefHeight="200.0" prefWidth="100.0" />
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#addFeatureColumn" prefHeight="30.0" prefWidth="30.0" text="+">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button layoutX="283.0" layoutY="11.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#removeFeatureColumn" prefHeight="30.0" prefWidth="30.0" text="-">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets bottom="20.0" />
+         </VBox.margin>
+      </HBox>
+      <VBox fx:id="featureColumnVbox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" />
+      <Label alignment="CENTER" prefHeight="40.0" prefWidth="161.0" text="description :">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <VBox.margin>
+            <Insets bottom="20.0" top="30.0" />
+         </VBox.margin>
+      </Label>
+      <TextArea fx:id="postDescriptionFiled" maxHeight="400.0" maxWidth="400.0" minHeight="150.0" prefHeight="400.0" prefWidth="400.0" />
+      <Label fx:id="priceLabel" alignment="CENTER" prefHeight="23.0" prefWidth="399.0" text="Price :">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </Label>
+      <TextField fx:id="postPriceFiled" maxHeight="35.0" maxWidth="400.0" minHeight="35.0" prefHeight="34.0" prefWidth="400.0">
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </TextField>
+      <Label fx:id="errorLabel" text="ERROR">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="agreedPriceCheckBox" mnemonicParsing="false" onAction="#agreedPriceCheckBoxFunction" text="Agreed price">
+         <VBox.margin>
+            <Insets left="-35.0" top="20.0" />
+         </VBox.margin>
+      </CheckBox>
+      <CheckBox fx:id="auctionCheckBox" mnemonicParsing="false" onAction="#auctionCheckBoxFunction" text="I want to put it up for auction">
+         <VBox.margin>
+            <Insets left="55.0" top="10.0" />
+         </VBox.margin>
+      </CheckBox>
+      <CheckBox fx:id="exchangeCheckBox" mnemonicParsing="false" text="I want to exchange">
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </CheckBox>
+      <Line endX="218.0929412841797" endY="-162.39212036132812" startX="-190.704345703125" startY="-162.1850128173828" style="-fx-opacity: 0.3;">
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </Line>
+      <Label alignment="CENTER" prefHeight="40.0" prefWidth="75.0" text="Image :">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </Label>
+      <Button fx:id="uploadImage" mnemonicParsing="false" onAction="#uploadImageFunction" prefHeight="40.0" prefWidth="130.0" text="upload">
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </Button>
+      <HBox prefHeight="150.0" prefWidth="541.0" spacing="30.0">
+         <VBox.margin>
+            <Insets bottom="20.0" top="30.0" />
+         </VBox.margin>
+         <padding>
+            <Insets left="30.0" />
+         </padding>
+         <children>
+            <ImageView fx:id="img1" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="img2" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="img3" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </ImageView>
+         </children>
+      </HBox>
+      <HBox prefHeight="150.0" prefWidth="541.0" spacing="30.0">
+         <padding>
+            <Insets left="30.0" />
+         </padding>
+         <children>
+            <ImageView fx:id="img4" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="img5" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </ImageView>
+            <ImageView fx:id="img6" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="20.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox prefHeight="150.0" prefWidth="541.0" spacing="30.0">
+         <padding>
+            <Insets left="30.0" />
+         </padding>
+         <children>
+            <ImageView fx:id="img7" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="img8" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </ImageView>
+            <ImageView fx:id="img9" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="20.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+         <children>
+            <Button maxHeight="60.0" minHeight="40.0" mnemonicParsing="false" onAction="#addPost" prefHeight="40.0" prefWidth="223.0" text="Post" />
+            <Button maxHeight="60.0" minHeight="40.0" mnemonicParsing="false" onAction="#cancelPost" prefHeight="40.0" prefWidth="213.0" text="Cancle" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="20.0" top="20.0" />
+         </VBox.margin>
+      </HBox>
+   </children>
+</VBox>

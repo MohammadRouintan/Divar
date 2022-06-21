@@ -13,7 +13,7 @@
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="test" alignment="CENTER" prefHeight="51.0" prefWidth="378.0" styleClass="number-lable" stylesheets="@../Style/logIn.css" text="Your Phone Number" textAlignment="CENTER">
+            <Label fx:id="test" alignment="CENTER" prefHeight="51.0" prefWidth="378.0" styleClass="number-lable" stylesheets="@../../Style/logIn.css" text="Your Phone Number" textAlignment="CENTER">
                <font>
                   <Font name="Segoe UI" size="25.0" />
                </font>
@@ -26,7 +26,7 @@
                   <Insets bottom="30.0" />
                </VBox.margin>
             </Label>
-            <TextField fx:id="inputPhoneNumberIDField" maxHeight="40.0" maxWidth="350.0" minHeight="20.0" minWidth="300.0" onAction="#getInputNumberField" prefHeight="39.0" prefWidth="338.0" promptText="0 9 1 3 * * * 5 2 5 2" styleClass="text-field" stylesheets="@../Style/logIn.css">
+            <TextField fx:id="inputPhoneNumberIDField" maxHeight="40.0" maxWidth="350.0" minHeight="20.0" minWidth="300.0" onAction="#getInputNumberField" prefHeight="39.0" prefWidth="338.0" promptText="0 9 1 3 * * * 5 2 5 2" styleClass="text-field" stylesheets="@../../Style/logIn.css">
                <font>
                   <Font size="18.0" />
                </font>
@@ -37,7 +37,7 @@
                   <Insets left="30.0" />
                </padding>
             </TextField>
-            <Button fx:id="sendButtonPhoneID" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#sendButtonPhoneNumber" onMousePressed="#testfunction" prefHeight="43.0" prefWidth="222.0" styleClass="number-btn" stylesheets="@../Style/logIn.css" text="Next" textAlignment="CENTER">
+            <Button fx:id="sendButtonPhoneID" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#sendButtonPhoneNumber" onMousePressed="#testfunction" prefHeight="43.0" prefWidth="222.0" styleClass="number-btn" stylesheets="@../../Style/logIn.css" text="Next" textAlignment="CENTER">
                <font>
                   <Font name="Segoe UI" size="25.0" />
                </font>
