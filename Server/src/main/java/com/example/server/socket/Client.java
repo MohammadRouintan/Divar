@@ -44,7 +44,7 @@ public class Client extends Thread {
                 // 4 : update user | 5 : check user exists | 6 : get user info
                 // 7 : get marked posts | 8 : get a specified post | 9 : get a branch posts
                 // 10: update a post | 11 : delete a post | 12 : add new post | 13 : last seen post
-                // 14: get users posts | 15 : add user
+                // 14: get users posts | 15 : add user | 16 : get last image name
                 while (true) {
                     int task = DIS.readInt();
                     if (task == 1) {
@@ -73,7 +73,6 @@ public class Client extends Thread {
                         DOS.writeInt(list.size());
                         for (String str : list){
                             DOS.writeUTF(str);
-
                         }
                     } else if (task == 8) {
                         int postID = DIS.readInt();
@@ -94,7 +93,15 @@ public class Client extends Thread {
                         Post post1 = new Post(new Document("postId", postID));
                         Database.deletePost(post1);
                     } else if (task == 12) {
-                        String data = DIS.readUTF();
+                        JSONObject json = new JSONObject(DIS.readUTF());
+                        Post post = new Post(Database.lastPostId(), json.getString("bio"), json.getString("title"),
+                                getStringArray(json.getJSONArray("imageName")), json.getString("address"),
+                                json.getString("price"), json.getString("city"), json.getString("time"),
+                                json.getString("phoneNumber"), json.getBoolean("accept"), json.getBoolean("auction"),
+                                json.getBoolean("exchange"), json.getBoolean("agreement"),
+                                getStringArray(json.getJSONArray("RowName")), getStringArray(json.getJSONArray("RowValue")),
+                                getStringArray(json.getJSONArray("ColumnName")), getStringArray(json.getJSONArray("ColumnValue")),
+                                json.getString("branchMain"), json.getString("branch1"));
                     } else if (task == 13) {
                         ArrayList <String> list = Database.lastSeenPost(new Document("phoneNumber", number));
                         DOS.writeInt(list.size());
@@ -111,6 +118,8 @@ public class Client extends Thread {
                     }else if (task == 15) {
                         Users users = new Users(number);
                         Database.addUsers(users);
+                    }else if (task == 16){
+                        DOS.writeInt(Database.lastImageID());
                     }else if (task == -1) {
                         closeSocket();
                         break;

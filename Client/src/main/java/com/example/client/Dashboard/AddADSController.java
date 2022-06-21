@@ -2,6 +2,7 @@ package com.example.client.Dashboard;
 
 import com.example.client.socket.Connect;
 import com.example.client.socket.GetInfo;
+import com.example.client.socket.ImageController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -318,7 +319,10 @@ public class AddADSController {
                 jsonObject.put("ColumnValue", ColumnValue);
 
                 GetInfo.addPost(jsonObject);
-                GetInfo.sendFile(file.getPath().toString() ,String.valueOf(Integer.parseInt(GetInfo.getLastNameImage()) + 1));
+                for (int i = 0; i < imagesName.size(); i++) {
+                    ImageController image = new ImageController(imagesPath.get(i) ,imagesName.get(i), 2);
+                    image.start();
+                }
             }
         }
 
@@ -385,7 +389,7 @@ public class AddADSController {
             file = chooser.showOpenDialog(null);
             if(file != null) {
                 // GetInfo.sendFile(String.valueOf(Integer.parseInt(GetInfo.getLastNameImage()) + 1));
-                imagesName.add(String.valueOf(Integer.parseInt(GetInfo.getLastNameImage()) + 1));
+                imagesName.add(String.valueOf(GetInfo.getLastImageName()));
                 imagesPath.add(file.getPath().toString());
                 priceLabel.setText(file.getPath());
                 numberOFUploadedImage++;

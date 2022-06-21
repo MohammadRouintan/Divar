@@ -42,6 +42,18 @@ public class GetInfo {
     }
 
 
+    public static boolean isUserExist() {
+        boolean flag = false;
+        try {
+            Connect.DOS.writeInt(5);
+            flag = Connect.DIS.readBoolean();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return flag;
+    }
+
+
     public static void deleteUser(String phoneNumber) {
         try {
             Connect.DOS.writeInt(5);
@@ -61,20 +73,11 @@ public class GetInfo {
     }
 
 
-    public static String getUser(String phoneNumber){
-        try {
-            Connect.DOS.writeInt(7);
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
-        }
-        return null;
-    }
-
-
-    public static String getLastNameImage() {
-        String result = null;
+    public static int getLastImageName() {
+        int result = 0;
         try {
             Connect.DOS.writeInt(16);
+            result = Connect.DIS.readInt();
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
@@ -108,13 +111,12 @@ public class GetInfo {
     }
 
 
-    public static ArrayList<String> getMarkedPost(int index){
+    public static ArrayList<String> getMarkedPost(int size){
         ArrayList<String> result = new ArrayList<>();
         try {
             Connect.DOS.writeInt(7);
-            Connect.DOS.writeInt(index);
+            Connect.DOS.writeInt(size);
             Connect.DOS.flush();
-            int size = Connect.DIS.readInt();
             for (int i = 0; i < size; i++) {
                 result.add(Connect.DIS.readUTF());
             }
