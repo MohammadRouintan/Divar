@@ -2,12 +2,7 @@ package com.example.server.Database.Users;
 
 import com.example.server.Database.Database;
 
-import com.example.server.Database.Posts.Post;
 import org.bson.Document;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 public class Users extends Database {
 
@@ -26,5 +21,17 @@ public class Users extends Database {
 
     public Users(String phoneNumber) {
         document.append("PhoneNumber", phoneNumber);
+    }
+
+    public Document getDocument() {
+        return document;
+    }
+
+    public Document getFilterDocument() {
+        return filterDocument;
+    }
+
+    public Document getUpdateDocument() {
+        return updateDocument;
     }
 }
