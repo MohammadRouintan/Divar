@@ -11,6 +11,8 @@ import org.bson.Document;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 
 public class Database {
     private static MongoClient mongoClient;
@@ -22,46 +24,54 @@ public class Database {
         database = mongoClient.getDatabase("Divar");
     }
 
-    public static void addPost(Post post) {
+    public synchronized static void addPost(Post post) {
         connectToDatabase();
         collection = database.getCollection("Posts");
         collection.insertOne(post.getDocument());
         disconnect();
     }
 
-    public static void addUsers(Users users) {
+    public synchronized static void addUsers(Users users) {
         connectToDatabase();
         collection = database.getCollection("Users");
         collection.insertOne(users.getDocument());
         disconnect();
     }
 
-    public static void updatePost(Post post) {
+    public synchronized static void updatePost(Post post) {
         connectToDatabase();
         collection = database.getCollection("Posts");
-        collection.updateOne(post.getFilter(), post.getUpdate());
+        collection.updateOne(post.getFilterDocument(), post.getUpdateDocument());
         disconnect();
     }
 
-    public static void updateUsers(Users users) {
+    public synchronized static void updateUsers(Users users) {
         connectToDatabase();
         collection = database.getCollection("Users");
         collection.updateOne(users.getFilter(), users.getUpdate());
         disconnect();
     }
 
-    public static void findPost(Document filter) {
+    public synchronized static Document findPost(Document filter) {
         connectToDatabase();
+        Document document = new Document("", "");
         collection = database.getCollection("Posts");
-        collection.find(filter);
+        if (collection.find(filter).cursor().hasNext()) {
+            document = collection.find(filter).cursor().next();
+        }
         disconnect();
+        return document;
     }
 
-    public static void findUser(Document filter) {
+    public synchronized static Document findUser(Document filter) {
         connectToDatabase();
+        Document document = new Document("", "");
         collection = database.getCollection("Users");
-        collection.find(filter);
+        if (collection.find(filter).cursor().hasNext()) {
+            document = collection.find(filter).cursor().next();
+        }
         disconnect();
+        return document;
     }
 
     public static int lastPostId() {
@@ -85,8 +95,44 @@ public class Database {
         return lastId;
     }
 
+    public static ArrayList<String> getPosts(int number, String branchMain) {
+        int temp = number;
+        ArrayList<String> posts = new ArrayList<>();
+        Document document = new Document("branchMain", branchMain);
+        for (int i = lastPostId(); i > 0; i--) {
+            if(temp == 0) {
+                break;
+            }
+            document.append("postId", i);
+            if (collection.find(document).cursor().hasNext()) {
+                posts.add(collection.find(document).cursor().next().toJson());
+                temp--;
+            }
+            document.remove("postId", i);
+        }
+        return posts;
+    }
+
+    public static String getPost(Document filter) {
+        return findPost(filter).toJson();
+    }
+
+    public static String getUser(Document filter) {
+        return findUser(filter).toJson();
+    }
+
+    public ArrayList<String> lastSeenPost(Document filter) {
+        String user = getUser(filter);
+        JSONObject jsonObject = new JSONObject(user);
+        JSONArray jsonArray = jsonObject.getJSONArray("lastSeenPost");
+        ArrayList<String> lastSeen = new ArrayList<>();
+        for (int i = 0; i < jsonArray.length(); i++) {
+            lastSeen.add(getPost(new Document("postId", jsonArray.get(i))));
+        }
+        return lastSeen;
+    }
+
     public static void disconnect(){
         mongoClient.close();
     }
-
 }

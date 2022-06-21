@@ -13,6 +13,7 @@ public class Connect {
     DataOutputStream imageDOS;
     DataInputStream imageDIS;
     public static DataOutputStream DOS;
+
     public static DataInputStream DIS;
     public static String confirmationCode;
 

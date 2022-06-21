@@ -56,6 +56,7 @@
             </Label>
             <Button fx:id="ReCodeButtonID" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#ReCodePhoneCode" prefHeight="50.0" prefWidth="222.0" styleClass="code-btn" stylesheets="@../Style/code.css" text="درخواست کد" textAlignment="CENTER" visible="false">
                <font>
+
                   <Font name="Georgia" size="24.0" />
                </font>
                <cursor>
