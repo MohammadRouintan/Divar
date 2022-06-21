@@ -188,7 +188,7 @@ public class Database {
     }
 
     private static int numberForMarkedPost = 0;
-    public ArrayList<String> getMarkedPost(int size, Document filter){
+    public ArrayList<String> getMarkedPosts(int size, Document filter){
         String user = getUser(filter);
         JSONObject object = new JSONObject(user);
         JSONArray jsonArray = object.getJSONArray("bookmarkPost");
@@ -203,7 +203,7 @@ public class Database {
     }
 
     private static int numberForUsersPost = 0;
-    public ArrayList<String> getUsersPost(int size, Document filter){
+    public ArrayList<String> getUsersPosts(int size, Document filter){
         String user = getUser(filter);
         JSONObject object = new JSONObject(user);
         JSONArray jsonArray = object.getJSONArray("usersPost");
