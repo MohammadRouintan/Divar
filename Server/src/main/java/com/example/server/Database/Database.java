@@ -176,4 +176,14 @@ public class Database {
     public static void disconnect(){
         mongoClient.close();
     }
+
+    public static boolean isUserExits(Users users){
+        connectToDatabase();
+        return collection.find(users.getFilterDocument()).cursor().hasNext();
+    }
+
+    public static boolean isPostExits(Post post){
+        connectToDatabase();
+        return collection.find(post.getFilterDocument()).cursor().hasNext();
+    }
 }
