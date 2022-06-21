@@ -134,7 +134,7 @@ public class GetInfo {
         }
         return null;
     }
-    
+
     public static String getLastNameImage(){
         String result = null;
         try {

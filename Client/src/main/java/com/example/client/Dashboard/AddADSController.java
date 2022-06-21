@@ -36,23 +36,24 @@ public class AddADSController {
         private static int numberOFUploadedImage;
         @FXML
         public void initialize() {
-                setMainCategories();
-                setCity();
-                HBox hBox;
-                hBox = makeNewHBox(0);
-                hBox.setId("featureRowTextField0");
-                featureRowVbox.getChildren().add(hBox);
+            setMainCategories();
+            setCity();
+            HBox hBox;
+            hBox = makeNewHBox(0);
+            hBox.setId("featureRowTextField0");
+            featureRowVbox.getChildren().add(hBox);
 
-                VBox vBox;
-                vBox = makeNewVBox(0);
-                vBox.setId("featureColumnTextField0");
-                featureColumnVbox.getChildren().add(vBox);
+            VBox vBox;
+            vBox = makeNewVBox(0);
+            vBox.setId("featureColumnTextField0");
+            featureColumnVbox.getChildren().add(vBox);
 
 
             setMainCategories();
             setCity();
             numberOFUploadedImage = 0;
             imagesName = new ArrayList<>();
+            imagesPath = new ArrayList<>();
         }
 
         private void setMainCategories(){
@@ -223,7 +224,7 @@ public class AddADSController {
             }else if(name.equals("")){
                 createErrorMassage("Please write name correctly !!");
             }else if(description.equals("")){
-                createErrorMassage("");
+                createErrorMassage("Please write description correctly !!");
             }else if(RowName0.getText().equals("") || RowValue0.getText().equals("")){
                 createErrorMassage("");
             }else if(ColumnName0.getText().equals("") || ColumnValue0.getText().equals("")){
@@ -317,7 +318,7 @@ public class AddADSController {
                 jsonObject.put("ColumnValue", ColumnValue);
 
                 GetInfo.addPost(jsonObject);
-                createErrorMassage("Please write description correctly !!");
+                GetInfo.sendFile(file.getPath().toString() ,String.valueOf(Integer.parseInt(GetInfo.getLastNameImage()) + 1));
             }
         }
 
@@ -377,6 +378,7 @@ public class AddADSController {
         private FileChooser chooser = new FileChooser();
         private File file = null;
         private ArrayList<String> imagesName;
+        private ArrayList<String> imagesPath;
 
         @FXML
         void uploadImageFunction (ActionEvent event) throws IOException {
@@ -384,6 +386,7 @@ public class AddADSController {
             if(file != null) {
                 // GetInfo.sendFile(String.valueOf(Integer.parseInt(GetInfo.getLastNameImage()) + 1));
                 imagesName.add(String.valueOf(Integer.parseInt(GetInfo.getLastNameImage()) + 1));
+                imagesPath.add(file.getPath().toString());
                 priceLabel.setText(file.getPath());
                 numberOFUploadedImage++;
                 Image img;
