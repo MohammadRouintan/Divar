@@ -7,7 +7,7 @@
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label prefHeight="18.0" prefWidth="166.0" text="my Ads">
+        <Label prefHeight="18.0" prefWidth="166.0" text="Edit Profile">
             <font>
                 <Font size="49.0" />
             </font>

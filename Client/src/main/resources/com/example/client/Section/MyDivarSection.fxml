@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane fx:id="MyDivarPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Dashboard.MyDivarController">
    <children>
       <VBox alignment="TOP_CENTER" layoutX="-3.0" layoutY="-2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="626.0" prefWidth="570.0">
@@ -25,17 +24,17 @@
                   <Font name="Segoe UI" size="17.0" />
                </font>
             </Button>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="58.0" prefWidth="520.0" text="Saved">
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#SavedButton" prefHeight="58.0" prefWidth="520.0" text="Saved">
                <font>
                   <Font name="Segoe UI" size="17.0" />
                </font>
             </Button>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="58.0" prefWidth="520.0" text="Recent Visits">
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#RecentVisitsButton" prefHeight="58.0" prefWidth="520.0" text="Recent Visits">
                <font>
                   <Font size="17.0" />
                </font>
             </Button>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="58.0" prefWidth="520.0" text="Edit Profile">
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#EditProfileButton" prefHeight="58.0" prefWidth="520.0" text="Edit Profile">
                <font>
                   <Font size="17.0" />
                </font>
