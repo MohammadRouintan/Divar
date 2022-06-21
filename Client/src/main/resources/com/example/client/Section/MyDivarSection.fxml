@@ -1,16 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="551.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label alignment="CENTER" text="My Divar">
+      <Label alignment="CENTER" prefHeight="54.0" prefWidth="142.0" text="My Divar" textAlignment="CENTER">
          <font>
-            <Font size="76.0" />
+            <Font name="Segoe UI Bold" size="25.0" />
          </font>
+         <VBox.margin>
+            <Insets bottom="30.0" top="20.0" />
+         </VBox.margin>
       </Label>
+      <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="59.0" prefWidth="520.0" text="My Ads">
+         <font>
+            <Font name="Segoe UI" size="17.0" />
+         </font>
+      </Button>
+      <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="58.0" prefWidth="520.0" text="Saved">
+         <font>
+            <Font name="Segoe UI" size="17.0" />
+         </font>
+      </Button>
+      <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="58.0" prefWidth="520.0" text="Recent Visits">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="58.0" prefWidth="520.0" text="Edit Profile">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
    </children>
 </VBox>
