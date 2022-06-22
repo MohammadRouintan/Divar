@@ -47,6 +47,7 @@ public class Client extends Thread {
                 // 14: get users posts | 15 : add user | 16 : get last image name
                 while (true) {
                     int task = DIS.readInt();
+                    System.out.println("a");
                     if (task == 1) {
                         //int size = DIS.readInt();
                         //ArrayList<String> list = Database.getPosts()
@@ -65,24 +66,30 @@ public class Client extends Thread {
                     } else if (task == 5) {
                         Users user1 = new Users(new Document("phoneNumber", number));
                         DOS.writeBoolean(Database.isUserExits(user1));
+                        DOS.flush();
                     } else if (task == 6) {
                         DOS.writeUTF(Database.getUser(new Document("phoneNumber", number)));
+                        DOS.flush();
                     } else if (task == 7) {
                         int size = DIS.readInt();
                         ArrayList <String> list = Database.getMarkedPosts(size, new Document("phoneNumber", number));
                         DOS.writeInt(list.size());
+                        DOS.flush();
                         for (String str : list){
                             DOS.writeUTF(str);
+                            DOS.flush();
                         }
                     } else if (task == 8) {
                         int postID = DIS.readInt();
                         DOS.writeUTF("");
+                        DOS.flush();
                     } else if (task == 9) {
                         int sizePosts = DIS.readInt();
                         String mainBranch = DIS.readUTF();
                         ArrayList <String> list = Database.getPosts(sizePosts, mainBranch);
                         for (String str : list){
                             DOS.writeUTF(str);
+                            DOS.flush();
                         }
                     } else if (task == 10) {
                         JSONObject json = new JSONObject(DIS.readUTF());
@@ -102,24 +109,30 @@ public class Client extends Thread {
                                 getStringArray(json.getJSONArray("RowName")), getStringArray(json.getJSONArray("RowValue")),
                                 getStringArray(json.getJSONArray("ColumnName")), getStringArray(json.getJSONArray("ColumnValue")),
                                 json.getString("branchMain"), json.getString("branch1"));
+                        Database.addPost(post);
                     } else if (task == 13) {
                         ArrayList <String> list = Database.lastSeenPost(new Document("phoneNumber", number));
                         DOS.writeInt(list.size());
+                        DOS.flush();
                         for (String str : list){
                             DOS.writeUTF(str);
+                            DOS.flush();
                         }
                     } else if (task == 14) {
                         int size = DIS.readInt();
                         ArrayList <String> list = Database.getUsersPosts(size, new Document("phoneNumber", number));
                         DOS.writeInt(list.size());
+                        DOS.flush();
                         for (String str : list){
                             DOS.writeUTF(str);
+                            DOS.flush();
                         }
                     }else if (task == 15) {
                         Users users = new Users(number);
                         Database.addUsers(users);
                     }else if (task == 16){
                         DOS.writeInt(Database.lastImageID());
+                        DOS.flush();
                     }else if (task == -1) {
                         closeSocket();
                         break;
