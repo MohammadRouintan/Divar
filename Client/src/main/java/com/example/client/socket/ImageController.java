@@ -1,18 +1,16 @@
 package com.example.client.socket;
 
-import javafx.scene.chart.PieChart;
-
 import java.io.*;
 import java.net.Socket;
 
-public class Image extends Thread{
+public class ImageController extends Thread{
     String filepath;
     String imageID;
     int work;
     DataInputStream DIS;
     DataOutputStream DOS;
     Socket socket;
-    public Image (String filePath, String imageID, int work) {
+    public ImageController (String filePath, String imageID, int work) {
         this.filepath = filePath;
         this.imageID = imageID;
         this.work = work;
