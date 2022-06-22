@@ -6,9 +6,9 @@
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Dashboard.MyDivarPages.MyAdsController">
    <children>
-      <ScrollPane fx:id="scroll" hbarPolicy="NEVER" prefHeight="600.0" prefWidth="570.0" vbarPolicy="ALWAYS">
+      <ScrollPane fx:id="scroll" hbarPolicy="NEVER" onScrollFinished="#Scrolled" prefHeight="600.0" prefWidth="570.0" vbarPolicy="ALWAYS">
          <content>
-            <VBox fx:id="mainVBox" onScrollFinished="#Scrolled" prefHeight="800.0" prefWidth="558.0" />
+            <VBox fx:id="mainVBox" prefHeight="800.0" prefWidth="555.0" />
          </content></ScrollPane>
       <Label fx:id="testLabel" text="Label" />
    </children>

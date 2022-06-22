@@ -82,7 +82,7 @@ public class MyAdsController {
 
     @FXML
     void Scrolled(ScrollEvent event) {
-        System.out.println("h");
+
         JSONObject post1 = new JSONObject();
         post1.put("title", "salam");
         post1.put("price", "14000");
@@ -92,10 +92,9 @@ public class MyAdsController {
         post2.put("title", "khobi");
         post2.put("price", "1400");
         post2.put("time", "6");
-        System.out.println("1");
         HBox rowHbox1 = makeNewHBox(post1, post2);
-        System.out.println("2");
+
+        mainVBox.setPrefHeight(mainVBox.getPrefHeight() + 300);
         mainVBox.getChildren().add(rowHbox1);
-        System.out.println("3");
     }
 }
