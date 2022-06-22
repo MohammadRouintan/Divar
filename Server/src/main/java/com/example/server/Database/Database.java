@@ -19,11 +19,18 @@ public class Database {
     private static MongoDatabase database;
     private static MongoCollection<Document> collection;
     public static int imageID;
+    public static int profileImageID;
 
     public static int lastImageID(){
         imageID ++;
         return imageID;
     }
+
+    public static int lastProfileImageID(){
+        profileImageID ++;
+        return profileImageID;
+    }
+
     public static void connectToDatabase() {
         mongoClient = MongoClients.create();
         database = mongoClient.getDatabase("Divar");
@@ -63,8 +70,8 @@ public class Database {
         JSONObject json = new JSONObject(users.getUpdateDocument());
         Object newDocument = json.get("$set");
         JSONObject object = new JSONObject(newDocument.toString());
-        JSONArray updateKeys = object.getJSONArray("updateKeys");
-        JSONArray updateValues = object.getJSONArray("updateValues");
+        String updateKeys = object.getString("updateUserKeys");
+        JSONArray updateValues = object.getJSONArray("updateUserValues");
         for (int i=0; i < updateKeys.length(); i++) {
             collection.updateOne(users.getFilterDocument() ,new Document("$set" ,new Document(updateKeys.getString(i) ,updateValues.get(i))));
         }
@@ -223,4 +230,18 @@ public class Database {
         numberForUsersPost++;
         return usersPost;
     }
+
+    public static String lastUserImageId() {
+        connectToDatabase();
+        collection = database.getCollection("Users");
+        String lastId = "";
+        if (collection.find().sort(new Document("PhoneNumber", -1)).limit(1).cursor().hasNext()) {
+            String jsonString = collection.find().sort(new Document("PhoneNumber", -1)).limit(1).cursor().next().toJson();
+            JSONObject obj = new JSONObject(jsonString);
+            lastId = String.valueOf(obj.getInt("profileNameImage"));
+        }
+        disconnect();
+        return lastId;
+    }
+
 }

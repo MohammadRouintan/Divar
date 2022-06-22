@@ -59,13 +59,11 @@ public class Client extends Thread {
                         GetInfo.newMessage(number, messageReceiver, messageText);
                     } else if (task == 4) {
                         JSONObject json = new JSONObject(DIS.readUTF());
-
-                        Users user1 = new Users(new Document("phoneNumber", number), new Document("$set", new Document(json.getString("updateUserKeys"), json.get("updateUserValues"))));
-                        Database.updateUsers(user1);
-                        //user.updateUser((ArrayList<String>) json.get("keys"), json.get("values"));
+                        Users user = new Users(new Document("phoneNumber", number), new Document("$set", new Document(json.get("updateUserKeys").toString(), json.get("updateUserValues"))));
+                        Database.updateUsers(user);
                     } else if (task == 5) {
-                        Users user1 = new Users(new Document("phoneNumber", number));
-                        DOS.writeBoolean(Database.isUserExits(user1));
+                        Users user = new Users(new Document("phoneNumber", number));
+                        DOS.writeBoolean(Database.isUserExits(user));
                         DOS.flush();
                     } else if (task == 6) {
                         DOS.writeUTF(Database.getUser(new Document("phoneNumber", number)));
@@ -133,10 +131,14 @@ public class Client extends Thread {
                     }else if (task == 16){
                         DOS.writeInt(Database.lastImageID());
                         DOS.flush();
+                    }else if (task == 17) {
+                        DOS.writeInt(Database.lastProfileImageID());
+                        DOS.flush();
                     }else if (task == -1) {
                         closeSocket();
                         break;
                     }
+                    System.out.println("A");
                 }
             }
         } catch (IOException e) {

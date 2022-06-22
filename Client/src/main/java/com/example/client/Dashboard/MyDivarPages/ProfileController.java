@@ -76,19 +76,19 @@ public class ProfileController {
         }else if (lastName == null){
             setErrorMessage("");
         }else{
-            ArrayList<String> keys = new ArrayList<>();
-            ArrayList<Object> values = new ArrayList<>();
-            keys.add("city");
-            keys.add("lastName");
-            keys.add("firstName");
-            keys.add("profileNameImage");
-            values.add(city);
-            values.add(firstName);
-            values.add(lastName);
-            values.add(profileName);
+            ArrayList<String> updateUserKeys = new ArrayList<>();
+            ArrayList<Object> updateUserValues = new ArrayList<>();
+            updateUserKeys.add("city");
+            updateUserKeys.add("lastName");
+            updateUserKeys.add("firstName");
+            updateUserKeys.add("profileNameImage");
+            updateUserValues.add(city);
+            updateUserValues.add(firstName);
+            updateUserValues.add(lastName);
+            updateUserValues.add(profileName);
 
-            GetInfo.updateUser(keys ,values);
-            GetInfo.sendProfile(file.getPath().toString() ,profileName);
+            GetInfo.updateUser(updateUserKeys ,updateUserValues);
+            GetInfo.sendProfile(file.getPath().toString() ,String.valueOf(profileName));
         }
 
     }
