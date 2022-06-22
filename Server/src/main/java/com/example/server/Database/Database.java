@@ -125,20 +125,18 @@ public class Database {
         return lastId;
     }
 
-    public static int lastUserImageId() {
+    public static String lastUserImageId() {
         connectToDatabase();
         collection = database.getCollection("Users");
-        int lastId = 0;
+        String lastId = "";
         if (collection.find().sort(new Document("PhoneNumber", -1)).limit(1).cursor().hasNext()) {
             String jsonString = collection.find().sort(new Document("PhoneNumber", -1)).limit(1).cursor().next().toJson();
             JSONObject obj = new JSONObject(jsonString);
-            lastId = obj.getInt("profileNameImage");
+            lastId = String.valueOf(obj.getInt("profileNameImage"));
         }
         disconnect();
         return lastId;
     }
-
-
     public static String lastImageIDFromDatabase() {
         connectToDatabase();
         collection = database.getCollection("Posts");
@@ -242,6 +240,7 @@ public class Database {
         return usersPost;
     }
 
+<<<<<<< HEAD
     public static void addMessage(Messages messages){
         connectToDatabase();
         collection = database.getCollection("Messages");
@@ -287,4 +286,16 @@ public class Database {
         return findMessage(filter).toJson();
     }
 
+=======
+    public static String numberOfPostsOfUser(Users users) {
+        connectToDatabase();
+        String number = "";
+        String user = getUser(users.getFilterDocument());
+        JSONObject object = new JSONObject(user);
+        JSONArray jsonArray = object.getJSONArray("usersPost");
+        number = String.valueOf(jsonArray.length());
+        disconnect();
+        return number;
+    }
+>>>>>>> 97541c5e3a7736fa8edde61b5ed4f7ab958bae16
 }
