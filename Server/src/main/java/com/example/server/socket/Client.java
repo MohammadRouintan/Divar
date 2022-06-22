@@ -109,6 +109,7 @@ public class Client extends Thread {
                                 getStringArray(json.getJSONArray("RowName")), getStringArray(json.getJSONArray("RowValue")),
                                 getStringArray(json.getJSONArray("ColumnName")), getStringArray(json.getJSONArray("ColumnValue")),
                                 json.getString("branchMain"), json.getString("branch1"));
+                        Database.addPost(post);
                     } else if (task == 13) {
                         ArrayList <String> list = Database.lastSeenPost(new Document("phoneNumber", number));
                         DOS.writeInt(list.size());

@@ -227,17 +227,17 @@ public class AddADSController {
                 createErrorMassage("Please write name correctly !!");
             }else if(description.equals("")){
                 createErrorMassage("Please write description correctly !!");
-            }else if(RowName0.getText().equals("") || RowValue0.getText().equals("")){
-                createErrorMassage("");
-            }else if(ColumnName0.getText().equals("") || ColumnValue0.getText().equals("")){
-                createErrorMassage("");
+//            }//else if(RowName0.getText().equals("") || RowValue0.getText().equals("")){
+//                createErrorMassage("");
+//            }//else if(ColumnName0.getText().equals("") || ColumnValue0.getText().equals("")){
+//                createErrorMassage("");
             }else {
                 ArrayList<String> RowName = new ArrayList<>();
                 ArrayList<String> RowValue = new ArrayList<>();
                 ArrayList<String> ColumnName = new ArrayList<>();
                 ArrayList<String> ColumnValue = new ArrayList<>();
 
-                for (int i = 0; i <= addFeatureColumnCounter; i++) {
+                for (int i = 0; i < addFeatureColumnCounter; i++) {
                     switch (i) {
                         case 0:
                             ColumnName.add(getColumnName(0));
@@ -266,7 +266,7 @@ public class AddADSController {
                     }
                 }
 
-                for (int i = 0; i <= addFeatureRowCounter; i++) {
+                for (int i = 0; i < addFeatureRowCounter; i++) {
                     switch (i) {
                         case 0:
                             RowName.add(getRowName(0));
@@ -434,6 +434,7 @@ public class AddADSController {
                         break;
                 }
             }
+            System.out.println("a");
         }
         @FXML
         private Label errorLabel;
