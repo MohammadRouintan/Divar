@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -239,28 +240,28 @@ public class AddADSController {
                 for (int i = 0; i <= addFeatureColumnCounter; i++) {
                     switch (i) {
                         case 0:
-                            ColumnName.add(ColumnName0.getText());
-                            ColumnValue.add(ColumnValue0.getText());
+                            ColumnName.add(getColumnName(0));
+                            ColumnValue.add(getColumnValue(0));
                             break;
                         case 1:
-                            ColumnName.add(ColumnName1.getText());
-                            ColumnValue.add(ColumnValue1.getText());
+                            ColumnName.add(getColumnName(1));
+                            ColumnValue.add(getColumnValue(1));
                             break;
                         case 2:
-                            ColumnName.add(ColumnName2.getText());
-                            ColumnValue.add(ColumnValue2.getText());
+                            ColumnName.add(getColumnName(2));
+                            ColumnValue.add(getColumnValue(2));
                             break;
                         case 3:
-                            ColumnName.add(ColumnName3.getText());
-                            ColumnValue.add(ColumnValue3.getText());
+                            ColumnName.add(getColumnName(3));
+                            ColumnValue.add(getColumnValue(3));
                             break;
                         case 4:
-                            ColumnName.add(ColumnName4.getText());
-                            ColumnValue.add(ColumnValue4.getText());
+                            ColumnName.add(getColumnName(4));
+                            ColumnValue.add(getColumnValue(4));
                             break;
                         case 5:
-                            ColumnName.add(ColumnName5.getText());
-                            ColumnValue.add(ColumnValue5.getText());
+                            ColumnName.add(getColumnName(5));
+                            ColumnValue.add(getColumnValue(5));
                             break;
                     }
                 }
@@ -268,28 +269,28 @@ public class AddADSController {
                 for (int i = 0; i <= addFeatureRowCounter; i++) {
                     switch (i) {
                         case 0:
-                            RowName.add(RowName0.getText());
-                            RowValue.add(RowValue0.getText());
+                            RowName.add(getRowName(0));
+                            RowValue.add(getRowValue(0));
                             break;
                         case 1:
-                            RowName.add(RowName1.getText());
-                            RowValue.add(RowValue1.getText());
+                            RowName.add(getRowName(1));
+                            RowValue.add(getRowValue(1));
                             break;
                         case 2:
-                            RowName.add(RowName2.getText());
-                            RowValue.add(RowValue2.getText());
+                            RowName.add(getRowName(2));
+                            RowValue.add(getRowValue(2));
                             break;
                         case 3:
-                            RowName.add(RowName3.getText());
-                            RowValue.add(RowValue3.getText());
+                            RowName.add(getRowName(3));
+                            RowValue.add(getRowValue(3));
                             break;
                         case 4:
-                            RowName.add(RowName4.getText());
-                            RowValue.add(RowValue4.getText());
+                            RowName.add(getRowName(4));
+                            RowValue.add(getRowValue(4));
                             break;
                         case 5:
-                            RowName.add(RowName5.getText());
-                            RowValue.add(RowValue5.getText());
+                            RowName.add(getRowName(5));
+                            RowValue.add(getRowValue(5));
                             break;
                     }
                 }
@@ -524,6 +525,30 @@ public class AddADSController {
         vBox.getChildren().add(nameTxt);
         vBox.getChildren().add(detailsTxt);
         return vBox;
+    }
+
+    private String getRowName(int number) {
+        HBox hBox = (HBox) featureRowVbox.getChildren().get(number);
+        TextField textField = (TextField) hBox.getChildren().get(0);
+        return textField.getText();
+    }
+
+    private String getRowValue(int number) {
+        HBox hBox = (HBox) featureRowVbox.getChildren().get(number);
+        TextField textField = (TextField) hBox.getChildren().get(1);
+        return textField.getText();
+    }
+
+    private String getColumnName(int number) {
+        VBox vBox = (VBox) featureColumnVbox.getChildren().get(number);
+        TextField textField = (TextField) vBox.getChildren().get(0);
+        return textField.getText();
+    }
+
+    private String getColumnValue(int number) {
+        VBox vBox = (VBox) featureColumnVbox.getChildren().get(number);
+        TextField textField = (TextField) vBox.getChildren().get(1);
+        return textField.getText();
     }
 }
 
