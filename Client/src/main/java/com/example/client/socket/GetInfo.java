@@ -193,4 +193,6 @@ public class GetInfo {
         return 0;
     }
 
+    public static void addUser(){}
+
 }
