@@ -25,7 +25,7 @@ public class MyAdsController {
     private ScrollPane scroll;
 
     @FXML
-    private AnchorPane mainAnchorPane;s
+    private AnchorPane mainAnchorPane;
 
     int counter = 0;
 
