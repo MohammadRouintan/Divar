@@ -1,7 +1,5 @@
 package com.example.client.socket;
 
-import javafx.scene.chart.PieChart;
-
 import java.io.*;
 import java.net.Socket;
 
@@ -12,7 +10,7 @@ public class Image extends Thread{
     DataInputStream DIS;
     DataOutputStream DOS;
     Socket socket;
-    public Image (String filePath, String imageID, int work) {
+    public Image(String filePath) {
         this.filepath = filePath;
         this.imageID = imageID;
         this.work = work;
