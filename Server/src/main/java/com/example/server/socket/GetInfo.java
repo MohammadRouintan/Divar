@@ -58,13 +58,16 @@ public class GetInfo {
      */
     public static String getConfirmationCode (String number) {
         String token = "";
-        try {
-            AcceptClients.SMSDOS.writeUTF(number);
-            AcceptClients.SMSDOS.flush();
-            token = AcceptClients.SMSDIS.readUTF();
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
-        }
+//        try {
+//            AcceptClients.SMSDOS.writeUTF(number);
+//            AcceptClients.SMSDOS.flush();
+//            token = AcceptClients.SMSDIS.readUTF();
+//            token = "00000";
+//        } catch (IOException e) {
+//            System.err.println(e.getMessage());
+//        }
+        token = "00000";
+
         return token;
     }
 
