@@ -240,7 +240,6 @@ public class Database {
         return usersPost;
     }
 
-<<<<<<< HEAD
     public static void addMessage(Messages messages){
         connectToDatabase();
         collection = database.getCollection("Messages");
@@ -286,7 +285,6 @@ public class Database {
         return findMessage(filter).toJson();
     }
 
-=======
     public static String numberOfPostsOfUser(Users users) {
         connectToDatabase();
         String number = "";
@@ -297,5 +295,4 @@ public class Database {
         disconnect();
         return number;
     }
->>>>>>> 97541c5e3a7736fa8edde61b5ed4f7ab958bae16
 }
