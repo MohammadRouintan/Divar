@@ -12,10 +12,44 @@ import java.io.IOException;
 public class MyDivarController {
     @FXML
     private Pane MyDivarPane;
+
     @FXML
     void MyAdsButton(ActionEvent event){
         try {
             Pane pane = FXMLLoader.load(Main.class.getResource("MyDivarPages/MyAds.fxml"));
+            MyDivarPane.getChildren().clear();
+            MyDivarPane.getChildren().add(pane);
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    void SavedButton(ActionEvent event){
+        try {
+            Pane pane = FXMLLoader.load(Main.class.getResource("MyDivarPages/Saved.fxml"));
+            MyDivarPane.getChildren().clear();
+            MyDivarPane.getChildren().add(pane);
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    void RecentVisitsButton(ActionEvent event){
+        try {
+            Pane pane = FXMLLoader.load(Main.class.getResource("MyDivarPages/RecentVisits.fxml"));
+            MyDivarPane.getChildren().clear();
+            MyDivarPane.getChildren().add(pane);
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    void EditProfileButton(ActionEvent event){
+        try {
+            Pane pane = FXMLLoader.load(Main.class.getResource("MyDivarPages/EditProfile.fxml"));
             MyDivarPane.getChildren().clear();
             MyDivarPane.getChildren().add(pane);
         } catch (IOException ex){

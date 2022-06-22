@@ -57,7 +57,7 @@ public class GetInfo {
         return true;
     }
 
-    public static String getUser(String phoneNumber){
+    public static String getUser(){
         try {
             Connect.DOS.writeInt(7);
         } catch (IOException e) {
@@ -168,6 +168,29 @@ public class GetInfo {
         return false;
     }
 
+    public static boolean sendProfile(String url, int fileName){
 
+        try {
+            Connect.imageDOS.writeInt(2);
+            Connect.imageDOS.writeUTF(String.valueOf(fileName));
+            int bytes = 0;
+            File file = new File(url);
+            FileInputStream fileInputStream = new FileInputStream(file);
+            Connect.imageDOS.writeLong(file.length());
+            byte[] buffer = new byte[4 * 1024];
+            while ((bytes = fileInputStream.read(buffer)) != -1) {
+                Connect.imageDOS.write(buffer, 0, bytes);
+                Connect.imageDOS.flush();
+            }
+            fileInputStream.close();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return false;
+    }
+
+    public static int getLastNameProfileImage(){
+        return 0;
+    }
 
 }
