@@ -23,10 +23,10 @@ public class AcceptClients{
             try {
                 serverSocket = new ServerSocket(5570);
                 serverNotificationSocket = new ServerSocket(5571);
-                serverSMSSocket = new ServerSocket(5573);
-                SMSSocket = serverSMSSocket.accept();
-                SMSDIS = new DataInputStream(new BufferedInputStream(SMSSocket.getInputStream()));
-                SMSDOS = new DataOutputStream(new BufferedOutputStream(SMSSocket.getOutputStream()));
+//                serverSMSSocket = new ServerSocket(5573);
+//                SMSSocket = serverSMSSocket.accept();
+//                SMSDIS = new DataInputStream(new BufferedInputStream(SMSSocket.getInputStream()));
+//                SMSDOS = new DataOutputStream(new BufferedOutputStream(SMSSocket.getOutputStream()));
 
             }catch(IOException e){
                 System.err.println(e.getMessage());
@@ -48,8 +48,8 @@ public class AcceptClients{
                 clientSockets.add(socket);
                 numbers.add(null);
                 int count = numbers.size() - 1;
-//                Client client = new Client(count);
-//                client.start();
+                Client client = new Client(count);
+                client.start();
             } catch (IOException e) {
                 System.err.println(e.getMessage());
             }

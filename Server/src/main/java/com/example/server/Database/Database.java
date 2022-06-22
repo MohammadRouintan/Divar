@@ -18,7 +18,12 @@ public class Database {
     private static MongoClient mongoClient;
     private static MongoDatabase database;
     private static MongoCollection<Document> collection;
+    public static int imageID;
 
+    public static int lastImageID(){
+        imageID ++;
+        return imageID;
+    }
     public static void connectToDatabase() {
         mongoClient = MongoClients.create();
         database = mongoClient.getDatabase("Divar");
@@ -119,7 +124,21 @@ public class Database {
         return lastId;
     }
 
-    public static String lastImageId() {
+    public static int lastUserImageId() {
+        connectToDatabase();
+        collection = database.getCollection("Users");
+        int lastId = 0;
+        if (collection.find().sort(new Document("PhoneNumber", -1)).limit(1).cursor().hasNext()) {
+            String jsonString = collection.find().sort(new Document("PhoneNumber", -1)).limit(1).cursor().next().toJson();
+            JSONObject obj = new JSONObject(jsonString);
+            lastId = obj.getInt("profileNameImage");
+        }
+        disconnect();
+        return lastId;
+    }
+
+
+    public static String lastImageIDFromDatabase() {
         connectToDatabase();
         collection = database.getCollection("Posts");
         String lastId = "";
@@ -162,7 +181,7 @@ public class Database {
         return findUser(filter).toJson();
     }
 
-    public ArrayList<String> lastSeenPost(Document filter) {
+    public static ArrayList<String> lastSeenPost(Document filter) {
         String user = getUser(filter);
         JSONObject jsonObject = new JSONObject(user);
         JSONArray jsonArray = jsonObject.getJSONArray("lastSeenPost");
@@ -188,7 +207,10 @@ public class Database {
     }
 
     private static int numberForMarkedPost = 0;
-    public ArrayList<String> getMarkedPosts(int size, Document filter){
+
+
+    public static ArrayList<String> getMarkedPosts(int size, Document filter){
+
         String user = getUser(filter);
         JSONObject object = new JSONObject(user);
         JSONArray jsonArray = object.getJSONArray("bookmarkPost");
@@ -203,7 +225,9 @@ public class Database {
     }
 
     private static int numberForUsersPost = 0;
-    public ArrayList<String> getUsersPosts(int size, Document filter){
+
+    public static ArrayList<String> getUsersPosts(int size, Document filter){
+
         String user = getUser(filter);
         JSONObject object = new JSONObject(user);
         JSONArray jsonArray = object.getJSONArray("usersPost");
