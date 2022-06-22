@@ -1,5 +1,6 @@
 package com.example.server.Database;
 
+import com.example.server.Database.Messages.Messages;
 import com.example.server.Database.Posts.Post;
 import com.example.server.Database.Users.Users;
 import com.mongodb.client.MongoClient;
@@ -240,4 +241,50 @@ public class Database {
         numberForUsersPost++;
         return usersPost;
     }
+
+    public static void addMessage(Messages messages){
+        connectToDatabase();
+        collection = database.getCollection("Messages");
+        collection.insertOne(messages.getDocument());
+        disconnect();
+    }
+
+    public static void updateMessage(Messages messages){
+        connectToDatabase();
+        collection = database.getCollection("Messages");
+        JSONObject json = new JSONObject(messages.getUpdateDocument());
+        Object newDocument = json.get("$set");
+        JSONObject object = new JSONObject(newDocument.toString());
+        JSONArray updateKeys = object.getJSONArray("updateMessageKeys");
+        JSONArray updateValues = object.getJSONArray("updateMessageValues");
+        for (int i=0; i < updateKeys.length(); i++) {
+            collection.updateOne(messages.getFilterDocument() ,new Document("$set" ,new Document(updateKeys.getString(i) ,updateValues.get(i))));
+        }
+        disconnect();
+    }
+
+    public synchronized static void deleteMessage(Messages messages) {
+        connectToDatabase();
+        collection = database.getCollection("Messages");
+        if (collection.find(messages.getFilterDocument()).cursor().hasNext()) {
+            collection.deleteOne(messages.getFilterDocument());
+        }
+        disconnect();
+    }
+
+    public synchronized static Document findMessage(Document filter) {
+        connectToDatabase();
+        Document document = new Document("", "");
+        collection = database.getCollection("Messages");
+        if (collection.find(filter).cursor().hasNext()) {
+            document = collection.find(filter).cursor().next();
+        }
+        disconnect();
+        return document;
+    }
+
+    public static String getMessage(Document filter) {
+        return findMessage(filter).toJson();
+    }
+
 }
