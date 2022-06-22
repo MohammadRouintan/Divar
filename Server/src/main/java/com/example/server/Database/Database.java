@@ -235,4 +235,15 @@ public class Database {
         numberForUsersPost++;
         return usersPost;
     }
+
+    public static String numberOfPostsOfUser(Users users) {
+        connectToDatabase();
+        String number = "";
+        String user = getUser(users.getFilterDocument());
+        JSONObject object = new JSONObject(user);
+        JSONArray jsonArray = object.getJSONArray("usersPost");
+        number = String.valueOf(jsonArray.length());
+        disconnect();
+        return number;
+    }
 }
