@@ -14,7 +14,7 @@ public class Users extends Database {
         this.filterDocument = filterDocument;
     }
 
-    public Users(Document filterDocument, Document updateDocument) {
+    public Users(String key, String value) {
         this.filterDocument = filterDocument;
         this.updateDocument = updateDocument;
     }
