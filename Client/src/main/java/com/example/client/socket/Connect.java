@@ -13,6 +13,7 @@ public class Connect {
     public static DataOutputStream imageDOS;
     public static DataInputStream imageDIS;
     public static DataOutputStream DOS;
+
     public static DataInputStream DIS;
 
     public static String getPhoneNumber() {

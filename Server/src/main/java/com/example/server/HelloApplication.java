@@ -1,5 +1,6 @@
 package com.example.server;
 
+import com.example.server.Database.Database;
 import com.example.server.socket.AcceptClients;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +20,8 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
+        Database.imageID = Integer.parseInt(Database.lastImageIDFromDatabase());
+        Database.profileImageID = Integer.parseInt(Database.lastUserImageId());
         AcceptClients acceptClients = new AcceptClients();
         acceptClients.run();
         launch();

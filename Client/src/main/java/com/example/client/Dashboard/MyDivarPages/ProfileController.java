@@ -19,7 +19,21 @@ public class ProfileController {
 
     @FXML
     public void initialize() {
+
         user = GetInfo.getUser();
+        try{
+            JSONObject json = new JSONObject(user);
+            String lastName = json.getString("lastName");
+            String firstName = json.getString("firstName");
+            String city = json.getString("city");
+            firstNameLabel.setText(firstName);
+            lastNameLabel.setText(lastName);
+            cityLabel.setText(city);
+        }catch (Exception e){
+            firstNameLabel.setText("null");
+            lastNameLabel.setText("null");
+            cityLabel.setText("null");
+        }
     }
 
     private int profileName;
@@ -40,6 +54,15 @@ public class ProfileController {
     private Label errorMessage;
 
     @FXML
+    private Label lastNameLabel;
+
+    @FXML
+    private Label firstNameLabel;
+
+    @FXML
+    private Label cityLabel;
+
+    @FXML
     void uploadData(ActionEvent event) {
 
         String city = textFiledCity.getText();
@@ -53,19 +76,19 @@ public class ProfileController {
         }else if (lastName == null){
             setErrorMessage("");
         }else{
-            ArrayList<String> keys = new ArrayList<>();
-            ArrayList<Object> values = new ArrayList<>();
-            keys.add("city");
-            keys.add("lastName");
-            keys.add("firstName");
-            keys.add("profileNameImage");
-            values.add(city);
-            values.add(firstName);
-            values.add(lastName);
-            values.add(profileName);
+            ArrayList<String> updateUserKeys = new ArrayList<>();
+            ArrayList<Object> updateUserValues = new ArrayList<>();
+            updateUserKeys.add("city");
+            updateUserKeys.add("lastName");
+            updateUserKeys.add("firstName");
+            updateUserKeys.add("profileNameImage");
+            updateUserValues.add(city);
+            updateUserValues.add(firstName);
+            updateUserValues.add(lastName);
+            updateUserValues.add(profileName);
 
-            GetInfo.updateUser(keys ,values);
-            GetInfo.sendProfile(file.getPath().toString() ,profileName);
+            GetInfo.updateUser(updateUserKeys ,updateUserValues);
+            GetInfo.sendProfile(file.getPath().toString() ,String.valueOf(profileName));
         }
 
     }

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="com.example.client.Dashboard.MyDivarPages.ProfileController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Dashboard.MyDivarPages.ProfileController">
    <children>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
@@ -22,5 +23,9 @@
          </children>
       </HBox>
       <Button mnemonicParsing="false" onAction="#uploadData" text="Button" />
+      <Label fx:id="errorMessagee" prefHeight="17.0" prefWidth="389.0" text="Error" />
+      <Label fx:id="lastNameLabel" prefHeight="17.0" prefWidth="389.0" text="LastName" />
+      <Label fx:id="firstNameLabel" prefHeight="17.0" prefWidth="389.0" text="FirstName" />
+      <Label fx:id="cityLabel" prefHeight="17.0" prefWidth="389.0" text="City" />
    </children>
 </VBox>
