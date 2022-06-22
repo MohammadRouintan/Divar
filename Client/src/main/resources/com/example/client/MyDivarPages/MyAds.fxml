@@ -2,16 +2,14 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseMoved="#Scolled" prefHeight="600.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Dashboard.MyDivarPages.MyAdsController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Dashboard.MyDivarPages.MyAdsController">
    <children>
       <ScrollPane fx:id="scroll" hbarPolicy="NEVER" prefHeight="600.0" prefWidth="570.0" vbarPolicy="ALWAYS">
          <content>
-            <AnchorPane fx:id="mainAnchorPane" prefHeight="1000.0" prefWidth="554.0" />
-         </content>
-      </ScrollPane>
+            <VBox fx:id="mainVBox" onScrollFinished="#Scrolled" prefHeight="800.0" prefWidth="558.0" />
+         </content></ScrollPane>
       <Label fx:id="testLabel" text="Label" />
    </children>
 </VBox>
