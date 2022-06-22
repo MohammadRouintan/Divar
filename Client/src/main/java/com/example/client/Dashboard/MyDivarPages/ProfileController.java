@@ -19,7 +19,21 @@ public class ProfileController {
 
     @FXML
     public void initialize() {
+
         user = GetInfo.getUser();
+        try{
+            JSONObject json = new JSONObject(user);
+            String lastName = json.getString("lastName");
+            String firstName = json.getString("firstName");
+            String city = json.getString("city");
+            firstNameLabel.setText(firstName);
+            lastNameLabel.setText(lastName);
+            cityLabel.setText(city);
+        }catch (Exception e){
+            firstNameLabel.setText("null");
+            lastNameLabel.setText("null");
+            cityLabel.setText("null");
+        }
     }
 
     private int profileName;
@@ -38,6 +52,15 @@ public class ProfileController {
 
     @FXML
     private Label errorMessage;
+
+    @FXML
+    private Label lastNameLabel;
+
+    @FXML
+    private Label firstNameLabel;
+
+    @FXML
+    private Label cityLabel;
 
     @FXML
     void uploadData(ActionEvent event) {
