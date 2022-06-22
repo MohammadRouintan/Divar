@@ -1,14 +1,13 @@
 import java.io.*;
+import java.net.Socket;
 
 public class Client extends Thread{
-    int count;
     DataOutputStream DOS;
     DataInputStream DIS;
-    public Client (int count) {
-        this.count = count;
+    public Client (Socket socket) {
         try {
-            DOS = new DataOutputStream(new BufferedOutputStream(Connect.clientSockets.get(count).getOutputStream()));
-            DIS = new DataInputStream(new BufferedInputStream(Connect.clientSockets.get(count).getInputStream()));
+            DOS = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+            DIS = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
@@ -21,15 +20,17 @@ public class Client extends Thread{
             if(input == 1){
                 sendFile(name);
             }else if(input == 2){
-                receiveFile();
+                receiveFile(name);
             }
+            DIS.close();
+            DOS.close();
+
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
     }
     private void sendFile (String name) {
         try {
-            DOS.writeUTF(name);
             int bytes = 0;
             File file = new File("../images/" + name);
             FileInputStream fileInputStream = new FileInputStream(file);
@@ -45,17 +46,15 @@ public class Client extends Thread{
         }
     }
 
-    private void receiveFile () {
+    private void receiveFile (String name) {
         int bytes = 0;
         try {
-            String name = DIS.readUTF();
-            FileOutputStream fileOutputStream = new FileOutputStream("../images/" + name);
+            FileOutputStream fileOutputStream = new FileOutputStream( name + ".png");
             long size = DIS.readLong();
             byte[] buffer = new byte[4 * 1024];
             while (size > 0 && (bytes = DIS.read(buffer, 0, (int) Math.min(buffer.length, size))) != -1) {
                 fileOutputStream.write(buffer, 0, bytes);
                 size -= bytes;
-
             }
             fileOutputStream.close();
         }catch(IOException e){

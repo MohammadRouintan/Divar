@@ -18,7 +18,12 @@ public class Database {
     private static MongoClient mongoClient;
     private static MongoDatabase database;
     private static MongoCollection<Document> collection;
+    public static int imageID;
 
+    public static int lastImageID(){
+        imageID ++;
+        return imageID;
+    }
     public static void connectToDatabase() {
         mongoClient = MongoClients.create();
         database = mongoClient.getDatabase("Divar");
@@ -132,7 +137,8 @@ public class Database {
         return lastId;
     }
 
-    public static String lastImageId() {
+
+    public static String lastImageIDFromDatabase() {
         connectToDatabase();
         collection = database.getCollection("Posts");
         String lastId = "";

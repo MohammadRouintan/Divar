@@ -19,8 +19,7 @@ public class Connect {
         while (true) {
             try {
                 Socket socket = serverSocket.accept();
-                clientSockets.add(socket);
-                Client client = new Client(clientSockets.size() - 1);
+                Client client = new Client(socket);
                 client.start();
             } catch (IOException e) {
 

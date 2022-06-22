@@ -10,12 +10,11 @@ public class Connect {
 
     Socket socket;
     Socket imageSocket;
-    DataOutputStream imageDOS;
-    DataInputStream imageDIS;
+    public static DataOutputStream imageDOS;
+    public static DataInputStream imageDIS;
     public static DataOutputStream DOS;
 
     public static DataInputStream DIS;
-    public static String confirmationCode;
 
     public static String getPhoneNumber() {
         return phoneNumber;
@@ -54,6 +53,7 @@ public class Connect {
         }
         return post;
     }
+
     private void receiveFile () {
         int bytes = 0;
         try {
@@ -72,37 +72,6 @@ public class Connect {
         }
     }
 
-    /**
-     * TODO set get name on server
-     */
-    public void sendPost(JSONObject json){
-        try {
-            DOS.writeInt(2);
-            String fileName = DIS.readUTF();
-            DOS.writeUTF(json.toString());
-            sendFile(fileName);
-        } catch (IOException e){
-            System.err.println(e.getMessage());
-        }
-    }
-
-    private void sendFile (String name) {
-        try {
-            DOS.writeUTF(name);
-            int bytes = 0;
-            File file = new File("../images/" + name);
-            FileInputStream fileInputStream = new FileInputStream(file);
-            DOS.writeLong(file.length());
-            byte[] buffer = new byte[4 * 1024];
-            while ((bytes = fileInputStream.read(buffer)) != -1) {
-                DOS.write(buffer, 0, bytes);
-                DOS.flush();
-            }
-            fileInputStream.close();
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
-        }
-    }
 
     public void sendMessage (String message, String number) {
         try {

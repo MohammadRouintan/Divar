@@ -10,4 +10,6 @@ module com.example.client {
     opens com.example.client.socket to javafx.fxml;
     exports com.example.client.Login;
     opens com.example.client.Login to javafx.fxml;
+    exports com.example.client.Dashboard;
+    opens com.example.client.Dashboard to javafx.fxml;
 }
