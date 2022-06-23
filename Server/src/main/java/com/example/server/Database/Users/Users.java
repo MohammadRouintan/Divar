@@ -16,11 +16,11 @@ public class Users extends Database {
         this.filterDocument = filterDocument;
     }
 
-    public Users(Document filterDocument ,Document updateDocument) {
-        this.filterDocument = filterDocument;
-        this.updateDocument = updateDocument;
-
-    }
+//    public Users(Document filterDocument ,Document updateDocument) {
+//        this.filterDocument = filterDocument;
+//        this.updateDocument = updateDocument;
+//
+//    }
 
     public Users(String phoneNumber) {
         document.append("PhoneNumber", phoneNumber);

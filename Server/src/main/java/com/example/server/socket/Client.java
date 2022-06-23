@@ -61,7 +61,7 @@ public class Client extends Thread {
                         JSONObject json = new JSONObject(DIS.readUTF());
 
                         ArrayList<String> key = (ArrayList<String>) json.get("updateUserKeys");
-                        ArrayList<String> value = (ArrayList<String>) json.get("updateUserValues");
+                        ArrayList<Object> value = (ArrayList<Object>) json.get("updateUserValues");
 
                         Users user1 = new Users(new Document("phoneNumber", number));
 
