@@ -20,11 +20,18 @@ public class Database {
     private static MongoDatabase database;
     private static MongoCollection<Document> collection;
     public static int imageID;
+    public static int profileImageID;
 
     public static int lastImageID(){
         imageID ++;
         return imageID;
     }
+
+    public static int lastProfileImageID(){
+        profileImageID ++;
+        return profileImageID;
+    }
+
     public static void connectToDatabase() {
         mongoClient = MongoClients.create();
         database = mongoClient.getDatabase("Divar");
@@ -40,7 +47,9 @@ public class Database {
     public synchronized static void addUsers(Users users) {
         connectToDatabase();
         collection = database.getCollection("Users");
-        collection.insertOne(users.getDocument());
+        if (!collection.find(users.getDocument()).cursor().hasNext()) {
+            collection.insertOne(users.getDocument());
+        }
         disconnect();
     }
 
@@ -55,6 +64,7 @@ public class Database {
         connectToDatabase();
         collection = database.getCollection("Users");
         collection.updateOne(users.getFilterDocument() ,new Document("$set" ,new Document(key ,value)));
+
         disconnect();
     }
 
@@ -111,18 +121,7 @@ public class Database {
         return lastId;
     }
 
-    public static String lastUserImageId() {
-        connectToDatabase();
-        collection = database.getCollection("Users");
-        String lastId = "";
-        if (collection.find().sort(new Document("PhoneNumber", -1)).limit(1).cursor().hasNext()) {
-            String jsonString = collection.find().sort(new Document("PhoneNumber", -1)).limit(1).cursor().next().toJson();
-            JSONObject obj = new JSONObject(jsonString);
-            lastId = String.valueOf(obj.getInt("profileNameImage"));
-        }
-        disconnect();
-        return lastId;
-    }
+
     public static String lastImageIDFromDatabase() {
         connectToDatabase();
         collection = database.getCollection("Posts");
@@ -284,6 +283,18 @@ public class Database {
         number = String.valueOf(jsonArray.length());
         disconnect();
         return number;
+    }
+    public static String lastUserImageId() {
+        connectToDatabase();
+        collection = database.getCollection("Users");
+        String lastId = "";
+        if (collection.find().sort(new Document("phoneNumber", -1)).limit(1).cursor().hasNext()) {
+            String jsonString = collection.find().sort(new Document("phoneNumber", -1)).limit(1).cursor().next().toJson();
+            JSONObject obj = new JSONObject(jsonString);
+            lastId = String.valueOf(obj.getInt("profileNameImage"));
+        }
+        disconnect();
+        return lastId;
     }
 
 }

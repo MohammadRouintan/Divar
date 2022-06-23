@@ -23,8 +23,8 @@ public class Users extends Database {
 //    }
 
     public Users(String phoneNumber) {
-        document.append("PhoneNumber", phoneNumber);
-        this.phoneNumber = phoneNumber;
+        document = new Document();
+        document.append("phoneNumber", phoneNumber);
     }
 
     public Document getDocument() {

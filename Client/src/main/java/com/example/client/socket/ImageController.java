@@ -10,6 +10,7 @@ public class ImageController extends Thread{
     DataInputStream DIS;
     DataOutputStream DOS;
     Socket socket;
+
     public ImageController (String filePath, String imageID, int work) {
         this.filepath = filePath;
         this.imageID = imageID;
@@ -29,6 +30,8 @@ public class ImageController extends Thread{
             receiveFile(filepath, imageID);
         } else if (work == 2) {
             sendFile(filepath, imageID);
+        } else if (work == 3){
+            sendProfile(filepath, imageID);
         }
         try {
             DIS.close();
@@ -62,6 +65,24 @@ public class ImageController extends Thread{
 
         try {
             DOS.writeInt(2);
+            DOS.writeUTF(imageID);
+            int bytes = 0;
+            File file = new File(filePath);
+            FileInputStream fileInputStream = new FileInputStream(file);
+            DOS.writeLong(file.length());
+            byte[] buffer = new byte[4 * 1024];
+            while ((bytes = fileInputStream.read(buffer)) != -1) {
+                DOS.write(buffer, 0, bytes);
+                DOS.flush();
+            }
+            fileInputStream.close();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }    public void sendProfile(String filePath, String imageID){
+
+        try {
+            DOS.writeInt(3);
             DOS.writeUTF(imageID);
             int bytes = 0;
             File file = new File(filePath);

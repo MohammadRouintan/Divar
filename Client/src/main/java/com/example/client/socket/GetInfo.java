@@ -9,12 +9,7 @@ import java.util.ArrayList;
 
 public class GetInfo {
 
-    /**
-     * function to check confirmation code which sent from server
-     * @param code received from client input
-     * @return true if code was correct
-     * TODO get user confirmation code and check the code with server code
-     */
+
     public static boolean confirmationCheck(String code) {
         boolean check = false;
         try {
@@ -34,8 +29,8 @@ public class GetInfo {
             Connect.DOS.flush();
 
             JSONObject json = new JSONObject();
-            json.put("keys", keys);
-            json.put("values", values);
+            json.put("updateUserKeys", keys);
+            json.put("updateUserValues", values);
             Connect.DOS.writeUTF(json.toString());
             Connect.DOS.flush();
         } catch (IOException e) {
@@ -78,19 +73,6 @@ public class GetInfo {
             System.err.println(e.getMessage());
         }
         return true;
-    }
-
-
-    public static int getLastImageName() {
-        int result = 0;
-        try {
-            Connect.DOS.writeInt(16);
-            Connect.DOS.flush();
-            result = Connect.DIS.readInt();
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
-        }
-        return result;
     }
 
 
@@ -152,34 +134,6 @@ public class GetInfo {
             System.err.println(e.getMessage());
         }
         return result;
-    }
-
-
-    public static boolean sendFile(String url, String fileName){
-
-        try {
-            Connect.imageDOS.writeInt(2);
-            Connect.imageDOS.flush();
-
-            Connect.imageDOS.writeUTF(fileName);
-            Connect.imageDOS.flush();
-
-            int bytes = 0;
-            File file = new File(url);
-            FileInputStream fileInputStream = new FileInputStream(file);
-            Connect.imageDOS.writeLong(file.length());
-            Connect.imageDOS.flush();
-
-            byte[] buffer = new byte[4 * 1024];
-            while ((bytes = fileInputStream.read(buffer)) != -1) {
-                Connect.imageDOS.write(buffer, 0, bytes);
-                Connect.imageDOS.flush();
-            }
-            fileInputStream.close();
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
-        }
-        return false;
     }
 
 
@@ -277,4 +231,85 @@ public class GetInfo {
         }
     }
 
+
+    public static int getLastImageName() {
+        int result = 0;
+        try {
+            Connect.DOS.writeInt(16);
+            Connect.DOS.flush();
+            result = Connect.DIS.readInt();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return result;
+    }
+
+
+    public static int getLastNameProfileImage(){
+        int result = 0;
+        try {
+            Connect.DOS.writeInt(17);
+            Connect.DOS.flush();
+            result = Connect.DIS.readInt();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return result;
+    }
+
+
+    public static boolean sendProfile(String url, String fileName){
+        try {
+            Connect.imageDOS.writeInt(3);
+            Connect.imageDOS.flush();
+
+            Connect.imageDOS.writeUTF(fileName);
+            Connect.imageDOS.flush();
+
+            int bytes = 0;
+            File file = new File(url);
+            FileInputStream fileInputStream = new FileInputStream(file);
+            Connect.imageDOS.writeLong(file.length());
+            Connect.imageDOS.flush();
+
+            byte[] buffer = new byte[4 * 1024];
+            while ((bytes = fileInputStream.read(buffer)) != -1) {
+                Connect.imageDOS.write(buffer, 0, bytes);
+                Connect.imageDOS.flush();
+            }
+            fileInputStream.close();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return false;
+
+    }
+
+
+    public static boolean sendFile(String url, String fileName){
+
+        try {
+            Connect.imageDOS.writeInt(2);
+            Connect.imageDOS.flush();
+
+            Connect.imageDOS.writeUTF(fileName);
+            Connect.imageDOS.flush();
+
+            int bytes = 0;
+            File file = new File(url);
+            FileInputStream fileInputStream = new FileInputStream(file);
+            Connect.imageDOS.writeLong(file.length());
+            Connect.imageDOS.flush();
+
+            byte[] buffer = new byte[4 * 1024];
+            while ((bytes = fileInputStream.read(buffer)) != -1) {
+                Connect.imageDOS.write(buffer, 0, bytes);
+                Connect.imageDOS.flush();
+            }
+            fileInputStream.close();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return false;
+    }
 }

@@ -59,18 +59,18 @@ public class Client extends Thread {
                         GetInfo.newMessage(number, messageReceiver, messageText);
                     } else if (task == 4) {
                         JSONObject json = new JSONObject(DIS.readUTF());
-
-                        ArrayList<String> key = (ArrayList<String>) json.get("updateUserKeys");
-                        ArrayList<Object> value = (ArrayList<Object>) json.get("updateUserValues");
+                        ArrayList<String> key = getStringArray(json.getJSONArray("updateUserKeys"));
+                        ArrayList<Object> value = getObjectArray(json.getJSONArray("updateUserValues"));
 
                         Users user1 = new Users(new Document("phoneNumber", number));
 
                         for (int i = 0; i < value.size(); i++) {
                             Database.updateUsers(user1 ,key.get(i) ,value.get(i));
                         }
+
                     } else if (task == 5) {
-                        Users user1 = new Users(new Document("phoneNumber", number));
-                        DOS.writeBoolean(Database.isUserExits(user1));
+                        Users user = new Users(new Document("phoneNumber", number));
+                        DOS.writeBoolean(Database.isUserExits(user));
                         DOS.flush();
                     } else if (task == 6) {
                         DOS.writeUTF(Database.getUser(new Document("phoneNumber", number)));
@@ -99,8 +99,8 @@ public class Client extends Thread {
                     } else if (task == 10) {
                         JSONObject json = new JSONObject(DIS.readUTF());
 
-                        ArrayList<String> key = (ArrayList<String>) json.get("updateKeys");
-                        ArrayList<Object> value = (ArrayList<Object>) json.get("updateValues");
+                        ArrayList<String> key = getStringArray(json.getJSONArray("updateKeys"));
+                        ArrayList<Object> value = getObjectArray(json.getJSONArray("updateValues"));
 
                         Post post1 = new Post(new Document("postId", json.getInt("postId")));
 
@@ -145,10 +145,14 @@ public class Client extends Thread {
                     }else if (task == 16){
                         DOS.writeInt(Database.lastImageID());
                         DOS.flush();
+                    }else if (task == 17) {
+                        DOS.writeInt(Database.lastProfileImageID());
+                        DOS.flush();
                     }else if (task == -1) {
                         closeSocket();
                         break;
                     }
+                    System.out.println("A");
                 }
             }
         } catch (IOException e) {
