@@ -10,6 +10,7 @@ public class ImageController extends Thread{
     DataInputStream DIS;
     DataOutputStream DOS;
     Socket socket;
+
     public ImageController (String filePath, String imageID, int work) {
         this.filepath = filePath;
         this.imageID = imageID;
