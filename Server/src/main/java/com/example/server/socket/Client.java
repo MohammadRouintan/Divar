@@ -60,9 +60,14 @@ public class Client extends Thread {
                     } else if (task == 4) {
                         JSONObject json = new JSONObject(DIS.readUTF());
 
-                        Users user1 = new Users(new Document("phoneNumber", number), new Document("$set", new Document(json.getString("updateUserKeys"), json.get("updateUserValues"))));
-                        Database.updateUsers(user1);
-                        //user.updateUser((ArrayList<String>) json.get("keys"), json.get("values"));
+                        ArrayList<String> key = (ArrayList<String>) json.get("updateUserKeys");
+                        ArrayList<String> value = (ArrayList<String>) json.get("updateUserValues");
+
+                        Users user1 = new Users(new Document("phoneNumber", number));
+
+                        for (int i = 0; i < value.size(); i++) {
+                            Database.updateUsers(user1 ,key.get(i) ,value.get(i));
+                        }
                     } else if (task == 5) {
                         Users user1 = new Users(new Document("phoneNumber", number));
                         DOS.writeBoolean(Database.isUserExits(user1));

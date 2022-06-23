@@ -58,16 +58,16 @@ public class Database {
         disconnect();
     }
 
-    public synchronized static void updateUsers(Users users) {
+    public synchronized static void updateUsers(Users users ,String key ,Object value) {
         connectToDatabase();
         collection = database.getCollection("Users");
         JSONObject json = new JSONObject(users.getUpdateDocument());
         Object newDocument = json.get("$set");
         JSONObject object = new JSONObject(newDocument.toString());
-        String updateKeys = object.getJSONArray("updateKeys");
-        String updateValues = object.getJSONArray("updateValues");
+        String updateKeys = object.getString("updateKeys");
+        String updateValues = object.getString("updateValues");
 
-        collection.updateOne(users.getFilterDocument() ,new Document("$set" ,new Document(updateKeys ,updateValues));
+        collection.updateOne(users.getFilterDocument() ,new Document("$set" ,new Document(updateKeys ,updateValues)));
 
         disconnect();
     }
