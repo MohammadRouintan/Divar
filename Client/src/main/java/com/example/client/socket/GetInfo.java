@@ -209,12 +209,12 @@ public class GetInfo {
     }
 
 
-    public static String getUserPosts() {
-        String result = null;
+    public static ArrayList<String> getUserPosts() {
+        ArrayList<String> result = new ArrayList<>();
         try {
             Connect.DOS.writeInt(14);
             Connect.DOS.flush();
-            result = Connect.DIS.readUTF();
+            result.add(Connect.DIS.readUTF());
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
