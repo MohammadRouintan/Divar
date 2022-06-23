@@ -28,6 +28,7 @@ public class MyAdsController {
 
     @FXML
     private VBox mainVBox;
+
     @FXML
     private Pagination pagination;
 
@@ -38,7 +39,7 @@ public class MyAdsController {
     @FXML
     public void initialize() {
         ArrayList<JSONObject> post = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 7; i++) {
             JSONObject post1 = new JSONObject();
             post1.put("title", "salam");
             post1.put("price", "14000");
@@ -50,19 +51,20 @@ public class MyAdsController {
         NewPage newPage = new NewPage(post,vBox);
         PagesList.add(newPage.getPage());
         pagination.setPageFactory(this::CreatPage);
-
     }
 
     private Node CreatPage(int pageIndex) {
+
         ArrayList<JSONObject> post = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 7; i++) {
             JSONObject post1 = new JSONObject();
-            post1.put("title", "salam");
+            post1.put("title", "khobi");
             post1.put("price", "14000");
             post1.put("time", "5");
             post1.put("image1", "/postImage/1.jpg");
             post.add(post1);
         }
+
         VBox vBox = new VBox();
         NewPage newPage = new NewPage(post,vBox);
         PagesList.add(newPage.getPage());
