@@ -131,8 +131,7 @@ public class Client extends Thread {
                             DOS.flush();
                         }
                     } else if (task == 14) {
-                        int size = DIS.readInt();
-                        ArrayList <String> list = Database.getUsersPosts(size, new Document("phoneNumber", number));
+                        ArrayList <String> list = Database.getUsersPosts(8, new Document("phoneNumber", number));
                         DOS.writeInt(list.size());
                         DOS.flush();
                         for (String str : list){

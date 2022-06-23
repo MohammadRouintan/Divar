@@ -214,7 +214,10 @@ public class GetInfo {
         try {
             Connect.DOS.writeInt(14);
             Connect.DOS.flush();
-            result.add(Connect.DIS.readUTF());
+            int size = Connect.DIS.readInt();
+            for (int i = 0; i < size; i++) {
+                result.add(Connect.DIS.readUTF());
+            }
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }

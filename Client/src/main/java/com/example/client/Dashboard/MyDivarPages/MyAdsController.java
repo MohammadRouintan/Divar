@@ -37,10 +37,10 @@ public class MyAdsController {
 
     @FXML
     public void initialize() {
-        GetInfo.getUserPosts();
+        ArrayList<String> list = GetInfo.getUserPosts();
         ArrayList<JSONObject> userPosts = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
-            userPosts.add(new JSONObject(GetInfo.getUserPosts().get(i)));
+        for(String str : list){
+            userPosts.add(new JSONObject(str));
         }
         VBox vBox = new VBox();
         NewPage newPage = new NewPage(userPosts,vBox);
@@ -49,9 +49,10 @@ public class MyAdsController {
     }
 
     private Node CreatePage(int pageIndex) {
+        ArrayList<String> list = GetInfo.getUserPosts();
         ArrayList<JSONObject> userPosts = new ArrayList<>();
-        for (int i = (pagination.getCurrentPageIndex() - 1) * 8; i < pagination.getCurrentPageIndex() * 8; i++) {
-            userPosts.add(new JSONObject(GetInfo.getUserPosts().get(i)));
+        for(String str : list){
+            userPosts.add(new JSONObject(str));
         }
         VBox vBox = new VBox();
         NewPage newPage = new NewPage(userPosts,vBox);
