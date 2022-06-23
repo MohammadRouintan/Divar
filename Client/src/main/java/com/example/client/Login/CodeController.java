@@ -60,7 +60,7 @@ public class CodeController {
         try {
             Integer.parseInt(inputPhoneNumberCodeID.getText());
             code = inputPhoneNumberCodeID.getText();
-            if (code.equals("00000")){
+            if ((counter > 0) && GetInfo.confirmationCheck(code)){
                // GetInfo.addUser();
                 Parent layout = FXMLLoader.load(Main.class.getResource("dashboard.fxml"));
                 Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();

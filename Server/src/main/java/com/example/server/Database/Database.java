@@ -1,5 +1,6 @@
 package com.example.server.Database;
 
+import com.example.server.Database.Messages.Messages;
 import com.example.server.Database.Posts.Post;
 import com.example.server.Database.Users.Users;
 import com.mongodb.client.MongoClient;
@@ -52,31 +53,18 @@ public class Database {
         disconnect();
     }
 
-    public synchronized static void updatePost(Post post) {
+    public synchronized static void updatePost(Post post ,String key ,Object value) {
         connectToDatabase();
         collection = database.getCollection("Posts");
-        JSONObject json = new JSONObject(post.getUpdateDocument());
-        Object newDocument = json.get("$set");
-        JSONObject object = new JSONObject(newDocument.toString());
-        JSONArray updateKeys = object.getJSONArray("updateKeys");
-        JSONArray updateValues = object.getJSONArray("updateValues");
-        for (int i=0; i < updateKeys.length(); i++) {
-            collection.updateOne(post.getFilterDocument() ,new Document("$set" ,new Document(updateKeys.getString(i) ,updateValues.get(i))));
-        }
+        collection.updateOne(post.getFilterDocument() ,new Document("$set" ,new Document(key ,value)));
         disconnect();
     }
 
-    public synchronized static void updateUsers(Users users) {
+    public synchronized static void updateUsers(Users users ,String key ,Object value) {
         connectToDatabase();
         collection = database.getCollection("Users");
-        JSONObject json = new JSONObject(users.getUpdateDocument());
-        Object newDocument = json.get("$set");
-        JSONObject object = new JSONObject(newDocument.toString());
-        JSONArray updateKeys = object.getJSONArray("updateUserKeys");
-        JSONArray updateValues = object.getJSONArray("updateUserValues");
-        for (int i=0; i < updateKeys.length(); i++) {
-            collection.updateOne(users.getFilterDocument() ,new Document("$set" ,new Document(updateKeys.getString(i) ,updateValues.get(i))));
-        }
+        collection.updateOne(users.getFilterDocument() ,new Document("$set" ,new Document(key ,value)));
+
         disconnect();
     }
 
@@ -133,6 +121,7 @@ public class Database {
         return lastId;
     }
 
+
     public static String lastImageIDFromDatabase() {
         connectToDatabase();
         collection = database.getCollection("Posts");
@@ -176,6 +165,10 @@ public class Database {
         return findUser(filter).toJson();
     }
 
+    public static Users getUserAsDoc(Document filter) {
+        return new Users(filter).setValues(findUser(filter));
+    }
+
     public static ArrayList<String> lastSeenPost(Document filter) {
         String user = getUser(filter);
         JSONObject jsonObject = new JSONObject(user);
@@ -203,7 +196,9 @@ public class Database {
 
     private static int numberForMarkedPost = 0;
 
+
     public static ArrayList<String> getMarkedPosts(int size, Document filter){
+
         String user = getUser(filter);
         JSONObject object = new JSONObject(user);
         JSONArray jsonArray = object.getJSONArray("bookmarkPost");
@@ -220,6 +215,7 @@ public class Database {
     private static int numberForUsersPost = 0;
 
     public static ArrayList<String> getUsersPosts(int size, Document filter){
+
         String user = getUser(filter);
         JSONObject object = new JSONObject(user);
         JSONArray jsonArray = object.getJSONArray("usersPost");
@@ -233,6 +229,61 @@ public class Database {
         return usersPost;
     }
 
+    public static void addMessage(Messages messages){
+        connectToDatabase();
+        collection = database.getCollection("Messages");
+        collection.insertOne(messages.getDocument());
+        disconnect();
+    }
+
+    public static void updateMessage(Messages messages){
+        connectToDatabase();
+        collection = database.getCollection("Messages");
+        JSONObject json = new JSONObject(messages.getUpdateDocument());
+        Object newDocument = json.get("$set");
+        JSONObject object = new JSONObject(newDocument.toString());
+        JSONArray updateKeys = object.getJSONArray("updateMessageKeys");
+        JSONArray updateValues = object.getJSONArray("updateMessageValues");
+        for (int i=0; i < updateKeys.length(); i++) {
+            collection.updateOne(messages.getFilterDocument() ,new Document("$set" ,new Document(updateKeys.getString(i) ,updateValues.get(i))));
+        }
+        disconnect();
+    }
+
+    public synchronized static void deleteMessage(Messages messages) {
+        connectToDatabase();
+        collection = database.getCollection("Messages");
+        if (collection.find(messages.getFilterDocument()).cursor().hasNext()) {
+            collection.deleteOne(messages.getFilterDocument());
+        }
+        disconnect();
+    }
+
+    public synchronized static Document findMessage(Document filter) {
+        connectToDatabase();
+        Document document = new Document("", "");
+        collection = database.getCollection("Messages");
+        if (collection.find(filter).cursor().hasNext()) {
+            document = collection.find(filter).cursor().next();
+        }
+        disconnect();
+        return document;
+    }
+
+    public static String getMessage(Document filter) {
+        return findMessage(filter).toJson();
+    }
+
+    public static String numberOfPostsOfUser(Users users) {
+        connectToDatabase();
+        String number = "";
+        String user = getUser(users.getFilterDocument());
+        JSONObject object = new JSONObject(user);
+        JSONArray jsonArray = object.getJSONArray("usersPost");
+        number = String.valueOf(jsonArray.length());
+        disconnect();
+        return number;
+    }
     public static String lastUserImageId() {
         connectToDatabase();
         collection = database.getCollection("Users");
