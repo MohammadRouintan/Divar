@@ -51,7 +51,7 @@ public class Client extends Thread{
     private void receiveFile (String name) {
         int bytes = 0;
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream("../post/" + name + ".png");
+            FileOutputStream fileOutputStream = new FileOutputStream("../Image/post/" + name + ".png");
             long size = DIS.readLong();
             byte[] buffer = new byte[4 * 1024];
             while (size > 0 && (bytes = DIS.read(buffer, 0, (int) Math.min(buffer.length, size))) != -1) {
@@ -66,7 +66,7 @@ public class Client extends Thread{
     private void receiveProfile (String name) {
         int bytes = 0;
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream("../profile/" + name + ".png");
+            FileOutputStream fileOutputStream = new FileOutputStream("../Image/profile/" + name + ".png");
             long size = DIS.readLong();
             byte[] buffer = new byte[4 * 1024];
             while (size > 0 && (bytes = DIS.read(buffer, 0, (int) Math.min(buffer.length, size))) != -1) {

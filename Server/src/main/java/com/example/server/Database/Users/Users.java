@@ -21,7 +21,7 @@ public class Users extends Database {
 
     public Users(String phoneNumber) {
         document = new Document();
-        document.append("PhoneNumber", phoneNumber);
+        document.append("phoneNumber", phoneNumber);
     }
 
     public Document getDocument() {

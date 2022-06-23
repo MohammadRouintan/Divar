@@ -46,7 +46,9 @@ public class Database {
     public synchronized static void addUsers(Users users) {
         connectToDatabase();
         collection = database.getCollection("Users");
-        collection.insertOne(users.getDocument());
+        if (!collection.find(users.getDocument()).cursor().hasNext()) {
+            collection.insertOne(users.getDocument());
+        }
         disconnect();
     }
 
@@ -70,7 +72,7 @@ public class Database {
         JSONObject json = new JSONObject(users.getUpdateDocument());
         Object newDocument = json.get("$set");
         JSONObject object = new JSONObject(newDocument.toString());
-        String updateKeys = object.getString("updateUserKeys");
+        JSONArray updateKeys = object.getJSONArray("updateUserKeys");
         JSONArray updateValues = object.getJSONArray("updateUserValues");
         for (int i=0; i < updateKeys.length(); i++) {
             collection.updateOne(users.getFilterDocument() ,new Document("$set" ,new Document(updateKeys.getString(i) ,updateValues.get(i))));
@@ -235,8 +237,8 @@ public class Database {
         connectToDatabase();
         collection = database.getCollection("Users");
         String lastId = "";
-        if (collection.find().sort(new Document("PhoneNumber", -1)).limit(1).cursor().hasNext()) {
-            String jsonString = collection.find().sort(new Document("PhoneNumber", -1)).limit(1).cursor().next().toJson();
+        if (collection.find().sort(new Document("phoneNumber", -1)).limit(1).cursor().hasNext()) {
+            String jsonString = collection.find().sort(new Document("phoneNumber", -1)).limit(1).cursor().next().toJson();
             JSONObject obj = new JSONObject(jsonString);
             lastId = String.valueOf(obj.getInt("profileNameImage"));
         }

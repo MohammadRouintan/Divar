@@ -93,12 +93,12 @@ public class ProfileController {
 
     }
 
-    private File file;
+    private File file = null;
     private FileChooser chooser = new FileChooser();
 
     @FXML
     void uploadImageProfile(ActionEvent event) {
-        File file = chooser.showOpenDialog(null);
+        file = chooser.showOpenDialog(null);
         if(file != null) {
             try{
                 JSONObject json = new JSONObject(user);

@@ -59,7 +59,10 @@ public class Client extends Thread {
                         GetInfo.newMessage(number, messageReceiver, messageText);
                     } else if (task == 4) {
                         JSONObject json = new JSONObject(DIS.readUTF());
-                        Users user = new Users(new Document("phoneNumber", number), new Document("$set", new Document(json.get("updateUserKeys").toString(), json.get("updateUserValues"))));
+                        Document d = new Document();
+                        d.append("updateUserKeys", json.getJSONArray("updateUserKeys"));
+                        d.append("updateUserValues", json.getJSONArray("updateUserValues"));
+                        Users user = new Users(new Document("phoneNumber", number), new Document("$set", d));
                         Database.updateUsers(user);
                     } else if (task == 5) {
                         Users user = new Users(new Document("phoneNumber", number));
