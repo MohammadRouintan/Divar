@@ -29,6 +29,8 @@ public class ProfileController {
             firstNameLabel.setText(firstName);
             lastNameLabel.setText(lastName);
             cityLabel.setText(city);
+            GetInfo.getProfile(json.getString("profileNameImage"));
+            profileImage.setImage(new Image("../Client/profile/" + json.getString("profileNameImage") + ".png"));
         }catch (Exception e){
             firstNameLabel.setText("null");
             lastNameLabel.setText("null");
