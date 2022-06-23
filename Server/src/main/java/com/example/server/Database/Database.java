@@ -44,21 +44,21 @@ public class Database {
         disconnect();
         String phoneNumber = post.getDocument().getString("phoneNumber");
         Users users = new Users(phoneNumber);
-        updateUserPostsArray(users);
+        updateUserArrays(users, "userPosts");
     }
 
-    public synchronized static void updateUserPostsArray(Users users) {
+    public synchronized static void updateUserArrays(Users users, String arrayName) {
         JSONObject user = new JSONObject(findUser(users.getFilterDocument()).toJson());
-        ArrayList<String> myPosts;
-        if (user.has("userPosts")) {
-            JSONArray userPosts = user.getJSONArray("userPosts");
-            myPosts = getStringArray(userPosts);
-            myPosts.add(String.valueOf(lastPostId() + 1));
+        ArrayList<String> Posts;
+        if (user.has(arrayName)) {
+            JSONArray userPosts = user.getJSONArray(arrayName);
+            Posts = getStringArray(userPosts);
+            Posts.add(String.valueOf(lastPostId() + 1));
         } else {
-            myPosts = new ArrayList<>();
-            myPosts.add(String.valueOf(lastPostId() + 1));
+            Posts = new ArrayList<>();
+            Posts.add(String.valueOf(lastPostId() + 1));
         }
-        updateUsers(users, "userPosts", myPosts);
+        updateUsers(users, arrayName, Posts);
     }
 
     public synchronized static void addUsers(Users users) {
