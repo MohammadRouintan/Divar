@@ -180,6 +180,10 @@ public class Database {
         return findUser(filter).toJson();
     }
 
+    public static Users getUserAsDoc(Document filter) {
+        return new Users(filter).setValues(findUser(filter));
+    }
+
     public static ArrayList<String> lastSeenPost(Document filter) {
         String user = getUser(filter);
         JSONObject jsonObject = new JSONObject(user);
