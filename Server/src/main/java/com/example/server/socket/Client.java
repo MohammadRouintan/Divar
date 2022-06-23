@@ -98,8 +98,15 @@ public class Client extends Thread {
                         }
                     } else if (task == 10) {
                         JSONObject json = new JSONObject(DIS.readUTF());
-                        Post post1 = new Post(new Document("postId", json.getInt("postId")), new Document("$set", new Document(json.getString("updateKeys"), json.get("updateValues"))));
-                        Database.updatePost(post1);
+
+                        ArrayList<String> key = (ArrayList<String>) json.get("updateKeys");
+                        ArrayList<Object> value = (ArrayList<Object>) json.get("updateValues");
+
+                        Post post1 = new Post(new Document("postId", json.getInt("postId")));
+
+                        for (int i = 0; i < value.size(); i++) {
+                            Database.updatePost(post1 ,key.get(i) ,value.get(i));
+                        }
                     } else if (task == 11) {
                         int postID = DIS.readInt();
                         Post post1 = new Post(new Document("postId", postID));

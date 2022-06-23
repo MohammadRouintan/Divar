@@ -44,31 +44,17 @@ public class Database {
         disconnect();
     }
 
-    public synchronized static void updatePost(Post post) {
+    public synchronized static void updatePost(Post post ,String key ,Object value) {
         connectToDatabase();
         collection = database.getCollection("Posts");
-        JSONObject json = new JSONObject(post.getUpdateDocument());
-        Object newDocument = json.get("$set");
-        JSONObject object = new JSONObject(newDocument.toString());
-        JSONArray updateKeys = object.getJSONArray("updateKeys");
-        JSONArray updateValues = object.getJSONArray("updateValues");
-        for (int i=0; i < updateKeys.length(); i++) {
-            collection.updateOne(post.getFilterDocument() ,new Document("$set" ,new Document(updateKeys.getString(i) ,updateValues.get(i))));
-        }
+        collection.updateOne(post.getFilterDocument() ,new Document("$set" ,new Document(key ,value)));
         disconnect();
     }
 
     public synchronized static void updateUsers(Users users ,String key ,Object value) {
         connectToDatabase();
         collection = database.getCollection("Users");
-        JSONObject json = new JSONObject(users.getUpdateDocument());
-        Object newDocument = json.get("$set");
-        JSONObject object = new JSONObject(newDocument.toString());
-        String updateKeys = object.getString("updateKeys");
-        String updateValues = object.getString("updateValues");
-
-        collection.updateOne(users.getFilterDocument() ,new Document("$set" ,new Document(updateKeys ,updateValues)));
-
+        collection.updateOne(users.getFilterDocument() ,new Document("$set" ,new Document(key ,value)));
         disconnect();
     }
 
