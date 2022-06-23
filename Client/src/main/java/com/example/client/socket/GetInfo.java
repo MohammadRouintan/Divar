@@ -312,4 +312,8 @@ public class GetInfo {
         }
         return false;
     }
+
+    public static void getProfile(String fileName){
+
+    }
 }
