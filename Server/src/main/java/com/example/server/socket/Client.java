@@ -113,7 +113,7 @@ public class Client extends Thread {
                         Database.deletePost(post1);
                     } else if (task == 12) {
                         JSONObject json = new JSONObject(DIS.readUTF());
-                        Post post = new Post(Database.lastPostId(), json.getString("bio"), json.getString("title"),
+                        Post post = new Post(Database.lastPostId() + 1, json.getString("bio"), json.getString("title"),
                                 getStringArray(json.getJSONArray("imageName")), json.getString("address"),
                                 json.getString("price"), json.getString("city"), json.getString("time"),
                                 json.getString("phoneNumber"), json.getBoolean("accept"), json.getBoolean("auction"),

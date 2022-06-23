@@ -42,6 +42,23 @@ public class Database {
         collection = database.getCollection("Posts");
         collection.insertOne(post.getDocument());
         disconnect();
+        String phoneNumber = post.getDocument().getString("phoneNumber");
+        Users users = new Users(phoneNumber);
+        updateUserPostsArray(users);
+    }
+
+    public synchronized static void updateUserPostsArray(Users users) {
+        JSONObject user = new JSONObject(findUser(users.getFilterDocument()).toJson());
+        ArrayList<String> myPosts;
+        if (user.has("userPosts")) {
+            JSONArray userPosts = user.getJSONArray("userPosts");
+            myPosts = getStringArray(userPosts);
+            myPosts.add(String.valueOf(lastPostId() + 1));
+        } else {
+            myPosts = new ArrayList<>();
+            myPosts.add(String.valueOf(lastPostId() + 1));
+        }
+        updateUsers(users, "userPosts", myPosts);
     }
 
     public synchronized static void addUsers(Users users) {
@@ -63,7 +80,7 @@ public class Database {
     public synchronized static void updateUsers(Users users ,String key ,Object value) {
         connectToDatabase();
         collection = database.getCollection("Users");
-        collection.updateOne(users.getFilterDocument() ,new Document("$set" ,new Document(key ,value)));
+        collection.updateOne(users.getDocument() ,new Document("$set" ,new Document(key ,value)));
 
         disconnect();
     }
@@ -218,7 +235,7 @@ public class Database {
 
         String user = getUser(filter);
         JSONObject object = new JSONObject(user);
-        JSONArray jsonArray = object.getJSONArray("usersPost");
+        JSONArray jsonArray = object.getJSONArray("userPosts");
         ArrayList<String> usersPost = new ArrayList<>();
         for (int i = numberForUsersPost * size; i < (size * numberForUsersPost) + size; i++) {
             if(i < jsonArray.length()) {
@@ -295,6 +312,14 @@ public class Database {
         }
         disconnect();
         return lastId;
+    }
+
+    public static ArrayList<String> getStringArray (JSONArray JArray) {
+        ArrayList<String> list = new ArrayList<>();
+        for (int i = 0; i < JArray.length(); i++) {
+            list.add(JArray.getString(i));
+        }
+        return list;
     }
 
 }
