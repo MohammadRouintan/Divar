@@ -1,5 +1,6 @@
 package com.example.client.Dashboard.Posts;
 
+import com.example.client.socket.ImageController;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
@@ -8,8 +9,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.InputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class NewPage {
@@ -60,8 +66,17 @@ public class NewPage {
 
     private VBox makeNewVBox(JSONObject post){
         VBox vBox = new VBox();
+        String url = getStringArray(post.getJSONArray("imageName")).get(0);
+        ImageController imageController = new ImageController("", getStringArray(post.getJSONArray("imageName")).get(0), 1);
+        imageController.start();
+        try {
+            imageController.join();
+        } catch (InterruptedException e){
+            System.err.println(e.getMessage());
+        }
+
         ImageView imageView = new ImageView();
-        Image img = new Image(post.getString("image1"));
+        Image img = new Image(imageController.getPath());
         imageView.setFitHeight(200);
         imageView.setFitWidth(280);
         imageView.setImage(img);
@@ -85,6 +100,19 @@ public class NewPage {
         FullViewAds fullViewAds = new FullViewAds(parent,post);
     }
 
-
+    public ArrayList<String> getStringArray (JSONArray JArray) {
+        ArrayList<String> list = new ArrayList<>();
+        for (int i = 0; i < JArray.length(); i++) {
+            list.add(JArray.getString(i));
+        }
+        return list;
+    }
+    public ArrayList<Object> getObjectArray (JSONArray JArray) {
+        ArrayList<Object> list = new ArrayList<>();
+        for (int i = 0; i < JArray.length(); i++) {
+            list.add(JArray.get(i));
+        }
+        return list;
+    }
 
 }

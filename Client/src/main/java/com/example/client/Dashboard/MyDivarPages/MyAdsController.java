@@ -33,13 +33,11 @@ public class MyAdsController {
     @FXML
     private Pagination pagination;
 
-    List<VBox> PagesList = new ArrayList<VBox>();
-
+    private List<VBox> PagesList = new ArrayList<VBox>();
 
     @FXML
     public void initialize() {
         ArrayList<String> list = GetInfo.getUserPosts();
-
         ArrayList<JSONObject> userPosts = new ArrayList<>();
         for(String str : list){
             userPosts.add(new JSONObject(str));

@@ -501,12 +501,12 @@ public class AddADSController {
             nameTxt.setMinHeight(35);
             nameTxt.setPrefWidth(110);
             nameTxt.setPrefHeight(35);
-            nameTxt.setId("RowName" + counter);
+            nameTxt.setId("rowName" + counter);
             TextField detailsTxt = new TextField();
             detailsTxt.setMinHeight(35);
             detailsTxt.setPrefWidth(285);
             detailsTxt.setPrefHeight(35);
-            detailsTxt.setId("RowValue" + counter);
+            detailsTxt.setId("rowValue" + counter);
             hBox.getChildren().add(nameTxt);
             hBox.getChildren().add(detailsTxt);
             return hBox;
@@ -516,11 +516,11 @@ public class AddADSController {
         vBox.setPadding(new Insets(10, 0, 5, 0));
         vBox.setAlignment(Pos.CENTER);
         TextField nameTxt = new TextField();
-        nameTxt.setId("ColumnName" + counter);
+        nameTxt.setId("columnName" + counter);
         nameTxt.setMinHeight(35);
         nameTxt.setMaxWidth(150);
         TextField detailsTxt = new TextField();
-        detailsTxt.setId("ColumnValue" + counter);
+        detailsTxt.setId("columnValue" + counter);
         detailsTxt.setMinHeight(35);
         detailsTxt.setMaxWidth(345);
         vBox.getChildren().add(nameTxt);

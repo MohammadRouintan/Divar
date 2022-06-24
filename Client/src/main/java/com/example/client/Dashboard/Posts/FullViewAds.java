@@ -1,5 +1,6 @@
 package com.example.client.Dashboard.Posts;
 
+import com.example.client.socket.ImageController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -90,7 +91,15 @@ public class FullViewAds {
         slideShow.setPageCount(images.length());
         slideShow.setMaxPageIndicatorCount(images.length());
         slideShow.setPageFactory((pageIndex) -> {
-            Image img = new Image("/postImage/"+images.getString(pageIndex)+".jpg");
+            String url = "/post/"+getStringArray(images).get(pageIndex) + ".png";
+            ImageController imageController = new ImageController("", getStringArray(images).get(pageIndex), 1);
+            imageController.start();
+            try {
+                imageController.join();
+            } catch (InterruptedException e){
+                System.err.println(e.getMessage());
+            }
+            Image img = new Image(imageController.getPath());
             ImageView imageView = new ImageView(img);
             imageView.setFitWidth(400);
             imageView.setFitHeight(350);
@@ -101,8 +110,8 @@ public class FullViewAds {
 
     private HBox makeVerticalFeatureLabel(JSONObject post){
 
-        JSONArray NameColumnFeature = post.getJSONArray("ColumnName");
-        JSONArray ValueColumnFeature = post.getJSONArray("ColumnValue");
+        JSONArray NameColumnFeature = post.getJSONArray("columnName");
+        JSONArray ValueColumnFeature = post.getJSONArray("columnValue");
 
         HBox featureHbox = new HBox();
         for(int i = 0; i < NameColumnFeature.length(); i++){
@@ -117,8 +126,8 @@ public class FullViewAds {
 
     private VBox makeHorizontalFeatureLabel(JSONObject post){
 
-        JSONArray NameRowFeature = post.getJSONArray("ColumnName");
-        JSONArray ValueRowFeature = post.getJSONArray("ColumnValue");
+        JSONArray NameRowFeature = post.getJSONArray("columnName");
+        JSONArray ValueRowFeature = post.getJSONArray("columnValue");
 
         VBox featureVBox = new VBox();
         for(int i = 0; i < NameRowFeature.length(); i++){
@@ -131,5 +140,11 @@ public class FullViewAds {
 
         return featureVBox;
     }
-
+    public ArrayList<String> getStringArray (JSONArray JArray) {
+        ArrayList<String> list = new ArrayList<>();
+        for (int i = 0; i < JArray.length(); i++) {
+            list.add(JArray.getString(i));
+        }
+        return list;
+    }
 }

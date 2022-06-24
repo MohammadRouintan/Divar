@@ -45,21 +45,30 @@ public class ImageController extends Thread{
         int bytes = 0;
         try {
             DOS.writeInt(1);
+            DOS.flush();
             DOS.writeUTF(imageID);
-            FileOutputStream fileOutputStream = new FileOutputStream("/post/" + imageID + ".png");
+            DOS.flush();
+            File file = new File("../Client/src/main/resources/post/" + imageID + ".png");
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
             long size = DIS.readLong();
             byte[] buffer = new byte[4 * 1024];
             while (size > 0 && (bytes = DIS.read(buffer, 0, (int) Math.min(buffer.length, size))) != -1) {
                 fileOutputStream.write(buffer, 0, bytes);
                 size -= bytes;
-
             }
+            absolutePath = file.getAbsolutePath();
             fileOutputStream.close();
+
         }catch(IOException e){
             System.err.println(e.getMessage());
         }
-    }
 
+    }
+    String absolutePath;
+
+    public String getPath(){
+        return this.absolutePath;
+    }
 
     public void sendFile(String filePath, String imageID){
 
