@@ -10,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.spi.AbstractResourceBundleProvider;
 
 
 public class Database {
@@ -168,17 +169,14 @@ public class Database {
         collection = database.getCollection("Posts");
         int temp = number;
         ArrayList<String> posts = new ArrayList<>();
-        Document document = new Document("branchMain", branchMain);
-        for (int i = lastPostId(); i > 0; i--) {
-            if(temp == 0) {
-                break;
-            }
-            document.append("postId", i);
-            if (collection.find(document).cursor().hasNext()) {
-                posts.add(collection.find(document).cursor().next().toJson());
+        if (collection.find(new Document("branchMain", branchMain)).cursor().hasNext()) {
+            for (Document document : collection.find(new Document("branchMain", branchMain))) {
+                if (temp == 0) {
+                    break;
+                }
+                posts.add(document.toJson());
                 temp--;
             }
-            document.remove("postId", i);
         }
         disconnect();
         return posts;
@@ -331,6 +329,27 @@ public class Database {
             list.add(JArray.getString(i));
         }
         return list;
+    }
+
+    public static ArrayList<String> search(int size, String search) {
+        connectToDatabase();
+        int temp = size;
+        collection = database.getCollection("Posts");
+        ArrayList<String> posts = new ArrayList<>();
+        if (collection.find().cursor().hasNext()) {
+            for (Document document : collection.find()) {
+                if (temp == 0) {
+                    break;
+                }
+                String title = document.getString("title");
+                if (title.contains(search)) {
+                    posts.add(document.toJson());
+                    temp--;
+                }
+            }
+        }
+        disconnect();
+        return posts;
     }
 
 }
