@@ -361,10 +361,13 @@ public class AddADSController {
         @FXML
         void agreedPriceCheckBoxFunction(ActionEvent event){
                 if(agreedPriceCheckBox.isSelected()){
-                        postPriceFiled.setEditable(false);
-                        postPriceFiled.setText("");
+                    auctionCheckBox.setSelected(false);
+                    auctionCheckBox.setDisable(true);
+                    postPriceFiled.setEditable(false);
+                    postPriceFiled.setText("");
                 }else{
-                        postPriceFiled.setEditable(true);
+                    auctionCheckBox.setDisable(false);
+                    postPriceFiled.setEditable(true);
                 }
         }
 
@@ -374,10 +377,17 @@ public class AddADSController {
         @FXML
         void auctionCheckBoxFunction(ActionEvent event){
                 if(auctionCheckBox.isSelected()){
-                        priceLabel.setText("Base Price : ");
+                    agreedPriceCheckBox.setSelected(false);
+                    agreedPriceCheckBox.setDisable(true);
+                    exchangeCheckBox.setSelected(false);
+                    exchangeCheckBox.setDisable(true);
+                    priceLabel.setText("Base Price : ");
                 }else{
-                        priceLabel.setText("Price : ");
+                    agreedPriceCheckBox.setDisable(false);
+                    exchangeCheckBox.setDisable(false);
+                    priceLabel.setText("Price : ");
                 }
+
         }
 
         private FileChooser chooser = new FileChooser();
