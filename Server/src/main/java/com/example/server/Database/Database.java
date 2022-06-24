@@ -155,9 +155,8 @@ public class Database {
         collection = database.getCollection("Posts");
         ArrayList<String> notAccepted = new ArrayList<>();
         if(collection.find(new Document("accept", false)).cursor().hasNext()) {
-            MongoCursor<Document> cursor = collection.find(new Document("accept", false)).iterator();
-            while (cursor.hasNext()) {
-                notAccepted.add(cursor.next().toJson());
+            for (Document document : collection.find(new Document("accept", false))) {
+                notAccepted.add(document.toJson());
             }
         }
         disconnect();
@@ -312,6 +311,7 @@ public class Database {
         disconnect();
         return number;
     }
+
     public static String lastUserImageId() {
         connectToDatabase();
         collection = database.getCollection("Users");
