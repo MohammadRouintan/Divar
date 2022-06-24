@@ -39,12 +39,26 @@ public class MyAdsController {
     @FXML
     public void initialize() {
         ArrayList<JSONObject> post = new ArrayList<>();
+        ArrayList<String> imageName = new ArrayList<>();
+        imageName.add("1");
+        imageName.add("2");
+        ArrayList<String> ColumnName = new ArrayList<>();
+        ColumnName.add("Salam");
+        ColumnName.add("Khobi");
+
+        ArrayList<String> ColumnValue = new ArrayList<>();
+        ColumnValue.add("dddddd");
+        ColumnValue.add("bbbbbb");
+
         for (int i = 0; i < 7; i++) {
             JSONObject post1 = new JSONObject();
             post1.put("title", "salam");
             post1.put("price", "14000");
             post1.put("time", "5");
             post1.put("image1", "/postImage/1.jpg");
+            post1.put("imageName",imageName);
+            post1.put("ColumnName",ColumnName);
+            post1.put("ColumnValue",ColumnValue);
             post.add(post1);
         }
         VBox vBox = new VBox();
@@ -54,21 +68,34 @@ public class MyAdsController {
     }
 
     private Node CreatPage(int pageIndex) {
-
         ArrayList<JSONObject> post = new ArrayList<>();
+        ArrayList<String> imageName = new ArrayList<>();
+        imageName.add("1");
+        imageName.add("2");
+        ArrayList<String> ColumnName = new ArrayList<>();
+        ColumnName.add("Salam");
+        ColumnName.add("Khobi");
+
+        ArrayList<String> ColumnValue = new ArrayList<>();
+        ColumnValue.add("dddddd");
+        ColumnValue.add("bbbbbb");
+
         for (int i = 0; i < 7; i++) {
             JSONObject post1 = new JSONObject();
-            post1.put("title", "khobi");
+            post1.put("title", "salam");
             post1.put("price", "14000");
             post1.put("time", "5");
             post1.put("image1", "/postImage/1.jpg");
+            post1.put("imageName",imageName);
+            post1.put("ColumnName",ColumnName);
+            post1.put("ColumnValue",ColumnValue);
             post.add(post1);
         }
-
         VBox vBox = new VBox();
         NewPage newPage = new NewPage(post,vBox);
         PagesList.add(newPage.getPage());
         return PagesList.get(pageIndex);
+
     }
 
 }
