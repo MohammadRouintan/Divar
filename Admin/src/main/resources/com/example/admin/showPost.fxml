@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="538.0" prefWidth="618.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.admin.Dashboard.showPost">
+   <children>
+      <ScrollPane layoutX="5.0" prefHeight="540.0" prefWidth="601.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1619.0" prefWidth="600.0">
+               <children>
+                  <HBox layoutX="8.0" layoutY="14.0" prefHeight="0.0" prefWidth="470.0" style="-fx-background-color: #000;">
+                     <children>
+                        <ImageView fx:id="img0" fitHeight="150.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="img1" fitHeight="150.0" fitWidth="191.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="img2" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="6.0" layoutY="166.0" prefHeight="142.0" prefWidth="575.0" style="-fx-background-color: #000;">
+                     <children>
+                        <ImageView fx:id="img3" fitHeight="150.0" fitWidth="197.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="img4" fitHeight="150.0" fitWidth="191.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="img5" fitHeight="150.0" fitWidth="179.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="7.0" layoutY="319.0" prefHeight="142.0" prefWidth="575.0" style="-fx-background-color: #000;">
+                     <children>
+                        <ImageView fx:id="img6" fitHeight="150.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="img7" fitHeight="150.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="img8" fitHeight="150.0" fitWidth="194.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </HBox>
+                  <Label layoutX="22.0" layoutY="591.0" prefHeight="30.0" prefWidth="142.0" text="Branch 2: ">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="Branch2" layoutX="133.0" layoutY="591.0" prefHeight="30.0" prefWidth="189.0" text="t">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="bio" editable="false" layoutX="28.0" layoutY="656.0" prefHeight="177.0" prefWidth="501.0" promptText="bio" />
+                  <TextField fx:id="rowName1" editable="false" layoutX="33.0" layoutY="847.0" prefHeight="26.0" prefWidth="115.0" />
+                  <TextField fx:id="rowValue1" editable="false" layoutX="159.0" layoutY="847.0" prefHeight="26.0" prefWidth="271.0" />
+                  <TextField fx:id="rowName2" editable="false" layoutX="33.0" layoutY="885.0" prefHeight="26.0" prefWidth="115.0" />
+                  <TextField fx:id="rowValue2" editable="false" layoutX="159.0" layoutY="885.0" prefHeight="26.0" prefWidth="271.0" />
+                  <TextField fx:id="rowName3" editable="false" layoutX="33.0" layoutY="921.0" prefHeight="26.0" prefWidth="115.0" />
+                  <TextField fx:id="rowValue3" editable="false" layoutX="159.0" layoutY="921.0" prefHeight="26.0" prefWidth="271.0" />
+                  <TextField fx:id="rowName4" editable="false" layoutX="33.0" layoutY="956.0" prefHeight="26.0" prefWidth="115.0" />
+                  <TextField fx:id="rowValue4" editable="false" layoutX="159.0" layoutY="956.0" prefHeight="26.0" prefWidth="271.0" />
+                  <TextField fx:id="rowName5" editable="false" layoutX="32.0" layoutY="989.0" prefHeight="26.0" prefWidth="115.0" />
+                  <TextField fx:id="rowValue5" editable="false" layoutX="158.0" layoutY="989.0" prefHeight="26.0" prefWidth="271.0" />
+                  <TextField fx:id="rowName6" editable="false" layoutX="33.0" layoutY="1023.0" prefHeight="26.0" prefWidth="115.0" />
+                  <TextField fx:id="rowValue6" editable="false" layoutX="159.0" layoutY="1023.0" prefHeight="26.0" prefWidth="271.0" />
+                  <TextField fx:id="ColumnName1" editable="false" layoutX="33.0" layoutY="1085.0" prefHeight="26.0" prefWidth="117.0" />
+                  <TextField fx:id="columnValue1" editable="false" layoutX="10.0" layoutY="1122.0" prefHeight="26.0" prefWidth="173.0" />
+                  <TextField fx:id="ColumnName2" editable="false" layoutX="230.0" layoutY="1079.0" prefHeight="26.0" prefWidth="117.0" />
+                  <TextField fx:id="columnValue2" editable="false" layoutX="207.0" layoutY="1116.0" prefHeight="26.0" prefWidth="173.0" />
+                  <TextField fx:id="ColumnName3" editable="false" layoutX="426.0" layoutY="1078.0" prefHeight="26.0" prefWidth="117.0" />
+                  <TextField fx:id="columnValue3" editable="false" layoutX="403.0" layoutY="1115.0" prefHeight="26.0" prefWidth="173.0" />
+                  <CheckBox fx:id="agreement" layoutX="69.0" layoutY="1253.0" mnemonicParsing="false" text="Agreement" />
+                  <CheckBox fx:id="Exchange" layoutX="436.0" layoutY="1253.0" mnemonicParsing="false" text="Exchange" />
+                  <CheckBox fx:id="auction" layoutX="257.0" layoutY="1253.0" mnemonicParsing="false" text="Auction" />
+                  <Label layoutX="14.0" layoutY="1293.0" prefHeight="30.0" prefWidth="161.0" text="phone number:">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="phoneNumber" layoutX="174.0" layoutY="1293.0" prefHeight="30.0" prefWidth="140.0" text="t">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="18.0" layoutY="1328.0" prefHeight="30.0" prefWidth="161.0" text="city : ">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="city" layoutX="178.0" layoutY="1328.0" prefHeight="30.0" prefWidth="140.0" text="t">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="18.0" layoutY="1367.0" prefHeight="30.0" prefWidth="161.0" text="address  : ">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="address" layoutX="178.0" layoutY="1367.0" prefHeight="30.0" prefWidth="140.0" text="t">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="17.0" layoutY="1484.0" mnemonicParsing="false" onAction="#delete" prefHeight="26.0" prefWidth="227.0" style="-fx-background-color: #a00114#a00114;" text="delete">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="274.0" layoutY="1483.0" mnemonicParsing="false" onAction="#accept" prefHeight="26.0" prefWidth="227.0" style="-fx-background-color: #058b50#058b50;" text="accept">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="22.0" layoutY="485.0" prefHeight="30.0" prefWidth="64.0" text="Title : ">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="title" layoutX="95.0" layoutY="486.0" prefHeight="30.0" prefWidth="279.0" text="t">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="23.0" layoutY="518.0" prefHeight="30.0" prefWidth="64.0" text="Price :">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="price" layoutX="101.0" layoutY="518.0" prefHeight="30.0" prefWidth="279.0" text="t">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="19.0" layoutY="550.0" prefHeight="30.0" prefWidth="142.0" text="Main Branch : ">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="mainBranch" layoutX="177.0" layoutY="551.0" prefHeight="30.0" prefWidth="173.0" text="t">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

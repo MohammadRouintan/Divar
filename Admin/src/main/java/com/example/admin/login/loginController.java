@@ -34,13 +34,14 @@ public class loginController {
     void login(ActionEvent event) {
 
         if(usernameTextFiled.getText() != null || passwordTextFiled.getText() != null){
-            String admin = GetInfo.getAdmin();
-            JSONObject object = new JSONObject(admin);
-            String password = object.getString("password");
-            String username = object.getString("username");
-            if(password.equals(passwordTextFiled.getText()) && username.equals(usernameTextFiled.getText())){
+//            String admin = GetInfo.getAdmin();
+//            JSONObject object = new JSONObject(admin);
+//            String password = object.getString("password");
+//            String username = object.getString("username");
+            //if(password.equals(passwordTextFiled.getText()) && username.equals(usernameTextFiled.getText())){
                 try {
-                    layout = FXMLLoader.load(Main.class.getResource("StudentDashboard.fxml"));
+                    GetInfo.Posts =  GetInfo.getPosts();
+                    layout = FXMLLoader.load(Main.class.getResource("dashboard.fxml"));
                     stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
                     scene = new Scene(layout);
                     stage.setTitle("Dashboard");
@@ -49,7 +50,7 @@ public class loginController {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }
+           // }
         }else{
             errorMassage.setText("wrong password or username!");
         }
