@@ -263,17 +263,10 @@ public class Database {
         disconnect();
     }
 
-    public static void updateMessage(Messages messages){
+    public static void updateMessage(Messages messages ,String key ,Object value){
         connectToDatabase();
         collection = database.getCollection("Messages");
-        JSONObject json = new JSONObject(messages.getUpdateDocument());
-        Object newDocument = json.get("$set");
-        JSONObject object = new JSONObject(newDocument.toString());
-        JSONArray updateKeys = object.getJSONArray("updateMessageKeys");
-        JSONArray updateValues = object.getJSONArray("updateMessageValues");
-        for (int i=0; i < updateKeys.length(); i++) {
-            collection.updateOne(messages.getFilterDocument() ,new Document("$set" ,new Document(updateKeys.getString(i) ,updateValues.get(i))));
-        }
+        collection.updateOne(messages.getFilterDocument() ,new Document("$set" ,new Document(key ,value)));
         disconnect();
     }
 
