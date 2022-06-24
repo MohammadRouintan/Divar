@@ -39,7 +39,7 @@ public class Client extends Thread {
                 closeSocket();
             } else {
                 AcceptClients.numbers.add(number);
-
+                Users users = new Users(number);
                 // 1 : send post to client | 2 : get post from client | 3 : new message from user
                 // 4 : update user | 5 : check user exists | 6 : get user info
                 // 7 : get marked posts | 8 : get a specified post | 9 : get a branch posts
@@ -77,7 +77,8 @@ public class Client extends Thread {
                         DOS.flush();
                     } else if (task == 7) {
                         int size = DIS.readInt();
-                        ArrayList <String> list = Database.getMarkedPosts(size, new Document("phoneNumber", number));
+                        users.setFilterDocument(new Document("phoneNumber", number));
+                        ArrayList <String> list = Database.getMarkedPosts(size,users);
                         DOS.writeInt(list.size());
                         DOS.flush();
                         for (String str : list){
@@ -132,7 +133,8 @@ public class Client extends Thread {
                         }
                     } else if (task == 14) {
                         int size = DIS.readInt();
-                        ArrayList <String> list = Database.getUsersPosts(size, new Document("phoneNumber", number));
+                        users.setFilterDocument(new Document("phoneNumber", number));
+                        ArrayList <String> list = Database.getUsersPosts(size,users);
                         DOS.writeInt(list.size());
                         DOS.flush();
                         for (String str : list){
@@ -140,7 +142,6 @@ public class Client extends Thread {
                             DOS.flush();
                         }
                     }else if (task == 15) {
-                        Users users = new Users(number);
                         Database.addUsers(users);
                     }else if (task == 16){
                         DOS.writeInt(Database.lastImageID());

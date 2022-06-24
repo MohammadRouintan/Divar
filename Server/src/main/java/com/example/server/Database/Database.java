@@ -221,38 +221,36 @@ public class Database {
         return collection.find(post.getFilterDocument()).cursor().hasNext();
     }
 
-    private static int numberForMarkedPost = 0;
 
+    public static ArrayList<String> getMarkedPosts(int size, Users user){
 
-    public static ArrayList<String> getMarkedPosts(int size, Document filter){
-
-        String user = getUser(filter);
-        JSONObject object = new JSONObject(user);
+        String temp = user.getFilterDocument().toJson();
+        JSONObject object = new JSONObject(temp);
         JSONArray jsonArray = object.getJSONArray("bookmarkPost");
         ArrayList<String> markedPost = new ArrayList<>();
-        for (int i = numberForMarkedPost * size; i < (size * numberForMarkedPost) + size; i++) {
+        for (int i = user.getNumberForMarkedPost() * size; i < (size * user.getNumberForMarkedPost()) + size; i++) {
             if(i < jsonArray.length()) {
                 markedPost.add(getPost(new Document("postId", jsonArray.get(i))));
             }
         }
-        numberForMarkedPost++;
+        user.setNumberForMarkedPost(user.getNumberForMarkedPost() + 1);
         return markedPost;
     }
 
-    private static int numberForUsersPost = 0;
 
-    public static ArrayList<String> getUsersPosts(int size, Document filter){
 
-        String user = getUser(filter);
-        JSONObject object = new JSONObject(user);
+    public static ArrayList<String> getUsersPosts(int size, Users user){
+
+        String temp = user.getFilterDocument().toJson();
+        JSONObject object = new JSONObject(temp);
         JSONArray jsonArray = object.getJSONArray("userPosts");
         ArrayList<String> usersPost = new ArrayList<>();
-        for (int i = numberForUsersPost * size; i < (size * numberForUsersPost) + size; i++) {
+        for (int i = user.getNumberForUsersPost() * size; i < (size * user.getNumberForUsersPost()) + size; i++) {
             if(i < jsonArray.length()) {
                 usersPost.add(getPost(new Document("postId", jsonArray.get(i))));
             }
         }
-        numberForUsersPost++;
+        user.setNumberForUsersPost(user.getNumberForUsersPost() + 1);
         return usersPost;
     }
 
