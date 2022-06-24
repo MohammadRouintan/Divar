@@ -3,10 +3,7 @@ package com.example.server.Database;
 import com.example.server.Database.Messages.Messages;
 import com.example.server.Database.Posts.Post;
 import com.example.server.Database.Users.Users;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.*;
 import javafx.geometry.Pos;
 import org.bson.Document;
 import org.json.JSONArray;
@@ -20,11 +17,18 @@ public class Database {
     private static MongoDatabase database;
     private static MongoCollection<Document> collection;
     public static int imageID;
+    public static int profileImageID;
 
     public static int lastImageID(){
         imageID ++;
         return imageID;
     }
+
+    public static int lastProfileImageID(){
+        profileImageID ++;
+        return profileImageID;
+    }
+
     public static void connectToDatabase() {
         mongoClient = MongoClients.create();
         database = mongoClient.getDatabase("Divar");
@@ -35,12 +39,31 @@ public class Database {
         collection = database.getCollection("Posts");
         collection.insertOne(post.getDocument());
         disconnect();
+        String phoneNumber = post.getDocument().getString("phoneNumber");
+        Users users = new Users(phoneNumber);
+        updateUserArrays(users, "userPosts");
+    }
+
+    public synchronized static void updateUserArrays(Users users, String arrayName) {
+        JSONObject user = new JSONObject(findUser(users.getFilterDocument()).toJson());
+        ArrayList<String> Posts;
+        if (user.has(arrayName)) {
+            JSONArray userPosts = user.getJSONArray(arrayName);
+            Posts = getStringArray(userPosts);
+            Posts.add(String.valueOf(lastPostId() + 1));
+        } else {
+            Posts = new ArrayList<>();
+            Posts.add(String.valueOf(lastPostId() + 1));
+        }
+        updateUsers(users, arrayName, Posts);
     }
 
     public synchronized static void addUsers(Users users) {
         connectToDatabase();
         collection = database.getCollection("Users");
-        collection.insertOne(users.getDocument());
+        if (!collection.find(users.getDocument()).cursor().hasNext()) {
+            collection.insertOne(users.getDocument());
+        }
         disconnect();
     }
 
@@ -54,7 +77,8 @@ public class Database {
     public synchronized static void updateUsers(Users users ,String key ,Object value) {
         connectToDatabase();
         collection = database.getCollection("Users");
-        collection.updateOne(users.getFilterDocument() ,new Document("$set" ,new Document(key ,value)));
+        collection.updateOne(users.getDocument() ,new Document("$set" ,new Document(key ,value)));
+
         disconnect();
     }
 
@@ -111,18 +135,7 @@ public class Database {
         return lastId;
     }
 
-    public static String lastUserImageId() {
-        connectToDatabase();
-        collection = database.getCollection("Users");
-        String lastId = "";
-        if (collection.find().sort(new Document("PhoneNumber", -1)).limit(1).cursor().hasNext()) {
-            String jsonString = collection.find().sort(new Document("PhoneNumber", -1)).limit(1).cursor().next().toJson();
-            JSONObject obj = new JSONObject(jsonString);
-            lastId = String.valueOf(obj.getInt("profileNameImage"));
-        }
-        disconnect();
-        return lastId;
-    }
+
     public static String lastImageIDFromDatabase() {
         connectToDatabase();
         collection = database.getCollection("Posts");
@@ -135,6 +148,19 @@ public class Database {
         }
         disconnect();
         return lastId;
+    }
+
+    public static ArrayList<String> getNotAcceptedPosts() {
+        connectToDatabase();
+        collection = database.getCollection("Posts");
+        ArrayList<String> notAccepted = new ArrayList<>();
+        if(collection.find(new Document("accept", false)).cursor().hasNext()) {
+            for (Document document : collection.find(new Document("accept", false))) {
+                notAccepted.add(document.toJson());
+            }
+        }
+        disconnect();
+        return notAccepted;
     }
 
     public static ArrayList<String> getPosts(int number, String branchMain) {
@@ -219,7 +245,7 @@ public class Database {
 
         String user = getUser(filter);
         JSONObject object = new JSONObject(user);
-        JSONArray jsonArray = object.getJSONArray("usersPost");
+        JSONArray jsonArray = object.getJSONArray("userPosts");
         ArrayList<String> usersPost = new ArrayList<>();
         for (int i = numberForUsersPost * size; i < (size * numberForUsersPost) + size; i++) {
             if(i < jsonArray.length()) {
@@ -285,4 +311,26 @@ public class Database {
         disconnect();
         return number;
     }
+
+    public static String lastUserImageId() {
+        connectToDatabase();
+        collection = database.getCollection("Users");
+        String lastId = "";
+        if (collection.find().sort(new Document("phoneNumber", -1)).limit(1).cursor().hasNext()) {
+            String jsonString = collection.find().sort(new Document("phoneNumber", -1)).limit(1).cursor().next().toJson();
+            JSONObject obj = new JSONObject(jsonString);
+            lastId = String.valueOf(obj.getInt("profileNameImage"));
+        }
+        disconnect();
+        return lastId;
+    }
+
+    public static ArrayList<String> getStringArray (JSONArray JArray) {
+        ArrayList<String> list = new ArrayList<>();
+        for (int i = 0; i < JArray.length(); i++) {
+            list.add(JArray.getString(i));
+        }
+        return list;
+    }
+
 }
