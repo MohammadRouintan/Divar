@@ -60,9 +60,14 @@ public class Client extends Thread {
                     } else if (task == 4) {
                         JSONObject json = new JSONObject(DIS.readUTF());
 
-                        Users user1 = new Users(new Document("phoneNumber", number), new Document("$set", new Document(json.getString("updateUserKeys"), json.get("updateUserValues"))));
-                        Database.updateUsers(user1);
-                        //user.updateUser((ArrayList<String>) json.get("keys"), json.get("values"));
+                        ArrayList<String> key = (ArrayList<String>) json.get("updateUserKeys");
+                        ArrayList<Object> value = (ArrayList<Object>) json.get("updateUserValues");
+
+                        Users user1 = new Users(new Document("phoneNumber", number));
+
+                        for (int i = 0; i < value.size(); i++) {
+                            Database.updateUsers(user1 ,key.get(i) ,value.get(i));
+                        }
                     } else if (task == 5) {
                         Users user1 = new Users(new Document("phoneNumber", number));
                         DOS.writeBoolean(Database.isUserExits(user1));
@@ -93,8 +98,15 @@ public class Client extends Thread {
                         }
                     } else if (task == 10) {
                         JSONObject json = new JSONObject(DIS.readUTF());
-                        Post post1 = new Post(new Document("postId", json.getInt("postId")), new Document("$set", new Document(json.getString("updateKeys"), json.get("updateValues"))));
-                        Database.updatePost(post1);
+
+                        ArrayList<String> key = (ArrayList<String>) json.get("updateKeys");
+                        ArrayList<Object> value = (ArrayList<Object>) json.get("updateValues");
+
+                        Post post1 = new Post(new Document("postId", json.getInt("postId")));
+
+                        for (int i = 0; i < value.size(); i++) {
+                            Database.updatePost(post1 ,key.get(i) ,value.get(i));
+                        }
                     } else if (task == 11) {
                         int postID = DIS.readInt();
                         Post post1 = new Post(new Document("postId", postID));
