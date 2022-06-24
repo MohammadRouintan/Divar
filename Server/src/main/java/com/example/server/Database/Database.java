@@ -3,10 +3,7 @@ package com.example.server.Database;
 import com.example.server.Database.Messages.Messages;
 import com.example.server.Database.Posts.Post;
 import com.example.server.Database.Users.Users;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.*;
 import javafx.geometry.Pos;
 import org.bson.Document;
 import org.json.JSONArray;
@@ -151,6 +148,20 @@ public class Database {
         }
         disconnect();
         return lastId;
+    }
+
+    public static ArrayList<String> getNotAcceptedPosts() {
+        connectToDatabase();
+        collection = database.getCollection("Posts");
+        ArrayList<String> notAccepted = new ArrayList<>();
+        if(collection.find(new Document("accept", false)).cursor().hasNext()) {
+            MongoCursor<Document> cursor = collection.find(new Document("accept", false)).iterator();
+            while (cursor.hasNext()) {
+                notAccepted.add(cursor.next().toJson());
+            }
+        }
+        disconnect();
+        return notAccepted;
     }
 
     public static ArrayList<String> getPosts(int number, String branchMain) {
