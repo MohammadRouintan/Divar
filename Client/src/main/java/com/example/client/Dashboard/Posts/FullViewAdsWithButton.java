@@ -12,15 +12,13 @@ import org.json.JSONObject;
 
 public class FullViewAdsWithButton extends FullViewAds{
 
-    public FullViewAdsWithButton(Parent parent, JSONObject post) {
-        super(parent, post);
+    public FullViewAdsWithButton(Parent parent, JSONObject post, String paneName) {
+        super(parent, post, paneName);
     }
 
     @Override
     protected void AddBox(Parent parent, JSONObject post){
         super.AddBox(parent,post);
-        if(post.getBoolean("agreement")){
 
-        }
     }
 }

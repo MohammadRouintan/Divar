@@ -2,6 +2,7 @@ package com.example.client.Dashboard.Posts;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -22,11 +23,13 @@ public class FullViewAds {
     private JSONObject post;
     private Parent parent;
     protected Pagination pagination;
+    String paneName;
 
-    public FullViewAds(Parent parent, JSONObject post){
+    public FullViewAds(Parent parent, JSONObject post, String paneName){
         this.post = post;
         this.parent = parent;
         this.pagination = (Pagination)parent;
+        this.paneName = paneName;
         AddBox(parent,post);
     }
 
@@ -56,24 +59,21 @@ public class FullViewAds {
 
         Label title = new Label(post.getString("title"));
         Label time = new Label(post.getString("time"));
-        Label price = new Label();
-        Label newPrice = new Label("NewPrice : ");
+        Label price;
         TextField priceField = new TextField();
-        HBox auction = new HBox();
+        priceField.setPromptText("NewPrice");
+        priceField.setAlignment(Pos.CENTER);
+        priceField.setMaxWidth(300);
         Label exchange = new Label();
 
-        if (post.getBoolean("auction")) {
-            auction.getChildren().addAll(newPrice, priceField);
+        if (post.getBoolean("agreement")) {
+            price = new Label("agreement");
         } else {
-            if (post.getBoolean("agreement")) {
-                price = new Label("agreement");
-            } else {
-                price = new Label(post.getString("price"));
-            }
+            price = new Label(post.getString("price"));
+        }
 
-            if (post.getBoolean("exchange")) {
-                exchange.setText("I want to exchange");
-            }
+        if (post.getBoolean("exchange")) {
+            exchange.setText("I want to exchange");
         }
 
 
@@ -90,8 +90,8 @@ public class FullViewAds {
 
         AdsVBox.setPrefWidth(1200);
         AdsVBox.setPrefHeight(570);
-        if (post.getBoolean("auction")) {
-            mainVBox.getChildren().addAll(hBox,slideShow,title,time,auction,featureColumnHBox,featureRowVBox,descriptionVBox);
+        if (post.getBoolean("auction") && !this.paneName.equals("MyAds")) {
+            mainVBox.getChildren().addAll(hBox,slideShow,title,time,priceField,featureColumnHBox,featureRowVBox,descriptionVBox);
         } else {
             mainVBox.getChildren().addAll(hBox,slideShow,title,time,price,exchange,featureColumnHBox,featureRowVBox,descriptionVBox);
         }
