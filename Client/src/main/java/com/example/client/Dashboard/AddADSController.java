@@ -59,7 +59,7 @@ public class AddADSController {
         }
 
         private void setMainCategories(){
-            String[] mainCategories = {"Digital Commodity", "Entertainment", "Equipment", "Estate", "Home Commodity", "Personal Items", "Recruitment", "Services", "Social", "Vehicles"};
+            String[] mainCategories = {"Digital Goods", "Entertainment", "Equipment", "Estate", "Home Goods", "Personal Items", "Recruitment", "Services", "Social", "Vehicles"};
             ObservableList<String> temp = FXCollections.observableArrayList();
             temp.addAll(mainCategories);
             MainBranchCategories.setItems(temp);
@@ -164,6 +164,7 @@ public class AddADSController {
                 addFeatureRowCounter++;
             }
         }
+
         @FXML
         void removeFeatureRow(ActionEvent event){
             if(addFeatureRowCounter > 1){
@@ -171,6 +172,7 @@ public class AddADSController {
                 addFeatureRowCounter--;
             }
         }
+
         private static int addFeatureColumnCounter = 1;
         @FXML
         void addFeatureColumn(ActionEvent event){
@@ -361,10 +363,13 @@ public class AddADSController {
         @FXML
         void agreedPriceCheckBoxFunction(ActionEvent event){
                 if(agreedPriceCheckBox.isSelected()){
-                        postPriceFiled.setEditable(false);
-                        postPriceFiled.setText("");
+                    auctionCheckBox.setSelected(false);
+                    auctionCheckBox.setDisable(true);
+                    postPriceFiled.setEditable(false);
+                    postPriceFiled.setText("");
                 }else{
-                        postPriceFiled.setEditable(true);
+                    auctionCheckBox.setDisable(false);
+                    postPriceFiled.setEditable(true);
                 }
         }
 
@@ -374,10 +379,17 @@ public class AddADSController {
         @FXML
         void auctionCheckBoxFunction(ActionEvent event){
                 if(auctionCheckBox.isSelected()){
-                        priceLabel.setText("Base Price : ");
+                    agreedPriceCheckBox.setSelected(false);
+                    agreedPriceCheckBox.setDisable(true);
+                    exchangeCheckBox.setSelected(false);
+                    exchangeCheckBox.setDisable(true);
+                    priceLabel.setText("Base Price : ");
                 }else{
-                        priceLabel.setText("Price : ");
+                    agreedPriceCheckBox.setDisable(false);
+                    exchangeCheckBox.setDisable(false);
+                    priceLabel.setText("Price : ");
                 }
+
         }
 
         private FileChooser chooser = new FileChooser();
