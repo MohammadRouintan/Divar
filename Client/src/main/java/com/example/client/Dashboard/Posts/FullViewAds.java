@@ -72,6 +72,7 @@ public class FullViewAds {
         mainVBox.getChildren().addAll(hBox,slideShow,title,time,price,featureColumnHBox,featureRowVBox,descriptionVBox);
         //post.getJSONArray("rowName").length();
         //post.getJSONArray("columnName").length();
+
     }
 
 
