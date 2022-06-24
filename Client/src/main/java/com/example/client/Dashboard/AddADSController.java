@@ -164,6 +164,7 @@ public class AddADSController {
                 addFeatureRowCounter++;
             }
         }
+
         @FXML
         void removeFeatureRow(ActionEvent event){
             if(addFeatureRowCounter > 1){
@@ -171,6 +172,7 @@ public class AddADSController {
                 addFeatureRowCounter--;
             }
         }
+
         private static int addFeatureColumnCounter = 1;
         @FXML
         void addFeatureColumn(ActionEvent event){
