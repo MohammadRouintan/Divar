@@ -5,54 +5,54 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="551.0" prefWidth="600.0" spacing="10.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="551.0" prefWidth="600.0" spacing="10.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Dashboard.Explore.CategoriesController">
    <children>
-      <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="500.0" text="Estate">
+      <Button mnemonicParsing="false" onAction="#estateButton" prefHeight="44.0" prefWidth="500.0" text="Estate">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="500.0" text="Vehicles">
+      <Button mnemonicParsing="false" onAction="#vehiclesButton" prefHeight="44.0" prefWidth="500.0" text="Vehicles">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="500.0" text="Digital Goods">
+      <Button mnemonicParsing="false" onAction="#digitalGoodsButton" prefHeight="44.0" prefWidth="500.0" text="Digital Goods">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="500.0" text="Home Goods">
+      <Button mnemonicParsing="false" onAction="#homeGoodsButton" prefHeight="44.0" prefWidth="500.0" text="Home Goods">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="500.0" text="Services">
+      <Button mnemonicParsing="false" onAction="#servicesButton" prefHeight="44.0" prefWidth="500.0" text="Services">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="500.0" text="Personal Items">
+      <Button mnemonicParsing="false" onAction="#personalItemsButton" prefHeight="44.0" prefWidth="500.0" text="Personal Items">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="500.0" text="Entertainment">
+      <Button mnemonicParsing="false" onAction="#entertainmentButton" prefHeight="44.0" prefWidth="500.0" text="Entertainment">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="500.0" text="Social">
+      <Button mnemonicParsing="false" onAction="#socialButton" prefHeight="44.0" prefWidth="500.0" text="Social">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="500.0" text="Equipment">
+      <Button mnemonicParsing="false" onAction="#equipmentButton" prefHeight="44.0" prefWidth="500.0" text="Equipment">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="500.0" text="Recruitment">
+      <Button mnemonicParsing="false" onAction="#reqruitmentButton" prefHeight="44.0" prefWidth="500.0" text="Recruitment">
          <font>
             <Font size="20.0" />
          </font>

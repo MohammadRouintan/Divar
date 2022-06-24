@@ -86,7 +86,4 @@ public class NewPage {
         Parent parent = vBox.getParent().getParent().getParent().getParent();
         FullViewAds fullViewAds = new FullViewAds(parent,post, this.paneName);
     }
-
-
-
 }
