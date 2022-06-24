@@ -1,7 +1,9 @@
 package com.example.client.Dashboard.Posts;
 
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.control.Pagination;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -74,8 +76,15 @@ public class NewPage {
         vBox.setStyle("-fx-background-color: #e74c3c");
         vBox.setAlignment(Pos.TOP_CENTER);
         vBox.getChildren().addAll(imageView,titleLabel,priceLabel,timeLabel);
+        vBox.setOnMouseClicked(event -> ShowAds(vBox, post));
         return vBox;
     }
+
+    void ShowAds(VBox vBox,JSONObject post){
+        Parent parent = vBox.getParent().getParent().getParent().getParent();
+        FullViewAds fullViewAds = new FullViewAds(parent,post);
+    }
+
 
 
 }

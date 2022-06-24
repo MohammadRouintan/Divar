@@ -29,6 +29,7 @@ public class MyAdsController {
 
     @FXML
     private VBox mainVBox;
+
     @FXML
     private Pagination pagination;
 
@@ -59,5 +60,4 @@ public class MyAdsController {
         PagesList.add(newPage.getPage());
         return PagesList.get(pageIndex);
     }
-
 }
