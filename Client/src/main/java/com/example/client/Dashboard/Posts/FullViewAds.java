@@ -56,16 +56,27 @@ public class FullViewAds {
 
         Label title = new Label(post.getString("title"));
         Label time = new Label(post.getString("time"));
-        Label price;
-        if (post.getBoolean("agreement")) {
-            price = new Label("agreement");
-        } else {
-            price = new Label(post.getString("price"));
-        }
+        Label price = new Label();
+        Label newPrice = new Label("NewPrice : ");
+        TextField priceField = new TextField();
+        HBox auction = new HBox();
         Label exchange = new Label();
-        if (post.getBoolean("exchange")) {
-            exchange.setText("I want to exchange");
+
+        if (post.getBoolean("auction")) {
+            auction.getChildren().addAll(newPrice, priceField);
+        } else {
+            if (post.getBoolean("agreement")) {
+                price = new Label("agreement");
+            } else {
+                price = new Label(post.getString("price"));
+            }
+
+            if (post.getBoolean("exchange")) {
+                exchange.setText("I want to exchange");
+            }
         }
+
+
 
         HBox featureColumnHBox = makeVerticalFeatureLabel(post);
         VBox featureRowVBox = makeHorizontalFeatureLabel(post);
@@ -79,7 +90,11 @@ public class FullViewAds {
 
         AdsVBox.setPrefWidth(1200);
         AdsVBox.setPrefHeight(570);
-        mainVBox.getChildren().addAll(hBox,slideShow,title,time,price,exchange,featureColumnHBox,featureRowVBox,descriptionVBox);
+        if (post.getBoolean("auction")) {
+            mainVBox.getChildren().addAll(hBox,slideShow,title,time,auction,featureColumnHBox,featureRowVBox,descriptionVBox);
+        } else {
+            mainVBox.getChildren().addAll(hBox,slideShow,title,time,price,exchange,featureColumnHBox,featureRowVBox,descriptionVBox);
+        }
         //post.getJSONArray("rowName").length();
         //post.getJSONArray("columnName").length();
 
