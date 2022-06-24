@@ -59,6 +59,9 @@ public class MyAdsController {
             post1.put("imageName",imageName);
             post1.put("ColumnName",ColumnName);
             post1.put("ColumnValue",ColumnValue);
+            post1.put("bio","I have a scene showing 3 images, and I want each of them to take a third of the width of the scene. " +
+                    "From now, I have made 3 Pane of each 30% of it, it works. But in those Pane," +
+                    " I can't make my ImageView use only the width of the Pane.");
             post.add(post1);
         }
         VBox vBox = new VBox();
@@ -89,6 +92,9 @@ public class MyAdsController {
             post1.put("imageName",imageName);
             post1.put("ColumnName",ColumnName);
             post1.put("ColumnValue",ColumnValue);
+            post1.put("bio","I have a scene showing 3 images, and I want each of them to take a third of the width of the scene. " +
+                    "From now, I have made 3 Pane of each 30% of it, it works. But in those Pane," +
+                    " I can't make my ImageView use only the width of the Pane.");
             post.add(post1);
         }
         VBox vBox = new VBox();

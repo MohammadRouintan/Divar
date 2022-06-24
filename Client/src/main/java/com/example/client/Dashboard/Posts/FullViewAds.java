@@ -60,9 +60,16 @@ public class FullViewAds {
         HBox featureColumnHBox = makeVerticalFeatureLabel(post);
         VBox featureRowVBox = makeHorizontalFeatureLabel(post);
 
+        Label descriptionLable = new Label("Description");
+        Label descriptionText = new Label(post.getString("bio"));
+        descriptionText.setPrefWidth(300);
+        descriptionText.setWrapText(true);
+        VBox descriptionVBox = new VBox();
+        descriptionVBox.getChildren().addAll(descriptionLable,descriptionText);
+
         AdsVBox.setPrefWidth(1200);
         AdsVBox.setPrefHeight(570);
-        mainVBox.getChildren().addAll(hBox,slideShow,title,time,price,featureColumnHBox,featureRowVBox);
+        mainVBox.getChildren().addAll(hBox,slideShow,title,time,price,featureColumnHBox,featureRowVBox,descriptionVBox);
         //post.getJSONArray("rowName").length();
         //post.getJSONArray("columnName").length();
     }
@@ -123,4 +130,5 @@ public class FullViewAds {
 
         return featureVBox;
     }
+
 }
