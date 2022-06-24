@@ -1,16 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="551.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-        <Label alignment="CENTER" text="CategoriesSection">
-            <font>
-                <Font size="76.0" />
-            </font>
-        </Label>
-    </children>
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="551.0" prefWidth="600.0" spacing="10.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="500.0" text="Estate">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="500.0" text="Vehicles">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="500.0" text="Digital Goods">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="500.0" text="Home Goods">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="500.0" text="Services">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="500.0" text="Personal Items">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="500.0" text="Entertainment">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="500.0" text="Social">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="500.0" text="Equipment">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="500.0" text="Recruitment">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+   </children>
+   <padding>
+      <Insets top="10.0" />
+   </padding>
 </VBox>

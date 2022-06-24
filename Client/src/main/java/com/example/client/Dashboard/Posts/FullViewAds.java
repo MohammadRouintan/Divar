@@ -1,12 +1,15 @@
 package com.example.client.Dashboard.Posts;
 
+import com.example.client.socket.ImageController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -20,19 +23,22 @@ public class FullViewAds {
 
     private JSONObject post;
     private Parent parent;
-    private Pagination pagination;
+    protected Pagination pagination;
+    protected VBox mainVBox;
+    String paneName;
 
-    public FullViewAds(Parent parent, JSONObject post){
+    public FullViewAds(Parent parent, JSONObject post, String paneName){
         this.post = post;
         this.parent = parent;
         this.pagination = (Pagination)parent;
+        this.paneName = paneName;
+        this.mainVBox = (VBox)this.parent.getParent();
         AddBox(parent,post);
     }
 
-    private void AddBox(Parent parent,JSONObject post){
+    protected void AddBox(Parent parent,JSONObject post){
 
 
-        VBox mainVBox = (VBox)parent.getParent();
         mainVBox.getChildren().clear();
 
 
@@ -55,7 +61,29 @@ public class FullViewAds {
 
         Label title = new Label(post.getString("title"));
         Label time = new Label(post.getString("time"));
-        Label price = new Label(post.getString("price"));
+        Label price;
+        TextField priceField = new TextField();
+        priceField.setPromptText("NewPrice");
+        priceField.setAlignment(Pos.CENTER);
+        priceField.setMaxWidth(300);
+        Label exchange = new Label();
+
+        if (post.getBoolean("agreement")) {
+            price = new Label("agreement");
+        } else {
+            price = new Label(post.getString("price"));
+        }
+
+        if (post.getBoolean("exchange")) {
+            exchange.setText("I want to exchange");
+        }
+
+        Button bookmarked = new Button("Bookmark");
+        Button chat = new Button("Chat");
+        HBox buttons = new HBox();
+        buttons.setAlignment(Pos.CENTER);
+        buttons.setSpacing(20);
+        buttons.getChildren().addAll(bookmarked, chat);
 
         HBox featureColumnHBox = makeVerticalFeatureLabel(post);
         VBox featureRowVBox = makeHorizontalFeatureLabel(post);
@@ -69,20 +97,26 @@ public class FullViewAds {
 
         AdsVBox.setPrefWidth(1200);
         AdsVBox.setPrefHeight(570);
-        mainVBox.getChildren().addAll(hBox,slideShow,title,time,price,featureColumnHBox,featureRowVBox,descriptionVBox);
+        if (post.getBoolean("auction") && !this.paneName.equals("MyAds")) {
+            mainVBox.getChildren().addAll(hBox,slideShow,title,time,priceField,featureColumnHBox,featureRowVBox,descriptionVBox, buttons);
+        } else if (!this.paneName.equals("MyAds")){
+            mainVBox.getChildren().addAll(hBox,slideShow,title,time,price,exchange,featureColumnHBox,featureRowVBox,descriptionVBox, buttons);
+        } else {
+            mainVBox.getChildren().addAll(hBox,slideShow,title,time,price,exchange,featureColumnHBox,featureRowVBox,descriptionVBox);
+        }
         //post.getJSONArray("rowName").length();
         //post.getJSONArray("columnName").length();
 
     }
 
 
-    private void BackButton(Pagination pagination){
+    protected void BackButton(Pagination pagination){
         VBox mainVbox = (VBox) parent.getParent();
         mainVbox.getChildren().add(new Label("helllo"));
     }
 
 
-    private Pagination makeSlideShow(JSONObject post){
+    protected Pagination makeSlideShow(JSONObject post){
         JSONArray images = post.getJSONArray("imageName");
         Pagination slideShow = new Pagination();
         slideShow.setPrefHeight(350);
@@ -90,7 +124,15 @@ public class FullViewAds {
         slideShow.setPageCount(images.length());
         slideShow.setMaxPageIndicatorCount(images.length());
         slideShow.setPageFactory((pageIndex) -> {
-            Image img = new Image("/postImage/"+images.getString(pageIndex)+".jpg");
+            String url = "/post/"+getStringArray(images).get(pageIndex) + ".png";
+            ImageController imageController = new ImageController("", getStringArray(images).get(pageIndex), 1);
+            imageController.start();
+            try {
+                imageController.join();
+            } catch (InterruptedException e){
+                System.err.println(e.getMessage());
+            }
+            Image img = new Image(imageController.getPath());
             ImageView imageView = new ImageView(img);
             imageView.setFitWidth(400);
             imageView.setFitHeight(350);
@@ -99,10 +141,10 @@ public class FullViewAds {
         return slideShow;
     }
 
-    private HBox makeVerticalFeatureLabel(JSONObject post){
+    protected HBox makeVerticalFeatureLabel(JSONObject post){
 
-        JSONArray NameColumnFeature = post.getJSONArray("ColumnName");
-        JSONArray ValueColumnFeature = post.getJSONArray("ColumnValue");
+        JSONArray NameColumnFeature = post.getJSONArray("columnName");
+        JSONArray ValueColumnFeature = post.getJSONArray("columnValue");
 
         HBox featureHbox = new HBox();
         for(int i = 0; i < NameColumnFeature.length(); i++){
@@ -115,10 +157,10 @@ public class FullViewAds {
         return featureHbox;
     }
 
-    private VBox makeHorizontalFeatureLabel(JSONObject post){
+    protected VBox makeHorizontalFeatureLabel(JSONObject post){
 
-        JSONArray NameRowFeature = post.getJSONArray("ColumnName");
-        JSONArray ValueRowFeature = post.getJSONArray("ColumnValue");
+        JSONArray NameRowFeature = post.getJSONArray("columnName");
+        JSONArray ValueRowFeature = post.getJSONArray("columnValue");
 
         VBox featureVBox = new VBox();
         for(int i = 0; i < NameRowFeature.length(); i++){
@@ -131,5 +173,15 @@ public class FullViewAds {
 
         return featureVBox;
     }
-
+    public ArrayList<String> getStringArray (JSONArray JArray) {
+        ArrayList<String> list = new ArrayList<>();
+        for (int i = 0; i < JArray.length(); i++) {
+            list.add(JArray.getString(i));
+        }
+        return list;
+    }
+//    protected Label setPrice(JSONObject post){
+//        Label price = new Label(post.getString("price"));
+//        return Label;
+//    }
 }

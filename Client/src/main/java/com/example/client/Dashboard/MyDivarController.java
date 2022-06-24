@@ -27,7 +27,7 @@ public class MyDivarController {
     @FXML
     void SavedButton(ActionEvent event){
         try {
-            Pane pane = FXMLLoader.load(Main.class.getResource("MyDivarPages/Saved.fxml"));
+            Pane pane = FXMLLoader.load(Main.class.getResource("MyDivarPages/MyDivarAds.fxml"));
             MyDivarPane.getChildren().clear();
             MyDivarPane.getChildren().add(pane);
         } catch (IOException ex){
@@ -38,7 +38,7 @@ public class MyDivarController {
     @FXML
     void RecentVisitsButton(ActionEvent event){
         try {
-            Pane pane = FXMLLoader.load(Main.class.getResource("MyDivarPages/RecentVisits.fxml"));
+            Pane pane = FXMLLoader.load(Main.class.getResource("MyDivarPages/MyDivarAds.fxml"));
             MyDivarPane.getChildren().clear();
             MyDivarPane.getChildren().add(pane);
         } catch (IOException ex){

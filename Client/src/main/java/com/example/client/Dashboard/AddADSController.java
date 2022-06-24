@@ -59,7 +59,7 @@ public class AddADSController {
         }
 
         private void setMainCategories(){
-            String[] mainCategories = {"Digital Commodity", "Entertainment", "Equipment", "Estate", "Home Commodity", "Personal Items", "Recruitment", "Services", "Social", "Vehicles"};
+            String[] mainCategories = {"Digital Goods", "Entertainment", "Equipment", "Estate", "Home Goods", "Personal Items", "Recruitment", "Services", "Social", "Vehicles"};
             ObservableList<String> temp = FXCollections.observableArrayList();
             temp.addAll(mainCategories);
             MainBranchCategories.setItems(temp);
@@ -164,6 +164,7 @@ public class AddADSController {
                 addFeatureRowCounter++;
             }
         }
+
         @FXML
         void removeFeatureRow(ActionEvent event){
             if(addFeatureRowCounter > 1){
@@ -171,6 +172,7 @@ public class AddADSController {
                 addFeatureRowCounter--;
             }
         }
+
         private static int addFeatureColumnCounter = 1;
         @FXML
         void addFeatureColumn(ActionEvent event){
@@ -361,10 +363,13 @@ public class AddADSController {
         @FXML
         void agreedPriceCheckBoxFunction(ActionEvent event){
                 if(agreedPriceCheckBox.isSelected()){
-                        postPriceFiled.setEditable(false);
-                        postPriceFiled.setText("");
+                    auctionCheckBox.setSelected(false);
+                    auctionCheckBox.setDisable(true);
+                    postPriceFiled.setEditable(false);
+                    postPriceFiled.setText("");
                 }else{
-                        postPriceFiled.setEditable(true);
+                    auctionCheckBox.setDisable(false);
+                    postPriceFiled.setEditable(true);
                 }
         }
 
@@ -374,10 +379,17 @@ public class AddADSController {
         @FXML
         void auctionCheckBoxFunction(ActionEvent event){
                 if(auctionCheckBox.isSelected()){
-                        priceLabel.setText("Base Price : ");
+                    agreedPriceCheckBox.setSelected(false);
+                    agreedPriceCheckBox.setDisable(true);
+                    exchangeCheckBox.setSelected(false);
+                    exchangeCheckBox.setDisable(true);
+                    priceLabel.setText("Base Price : ");
                 }else{
-                        priceLabel.setText("Price : ");
+                    agreedPriceCheckBox.setDisable(false);
+                    exchangeCheckBox.setDisable(false);
+                    priceLabel.setText("Price : ");
                 }
+
         }
 
         private FileChooser chooser = new FileChooser();
@@ -501,12 +513,12 @@ public class AddADSController {
             nameTxt.setMinHeight(35);
             nameTxt.setPrefWidth(110);
             nameTxt.setPrefHeight(35);
-            nameTxt.setId("RowName" + counter);
+            nameTxt.setId("rowName" + counter);
             TextField detailsTxt = new TextField();
             detailsTxt.setMinHeight(35);
             detailsTxt.setPrefWidth(285);
             detailsTxt.setPrefHeight(35);
-            detailsTxt.setId("RowValue" + counter);
+            detailsTxt.setId("rowValue" + counter);
             hBox.getChildren().add(nameTxt);
             hBox.getChildren().add(detailsTxt);
             return hBox;
@@ -516,11 +528,11 @@ public class AddADSController {
         vBox.setPadding(new Insets(10, 0, 5, 0));
         vBox.setAlignment(Pos.CENTER);
         TextField nameTxt = new TextField();
-        nameTxt.setId("ColumnName" + counter);
+        nameTxt.setId("columnName" + counter);
         nameTxt.setMinHeight(35);
         nameTxt.setMaxWidth(150);
         TextField detailsTxt = new TextField();
-        detailsTxt.setId("ColumnValue" + counter);
+        detailsTxt.setId("columnValue" + counter);
         detailsTxt.setMinHeight(35);
         detailsTxt.setMaxWidth(345);
         vBox.getChildren().add(nameTxt);

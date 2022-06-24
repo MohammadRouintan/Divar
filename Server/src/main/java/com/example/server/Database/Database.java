@@ -245,11 +245,11 @@ public class Database {
 
         String user = getUser(filter);
         JSONObject object = new JSONObject(user);
-        JSONArray jsonArray = object.getJSONArray("userPosts");
+        ArrayList<String> userPosts = getStringArray(object.getJSONArray("userPosts"));
         ArrayList<String> usersPost = new ArrayList<>();
         for (int i = numberForUsersPost * size; i < (size * numberForUsersPost) + size; i++) {
-            if(i < jsonArray.length()) {
-                usersPost.add(getPost(new Document("postId", jsonArray.get(i))));
+            if(i < userPosts.size()) {
+                usersPost.add(getPost(new Document("postId", Integer.parseInt(userPosts.get(i)))));
             }
         }
         numberForUsersPost++;
@@ -315,11 +315,15 @@ public class Database {
     public static String lastUserImageId() {
         connectToDatabase();
         collection = database.getCollection("Users");
-        String lastId = "";
-        if (collection.find().sort(new Document("phoneNumber", -1)).limit(1).cursor().hasNext()) {
-            String jsonString = collection.find().sort(new Document("phoneNumber", -1)).limit(1).cursor().next().toJson();
-            JSONObject obj = new JSONObject(jsonString);
-            lastId = String.valueOf(obj.getInt("profileNameImage"));
+        String lastId = "1";
+        if (collection.find().cursor().hasNext()) {
+            for (Document document : collection.find()) {
+                String jsonString = document.toJson();
+                JSONObject obj = new JSONObject(jsonString);
+                if (obj.getInt("profileNameImage") > Integer.parseInt(lastId)) {
+                    lastId = String.valueOf(obj.getInt("profileNameImage"));
+                }
+            }
         }
         disconnect();
         return lastId;

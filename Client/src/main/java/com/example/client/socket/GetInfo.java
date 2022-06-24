@@ -319,4 +319,9 @@ public class GetInfo {
     public static void getProfile(String fileName){
 
     }
+
+    public static ArrayList<String> chatCount(String phoneNumber){return null;}
+
+    public static String getMessage(String phoneNumber1 ,String phoneNumber2){return null;}
+
 }
