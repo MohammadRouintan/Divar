@@ -29,6 +29,7 @@ public class MyAdsController {
 
     @FXML
     private VBox mainVBox;
+
     @FXML
     private Pagination pagination;
 
@@ -38,6 +39,7 @@ public class MyAdsController {
     @FXML
     public void initialize() {
         ArrayList<String> list = GetInfo.getUserPosts();
+
         ArrayList<JSONObject> userPosts = new ArrayList<>();
         for(String str : list){
             userPosts.add(new JSONObject(str));
@@ -59,5 +61,4 @@ public class MyAdsController {
         PagesList.add(newPage.getPage());
         return PagesList.get(pageIndex);
     }
-
 }

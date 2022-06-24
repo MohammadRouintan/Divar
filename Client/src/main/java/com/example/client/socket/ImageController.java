@@ -27,7 +27,7 @@ public class ImageController extends Thread{
     @Override
     public void run() {
         if (work == 1) {
-            receiveFile(filepath, imageID);
+            receiveFile(imageID);
         } else if (work == 2) {
             sendFile(filepath, imageID);
         } else if (work == 3){
@@ -41,12 +41,12 @@ public class ImageController extends Thread{
             System.err.println(e.getMessage());
         }
     }
-    private void receiveFile (String filePath, String imageID) {
+    private void receiveFile (String imageID) {
         int bytes = 0;
         try {
             DOS.writeInt(1);
             DOS.writeUTF(imageID);
-            FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+            FileOutputStream fileOutputStream = new FileOutputStream("/post/" + imageID + ".png");
             long size = DIS.readLong();
             byte[] buffer = new byte[4 * 1024];
             while (size > 0 && (bytes = DIS.read(buffer, 0, (int) Math.min(buffer.length, size))) != -1) {
