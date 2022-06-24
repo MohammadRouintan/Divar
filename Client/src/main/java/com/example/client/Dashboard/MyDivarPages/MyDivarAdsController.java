@@ -3,16 +3,14 @@ package com.example.client.Dashboard.MyDivarPages;
 import com.example.client.Dashboard.Posts.NewPage;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookmarkedAdsController {
+public class MyDivarAdsController {
     @FXML
     private VBox mainVBox;
 
@@ -56,7 +54,7 @@ public class BookmarkedAdsController {
                     " I can't make my ImageView use only the width of the Pane.");
             post1.put("agreement", true);
             post1.put("exchange", true);
-            post1.put("auction", true);
+            post1.put("auction", false);
             post.add(post1);
         }
         VBox vBox = new VBox();

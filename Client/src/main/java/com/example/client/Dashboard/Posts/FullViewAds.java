@@ -23,6 +23,7 @@ public class FullViewAds {
     private JSONObject post;
     private Parent parent;
     protected Pagination pagination;
+    protected VBox mainVBox;
     String paneName;
 
     public FullViewAds(Parent parent, JSONObject post, String paneName){
@@ -30,13 +31,13 @@ public class FullViewAds {
         this.parent = parent;
         this.pagination = (Pagination)parent;
         this.paneName = paneName;
+        this.mainVBox = (VBox)this.parent.getParent();
         AddBox(parent,post);
     }
 
     protected void AddBox(Parent parent,JSONObject post){
 
 
-        VBox mainVBox = (VBox)parent.getParent();
         mainVBox.getChildren().clear();
 
 
@@ -76,7 +77,12 @@ public class FullViewAds {
             exchange.setText("I want to exchange");
         }
 
-
+        Button bookmarked = new Button("Bookmark");
+        Button chat = new Button("Chat");
+        HBox buttons = new HBox();
+        buttons.setAlignment(Pos.CENTER);
+        buttons.setSpacing(20);
+        buttons.getChildren().addAll(bookmarked, chat);
 
         HBox featureColumnHBox = makeVerticalFeatureLabel(post);
         VBox featureRowVBox = makeHorizontalFeatureLabel(post);
@@ -91,7 +97,9 @@ public class FullViewAds {
         AdsVBox.setPrefWidth(1200);
         AdsVBox.setPrefHeight(570);
         if (post.getBoolean("auction") && !this.paneName.equals("MyAds")) {
-            mainVBox.getChildren().addAll(hBox,slideShow,title,time,priceField,featureColumnHBox,featureRowVBox,descriptionVBox);
+            mainVBox.getChildren().addAll(hBox,slideShow,title,time,priceField,featureColumnHBox,featureRowVBox,descriptionVBox, buttons);
+        } else if (!this.paneName.equals("MyAds")){
+            mainVBox.getChildren().addAll(hBox,slideShow,title,time,price,exchange,featureColumnHBox,featureRowVBox,descriptionVBox, buttons);
         } else {
             mainVBox.getChildren().addAll(hBox,slideShow,title,time,price,exchange,featureColumnHBox,featureRowVBox,descriptionVBox);
         }
