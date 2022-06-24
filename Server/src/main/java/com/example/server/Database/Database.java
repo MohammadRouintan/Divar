@@ -290,6 +290,20 @@ public class Database {
         return document;
     }
 
+    public synchronized static ArrayList<String> findMessageCount(Document filter) {
+        connectToDatabase();
+        Document document = new Document("", "");
+        ArrayList<String> temp = new ArrayList<>();
+        collection = database.getCollection("Messages");
+        if (collection.find(filter).cursor().hasNext()) {
+            for (Document doc: collection.find(filter)) {
+                temp.add(doc.getString("user2"));
+            }
+        }
+        disconnect();
+        return temp;
+    }
+
     public static String getMessage(Document filter) {
         return findMessage(filter).toJson();
     }
