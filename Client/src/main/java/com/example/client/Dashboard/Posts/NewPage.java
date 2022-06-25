@@ -78,7 +78,8 @@ public class NewPage {
         }
 
         ImageView imageView = new ImageView();
-        Image img = new Image(imageController.getPath());
+        File file = new File(imageController.getPath());
+        Image img = new Image(file.toURI().toString());
         imageView.setFitHeight(200);
         imageView.setFitWidth(280);
         imageView.setImage(img);
