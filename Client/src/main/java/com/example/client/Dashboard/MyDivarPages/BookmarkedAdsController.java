@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyDivarAdsController {
+public class BookmarkedAdsController {
     @FXML
     private VBox mainVBox;
 
