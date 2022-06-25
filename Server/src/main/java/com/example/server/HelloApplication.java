@@ -21,7 +21,7 @@ public class HelloApplication extends Application {
 
     public static void main(String[] args) {
         System.out.println("a");
-        Database.imageID = Integer.parseInt(Database.lastImageIDFromDatabase());
+        Database.imageID = Database.lastImageIdOfPosts();
         AcceptClients acceptClients = new AcceptClients();
         acceptClients.run();
         launch();

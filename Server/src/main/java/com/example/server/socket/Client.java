@@ -66,7 +66,7 @@ public class Client extends Thread {
                         Users user1 = new Users(new Document("phoneNumber", number));
 
                         for (int i = 0; i < value.size(); i++) {
-                            Database.updateUsers(user1 ,key.get(i) ,value.get(i));
+                            Database.updateUser(user1 ,key.get(i) ,value.get(i));
                         }
                     } else if (task == 5) {
                         Users user1 = new Users(new Document("phoneNumber", number));
@@ -91,8 +91,9 @@ public class Client extends Thread {
                         DOS.flush();
                     } else if (task == 9) {
                         int sizePosts = DIS.readInt();
-                        String mainBranch = DIS.readUTF();
-                        ArrayList <String> list = Database.getPosts(sizePosts, mainBranch);
+                        String key = DIS.readUTF();
+                        String value = DIS.readUTF();
+                        ArrayList <String> list = Database.getPosts(sizePosts, key, value);
                         for (String str : list){
                             DOS.writeUTF(str);
                             DOS.flush();
@@ -142,7 +143,7 @@ public class Client extends Thread {
                             DOS.flush();
                         }
                     }else if (task == 15) {
-                        Database.addUsers(users);
+                        Database.addUser(users);
                     }else if (task == 16){
                         DOS.writeInt(Database.lastImageID());
                         DOS.flush();
