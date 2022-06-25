@@ -188,7 +188,7 @@ public class Database {
         return notAccepted;
     }
 
-    public static ArrayList<String> getPosts(int number, int index, String key, Object value) {
+    public static ArrayList<String> getPosts(int number, String key, Object value, int index) {
         connectToDatabase();
         collection = database.getCollection("Posts");
         ArrayList<String> posts = new ArrayList<>();
