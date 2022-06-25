@@ -56,33 +56,9 @@
                   <Insets left="10.0" />
                </padding>
             </HBox>
-            <ScrollPane hbarPolicy="NEVER" layoutX="10.0" layoutY="69.0" prefHeight="466.0" prefWidth="363.0" style="-fx-background-color: #ecf0f1;" vbarPolicy="NEVER" AnchorPane.leftAnchor="0.0">
+            <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="10.0" layoutY="69.0" prefHeight="466.0" prefWidth="363.0" style="-fx-background-color: #ecf0f1;" vbarPolicy="NEVER" AnchorPane.leftAnchor="0.0">
                <content>
-                  <VBox fx:id="chatBox" prefHeight="476.0" prefWidth="363.0" style="-fx-background-color: #ecf0f1;">
-                     <children>
-                        <HBox alignment="CENTER_LEFT" minHeight="63.0" minWidth="358.0" prefHeight="63.0" prefWidth="358.0" spacing="10.0">
-                           <children>
-                              <Circle fill="WHITE" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Label prefHeight="50.0" prefWidth="286.0" style="-fx-background-color: #fff;" text="salam khobi kos nariii bokonim" />
-                           </children>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                           <padding>
-                              <Insets left="5.0" />
-                           </padding>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" minHeight="56.0" minWidth="358.0" prefHeight="70.0" prefWidth="358.0" spacing="10.0">
-                           <children>
-                              <Label alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="286.0" style="-fx-background-color: #fff; -fx-border-radius: 20;" text="hamii kos ghir nemayd" />
-                              <Circle fill="WHITE" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-                           </children>
-                           <padding>
-                              <Insets right="5.0" />
-                           </padding>
-                        </HBox>
-                     </children>
-                  </VBox>
+                  <VBox fx:id="chatBox" prefHeight="485.0" prefWidth="363.0" style="-fx-background-color: #ecf0f1;" />
                </content>
             </ScrollPane>
             <HBox alignment="CENTER_LEFT" layoutX="-2.0" layoutY="500.0" prefHeight="59.0" prefWidth="379.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0">
