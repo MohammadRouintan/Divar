@@ -4,7 +4,6 @@ import com.example.server.Database.Messages.Messages;
 import com.example.server.Database.Posts.Post;
 import com.example.server.Database.Users.Users;
 import com.mongodb.client.*;
-import javafx.geometry.Pos;
 import org.bson.Document;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -39,26 +38,11 @@ public class Database {
         collection = database.getCollection("Posts");
         collection.insertOne(post.getDocument());
         disconnect();
-        String phoneNumber = post.getDocument().getString("phoneNumber");
-        Users users = new Users(phoneNumber);
+        Users users = new Users(post.getDocument().getString("phoneNumber"));
         updateUserArrays(users, "userPosts");
     }
 
-    public synchronized static void updateUserArrays(Users users, String arrayName) {
-        JSONObject user = new JSONObject(findUser(users.getFilterDocument()).toJson());
-        ArrayList<String> Posts;
-        if (user.has(arrayName)) {
-            JSONArray userPosts = user.getJSONArray(arrayName);
-            Posts = getStringArray(userPosts);
-            Posts.add(String.valueOf(lastPostId() + 1));
-        } else {
-            Posts = new ArrayList<>();
-            Posts.add(String.valueOf(lastPostId() + 1));
-        }
-        updateUsers(users, arrayName, Posts);
-    }
-
-    public synchronized static void addUsers(Users users) {
+    public synchronized static void addUser(Users users) {
         connectToDatabase();
         collection = database.getCollection("Users");
         if (!collection.find(users.getDocument()).cursor().hasNext()) {
@@ -74,11 +58,10 @@ public class Database {
         disconnect();
     }
 
-    public synchronized static void updateUsers(Users users ,String key ,Object value) {
+    public synchronized static void updateUser(Users users ,String key ,Object value) {
         connectToDatabase();
         collection = database.getCollection("Users");
         collection.updateOne(users.getDocument() ,new Document("$set" ,new Document(key ,value)));
-
         disconnect();
     }
 
@@ -93,6 +76,10 @@ public class Database {
         return document;
     }
 
+    public static String getPost(Document filter) {
+        return findPost(filter).toJson();
+    }
+
     public synchronized static Document findUser(Document filter) {
         connectToDatabase();
         Document document = new Document("", "");
@@ -102,6 +89,10 @@ public class Database {
         }
         disconnect();
         return document;
+    }
+
+    public static String getUser(Document filter) {
+        return findUser(filter).toJson();
     }
 
     public synchronized static void deletePost(Post post) {
@@ -116,10 +107,39 @@ public class Database {
     public synchronized static void deleteUser(Users users) {
         connectToDatabase();
         collection = database.getCollection("Users");
-        if (collection.find(users.getFilterDocument()).cursor().hasNext()) {
-            collection.deleteOne(users.getFilterDocument());
+        if (collection.find(users.getDocument()).cursor().hasNext()) {
+            collection.deleteOne(users.getDocument());
         }
         disconnect();
+    }
+
+    public static boolean isPostExits(Post post){
+        connectToDatabase();
+        collection = database.getCollection("Posts");
+        boolean flag = collection.find(post.getFilterDocument()).cursor().hasNext();
+        disconnect();
+        return flag;
+    }
+
+    public static boolean isUserExits(Users users){
+        connectToDatabase();
+        collection = database.getCollection("Users");
+        boolean flag = collection.find(users.getDocument()).cursor().hasNext();
+        disconnect();
+        return flag;
+    }
+
+    public synchronized static void updateUserArrays(Users users, String arrayName) {
+        JSONObject user = new JSONObject(getUser(users.getDocument()));
+        ArrayList<String> Posts;
+        if (user.has(arrayName)) {
+            Posts = getStringArray(user.getJSONArray(arrayName));
+            Posts.add(String.valueOf(lastPostId()));
+        } else {
+            Posts = new ArrayList<>();
+            Posts.add(String.valueOf(lastPostId()));
+        }
+        updateUser(users, arrayName, Posts);
     }
 
     public static int lastPostId() {
@@ -135,16 +155,19 @@ public class Database {
         return lastId;
     }
 
-
-    public static String lastImageIDFromDatabase() {
+    public static int lastImageIdOfPosts() {
+        int lastPostId = lastPostId();
         connectToDatabase();
         collection = database.getCollection("Posts");
-        String lastId = "";
-        if (collection.find().sort(new Document("postId", -1)).limit(1).cursor().hasNext()) {
-            String jsonString = collection.find().sort(new Document("postId", -1)).limit(1).cursor().next().toJson();
-            JSONObject obj = new JSONObject(jsonString);
-            JSONArray jsonArray = obj.getJSONArray("imageName");
-            lastId = String.valueOf(jsonArray.getInt(jsonArray.length() - 1));
+        int lastId = 1;
+        for (int i = lastPostId; i >= 0; i--) {
+            String jsonString = collection.find(new Document("postId", i)).cursor().next().toJson();
+            JSONObject post = new JSONObject(jsonString);
+            JSONArray imageName = post.getJSONArray("imageName");
+            int temp = imageName.getInt(imageName.length() - 1);
+            if (temp > lastId) {
+                lastId = temp;
+            }
         }
         disconnect();
         return lastId;
@@ -163,37 +186,22 @@ public class Database {
         return notAccepted;
     }
 
-    public static ArrayList<String> getPosts(int number, String branchMain) {
+    public static ArrayList<String> getPosts(int number, String key, String value) {
         connectToDatabase();
         collection = database.getCollection("Posts");
         int temp = number;
         ArrayList<String> posts = new ArrayList<>();
-        Document document = new Document("branchMain", branchMain);
-        for (int i = lastPostId(); i > 0; i--) {
-            if(temp == 0) {
-                break;
-            }
-            document.append("postId", i);
-            if (collection.find(document).cursor().hasNext()) {
-                posts.add(collection.find(document).cursor().next().toJson());
+        if (collection.find(new Document(key, value)).cursor().hasNext()) {
+            for (Document document : collection.find(new Document(key, value))) {
+                if (temp == 0) {
+                    break;
+                }
+                posts.add(document.toJson());
                 temp--;
             }
-            document.remove("postId", i);
         }
         disconnect();
         return posts;
-    }
-
-    public static String getPost(Document filter) {
-        return findPost(filter).toJson();
-    }
-
-    public static String getUser(Document filter) {
-        return findUser(filter).toJson();
-    }
-
-    public static Users getUserAsDoc(Document filter) {
-        return new Users(filter).setValues(findUser(filter));
     }
 
     public static ArrayList<String> lastSeenPost(Document filter) {
@@ -207,52 +215,42 @@ public class Database {
         return lastSeen;
     }
 
+    public static Users getUserAsDoc(Document filter) {
+        return new Users(filter).setValues(findUser(filter));
+    }
+
+
+
     public static void disconnect(){
         mongoClient.close();
     }
 
-    public static boolean isUserExits(Users users){
-        connectToDatabase();
-        return collection.find(users.getFilterDocument()).cursor().hasNext();
-    }
-
-    public static boolean isPostExits(Post post){
-        connectToDatabase();
-        return collection.find(post.getFilterDocument()).cursor().hasNext();
-    }
-
-    private static int numberForMarkedPost = 0;
-
-
-    public static ArrayList<String> getMarkedPosts(int size, Document filter){
-
-        String user = getUser(filter);
-        JSONObject object = new JSONObject(user);
+    public static ArrayList<String> getMarkedPosts(int size, Users user){
+        String temp = getUser(user.getDocument());
+        JSONObject object = new JSONObject(temp);
         JSONArray jsonArray = object.getJSONArray("bookmarkPost");
         ArrayList<String> markedPost = new ArrayList<>();
-        for (int i = numberForMarkedPost * size; i < (size * numberForMarkedPost) + size; i++) {
+        for (int i = user.getNumberForMarkedPost() * size; i < (size * user.getNumberForMarkedPost()) + size; i++) {
             if(i < jsonArray.length()) {
                 markedPost.add(getPost(new Document("postId", jsonArray.get(i))));
             }
         }
-        numberForMarkedPost++;
+        user.setNumberForMarkedPost(user.getNumberForMarkedPost() + 1);
         return markedPost;
     }
 
-    private static int numberForUsersPost = 0;
 
-    public static ArrayList<String> getUsersPosts(int size, Document filter){
-
-        String user = getUser(filter);
-        JSONObject object = new JSONObject(user);
-        ArrayList<String> userPosts = getStringArray(object.getJSONArray("userPosts"));
+    public static ArrayList<String> getUsersPosts(int size, Users user){
+        String temp = getUser(user.getDocument());
+        JSONObject object = new JSONObject(temp);
+        ArrayList<String> jsonArray = getStringArray(object.getJSONArray("userPosts"));
         ArrayList<String> usersPost = new ArrayList<>();
-        for (int i = numberForUsersPost * size; i < (size * numberForUsersPost) + size; i++) {
-            if(i < userPosts.size()) {
-                usersPost.add(getPost(new Document("postId", Integer.parseInt(userPosts.get(i)))));
+        for (int i = user.getNumberForUsersPost() * size; i < (size * user.getNumberForUsersPost()) + size; i++) {
+            if(i < jsonArray.size()) {
+                usersPost.add(getPost(new Document("postId", Integer.parseInt(jsonArray.get(i)))));
             }
         }
-        numberForUsersPost++;
+        user.setNumberForUsersPost(user.getNumberForUsersPost() + 1);
         return usersPost;
     }
 
@@ -263,17 +261,10 @@ public class Database {
         disconnect();
     }
 
-    public static void updateMessage(Messages messages){
+    public static void updateMessage(Messages messages ,String key ,Object value){
         connectToDatabase();
         collection = database.getCollection("Messages");
-        JSONObject json = new JSONObject(messages.getUpdateDocument());
-        Object newDocument = json.get("$set");
-        JSONObject object = new JSONObject(newDocument.toString());
-        JSONArray updateKeys = object.getJSONArray("updateMessageKeys");
-        JSONArray updateValues = object.getJSONArray("updateMessageValues");
-        for (int i=0; i < updateKeys.length(); i++) {
-            collection.updateOne(messages.getFilterDocument() ,new Document("$set" ,new Document(updateKeys.getString(i) ,updateValues.get(i))));
-        }
+        collection.updateOne(messages.getFilterDocument() ,new Document("$set" ,new Document(key ,value)));
         disconnect();
     }
 
@@ -297,31 +288,44 @@ public class Database {
         return document;
     }
 
+    public synchronized static ArrayList<String> findMessageCount(Document filter) {
+        connectToDatabase();
+        Document document = new Document("", "");
+        ArrayList<String> temp = new ArrayList<>();
+        collection = database.getCollection("Messages");
+        if (collection.find(filter).cursor().hasNext()) {
+            for (Document doc: collection.find(filter)) {
+                temp.add(doc.getString("user2"));
+            }
+        }
+        disconnect();
+        return temp;
+    }
+
     public static String getMessage(Document filter) {
         return findMessage(filter).toJson();
     }
 
-    public static String numberOfPostsOfUser(Users users) {
+    public static int numberOfPostsOfUser(Users users) {
         connectToDatabase();
-        String number = "";
-        String user = getUser(users.getFilterDocument());
+        int number = 0;
+        String user = getUser(users.getDocument());
         JSONObject object = new JSONObject(user);
-        JSONArray jsonArray = object.getJSONArray("usersPost");
-        number = String.valueOf(jsonArray.length());
+        JSONArray jsonArray = object.getJSONArray("userPosts");
+        number = jsonArray.length();
         disconnect();
         return number;
     }
 
-    public static String lastUserImageId() {
+    public static int lastUserImageId() {
         connectToDatabase();
         collection = database.getCollection("Users");
-        String lastId = "1";
+        int lastId = 1;
         if (collection.find().cursor().hasNext()) {
             for (Document document : collection.find()) {
-                String jsonString = document.toJson();
-                JSONObject obj = new JSONObject(jsonString);
-                if (obj.getInt("profileNameImage") > Integer.parseInt(lastId)) {
-                    lastId = String.valueOf(obj.getInt("profileNameImage"));
+                int temp = document.getInteger("profileNameImage");
+                if (temp > lastId) {
+                    lastId = temp;
                 }
             }
         }
@@ -335,6 +339,27 @@ public class Database {
             list.add(JArray.getString(i));
         }
         return list;
+    }
+
+    public static ArrayList<String> search(int size, String search) {
+        connectToDatabase();
+        int temp = size;
+        collection = database.getCollection("Posts");
+        ArrayList<String> posts = new ArrayList<>();
+        if (collection.find().cursor().hasNext()) {
+            for (Document document : collection.find()) {
+                if (temp == 0) {
+                    break;
+                }
+                String title = document.getString("title");
+                if (title.contains(search)) {
+                    posts.add(document.toJson());
+                    temp--;
+                }
+            }
+        }
+        disconnect();
+        return posts;
     }
 
 }
