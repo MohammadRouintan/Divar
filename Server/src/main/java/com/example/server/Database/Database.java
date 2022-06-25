@@ -252,21 +252,21 @@ public class Database {
 
     public static void addMessage(Messages messages){
         connectToDatabase();
-        collection = database.getCollection("Messages");
+        collection = database.getCollection("Chats");
         collection.insertOne(messages.getDocument());
         disconnect();
     }
 
     public static void updateMessage(Messages messages ,String key ,Object value){
         connectToDatabase();
-        collection = database.getCollection("Messages");
+        collection = database.getCollection("Chats");
         collection.updateOne(messages.getFilterDocument() ,new Document("$set" ,new Document(key ,value)));
         disconnect();
     }
 
     public synchronized static void deleteMessage(Messages messages) {
         connectToDatabase();
-        collection = database.getCollection("Messages");
+        collection = database.getCollection("Chats");
         if (collection.find(messages.getFilterDocument()).cursor().hasNext()) {
             collection.deleteOne(messages.getFilterDocument());
         }
@@ -276,7 +276,7 @@ public class Database {
     public synchronized static Document findMessage(Document filter) {
         connectToDatabase();
         Document document = new Document("", "");
-        collection = database.getCollection("Messages");
+        collection = database.getCollection("Chats");
         if (collection.find(filter).cursor().hasNext()) {
             document = collection.find(filter).cursor().next();
         }
@@ -286,9 +286,8 @@ public class Database {
 
     public synchronized static ArrayList<String> findMessageCount(Document filter) {
         connectToDatabase();
-        Document document = new Document("", "");
         ArrayList<String> temp = new ArrayList<>();
-        collection = database.getCollection("Messages");
+        collection = database.getCollection("Chats");
         if (collection.find(filter).cursor().hasNext()) {
             for (Document doc: collection.find(filter)) {
                 temp.add(doc.getString("user2"));
@@ -296,6 +295,39 @@ public class Database {
         }
         disconnect();
         return temp;
+    }
+
+    public synchronized static ArrayList<String> findPartner(String phoneNumber) {
+        connectToDatabase();
+        collection = database.getCollection("Chats");
+        ArrayList<String> partner = new ArrayList<>();
+        if (collection.find(new Document("user1", phoneNumber)).cursor().hasNext()) {
+            for (Document document : collection.find(new Document("user1", phoneNumber))) {
+                partner.add(document.getString("user2"));
+            }
+        } else if (collection.find(new Document("user2", phoneNumber)).cursor().hasNext()) {
+            for (Document document : collection.find(new Document("user2", phoneNumber))) {
+                partner.add(document.getString("user1"));
+            }
+        }
+        disconnect();
+        return partner;
+    }
+
+    public synchronized static String findChat(String phoneNumber1, String phoneNumber2) {
+        connectToDatabase();
+        collection = database.getCollection("Chats");
+        String chat = "0";
+        FindIterable<Document> chat1 = collection.find(new Document("user1", phoneNumber1).append("user2", phoneNumber2));
+        FindIterable<Document> chat2 = collection.find(new Document("user1", phoneNumber2).append("user2", phoneNumber1));
+
+        if (chat1.cursor().hasNext()) {
+            chat = chat1.cursor().next().toJson();
+        } else if (chat2.cursor().hasNext()) {
+            chat = chat2.cursor().next().toJson();
+        }
+        disconnect();
+        return chat;
     }
 
     public static String getMessage(Document filter) {
