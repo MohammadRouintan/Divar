@@ -77,8 +77,8 @@ public class NewPage {
             System.err.println(e.getMessage());
         }
 
-        ImageView imageView = new ImageView();
         Image img = new Image(imageController.getPath());
+        ImageView imageView = new ImageView(img);
         imageView.setFitHeight(200);
         imageView.setFitWidth(280);
         imageView.setImage(img);
@@ -96,7 +96,6 @@ public class NewPage {
         vBox.setOnMouseClicked(event -> ShowAds(vBox, post));
         return vBox;
     }
-
     void ShowAds(VBox vBox,JSONObject post){
         Parent parent = vBox.getParent().getParent().getParent().getParent();
         FullViewAds fullViewAds = new FullViewAds(parent,post, this.paneName);
