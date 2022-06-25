@@ -207,10 +207,10 @@ public class Database {
     public static ArrayList<String> lastSeenPost(Document filter) {
         String user = getUser(filter);
         JSONObject jsonObject = new JSONObject(user);
-        JSONArray jsonArray = jsonObject.getJSONArray("lastSeenPost");
+        ArrayList<String> jsonArray = getStringArray(jsonObject.getJSONArray("lastSeenPost"));
         ArrayList<String> lastSeen = new ArrayList<>();
-        for (int i = 0; i < jsonArray.length(); i++) {
-            lastSeen.add(getPost(new Document("postId", jsonArray.get(i))));
+        for (int i = 0; i < jsonArray.size(); i++) {
+            lastSeen.add(getPost(new Document("postId", Integer.parseInt(jsonArray.get(i)))));
         }
         return lastSeen;
     }
@@ -228,11 +228,11 @@ public class Database {
     public static ArrayList<String> getMarkedPosts(int size, Users user){
         String temp = getUser(user.getDocument());
         JSONObject object = new JSONObject(temp);
-        JSONArray jsonArray = object.getJSONArray("bookmarkPost");
+        ArrayList<String> jsonArray = getStringArray(object.getJSONArray("bookmarkPost"));
         ArrayList<String> markedPost = new ArrayList<>();
         for (int i = user.getNumberForMarkedPost() * size; i < (size * user.getNumberForMarkedPost()) + size; i++) {
-            if(i < jsonArray.length()) {
-                markedPost.add(getPost(new Document("postId", jsonArray.get(i))));
+            if(i < jsonArray.size()) {
+                markedPost.add(getPost(new Document("postId", Integer.parseInt(jsonArray.get(i)))));
             }
         }
         user.setNumberForMarkedPost(user.getNumberForMarkedPost() + 1);
