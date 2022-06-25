@@ -186,18 +186,21 @@ public class Database {
         return notAccepted;
     }
 
-    public static ArrayList<String> getPosts(int number, String key, String value) {
+    public static ArrayList<String> getPosts(int number, int index, String key, Object value) {
+        int temp = lastPostId();
         connectToDatabase();
         collection = database.getCollection("Posts");
-        int temp = number;
+        int size = number;
         ArrayList<String> posts = new ArrayList<>();
         if (collection.find(new Document(key, value)).cursor().hasNext()) {
-            for (Document document : collection.find(new Document(key, value))) {
-                if (temp == 0) {
+            for (int i = temp; i > 0; i--) {
+                if (size == 0) {
                     break;
                 }
-                posts.add(document.toJson());
-                temp--;
+                if (collection.find(new Document("postId", i).append(key, value)).cursor().hasNext()) {
+                    posts.add(collection.find(new Document("postId", i)).cursor().next().toJson());
+                    size--;
+                }
             }
         }
         disconnect();
