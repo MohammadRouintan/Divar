@@ -137,16 +137,22 @@ public class GetInfo {
     }
 
 
-    public static String getPosts(int sizePosts ,String mainBranch){
-        String result = null;
+    public static ArrayList<String> getPosts(int sizePosts ,String key, String value, int index){
+        ArrayList<String> result = new ArrayList<>();
         try {
             Connect.DOS.writeInt(9);
             Connect.DOS.writeInt(sizePosts);
             Connect.DOS.flush();
-
-            Connect.DOS.writeUTF(mainBranch);
+            Connect.DOS.writeUTF(key);
             Connect.DOS.flush();
-            result = Connect.DIS.readUTF();
+            Connect.DOS.writeUTF(value);
+            Connect.DOS.flush();
+            Connect.DOS.writeInt(index);
+            Connect.DOS.flush();
+            int size = Connect.DIS.readInt();
+            for (int i = 0; i < size; i++) {
+                result.add( Connect.DIS.readUTF());
+            }
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
