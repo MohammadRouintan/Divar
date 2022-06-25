@@ -62,7 +62,7 @@ public class Client extends Thread {
                         ArrayList<String> key = getStringArray(json.getJSONArray("updateUserKeys"));
                         ArrayList<Object> value = getObjectArray(json.getJSONArray("updateUserValues"));
 
-                        Users user1 = new Users(new Document("phoneNumber", number));
+                        Users user1 = new Users(number);
 
                         for (int i = 0; i < value.size(); i++) {
                             Database.updateUser(user1 ,key.get(i) ,value.get(i));

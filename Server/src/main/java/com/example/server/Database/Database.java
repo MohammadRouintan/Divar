@@ -161,12 +161,14 @@ public class Database {
         collection = database.getCollection("Posts");
         int lastId = 1;
         for (int i = lastPostId; i >= 0; i--) {
-            String jsonString = collection.find(new Document("postId", i)).cursor().next().toJson();
-            JSONObject post = new JSONObject(jsonString);
-            JSONArray imageName = post.getJSONArray("imageName");
-            int temp = imageName.getInt(imageName.length() - 1);
-            if (temp > lastId) {
-                lastId = temp;
+            if (collection.find(new Document("postId", i)).cursor().hasNext()) {
+                String jsonString = collection.find(new Document("postId", i)).cursor().next().toJson();
+                JSONObject post = new JSONObject(jsonString);
+                JSONArray imageName = post.getJSONArray("imageName");
+                int temp = imageName.getInt(imageName.length() - 1);
+                if (temp > lastId) {
+                    lastId = temp;
+                }
             }
         }
         disconnect();
@@ -323,10 +325,14 @@ public class Database {
         int lastId = 1;
         if (collection.find().cursor().hasNext()) {
             for (Document document : collection.find()) {
-                int temp = document.getInteger("profileNameImage");
-                if (temp > lastId) {
-                    lastId = temp;
+                JSONObject doc = new JSONObject(document.toJson());
+                if (doc.has("profileNameImage")) {
+                    int temp = document.getInteger("profileNameImage");
+                    if (temp > lastId) {
+                        lastId = temp;
+                    }
                 }
+
             }
         }
         disconnect();
