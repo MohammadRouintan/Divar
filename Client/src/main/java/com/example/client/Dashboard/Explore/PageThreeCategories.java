@@ -35,7 +35,7 @@ public class PageThreeCategories {
         HBox tophBox = new HBox();
 
         Pagination pagination = new Pagination();
-        pagination.setPrefWidth(570);
+        pagination.setPrefWidth(550);
         pagination.setPrefHeight(1200);
         //test the show of post
 
@@ -73,10 +73,6 @@ public class PageThreeCategories {
         NewPage newPage = new NewPage(post,vBox, "BookmarkedAds");
         PagesList.add(newPage.getPage());
         pagination.setPageFactory(this::CreatePage);
-//        ScrollPane scrollPane = new ScrollPane();
-//        scrollPane.setPrefWidth(570);
-//        scrollPane.setPrefHeight(600);
-//        scrollPane.setContent(pagination);
 
         tophBox.getChildren().addAll(back,TitleLabel);
         this.mainVBox.getChildren().addAll(tophBox,pagination);
