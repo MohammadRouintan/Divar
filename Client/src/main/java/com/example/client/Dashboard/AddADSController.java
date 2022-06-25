@@ -59,7 +59,7 @@ public class AddADSController {
         }
 
         private void setMainCategories(){
-            String[] mainCategories = {"Digital Commodity", "Entertainment", "Equipment", "Estate", "Home Commodity", "Personal Items", "Recruitment", "Services", "Social", "Vehicles"};
+            String[] mainCategories = {"Digital Goods", "Entertainment", "Equipment", "Estate", "Home Goods", "Personal Items", "Recruitment", "Services", "Social", "Vehicles"};
             ObservableList<String> temp = FXCollections.observableArrayList();
             temp.addAll(mainCategories);
             MainBranchCategories.setItems(temp);

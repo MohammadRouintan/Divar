@@ -1,32 +1,16 @@
 package com.example.client.Dashboard.MyDivarPages;
 
 import com.example.client.Dashboard.Posts.NewPage;
-import com.example.client.socket.GetInfo;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.ScrollEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyAdsController {
-    @FXML
-    private Label testLabel;
-
-    @FXML
-    private ScrollPane scroll;
-
+public class LastSeenAdsController {
     @FXML
     private VBox mainVBox;
 
@@ -70,11 +54,11 @@ public class MyAdsController {
                     " I can't make my ImageView use only the width of the Pane.");
             post1.put("agreement", true);
             post1.put("exchange", true);
-            post1.put("auction", true);
+            post1.put("auction", false);
             post.add(post1);
         }
         VBox vBox = new VBox();
-        NewPage newPage = new NewPage(post,vBox, "MyAds");
+        NewPage newPage = new NewPage(post,vBox, "BookmarkedAds");
         PagesList.add(newPage.getPage());
         pagination.setPageFactory(this::CreatePage);
     }
@@ -111,7 +95,7 @@ public class MyAdsController {
             post.add(post1);
         }
         VBox vBox = new VBox();
-        NewPage newPage = new NewPage(post,vBox,"MyAds");
+        NewPage newPage = new NewPage(post,vBox,"BookmarkedAds");
         PagesList.add(newPage.getPage());
         return PagesList.get(pageIndex);
     }

@@ -2,6 +2,7 @@ package com.example.client.Dashboard.Posts;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -22,18 +23,21 @@ public class FullViewAds {
     private JSONObject post;
     private Parent parent;
     protected Pagination pagination;
+    protected VBox mainVBox;
+    String paneName;
 
-    public FullViewAds(Parent parent, JSONObject post){
+    public FullViewAds(Parent parent, JSONObject post, String paneName){
         this.post = post;
         this.parent = parent;
         this.pagination = (Pagination)parent;
+        this.paneName = paneName;
+        this.mainVBox = (VBox)this.parent.getParent();
         AddBox(parent,post);
     }
 
     protected void AddBox(Parent parent,JSONObject post){
 
 
-        VBox mainVBox = (VBox)parent.getParent();
         mainVBox.getChildren().clear();
 
 
@@ -57,15 +61,28 @@ public class FullViewAds {
         Label title = new Label(post.getString("title"));
         Label time = new Label(post.getString("time"));
         Label price;
+        TextField priceField = new TextField();
+        priceField.setPromptText("NewPrice");
+        priceField.setAlignment(Pos.CENTER);
+        priceField.setMaxWidth(300);
+        Label exchange = new Label();
+
         if (post.getBoolean("agreement")) {
             price = new Label("agreement");
         } else {
             price = new Label(post.getString("price"));
         }
-        Label exchange = new Label();
+
         if (post.getBoolean("exchange")) {
             exchange.setText("I want to exchange");
         }
+
+        Button bookmarked = new Button("Bookmark");
+        Button chat = new Button("Chat");
+        HBox buttons = new HBox();
+        buttons.setAlignment(Pos.CENTER);
+        buttons.setSpacing(20);
+        buttons.getChildren().addAll(bookmarked, chat);
 
         HBox featureColumnHBox = makeVerticalFeatureLabel(post);
         VBox featureRowVBox = makeHorizontalFeatureLabel(post);
@@ -79,7 +96,13 @@ public class FullViewAds {
 
         AdsVBox.setPrefWidth(1200);
         AdsVBox.setPrefHeight(570);
-        mainVBox.getChildren().addAll(hBox,slideShow,title,time,price,exchange,featureColumnHBox,featureRowVBox,descriptionVBox);
+        if (post.getBoolean("auction") && !this.paneName.equals("MyAds")) {
+            mainVBox.getChildren().addAll(hBox,slideShow,title,time,priceField,featureColumnHBox,featureRowVBox,descriptionVBox, buttons);
+        } else if (!this.paneName.equals("MyAds")){
+            mainVBox.getChildren().addAll(hBox,slideShow,title,time,price,exchange,featureColumnHBox,featureRowVBox,descriptionVBox, buttons);
+        } else {
+            mainVBox.getChildren().addAll(hBox,slideShow,title,time,price,exchange,featureColumnHBox,featureRowVBox,descriptionVBox);
+        }
         //post.getJSONArray("rowName").length();
         //post.getJSONArray("columnName").length();
 

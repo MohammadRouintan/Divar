@@ -15,10 +15,12 @@ import java.util.ArrayList;
 public class NewPage {
     private ArrayList<JSONObject> postsList;
     private VBox page;
+    private String paneName;
 
-    public NewPage(ArrayList<JSONObject> postsList,VBox page){
+    public NewPage(ArrayList<JSONObject> postsList,VBox page, String paneName){
         this.page = page;
         this.postsList = postsList;
+        this.paneName = paneName;
         AddHBox();
     }
 
@@ -82,9 +84,6 @@ public class NewPage {
 
     void ShowAds(VBox vBox,JSONObject post){
         Parent parent = vBox.getParent().getParent().getParent().getParent();
-        FullViewAds fullViewAds = new FullViewAds(parent,post);
+        FullViewAds fullViewAds = new FullViewAds(parent,post, this.paneName);
     }
-
-
-
 }
