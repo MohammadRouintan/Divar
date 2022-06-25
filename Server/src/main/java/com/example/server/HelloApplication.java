@@ -20,8 +20,8 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
-        Database.imageID = Integer.parseInt(Database.lastImageIDFromDatabase());
-        Database.profileImageID = Integer.parseInt(Database.lastUserImageId());
+        Database.imageID = Database.lastImageIdOfPosts();
+        Database.profileImageID = Database.lastUserImageId();
         AcceptClients acceptClients = new AcceptClients();
         acceptClients.run();
         launch();

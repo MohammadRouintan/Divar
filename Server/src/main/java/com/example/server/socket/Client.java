@@ -39,7 +39,7 @@ public class Client extends Thread {
                 closeSocket();
             } else {
                 AcceptClients.numbers.add(number);
-
+                Users users = new Users(number);
                 // 1 : send post to client | 2 : get post from client | 3 : new message from user
                 // 4 : update user | 5 : check user exists | 6 : get user info
                 // 7 : get marked posts | 8 : get a specified post | 9 : get a branch posts
@@ -65,7 +65,7 @@ public class Client extends Thread {
                         Users user1 = new Users(new Document("phoneNumber", number));
 
                         for (int i = 0; i < value.size(); i++) {
-                            Database.updateUsers(user1 ,key.get(i) ,value.get(i));
+                            Database.updateUser(user1 ,key.get(i) ,value.get(i));
                         }
 
                     } else if (task == 5) {
@@ -77,7 +77,8 @@ public class Client extends Thread {
                         DOS.flush();
                     } else if (task == 7) {
                         int size = DIS.readInt();
-                        ArrayList <String> list = Database.getMarkedPosts(size, new Document("phoneNumber", number));
+                        users.setFilterDocument(new Document("phoneNumber", number));
+                        ArrayList <String> list = Database.getMarkedPosts(size,users);
                         DOS.writeInt(list.size());
                         DOS.flush();
                         for (String str : list){
@@ -90,8 +91,9 @@ public class Client extends Thread {
                         DOS.flush();
                     } else if (task == 9) {
                         int sizePosts = DIS.readInt();
-                        String mainBranch = DIS.readUTF();
-                        ArrayList <String> list = Database.getPosts(sizePosts, mainBranch);
+                        String key = DIS.readUTF();
+                        String value = DIS.readUTF();
+                        ArrayList <String> list = Database.getPosts(sizePosts, key, value);
                         for (String str : list){
                             DOS.writeUTF(str);
                             DOS.flush();
@@ -131,7 +133,8 @@ public class Client extends Thread {
                             DOS.flush();
                         }
                     } else if (task == 14) {
-                        ArrayList <String> list = Database.getUsersPosts(8, new Document("phoneNumber", number));
+                        Users user = new Users(number);
+                        ArrayList <String> list = Database.getUsersPosts(8, user);
                         DOS.writeInt(list.size());
                         DOS.flush();
                         for (String str : list){
@@ -139,8 +142,7 @@ public class Client extends Thread {
                             DOS.flush();
                         }
                     }else if (task == 15) {
-                        Users users = new Users(number);
-                        Database.addUsers(users);
+                        Database.addUser(users);
                     }else if (task == 16){
                         DOS.writeInt(Database.lastImageID());
                         DOS.flush();

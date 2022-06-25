@@ -9,6 +9,19 @@ import java.util.ArrayList;
 public class Users extends Database {
 
     private Document document;
+
+    public void setDocument(Document document) {
+        this.document = document;
+    }
+
+    public void setFilterDocument(Document filterDocument) {
+        this.filterDocument = filterDocument;
+    }
+
+    public void setUpdateDocument(Document updateDocument) {
+        this.updateDocument = updateDocument;
+    }
+
     private Document filterDocument;
     private Document updateDocument;
 
@@ -16,11 +29,25 @@ public class Users extends Database {
         this.filterDocument = filterDocument;
     }
 
-//    public Users(Document filterDocument ,Document updateDocument) {
-//        this.filterDocument = filterDocument;
-//        this.updateDocument = updateDocument;
-//
-//    }
+    public void setNumberForMarkedPost(int numberForMarkedPost) {
+        this.numberForMarkedPost = numberForMarkedPost;
+    }
+
+    public int getNumberForMarkedPost() {
+        return numberForMarkedPost;
+    }
+
+    private int numberForUsersPost = 0;
+
+    private int numberForMarkedPost = 0;
+
+    public void setNumberForUsersPost(int numberForUsersPost) {
+        this.numberForUsersPost = numberForUsersPost;
+    }
+
+    public int getNumberForUsersPost() {
+        return numberForUsersPost;
+    }
 
     public Users(String phoneNumber) {
         document = new Document();
