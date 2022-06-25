@@ -73,15 +73,13 @@ public class PageThreeCategories {
         NewPage newPage = new NewPage(post,vBox, "BookmarkedAds");
         PagesList.add(newPage.getPage());
         pagination.setPageFactory(this::CreatePage);
-        ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setPrefWidth(570);
-        scrollPane.setPrefHeight(600);
-        scrollPane.setContent(pagination);
+//        ScrollPane scrollPane = new ScrollPane();
+//        scrollPane.setPrefWidth(570);
+//        scrollPane.setPrefHeight(600);
+//        scrollPane.setContent(pagination);
 
         tophBox.getChildren().addAll(back,TitleLabel);
-
-        threeCategories.getChildren().addAll(tophBox,scrollPane);
-        this.mainVBox.getChildren().add(threeCategories);
+        this.mainVBox.getChildren().addAll(tophBox,pagination);
 
         back.setOnAction(event -> {
             mainVBox.getChildren().clear();
@@ -90,10 +88,7 @@ public class PageThreeCategories {
     }
 
     private Node CreatePage(int pageIndex) {
-//        ArrayList<JSONObject> userPosts = new ArrayList<>();
-//        for (int i = (pagination.getCurrentPageIndex() - 1) * 8; i < pagination.getCurrentPageIndex() * 8; i++) {
-//            userPosts.add(new JSONObject(GetInfo.getUserPosts().get(i)));
-//        }
+
         ArrayList<JSONObject> post = new ArrayList<>();
         ArrayList<String> imageName = new ArrayList<>();
         imageName.add("1");

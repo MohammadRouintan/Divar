@@ -14,6 +14,7 @@ public class ChatController {
     public void initialize(){
         Image img = new Image("/postImage/1.jpg");
         circleImage.setFill(new ImagePattern(img));
+
     }
 
 }
