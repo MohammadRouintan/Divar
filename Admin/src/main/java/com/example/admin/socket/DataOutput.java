@@ -1,15 +1,15 @@
-package com.example.server.socket;
+package com.example.admin.socket;
 
-import java.io.BufferedInputStream;
-import java.io.DataInputStream;
+import java.io.BufferedOutputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-public class AdminInput extends Thread{
-    public static DataInputStream DIS;
-    public AdminInput(Socket socket) {
+public class DataOutput extends Thread{
+    public static DataOutputStream DOS;
+    public DataOutput(Socket socket) {
         try {
-            DIS = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+            DOS = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
@@ -18,7 +18,6 @@ public class AdminInput extends Thread{
     @Override
     public void run(){
         try {
-
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }

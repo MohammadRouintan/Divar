@@ -1,13 +1,13 @@
-package com.example.server.socket;
+package com.example.admin.socket;
 
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-public class AdminInput extends Thread{
+public class DataInput extends Thread{
     public static DataInputStream DIS;
-    public AdminInput(Socket socket) {
+    public DataInput(Socket socket) {
         try {
             DIS = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
         } catch (IOException e) {
