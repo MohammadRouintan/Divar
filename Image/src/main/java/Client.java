@@ -22,6 +22,8 @@ public class Client extends Thread{
             }else if(input == 2){
                 receiveFile(name);
             }else if(input == 3) {
+                sendProfile(name);
+            }else if (input == 4){
                 receiveProfile(name);
             }
             DIS.close();
@@ -66,7 +68,7 @@ public class Client extends Thread{
     private void sendProfile (String name) {
         try {
             int bytes = 0;
-            File file = new File("../Image/post/" + name + ".png");
+            File file = new File("../Image/profile/" + name + ".png");
             FileInputStream fileInputStream = new FileInputStream(file);
             DOS.writeLong(file.length());
             byte[] buffer = new byte[4 * 1024];

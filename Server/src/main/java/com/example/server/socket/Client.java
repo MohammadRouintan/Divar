@@ -62,15 +62,13 @@ public class Client extends Thread {
                         ArrayList<String> key = getStringArray(json.getJSONArray("updateUserKeys"));
                         ArrayList<Object> value = getObjectArray(json.getJSONArray("updateUserValues"));
 
-                        Users user1 = new Users(number);
 
                         for (int i = 0; i < value.size(); i++) {
-                            Database.updateUser(user1 ,key.get(i) ,value.get(i));
+                            Database.updateUser(users ,key.get(i) ,value.get(i));
                         }
 
                     } else if (task == 5) {
-                        Users user = new Users(new Document("phoneNumber", number));
-                        DOS.writeBoolean(Database.isUserExits(user));
+                        DOS.writeBoolean(Database.isUserExits(users));
                         DOS.flush();
                     } else if (task == 6) {
                         DOS.writeUTF(Database.getUser(new Document("phoneNumber", number)));
@@ -133,8 +131,7 @@ public class Client extends Thread {
                             DOS.flush();
                         }
                     } else if (task == 14) {
-                        Users user = new Users(number);
-                        ArrayList <String> list = Database.getUsersPosts(8, user);
+                        ArrayList <String> list = Database.getUsersPosts(8, users);
                         DOS.writeInt(list.size());
                         DOS.flush();
                         for (String str : list){

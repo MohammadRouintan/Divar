@@ -31,6 +31,8 @@ public class ImageController extends Thread{
         } else if (work == 2) {
             sendFile(filepath, imageID);
         } else if (work == 3){
+            receiveProfile(imageID);
+        }else if (work == 4){
             sendProfile(filepath, imageID);
         }
         try {
@@ -88,10 +90,38 @@ public class ImageController extends Thread{
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
-    }    public void sendProfile(String filePath, String imageID){
+    }
 
+    private void receiveProfile (String imageID) {
+        int bytes = 0;
         try {
             DOS.writeInt(3);
+            DOS.flush();
+            DOS.writeUTF(imageID);
+            DOS.flush();
+            File file = new File("../Client/src/main/resources/profile/" + imageID + ".png");
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            long size = DIS.readLong();
+            byte[] buffer = new byte[4 * 1024];
+            while (size > 0 && (bytes = DIS.read(buffer, 0, (int) Math.min(buffer.length, size))) != -1) {
+                fileOutputStream.write(buffer, 0, bytes);
+                size -= bytes;
+            }
+            absolutePath = file.getAbsolutePath();
+            fileOutputStream.close();
+
+        }catch(IOException e){
+            System.err.println(e.getMessage());
+        }
+
+    }
+
+
+
+    public void sendProfile(String filePath, String imageID){
+
+        try {
+            DOS.writeInt(4);
             DOS.writeUTF(imageID);
             int bytes = 0;
             File file = new File(filePath);
