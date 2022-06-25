@@ -1,11 +1,13 @@
 package com.example.client;
 
+import com.example.client.Dashboard.MyDivarPages.MyAdsController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class Main extends Application {
@@ -20,6 +22,9 @@ public class Main extends Application {
         stage.show();
     }
     public static void main(String[] args) {
+        MyAdsController.isPageReceived = new ArrayList<>();
+        MyAdsController.posts = new ArrayList<>();
+
         launch();
     }
 }

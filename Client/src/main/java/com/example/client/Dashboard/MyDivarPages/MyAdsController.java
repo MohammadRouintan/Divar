@@ -37,18 +37,25 @@ public class MyAdsController {
 
     @FXML
     public void initialize() {
-        ArrayList<String> list = GetInfo.getUserPosts();
         ArrayList<JSONObject> userPosts = new ArrayList<>();
-        for(String str : list){
-            userPosts.add(new JSONObject(str));
-
+        if (isPageReceived.size() == 0) {
+            ArrayList<String> list = GetInfo.getUserPosts();
+            for (String str : list) {
+                userPosts.add(new JSONObject(str));
+            }
+            isPageReceived.add(true);
+            posts.addAll(userPosts);
+        }else {
+            for (int i = 0; i < Math.min(8, posts.size()); i++) {
+                userPosts.add(posts.get(i));
+            }
+        }
 //        GetInfo.getUserPosts();
 //        ArrayList<JSONObject> userPosts = new ArrayList<>();
 //        for (int i = 0; i < 8; i++) {
 //            userPosts.add(new JSONObject(GetInfo.getUserPosts().get(i)));
 //        }
 
-        }
         VBox vBox = new VBox();
         NewPage newPage = new NewPage(userPosts,vBox, "MyAds");
         PagesList.add(newPage.getPage());
@@ -56,14 +63,25 @@ public class MyAdsController {
     }
 
     private Node CreatePage(int pageIndex) {
-        ArrayList<String> list = GetInfo.getUserPosts();
         ArrayList<JSONObject> userPosts = new ArrayList<>();
-        for(String str : list){
-            userPosts.add(new JSONObject(str));
+        if (isPageReceived.size() >= pageIndex) {
+            for (int i = posts.size() - (pageIndex - 1) * 8; i < Math.min(posts.size() - (pageIndex - 1) * 8 + 8, posts.size() - pageIndex * 8); i++) {
+                userPosts.add(posts.get(i));
+            }
+        } else {
+            ArrayList<String> list = GetInfo.getUserPosts();
+            for (String str : list) {
+                userPosts.add(new JSONObject(str));
+            }
+            isPageReceived.add(true);
+            posts.addAll(userPosts);
         }
         VBox vBox = new VBox();
-        NewPage newPage = new NewPage(userPosts,vBox,"MyAds");
+        NewPage newPage = new NewPage(userPosts, vBox, "MyAds");
         PagesList.add(newPage.getPage());
         return PagesList.get(pageIndex);
     }
+
+    public static ArrayList<Boolean> isPageReceived;
+    public static ArrayList<JSONObject> posts;
 }
