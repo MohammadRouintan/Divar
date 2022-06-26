@@ -92,9 +92,6 @@ public class AddADSController {
         private CheckBox auctionCheckBox;
 
         @FXML
-        private ComboBox<?> branchThreeCategories;
-
-        @FXML
         private ComboBox<String> branchTwoCategories;
 
         @FXML
@@ -505,6 +502,7 @@ public class AddADSController {
 
             branchTwoCategories.setItems(branchTwo);
         }
+
         private HBox makeNewHBox(int counter){
             HBox hBox = new HBox();
             hBox.setPadding(new Insets(10, 0, 10, 0));

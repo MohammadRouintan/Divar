@@ -1,0 +1,11 @@
+.search-btn{
+    -fx-background-color: transparent;
+}
+.box {
+    -fx-background-color: transparent;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-border-color: #f1c40f;
+}
+.scearch-btn{
+}
