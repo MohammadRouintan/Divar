@@ -40,7 +40,7 @@ public class Database {
         collection.insertOne(post.getDocument());
         disconnect();
         Users users = new Users(post.getDocument().getString("phoneNumber"));
-        updateUserArrays(users, "userPosts");
+        updateUserArrays(users, "userPosts", lastPostId());
     }
 
     public synchronized static void addUser(Users users) {
@@ -130,15 +130,15 @@ public class Database {
         return flag;
     }
 
-    public synchronized static void updateUserArrays(Users users, String arrayName) {
+    public synchronized static void updateUserArrays(Users users, String arrayName, Object value) {
         JSONObject user = new JSONObject(getUser(users.getDocument()));
         ArrayList<String> Posts;
         if (user.has(arrayName)) {
             Posts = getStringArray(user.getJSONArray(arrayName));
-            Posts.add(String.valueOf(lastPostId()));
+            Posts.add(String.valueOf(value));
         } else {
             Posts = new ArrayList<>();
-            Posts.add(String.valueOf(lastPostId()));
+            Posts.add(String.valueOf(value));
         }
         updateUser(users, arrayName, Posts);
     }
@@ -357,8 +357,8 @@ public class Database {
         collection = database.getCollection("Users");
         int lastId = 1;
         List<Document> documents = new ArrayList<>();
-        documents.add(new Document("$project", new Document("profileNameImage", 1)));
-        documents.add(new Document("$sort", new Document("profileNameImage", -1)));
+        documents.add(new Document("$match", new Document("profileNameImage", 1)));
+        documents.add(new Document("$sort", new Document("phoneNumber", -1)));
         if (collection.aggregate(documents).cursor().hasNext()) {
             lastId = collection.aggregate(documents).cursor().next().getInteger("profileNameImage");
         }

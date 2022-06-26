@@ -149,7 +149,14 @@ public class Client extends Thread {
                     }else if (task == 17) {
                         DOS.writeInt(Database.lastProfileImageID());
                         DOS.flush();
-                    }else if (task == -1) {
+                    } else if (task == 18) {
+                        JSONObject jsonObject = new JSONObject(DIS.readUTF());
+                        String key = jsonObject.getString("arrayName");
+                        int number = jsonObject.getInt("number");
+
+                        Database.updateUserArrays(users, key, number);
+                    }
+                    else if (task == -1) {
                         closeSocket();
                         break;
                     }

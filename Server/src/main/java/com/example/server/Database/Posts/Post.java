@@ -30,7 +30,7 @@ public class Post {
         document.append("exchange" ,exchange);
         document.append("agreement" ,agreement);
         document.append("auction" ,auction);
-        if (price != null)
+        if (!price.equals(""))
             document.append("price" ,price);
         if (rowName != null)
             document.append("rowName" , rowName);
