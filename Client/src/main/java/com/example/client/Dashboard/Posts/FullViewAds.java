@@ -24,15 +24,17 @@ public class FullViewAds {
     private JSONObject post;
     private Parent parent;
     protected Pagination pagination;
+    protected ArrayList<Node> nodesOfMainVbox;
     protected VBox mainVBox;
     String paneName;
 
     public FullViewAds(Parent parent, JSONObject post, String paneName){
         this.post = post;
         this.parent = parent;
-        this.pagination = (Pagination)parent;
         this.paneName = paneName;
         this.mainVBox = (VBox)this.parent.getParent();
+        this.nodesOfMainVbox = getAllChildren(this.mainVBox);
+        mainVBox.getChildren();
         AddBox(parent,post);
     }
 
@@ -55,7 +57,10 @@ public class FullViewAds {
            @Override
             public void handle(ActionEvent event) {
                mainVBox.getChildren().clear();
-               mainVBox.getChildren().add(pagination);
+               for(Node node : nodesOfMainVbox){
+                   mainVBox.getChildren().add(node);
+               }
+
             }
         });
 
@@ -107,12 +112,6 @@ public class FullViewAds {
         //post.getJSONArray("rowName").length();
         //post.getJSONArray("columnName").length();
 
-    }
-
-
-    protected void BackButton(Pagination pagination){
-        VBox mainVbox = (VBox) parent.getParent();
-        mainVbox.getChildren().add(new Label("helllo"));
     }
 
 
@@ -173,12 +172,19 @@ public class FullViewAds {
 
         return featureVBox;
     }
+
     public ArrayList<String> getStringArray (JSONArray JArray) {
         ArrayList<String> list = new ArrayList<>();
         for (int i = 0; i < JArray.length(); i++) {
             list.add(JArray.getString(i));
         }
         return list;
+    }
+
+    protected ArrayList<Node> getAllChildren(VBox mainVBox) {
+        ArrayList<Node> nodes = new ArrayList<>();
+        nodes.addAll(mainVBox.getChildrenUnmodifiable());
+        return nodes;
     }
 //    protected Label setPrice(JSONObject post){
 //        Label price = new Label(post.getString("price"));

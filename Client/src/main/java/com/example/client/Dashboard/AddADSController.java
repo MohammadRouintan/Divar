@@ -50,9 +50,6 @@ public class AddADSController {
             vBox.setId("featureColumnTextField0");
             featureColumnVbox.getChildren().add(vBox);
 
-
-            setMainCategories();
-            setCity();
             numberOFUploadedImage = 0;
             imagesName = new ArrayList<>();
             imagesPath = new ArrayList<>();
@@ -90,9 +87,6 @@ public class AddADSController {
 
         @FXML
         private CheckBox auctionCheckBox;
-
-        @FXML
-        private ComboBox<?> branchThreeCategories;
 
         @FXML
         private ComboBox<String> branchTwoCategories;
@@ -505,6 +499,7 @@ public class AddADSController {
 
             branchTwoCategories.setItems(branchTwo);
         }
+
         private HBox makeNewHBox(int counter){
             HBox hBox = new HBox();
             hBox.setPadding(new Insets(10, 0, 10, 0));
