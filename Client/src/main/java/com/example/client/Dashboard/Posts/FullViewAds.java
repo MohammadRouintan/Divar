@@ -32,7 +32,7 @@ public class FullViewAds {
         this.parent = parent;
         this.paneName = paneName;
         this.mainVBox = (VBox)this.parent.getParent();
-        this.nodesOfMainVbox = getAllChildern(this.mainVBox);
+        this.nodesOfMainVbox = getAllChildren(this.mainVBox);
         mainVBox.getChildren();
         AddBox(parent,post);
     }
@@ -164,11 +164,9 @@ public class FullViewAds {
         return featureVBox;
     }
 
-    protected ArrayList<Node> getAllChildern (VBox mainVBox){
+    protected ArrayList<Node> getAllChildren (VBox mainVBox){
         ArrayList<Node> nodes = new ArrayList<>();
-        for (Node node : mainVBox.getChildrenUnmodifiable()) {
-            nodes.add(node);
-        }
+        nodes.addAll(mainVBox.getChildrenUnmodifiable());
         return nodes;
     }
 //    protected Label setPrice(JSONObject post){
