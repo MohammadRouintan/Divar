@@ -64,7 +64,7 @@ public class Client extends Thread {
 
 
                         for (int i = 0; i < value.size(); i++) {
-                            Database.updateUser(users ,key.get(i) ,value.get(i));
+                            Database.updateUser(users ,key.get(i) ,value.get(i), "set");
                         }
 
                     } else if (task == 5) {

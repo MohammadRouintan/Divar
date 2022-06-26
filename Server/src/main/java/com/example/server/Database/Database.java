@@ -4,6 +4,7 @@ import com.example.server.Database.Messages.Messages;
 import com.example.server.Database.Posts.Post;
 import com.example.server.Database.Users.Users;
 import com.mongodb.client.*;
+import javafx.geometry.Pos;
 import org.bson.Document;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -59,10 +60,14 @@ public class Database {
         disconnect();
     }
 
-    public synchronized static void updateUser(Users users ,String key ,Object value) {
+    public synchronized static void updateUser(Users users, String key, Object value, String typeOfUpdate) {
         connect();
         collection = database.getCollection("Users");
-        collection.updateOne(users.getDocument() ,new Document("$set" ,new Document(key ,value)));
+        if (typeOfUpdate.equals("set")) {
+            collection.updateOne(users.getDocument() ,new Document("$set" ,new Document(key ,value)));
+        } else if (typeOfUpdate.equals("unset")) {
+            collection.updateOne(users.getDocument() ,new Document("$unset" ,new Document(key ,value)));
+        }
         disconnect();
     }
 
@@ -130,17 +135,35 @@ public class Database {
         return flag;
     }
 
-    public synchronized static void updateUserArrays(Users users, String arrayName, Object value) {
+    public synchronized static void updateUserArrays(Users users, String arrayName, int number) {
         JSONObject user = new JSONObject(getUser(users.getDocument()));
-        ArrayList<String> Posts;
+        ArrayList<Integer> Posts;
         if (user.has(arrayName)) {
-            Posts = getStringArray(user.getJSONArray(arrayName));
-            Posts.add(String.valueOf(value));
+            Posts = getIntegerArray(user.getJSONArray(arrayName));
+            if (arrayName.equals("lastSeenPost") && Posts.size() == 16) {
+                Posts.remove(0);
+            }
+
+            if (arrayName.equals("lastSeenPost")) {
+                if (Posts.contains(number)) {
+                    Posts.remove(Posts.indexOf(number));
+                }
+                Posts.add(number);
+            } else if (arrayName.equals("bookmarkPost") && Posts.contains(number)) {
+                Posts.remove(Posts.indexOf(number));
+            } else {
+                Posts.add(number);
+            }
         } else {
             Posts = new ArrayList<>();
-            Posts.add(String.valueOf(value));
+            Posts.add(number);
         }
-        updateUser(users, arrayName, Posts);
+
+        if (Posts.size() == 0) {
+            updateUser(users, arrayName, true, "unset");
+        } else {
+            updateUser(users, arrayName, Posts, "set");
+        }
     }
 
     public static int lastPostId() {
@@ -223,10 +246,10 @@ public class Database {
     public static ArrayList<String> lastSeenPost(Document filter) {
         String user = getUser(filter);
         JSONObject jsonObject = new JSONObject(user);
-        ArrayList<String> jsonArray = getStringArray(jsonObject.getJSONArray("lastSeenPost"));
+        ArrayList<Integer> jsonArray = getIntegerArray(jsonObject.getJSONArray("lastSeenPost"));
         ArrayList<String> lastSeen = new ArrayList<>();
         for (int i = 0; i < jsonArray.size(); i++) {
-            lastSeen.add(getPost(new Document("postId", Integer.parseInt(jsonArray.get(i)))));
+            lastSeen.add(getPost(new Document("postId", jsonArray.get(i))));
         }
         return lastSeen;
     }
@@ -244,11 +267,11 @@ public class Database {
     public static ArrayList<String> getMarkedPosts(int size, Users user){
         String temp = getUser(user.getDocument());
         JSONObject object = new JSONObject(temp);
-        ArrayList<String> jsonArray = getStringArray(object.getJSONArray("bookmarkPost"));
+        ArrayList<Integer> jsonArray = getIntegerArray(object.getJSONArray("bookmarkPost"));
         ArrayList<String> markedPost = new ArrayList<>();
         for (int i = user.getNumberForMarkedPost() * size; i < (size * user.getNumberForMarkedPost()) + size; i++) {
             if(i < jsonArray.size()) {
-                markedPost.add(getPost(new Document("postId", Integer.parseInt(jsonArray.get(i)))));
+                markedPost.add(getPost(new Document("postId", jsonArray.get(i))));
             }
         }
         user.setNumberForMarkedPost(user.getNumberForMarkedPost() + 1);
@@ -259,11 +282,11 @@ public class Database {
     public static ArrayList<String> getUsersPosts(int size, Users user){
         String temp = getUser(user.getDocument());
         JSONObject object = new JSONObject(temp);
-        ArrayList<String> jsonArray = getStringArray(object.getJSONArray("userPosts"));
+        ArrayList<Integer> jsonArray = getIntegerArray(object.getJSONArray("userPosts"));
         ArrayList<String> usersPost = new ArrayList<>();
         for (int i = user.getNumberForUsersPost() * size; i < (size * user.getNumberForUsersPost()) + size; i++) {
             if(i < jsonArray.size()) {
-                usersPost.add(getPost(new Document("postId", Integer.parseInt(jsonArray.get(i)))));
+                usersPost.add(getPost(new Document("postId", jsonArray.get(i))));
             }
         }
         user.setNumberForUsersPost(user.getNumberForUsersPost() + 1);
@@ -366,10 +389,10 @@ public class Database {
         return lastId;
     }
 
-    public static ArrayList<String> getStringArray (JSONArray JArray) {
-        ArrayList<String> list = new ArrayList<>();
+    public static ArrayList<Integer> getIntegerArray (JSONArray JArray) {
+        ArrayList<Integer> list = new ArrayList<>();
         for (int i = 0; i < JArray.length(); i++) {
-            list.add(JArray.getString(i));
+            list.add(JArray.getInt(i));
         }
         return list;
     }
