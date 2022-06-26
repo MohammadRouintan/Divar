@@ -94,7 +94,7 @@ public class Client extends Thread {
                         String key = DIS.readUTF();
                         String value = DIS.readUTF();
                         int index = DIS.readInt();
-                        ArrayList<String> list = Database.getPosts(sizePosts, key, value, index);
+                        ArrayList<String> list = Database.getPosts(sizePosts, index, key, value);
                         DOS.writeInt(Math.min(sizePosts, list.size()));
                         DOS.flush();
                         for (String str : list){
