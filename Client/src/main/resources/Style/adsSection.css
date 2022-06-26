@@ -9,3 +9,8 @@
 }
 .scearch-btn{
 }
+.apply-btn{
+    -fx-background-color: #f1c40f;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+}
