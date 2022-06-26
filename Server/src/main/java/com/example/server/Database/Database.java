@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Database {
@@ -337,14 +338,11 @@ public class Database {
         connect();
         collection = database.getCollection("Users");
         int lastId = 1;
-        FindIterable<Document> profile = collection.find(new Document("profileImageName", 1)).sort(new Document("profileNameImage", -1));
-        if (profile.cursor().hasNext()) {
-            for (Document document : profile) {
-                int temp = document.getInteger("profileNameImage");
-                if (temp > lastId) {
-                    lastId = temp;
-                }
-            }
+        List<Document> documents = new ArrayList<>();
+        documents.add(new Document("$project", new Document("profileNameImage", 1)));
+        documents.add(new Document("$sort", new Document("profileNameImage", -1)));
+        if (collection.aggregate(documents).cursor().hasNext()) {
+            lastId = collection.aggregate(documents).cursor().next().getInteger("profileNameImage");
         }
         disconnect();
         return lastId;
@@ -378,5 +376,4 @@ public class Database {
         disconnect();
         return posts;
     }
-
 }
