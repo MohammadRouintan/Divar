@@ -189,14 +189,31 @@ public class Database {
         return notAccepted;
     }
 
-    public static ArrayList<String> getPosts(int number, String key, Object value, int index) {
+    public static ArrayList<String> getPosts(int size, int index, String key, Object value) {
         connect();
         collection = database.getCollection("Posts");
         ArrayList<String> posts = new ArrayList<>();
-        if (collection.find(new Document(key, value)).cursor().hasNext()) {
-            FindIterable<Document> post = collection.find(new Document(key, value)).sort(new Document("postId", -1)).skip(index * number);
-            for (Document document : post) {
+        FindIterable<Document> post = collection.find(new Document(key, value)).sort(new Document("postId", -1));
+        if (post.cursor().hasNext()) {
+            for (Document document : post.skip(index * size).limit(size)) {
                 posts.add(document.toJson());
+            }
+        }
+        disconnect();
+        return posts;
+    }
+
+    public static ArrayList<String> search(int size, int index, String key, Object value, String search) {
+        connect();
+        collection = database.getCollection("Posts");
+        ArrayList<String> posts = new ArrayList<>();
+        FindIterable<Document> post = collection.find(new Document(key, value)).sort(new Document("postId", -1));
+        if (post.cursor().hasNext()) {
+            for (Document document : post.skip(index * size).limit(size)) {
+                String title = document.getString("title");
+                if (title.contains(search)) {
+                    posts.add(document.toJson());
+                }
             }
         }
         disconnect();
@@ -357,24 +374,4 @@ public class Database {
         return list;
     }
 
-    public static ArrayList<String> search(int size, String search) {
-        connect();
-        int temp = size;
-        collection = database.getCollection("Posts");
-        ArrayList<String> posts = new ArrayList<>();
-        if (collection.find().cursor().hasNext()) {
-            for (Document document : collection.find()) {
-                if (temp == 0) {
-                    break;
-                }
-                String title = document.getString("title");
-                if (title.contains(search)) {
-                    posts.add(document.toJson());
-                    temp--;
-                }
-            }
-        }
-        disconnect();
-        return posts;
-    }
 }
