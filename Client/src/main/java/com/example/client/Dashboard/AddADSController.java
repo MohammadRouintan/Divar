@@ -50,9 +50,6 @@ public class AddADSController {
             vBox.setId("featureColumnTextField0");
             featureColumnVbox.getChildren().add(vBox);
 
-
-            setMainCategories();
-            setCity();
             numberOFUploadedImage = 0;
             imagesName = new ArrayList<>();
             imagesPath = new ArrayList<>();

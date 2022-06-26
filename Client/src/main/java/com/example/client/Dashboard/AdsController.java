@@ -49,6 +49,12 @@ public class AdsController {
         temp.addAll(cityes);
         City.setItems(temp);
     }
+
+    @FXML
+    void MainBranchCategotiesFunction(ActionEvent event) {
+        setBranchTwoCategories();
+    }
+
     public void setBranchTwoCategories() {
         ObservableList<String> branchTwo = FXCollections.observableArrayList();
         String[] estate = {"ResidentialSales", "ResidentialRent", "OfficeSales", "OfficeRent", "ShortTermRent", "ConstructionProject"};

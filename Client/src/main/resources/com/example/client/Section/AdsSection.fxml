@@ -52,7 +52,7 @@
                                  </font></Label>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="546.0">
                                  <children>
-                                    <ComboBox fx:id="mainBranchCategories" prefHeight="36.0" prefWidth="380.0" promptText="Categories" styleClass="box" stylesheets="@../../../../Style/adsSection.css">
+                                    <ComboBox fx:id="mainBranchCategories" onAction="#MainBranchCategotiesFunction" prefHeight="36.0" prefWidth="380.0" promptText="Categories" styleClass="box" stylesheets="@../../../../Style/adsSection.css">
                                        <HBox.margin>
                                           <Insets left="30.0" />
                                        </HBox.margin>
