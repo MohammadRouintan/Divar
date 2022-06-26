@@ -157,18 +157,19 @@ public class Database {
     }
 
     public static int lastImageIdOfPosts() {
-        int lastPostId = lastPostId();
         connect();
         collection = database.getCollection("Posts");
         int lastId = 1;
-        for (int i = lastPostId; i >= 0; i--) {
-            String jsonString = collection.find(new Document("postId", i)).cursor().next().toJson();
+        List<Document> documents = new ArrayList<>();
+        documents.add(new Document("$project", new Document("imageName", 1)));
+        documents.add(new Document("$sort", new Document("imageName", -1)));
+        if (collection.aggregate(documents).cursor().hasNext()) {
+            String jsonString = collection.aggregate(documents).cursor().next().toJson();
             JSONObject post = new JSONObject(jsonString);
             JSONArray imageName = post.getJSONArray("imageName");
             int temp = imageName.getInt(imageName.length() - 1);
             if (temp > lastId) {
                 lastId = temp;
-                break;
             }
         }
         disconnect();
