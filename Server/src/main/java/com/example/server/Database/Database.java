@@ -211,11 +211,11 @@ public class Database {
         return notAccepted;
     }
 
-    public static ArrayList<String> getPosts(int size, int index, String key, Object value) {
+    public static ArrayList<String> getPosts(int size, int index, Document filter) {
         connect();
         collection = database.getCollection("Posts");
         ArrayList<String> posts = new ArrayList<>();
-        FindIterable<Document> post = collection.find(new Document(key, value)).sort(new Document("postId", -1));
+        FindIterable<Document> post = collection.find(filter).sort(new Document("postId", -1));
         if (post.cursor().hasNext()) {
             for (Document document : post.skip(index * size).limit(size)) {
                 posts.add(document.toJson());
@@ -381,7 +381,7 @@ public class Database {
     public static int lastUserImageId() {
         connect();
         collection = database.getCollection("Users");
-        int lastId = 1;
+        int lastId = 0;
         List<Document> documents = new ArrayList<>();
         documents.add(new Document("$match", new Document("profileNameImage", 1)));
         documents.add(new Document("$sort", new Document("phoneNumber", -1)));
@@ -392,7 +392,21 @@ public class Database {
         return lastId;
     }
 
-    public static ArrayList<Integer> getIntegerArray (JSONArray JArray) {
+    public static int getSizeOfPosts(Document filter) {
+        connect();
+        collection = database.getCollection("Posts");
+        int counter = 0;
+        FindIterable<Document> posts = collection.find(filter);
+        if (posts.cursor().hasNext()) {
+            for (Document post : posts) {
+                counter++;
+            }
+        }
+
+        return counter;
+    }
+
+    public static ArrayList<Integer> getIntegerArray(JSONArray JArray) {
         ArrayList<Integer> list = new ArrayList<>();
         for (int i = 0; i < JArray.length(); i++) {
             list.add(JArray.getInt(i));

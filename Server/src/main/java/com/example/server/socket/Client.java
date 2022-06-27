@@ -90,10 +90,26 @@ public class Client extends Thread {
                         DOS.flush();
                     } else if (task == 9) {
                         int sizePosts = DIS.readInt();
-                        String key = DIS.readUTF();
-                        String value = DIS.readUTF();
                         int index = DIS.readInt();
-                        ArrayList<String> list = Database.getPosts(sizePosts, index, key, value);
+                        int sizeOfKeys = DIS.readInt();
+                        ArrayList<String> keys = new ArrayList<>();
+                        for (int i = 0; i < sizeOfKeys; i++) {
+                            keys.add(DIS.readUTF());
+                        }
+
+                        ArrayList<Object> values = new ArrayList<>();
+                        String jsonString = DIS.readUTF();
+                        JSONObject jsonObject = new JSONObject(jsonString);
+                        for (String key : keys) {
+                            values.add(jsonObject.get(key));
+                        }
+
+                        Document document = new Document();
+                        for (int i = 0; i < keys.size(); i++) {
+                            document.append(keys.get(i), values.get(i));
+                        }
+
+                        ArrayList<String> list = Database.getPosts(sizePosts, index, document);
                         DOS.writeInt(Math.min(sizePosts, list.size()));
                         DOS.flush();
                         for (String str : list){
@@ -165,8 +181,29 @@ public class Client extends Thread {
                         int size = Database.getSizeOfArrays(nameOfArray, users);
                         DOS.writeInt(size);
                         DOS.flush();
-                    }
-                    else if (task == -1) {
+                    } else if (task == 20) {
+                        int size = DIS.readInt();
+                        ArrayList<String> keys = new ArrayList<>();
+                        for (int i = 0; i < size; i++) {
+                            keys.add(DIS.readUTF());
+                        }
+
+                        ArrayList<Object> values = new ArrayList<>();
+                        String jsonString = DIS.readUTF();
+                        JSONObject jsonObject = new JSONObject(jsonString);
+                        for (String key : keys) {
+                            values.add(jsonObject.get(key));
+                        }
+
+                        Document document = new Document();
+                        for (int i = 0; i < keys.size(); i++) {
+                            document.append(keys.get(i), values.get(i));
+                        }
+
+                        int sizeOfPosts = Database.getSizeOfPosts(document);
+                        DOS.writeInt(sizeOfPosts);
+                        DOS.flush();
+                    } else if (task == -1) {
                         closeSocket();
                         break;
                     }
