@@ -4,7 +4,6 @@ import com.example.server.Database.Messages.Messages;
 import com.example.server.Database.Posts.Post;
 import com.example.server.Database.Users.Users;
 import com.mongodb.client.*;
-import javafx.geometry.Pos;
 import org.bson.Document;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -182,7 +181,7 @@ public class Database {
     public static int lastImageIdOfPosts() {
         connect();
         collection = database.getCollection("Posts");
-        int lastId = 1;
+        int lastId = 0;
         List<Document> documents = new ArrayList<>();
         documents.add(new Document("$project", new Document("imageName", 1)));
         documents.add(new Document("$sort", new Document("imageName", -1)));
@@ -243,13 +242,16 @@ public class Database {
         return posts;
     }
 
-    public static ArrayList<String> lastSeenPost(Document filter) {
-        String user = getUser(filter);
+    public static ArrayList<String> lastSeenPost(int size, int index, Users users) {
+        String user = getUser(users.getDocument());
         JSONObject jsonObject = new JSONObject(user);
         ArrayList<Integer> jsonArray = getIntegerArray(jsonObject.getJSONArray("lastSeenPost"));
         ArrayList<String> lastSeen = new ArrayList<>();
-        for (int i = 0; i < jsonArray.size(); i++) {
-            lastSeen.add(getPost(new Document("postId", jsonArray.get(i))));
+        for (int i = jsonArray.size() - 1 - (index * size); i > jsonArray.size() - 1 - (index + 1) * size; i--) {
+            FindIterable<Document> post = collection.find(new Document("postId", jsonArray.get(i)));
+            if (post.cursor().hasNext()) {
+                lastSeen.add(post.cursor().next().toJson());
+            }
         }
         return lastSeen;
     }
@@ -264,32 +266,32 @@ public class Database {
         mongoClient.close();
     }
 
-    public static ArrayList<String> getMarkedPosts(int size, Users user){
+    public static ArrayList<String> getMarkedPosts(int size, int index, Users user){
         String temp = getUser(user.getDocument());
         JSONObject object = new JSONObject(temp);
         ArrayList<Integer> jsonArray = getIntegerArray(object.getJSONArray("bookmarkPost"));
-        ArrayList<String> markedPost = new ArrayList<>();
-        for (int i = user.getNumberForMarkedPost() * size; i < (size * user.getNumberForMarkedPost()) + size; i++) {
-            if(i < jsonArray.size()) {
-                markedPost.add(getPost(new Document("postId", jsonArray.get(i))));
+        ArrayList<String> bookmarkPost = new ArrayList<>();
+        for (int i = jsonArray.size() - 1 - (index * size); i > jsonArray.size() - 1 - (index + 1) * size; i--) {
+            FindIterable<Document> post = collection.find(new Document("postId", jsonArray.get(i)));
+            if (post.cursor().hasNext()) {
+                bookmarkPost.add(post.cursor().next().toJson());
             }
         }
-        user.setNumberForMarkedPost(user.getNumberForMarkedPost() + 1);
-        return markedPost;
+        return bookmarkPost;
     }
 
 
-    public static ArrayList<String> getUsersPosts(int size, Users user){
+    public static ArrayList<String> getUsersPosts(int size, int index, Users user){
         String temp = getUser(user.getDocument());
         JSONObject object = new JSONObject(temp);
         ArrayList<Integer> jsonArray = getIntegerArray(object.getJSONArray("userPosts"));
         ArrayList<String> usersPost = new ArrayList<>();
-        for (int i = user.getNumberForUsersPost() * size; i < (size * user.getNumberForUsersPost()) + size; i++) {
-            if(i < jsonArray.size()) {
-                usersPost.add(getPost(new Document("postId", jsonArray.get(i))));
+        for (int i = jsonArray.size() - 1 - (index * size); i > jsonArray.size() - 1 - (index + 1) * size; i--) {
+            FindIterable<Document> post = collection.find(new Document("postId", jsonArray.get(i)));
+            if (post.cursor().hasNext()) {
+                usersPost.add(post.cursor().next().toJson());
             }
         }
-        user.setNumberForUsersPost(user.getNumberForUsersPost() + 1);
         return usersPost;
     }
 

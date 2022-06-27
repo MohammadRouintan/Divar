@@ -10,6 +10,7 @@ import java.io.*;
 import java.net.Socket;
 import java.security.cert.PolicyNode;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class Client extends Thread {
@@ -75,8 +76,8 @@ public class Client extends Thread {
                         DOS.flush();
                     } else if (task == 7) {
                         int size = DIS.readInt();
-                        users.setFilterDocument(new Document("phoneNumber", number));
-                        ArrayList <String> list = Database.getMarkedPosts(size,users);
+                        int index = DIS.readInt();
+                        ArrayList <String> list = Database.getMarkedPosts(size, index, users);
                         DOS.writeInt(list.size());
                         DOS.flush();
                         for (String str : list){
@@ -126,7 +127,9 @@ public class Client extends Thread {
                                 json.getString("branchMain"), json.getString("branch1"));
                         Database.addPost(post);
                     } else if (task == 13) {
-                        ArrayList <String> list = Database.lastSeenPost(new Document("phoneNumber", number));
+                        int size = DIS.readInt();
+                        int index = DIS.readInt();
+                        ArrayList <String> list = Database.lastSeenPost(size, index, users);
                         DOS.writeInt(list.size());
                         DOS.flush();
                         for (String str : list){
@@ -134,7 +137,9 @@ public class Client extends Thread {
                             DOS.flush();
                         }
                     } else if (task == 14) {
-                        ArrayList <String> list = Database.getUsersPosts(8, users);
+                        int size = DIS.readInt();
+                        int index = DIS.readInt();
+                        ArrayList <String> list = Database.getUsersPosts(size, index, users);
                         DOS.writeInt(list.size());
                         DOS.flush();
                         for (String str : list){
