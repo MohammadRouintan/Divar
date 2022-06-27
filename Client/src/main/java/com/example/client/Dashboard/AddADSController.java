@@ -38,6 +38,9 @@ public class AddADSController {
         private static int numberOFUploadedImage;
         @FXML
         public void initialize() {
+
+            MainDashboardController.nightMode.setOnAction(event -> setNightMode());
+
             setMainCategories();
             setCity();
             HBox hBox;
@@ -141,7 +144,8 @@ public class AddADSController {
 
         @FXML
         private Button uploadImage;
-
+        @FXML
+        private VBox mainVbox;
         @FXML
         void MainBranchCategotiesFunction(ActionEvent event) {
             setBranchTwoCategories();
@@ -569,6 +573,9 @@ public class AddADSController {
         VBox vBox = (VBox) featureColumnVbox.getChildren().get(number);
         TextField textField = (TextField) vBox.getChildren().get(1);
         return textField.getText();
+    }
+
+    void setNightMode(){
     }
 }
 

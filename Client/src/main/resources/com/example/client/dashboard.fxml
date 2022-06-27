@@ -110,8 +110,15 @@
             </JFXButton>
             <VBox alignment="BOTTOM_CENTER" maxWidth="150.0" prefHeight="126.0" prefWidth="134.0">
                <children>
-                  <JFXToggleButton alignment="BOTTOM_CENTER" text="Nigh Mode" toggleColor="#e74c3c" toggleLineColor="#c0392b" />
+                  <JFXToggleButton fx:id="toggleButton" alignment="BOTTOM_CENTER" text="Nigh Mode" toggleColor="#e74c3c" toggleLineColor="#c0392b">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </JFXToggleButton>
                </children>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
             </VBox>
          </children>
          <padding>

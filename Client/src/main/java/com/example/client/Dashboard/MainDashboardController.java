@@ -1,6 +1,7 @@
 package com.example.client.Dashboard;
 
 import com.example.client.Main;
+import com.jfoenix.controls.JFXToggleButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,9 +18,13 @@ import java.util.Objects;
 public class MainDashboardController {
 
     @FXML
-        private Pane mainPane;
+    public JFXToggleButton toggleButton;
     @FXML
+    private Pane mainPane;
+    @FXML
+    public static JFXToggleButton nightMode;
     public void initialize(){
+        nightMode = toggleButton;
         try {
             Pane pane = FXMLLoader.load(Main.class.getResource("Section/AdsSection.fxml"));
             mainPane.getChildren().clear();
