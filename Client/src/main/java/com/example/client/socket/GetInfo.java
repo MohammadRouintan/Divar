@@ -238,6 +238,19 @@ public class GetInfo {
         return result;
     }
 
+    public static int getSizeOfArray(String name) {
+        int result = 0;
+        try {
+            Connect.DOS.writeInt(19);
+            Connect.DOS.writeUTF(name);
+            Connect.DOS.flush();
+            result = Connect.DIS.readInt();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return result;
+    }
+
 
     public static void addUser(){
         try {

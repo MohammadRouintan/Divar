@@ -99,7 +99,7 @@ public class NewPage {
         vBox.getChildren().addAll(imageView,titleLabel,priceLabel,timeLabel);
         vBox.setOnMouseClicked(event -> {
             ShowAds(vBox, post);
-            if (!this.paneName.equals("MyAds"))
+            if (!this.paneName.equals("MyAds") && !this.paneName.equals("LastSeenAds"))
                 GetInfo.updateUserArrays("lastSeenPost", post.getInt("postId"));
         });
         return vBox;
