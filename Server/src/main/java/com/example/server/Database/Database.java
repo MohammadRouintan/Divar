@@ -436,5 +436,61 @@ public class Database {
         return list;
     }
 
+    public synchronized static ArrayList<Integer> getSizeOfNotSeenMessage(String phoneNumber, ArrayList<String> partners) {
+        ArrayList<Integer> notSeen = new ArrayList<>();
+        for (String partner : partners) {
+            String chat = findChat(phoneNumber, partner);
+            JSONObject jsonObject = new JSONObject(chat);
+            int counter = 0;
+            if (jsonObject.has("seen") && jsonObject.has("sender")) {
+                JSONArray sender = jsonObject.getJSONArray("sender");
+                JSONArray seen = jsonObject.getJSONArray("seen");
+                for (int i = sender.length() - 1; i >= 0 ; i--) {
+                    if (sender.getString(i).equals(partner) && !seen.getBoolean(i)) {
+                        counter++;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            notSeen.add(counter);
+        }
+        return notSeen;
+    }
+
+    public synchronized static ArrayList<String> getNameOfProfileImage(ArrayList<String> partners) {
+        ArrayList<String> imageName = new ArrayList<>();
+        for (String partner : partners) {
+            String user = getUser(new Document("phoneNumber", partner));
+            JSONObject jsonObject = new JSONObject(user);
+            if (jsonObject.has("profileNameImage")) {
+                imageName.add(jsonObject.getString("profileNameImage"));
+            }
+        }
+        return imageName;
+    }
+
+    public synchronized static String getChatCount(String phoneNumber) {
+        Document document = new Document();
+        document.append("partner", findPartner(phoneNumber));
+        document.append("size", getSizeOfNotSeenMessage(phoneNumber, findPartner(phoneNumber)));
+        document.append("imageName", getNameOfProfileImage(findPartner(phoneNumber)));
+        return document.toJson();
+    }
+
+    public synchronized static boolean isMessageExist(String phoneNumber1, String phoneNumber2) {
+        connect();
+        collection = database.getCollection("Chats");
+        FindIterable<Document> chat1 = collection.find(new Document("user1", phoneNumber1).append("user2", phoneNumber2));
+        FindIterable<Document> chat2 = collection.find(new Document("user1", phoneNumber2).append("user2", phoneNumber1));
+        boolean flag = false;
+        if (chat1.cursor().hasNext()) {
+            flag = true;
+        } else if (chat2.cursor().hasNext()) {
+            flag = true;
+        }
+        disconnect();
+        return flag;
+    }
 
 }
