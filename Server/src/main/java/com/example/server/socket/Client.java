@@ -231,6 +231,23 @@ public class Client extends Thread {
                             DOS.writeUTF(newPost);
                             DOS.flush();
                         }
+                    } else if (task == 23) {
+                        String phoneNumber = DIS.readUTF();
+                        String jsonString = Database.getChatCount(phoneNumber);
+                        DOS.writeUTF(jsonString);
+                        DOS.flush();
+                    } else if (task == 24) {
+                        String phoneNumber1 = DIS.readUTF();
+                        String phoneNumber2 = DIS.readUTF();
+                        String chat = Database.findChat(phoneNumber1, phoneNumber2);
+                        DOS.writeUTF(chat);
+                        DOS.flush();
+                    } else if (task == 25) {
+                        String phoneNumber1 = DIS.readUTF();
+                        String phoneNumber2 = DIS.readUTF();
+                        boolean isMessageExist = Database.isMessageExist(phoneNumber1, phoneNumber2);
+                        DOS.writeBoolean(isMessageExist);
+                        DOS.flush();
                     } else if (task == -1) {
                         closeSocket();
                         break;
