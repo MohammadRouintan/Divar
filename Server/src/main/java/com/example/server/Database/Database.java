@@ -247,11 +247,8 @@ public class Database {
         JSONObject jsonObject = new JSONObject(user);
         ArrayList<Integer> jsonArray = getIntegerArray(jsonObject.getJSONArray("lastSeenPost"));
         ArrayList<String> lastSeen = new ArrayList<>();
-        for (int i = jsonArray.size() - 1 - (index * size); i > jsonArray.size() - 1 - (index + 1) * size; i--) {
-            FindIterable<Document> post = collection.find(new Document("postId", jsonArray.get(i)));
-            if (post.cursor().hasNext()) {
-                lastSeen.add(post.cursor().next().toJson());
-            }
+        for (int i = jsonArray.size() - 1 - (index * size); i > Math.max(jsonArray.size() - 1 - (index + 1) * size, -1); i--) {
+            lastSeen.add(getPost(new Document("postId", jsonArray.get(i))));
         }
         return lastSeen;
     }
@@ -271,11 +268,8 @@ public class Database {
         JSONObject object = new JSONObject(temp);
         ArrayList<Integer> jsonArray = getIntegerArray(object.getJSONArray("bookmarkPost"));
         ArrayList<String> bookmarkPost = new ArrayList<>();
-        for (int i = jsonArray.size() - 1 - (index * size); i > jsonArray.size() - 1 - (index + 1) * size; i--) {
-            FindIterable<Document> post = collection.find(new Document("postId", jsonArray.get(i)));
-            if (post.cursor().hasNext()) {
-                bookmarkPost.add(post.cursor().next().toJson());
-            }
+        for (int i = jsonArray.size() - 1 - (index * size); i > Math.max(jsonArray.size() - 1 - (index + 1) * size, -1); i--) {
+            bookmarkPost.add(getPost(new Document("postId", jsonArray.get(i))));
         }
         return bookmarkPost;
     }
@@ -286,13 +280,20 @@ public class Database {
         JSONObject object = new JSONObject(temp);
         ArrayList<Integer> jsonArray = getIntegerArray(object.getJSONArray("userPosts"));
         ArrayList<String> usersPost = new ArrayList<>();
-        for (int i = jsonArray.size() - 1 - (index * size); i > jsonArray.size() - 1 - (index + 1) * size; i--) {
-            FindIterable<Document> post = collection.find(new Document("postId", jsonArray.get(i)));
-            if (post.cursor().hasNext()) {
-                usersPost.add(post.cursor().next().toJson());
-            }
+        for (int i = jsonArray.size() - 1 - (index * size); i > Math.max(jsonArray.size() - 1 - (index + 1) * size, -1); i--) {
+            usersPost.add(getPost(new Document("postId", jsonArray.get(i))));
         }
         return usersPost;
+    }
+
+    public static int getSizeOfArrays(String name, Users users) {
+        String temp = getUser(users.getDocument());
+        JSONObject object = new JSONObject(temp);
+        if (object.has(name)) {
+            ArrayList<Integer> jsonArray = getIntegerArray(object.getJSONArray(name));
+            return jsonArray.size();
+        }
+        return 0;
     }
 
     public static void addMessage(Messages messages){

@@ -160,6 +160,11 @@ public class Client extends Thread {
                         int number = jsonObject.getInt("number");
 
                         Database.updateUserArrays(users, key, number);
+                    } else if (task == 19) {
+                        String nameOfArray = DIS.readUTF();
+                        int size = Database.getSizeOfArrays(nameOfArray, users);
+                        DOS.writeInt(size);
+                        DOS.flush();
                     }
                     else if (task == -1) {
                         closeSocket();
