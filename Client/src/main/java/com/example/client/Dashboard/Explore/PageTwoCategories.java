@@ -33,9 +33,7 @@ public class PageTwoCategories {
     private void setButtons(String nameCat, VBox vBox) {
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(10);
-        Button showAll = new Button("ShowAll");
-        showAll.setPrefWidth(500);
-        showAll.setPrefHeight(44);
+        Button showAll = makeButton("ShowAll");
         vBox.getChildren().add(showAll);
         switch (nameCat) {
             case "Estate":
@@ -226,7 +224,7 @@ public class PageTwoCategories {
         button.setPrefWidth(500);
         button.setPrefHeight(44);
         button.setOnAction(event -> {
-            PageThreeCategories pageThreeCategories = new PageThreeCategories(mainVbox,Name);
+            PageThreeCategories pageThreeCategories = new PageThreeCategories(mainVbox, this.nameCat, Name);
         });
         return button;
     }

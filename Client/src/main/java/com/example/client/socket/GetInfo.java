@@ -138,21 +138,32 @@ public class GetInfo {
     }
 
 
-    public static ArrayList<String> getPosts(int sizePosts ,String key, String value, int index){
+    public static ArrayList<String> getPosts(int sizePosts, int index, ArrayList<String> keys, ArrayList<Object> values){
         ArrayList<String> result = new ArrayList<>();
         try {
             Connect.DOS.writeInt(9);
             Connect.DOS.writeInt(sizePosts);
             Connect.DOS.flush();
-            Connect.DOS.writeUTF(key);
-            Connect.DOS.flush();
-            Connect.DOS.writeUTF(value);
-            Connect.DOS.flush();
             Connect.DOS.writeInt(index);
             Connect.DOS.flush();
+            Connect.DOS.writeInt(keys.size());
+            Connect.DOS.flush();
+            for (String key : keys) {
+                Connect.DOS.writeUTF(key);
+                Connect.DOS.flush();
+            }
+
+            JSONObject jsonObject = new JSONObject();
+            for (int i = 0; i < keys.size(); i++) {
+                jsonObject.put(keys.get(i), values.get(i));
+            }
+
+            Connect.DOS.writeUTF(jsonObject.toString());
+            Connect.DOS.flush();
+
             int size = Connect.DIS.readInt();
             for (int i = 0; i < size; i++) {
-                result.add( Connect.DIS.readUTF());
+                result.add(Connect.DIS.readUTF());
             }
         } catch (IOException e) {
             System.err.println(e.getMessage());
@@ -244,6 +255,33 @@ public class GetInfo {
             Connect.DOS.writeInt(19);
             Connect.DOS.writeUTF(name);
             Connect.DOS.flush();
+            result = Connect.DIS.readInt();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return result;
+    }
+
+    public static int getSizeOfPosts(ArrayList<String> keys, ArrayList<Object> values) {
+        int result = 0;
+        try {
+            Connect.DOS.writeInt(20);
+            Connect.DOS.flush();
+            Connect.DOS.writeInt(keys.size());
+            Connect.DOS.flush();
+            for (String key : keys) {
+                Connect.DOS.writeUTF(key);
+                Connect.DOS.flush();
+            }
+
+            JSONObject jsonObject = new JSONObject();
+            for (int i = 0; i < keys.size(); i++) {
+                jsonObject.put(keys.get(i), values.get(i));
+            }
+
+            Connect.DOS.writeUTF(jsonObject.toString());
+            Connect.DOS.flush();
+
             result = Connect.DIS.readInt();
         } catch (IOException e) {
             System.err.println(e.getMessage());
@@ -358,7 +396,7 @@ public class GetInfo {
         return false;
     }
 
-    public static void getProfile(String fileName){
+    public static void receiveProfile(String fileName){
 
     }
 
