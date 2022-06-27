@@ -439,10 +439,53 @@ public class GetInfo {
         return newPosts;
     }
 
-    public static String getChatCount(String phoneNumber){return null;}
+    public static String getChatCount(String phoneNumber) {
+        String result = "";
+        try {
+            Connect.DOS.writeInt(23);
+            Connect.DOS.flush();
+            Connect.DOS.writeUTF(phoneNumber);
+            Connect.DOS.flush();
 
-    public static String getChat(String phoneNumber1 ,String phoneNumber2){return null;}
+            result = Connect.DIS.readUTF();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return result;
+    }
 
-    public static boolean isMessageExists(String user1 ,String user2){return false;}
+    public static String getChat(String phoneNumber1 ,String phoneNumber2) {
+        String result = "";
+        try {
+            Connect.DOS.writeInt(24);
+            Connect.DOS.flush();
+            Connect.DOS.writeUTF(phoneNumber1);
+            Connect.DOS.flush();
+            Connect.DOS.writeUTF(phoneNumber2);
+            Connect.DOS.flush();
+
+            result = Connect.DIS.readUTF();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return result;
+    }
+
+    public static boolean isMessageExists(String phoneNumber1 ,String phoneNumber2) {
+        boolean flag = false;
+        try {
+            Connect.DOS.writeInt(25);
+            Connect.DOS.flush();
+            Connect.DOS.writeUTF(phoneNumber1);
+            Connect.DOS.flush();
+            Connect.DOS.writeUTF(phoneNumber2);
+            Connect.DOS.flush();
+
+            flag = Connect.DIS.readBoolean();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return flag;
+    }
 
 }
