@@ -1,0 +1,11 @@
+.btn{
+    -fx-background-color: #f1c40f;
+    -fx-background-radius: 0 30 30 0 ;
+    -fx-border-radius: 0 30 30 0;
+}
+.tilte{
+    -fx-background-color: #f1c40f ;
+    -fx-border-radius: 20;
+    -fx-background-radius: 0 0 20 20;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5, 0, 0, 0);
+}
