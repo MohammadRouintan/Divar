@@ -18,6 +18,16 @@ public class MainDashboardController {
 
     @FXML
         private Pane mainPane;
+    @FXML
+    public void initialize(){
+        try {
+            Pane pane = FXMLLoader.load(Main.class.getResource("Section/AdsSection.fxml"));
+            mainPane.getChildren().clear();
+            mainPane.getChildren().add(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 
     @FXML
     void AdsButton(ActionEvent event) {

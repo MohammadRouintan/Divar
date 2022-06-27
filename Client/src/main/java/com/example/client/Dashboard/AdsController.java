@@ -1,6 +1,5 @@
 package com.example.client.Dashboard;
 
-import javafx.animation.ScaleTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,7 +8,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-import javafx.util.Duration;
+
 
 public class AdsController {
     @FXML

@@ -107,7 +107,7 @@
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../Icon/plus.png" />
+                        <Image url="@../../image/addrow.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -119,7 +119,7 @@
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../Icon/minus.png" />
+                        <Image url="@../../image/minus.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -142,7 +142,7 @@
                <graphic>
                   <ImageView fitHeight="31.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../Icon/plus.png" />
+                        <Image url="@../../image/addrow.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -154,7 +154,7 @@
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../Icon/minus.png" />
+                        <Image url="@../../image/minus.png" />
                      </image>
                   </ImageView>
                </graphic>

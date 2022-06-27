@@ -4,6 +4,7 @@
     -fx-background-radius: 20;
     -fx-border-color: #f1c40f;
 }
+
 .text-field{
     -fx-background-color: #fff;
     -fx-border-radius: 20;
@@ -21,6 +22,7 @@
     -fx-background-radius: 0 0 20 20;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5, 0, 0, 0);
 }
+
 .plus-btn{
     -fx-background-color: transparent;
 }
