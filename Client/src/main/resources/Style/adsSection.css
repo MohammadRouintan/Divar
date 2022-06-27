@@ -1,11 +1,25 @@
 .search-btn{
     -fx-background-color: transparent;
 }
+
 .box {
     -fx-background-color: transparent;
     -fx-border-radius: 20;
     -fx-background-radius: 20;
     -fx-border-color: #f1c40f;
+}
+
+.title{
+    -fx-background-color: #f1c40f ;
+    -fx-border-radius: 20;
+    -fx-background-radius: 10 10 0 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5, 0, 0, 0);
+}
+.top-title{
+    -fx-background-color: #f1c40f ;
+    -fx-border-radius: 20;
+    -fx-background-radius: 0 0 10 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5, 0, 0, 0);
 }
 .scearch-btn{
 }
@@ -13,4 +27,8 @@
     -fx-background-color: #f1c40f;
     -fx-border-radius: 20;
     -fx-background-radius: 20;
+}
+.apply-btn:hover{
+    -fx-background-color: #454545;
+    -fx-text-fill: #fff;
 }

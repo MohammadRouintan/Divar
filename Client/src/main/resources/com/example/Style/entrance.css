@@ -1,6 +1,6 @@
 
 .bck-img{
-    -fx-background-image: url("../image/background.png"),url(../image/logo.png);
+    -fx-background-image: url("../image/background.png"),url(../image/black.png);
     -fx-background-repeat: no-repeat,no-repeat;
     -fx-background-size: cover, 110px;
     -fx-background-position: center, center;

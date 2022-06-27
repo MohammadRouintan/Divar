@@ -38,6 +38,9 @@ public class AddADSController {
         private static int numberOFUploadedImage;
         @FXML
         public void initialize() {
+
+            MainDashboardController.nightMode.setOnAction(event -> setNightMode());
+
             setMainCategories();
             setCity();
             HBox hBox;
@@ -141,7 +144,8 @@ public class AddADSController {
 
         @FXML
         private Button uploadImage;
-
+        @FXML
+        private VBox mainVbox;
         @FXML
         void MainBranchCategotiesFunction(ActionEvent event) {
             setBranchTwoCategories();
@@ -469,10 +473,10 @@ public class AddADSController {
                 case "Vehicles":
                     branchTwo.addAll(vehicles);
                     break;
-                case "Digital Commodity":
+                case "Digital Goods":
                     branchTwo.addAll(digitalCommodity);
                     break;
-                case "Home Commodity":
+                case "Home Goods":
                     branchTwo.addAll(homeCommodity);
                     break;
                 case "Services":
@@ -501,35 +505,47 @@ public class AddADSController {
         }
 
         private HBox makeNewHBox(int counter){
+            File file = new File("../Client/src/main/resources/Style/AddAdsSection.css");
             HBox hBox = new HBox();
             hBox.setPadding(new Insets(10, 0, 10, 0));
             hBox.setAlignment(Pos.CENTER);
+            hBox.setSpacing(5);
             TextField nameTxt = new TextField();
             nameTxt.setMinHeight(35);
             nameTxt.setPrefWidth(110);
             nameTxt.setPrefHeight(35);
             nameTxt.setId("RowName" + counter);
+            nameTxt.getStylesheets().add(file.toURI().toString());
+            nameTxt.getStyleClass().add("text-field");
             TextField detailsTxt = new TextField();
             detailsTxt.setMinHeight(35);
             detailsTxt.setPrefWidth(285);
             detailsTxt.setPrefHeight(35);
             detailsTxt.setId("RowValue" + counter);
+            detailsTxt.getStylesheets().add(file.toURI().toString());
+            detailsTxt.getStyleClass().add("text-field");
             hBox.getChildren().add(nameTxt);
             hBox.getChildren().add(detailsTxt);
             return hBox;
         }
     private VBox makeNewVBox(int counter){
+        File file = new File("../Client/src/main/resources/Style/AddAdsSection.css");
         VBox vBox = new VBox();
         vBox.setPadding(new Insets(10, 0, 5, 0));
         vBox.setAlignment(Pos.CENTER);
+        vBox.setSpacing(5);
         TextField nameTxt = new TextField();
         nameTxt.setId("ColumnName" + counter);
         nameTxt.setMinHeight(35);
         nameTxt.setMaxWidth(150);
+        nameTxt.getStylesheets().add(file.toURI().toString());
+        nameTxt.getStyleClass().add("text-field");
         TextField detailsTxt = new TextField();
         detailsTxt.setId("ColumnValue" + counter);
         detailsTxt.setMinHeight(35);
         detailsTxt.setMaxWidth(345);
+        detailsTxt.getStylesheets().add(file.toURI().toString());
+        detailsTxt.getStyleClass().add("text-field");
         vBox.getChildren().add(nameTxt);
         vBox.getChildren().add(detailsTxt);
         return vBox;
@@ -557,6 +573,9 @@ public class AddADSController {
         VBox vBox = (VBox) featureColumnVbox.getChildren().get(number);
         TextField textField = (TextField) vBox.getChildren().get(1);
         return textField.getText();
+    }
+
+    void setNightMode(){
     }
 }
 

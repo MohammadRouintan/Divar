@@ -242,7 +242,6 @@ public class ChatController {
             hBox.getChildren().addAll(profileImg, massageVbox);
             massageVbox.setAlignment(Pos.CENTER_LEFT);
         }
-
         else {
             hBox.setAlignment(Pos.CENTER_RIGHT);
             hBox.setPadding(new Insets(0, 5, 0, 0));

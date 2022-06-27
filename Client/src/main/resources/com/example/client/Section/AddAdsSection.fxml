@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.geometry.Insets?>
@@ -15,7 +16,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" prefHeight="2000.0" prefWidth="600.0" style="-fx-background-color: f3f3f3;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Dashboard.AddADSController">
+<VBox fx:id="mainVbox" alignment="TOP_CENTER" prefHeight="2000.0" prefWidth="600.0" style="-fx-background-color: f3f3f3;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Dashboard.AddADSController">
    <children>
       <Label alignment="CENTER" minHeight="53.0" minWidth="140.0" prefHeight="54.0" prefWidth="603.0" styleClass="tilte" stylesheets="@../../../../Style/AddAdsSection.css" text="Add Ads">
          <font>
@@ -107,7 +108,7 @@
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../Icon/plus.png" />
+                        <Image url="@../../image/addrow.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -119,7 +120,7 @@
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../Icon/minus.png" />
+                        <Image url="@../../image/minus.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -142,7 +143,7 @@
                <graphic>
                   <ImageView fitHeight="31.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../Icon/plus.png" />
+                        <Image url="@../../image/addrow.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -154,7 +155,7 @@
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../Icon/minus.png" />
+                        <Image url="@../../image/minus.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -190,11 +191,6 @@
             <Insets top="10.0" />
          </VBox.margin>
       </TextField>
-      <Label fx:id="errorLabel" text="ERROR">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Label>
       <VBox maxWidth="150.0" prefHeight="55.0" prefWidth="481.0" spacing="10.0">
          <children>
             <JFXCheckBox fx:id="agreedPriceCheckBox" checkedColor="#f1c40f" onAction="#agreedPriceCheckBoxFunction" text="Agreed price" />
@@ -215,15 +211,19 @@
             <Font size="18.0" />
          </font>
          <VBox.margin>
-            <Insets top="10.0" />
+            <Insets bottom="20.0" top="10.0" />
          </VBox.margin>
       </Label>
-      <Button fx:id="uploadImage" mnemonicParsing="false" onAction="#uploadImageFunction" prefHeight="40.0" prefWidth="130.0" text="upload">
-         <VBox.margin>
-            <Insets top="10.0" />
-         </VBox.margin>
-      </Button>
-      <HBox prefHeight="150.0" prefWidth="541.0" spacing="30.0">
+      <JFXButton fx:id="uploadImage" minHeight="48.0" minWidth="53.0" onAction="#uploadImageFunction" prefHeight="48.0" prefWidth="56.0">
+         <graphic>
+            <ImageView fitHeight="47.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../image/pictureIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <HBox alignment="TOP_CENTER" prefHeight="150.0" prefWidth="541.0" spacing="30.0">
          <VBox.margin>
             <Insets bottom="20.0" top="30.0" />
          </VBox.margin>
@@ -232,7 +232,7 @@
          </padding>
          <children>
             <ImageView fx:id="img1" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="img2" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="img2" fitHeight="150.0" fitWidth="161.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="img3" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
                   <Insets right="10.0" />
@@ -240,7 +240,7 @@
             </ImageView>
          </children>
       </HBox>
-      <HBox prefHeight="150.0" prefWidth="541.0" spacing="30.0">
+      <HBox alignment="TOP_CENTER" prefHeight="150.0" prefWidth="541.0" spacing="30.0">
          <padding>
             <Insets left="30.0" />
          </padding>
@@ -257,7 +257,7 @@
             <Insets bottom="20.0" />
          </VBox.margin>
       </HBox>
-      <HBox prefHeight="150.0" prefWidth="541.0" spacing="30.0">
+      <HBox alignment="TOP_CENTER" prefHeight="150.0" prefWidth="541.0" spacing="30.0">
          <padding>
             <Insets left="30.0" />
          </padding>
@@ -274,10 +274,23 @@
             <Insets bottom="20.0" />
          </VBox.margin>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+      <Label fx:id="errorLabel" alignment="CENTER" prefHeight="38.0" prefWidth="463.0">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" prefHeight="46.0" prefWidth="600.0" spacing="30.0">
          <children>
-            <Button maxHeight="60.0" minHeight="40.0" mnemonicParsing="false" onAction="#addPost" prefHeight="40.0" prefWidth="223.0" text="Post" />
-            <Button maxHeight="60.0" minHeight="40.0" mnemonicParsing="false" onAction="#cancelPost" prefHeight="40.0" prefWidth="213.0" text="Cancle" />
+            <JFXButton minHeight="45.0" onAction="#addPost" prefHeight="45.0" prefWidth="220.0" styleClass="btn" stylesheets="@../../../../Style/AddAdsSection.css" text="Post">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </JFXButton>
+            <JFXButton minHeight="45.0" onAction="#cancelPost" prefHeight="45.0" prefWidth="220.0" styleClass="btn" stylesheets="@../../../../Style/AddAdsSection.css" text="Cancle">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </JFXButton>
          </children>
          <VBox.margin>
             <Insets bottom="20.0" top="20.0" />
