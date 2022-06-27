@@ -45,16 +45,12 @@ public class MyAdsController {
             }
             isPageReceived.add(true);
             posts.addAll(userPosts);
-        }else {
+        } else {
             for (int i = 0; i < Math.min(8, posts.size()); i++) {
                 userPosts.add(posts.get(i));
             }
+            pagination.setMaxPageIndicatorCount(isPageReceived.size());
         }
-//        GetInfo.getUserPosts();
-//        ArrayList<JSONObject> userPosts = new ArrayList<>();
-//        for (int i = 0; i < 8; i++) {
-//            userPosts.add(new JSONObject(GetInfo.getUserPosts().get(i)));
-//        }
 
         VBox vBox = new VBox();
         NewPage newPage = new NewPage(userPosts,vBox, "MyAds");
@@ -64,8 +60,8 @@ public class MyAdsController {
 
     private Node CreatePage(int pageIndex) {
         ArrayList<JSONObject> userPosts = new ArrayList<>();
-        if (isPageReceived.size() >= pageIndex) {
-            for (int i = posts.size() - (pageIndex - 1) * 8; i < Math.min(posts.size() - (pageIndex - 1) * 8 + 8, posts.size() - pageIndex * 8); i++) {
+        if (isPageReceived.size() >= pageIndex + 2) {
+            for (int i = posts.size() - (pageIndex * 8) - 1; i < Math.min(posts.size() - (pageIndex * 8) + 8, posts.size()); i++) {
                 userPosts.add(posts.get(i));
             }
         } else {
@@ -75,6 +71,7 @@ public class MyAdsController {
             }
             isPageReceived.add(true);
             posts.addAll(userPosts);
+            pagination.setMaxPageIndicatorCount(isPageReceived.size());
         }
         VBox vBox = new VBox();
         NewPage newPage = new NewPage(userPosts, vBox, "MyAds");

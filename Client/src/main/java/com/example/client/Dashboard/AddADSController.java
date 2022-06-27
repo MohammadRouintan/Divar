@@ -204,12 +204,15 @@ public class AddADSController {
             String address = addressTextFiled.getText();
             String name = nameTextFiled.getText();
             String description = postDescriptionFiled.getText();
-            String price = postPriceFiled.getText();
+            String price = "";
+            if (!agreedPriceCheckBox.isSelected()) {
+                price = postPriceFiled.getText();
+            }
 
             Pattern pattern = Pattern.compile("[0-9]+");
             Matcher matcher = pattern.matcher(price);
 
-            if(!matcher.matches()){
+            if(!price.equals("") && !matcher.matches()){
                 createErrorMassage("Price is invalid !!");
             }else if (mainBranch == null){
                 createErrorMassage("Please select MainBranch !!");

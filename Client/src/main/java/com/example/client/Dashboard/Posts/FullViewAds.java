@@ -1,5 +1,6 @@
 package com.example.client.Dashboard.Posts;
 
+import com.example.client.socket.GetInfo;
 import com.example.client.socket.ImageController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -89,6 +90,9 @@ public class FullViewAds {
         buttons.setAlignment(Pos.CENTER);
         buttons.setSpacing(20);
         buttons.getChildren().addAll(bookmarked, chat);
+        bookmarked.setOnAction(event -> {
+            GetInfo.updateUserArrays("bookmarkPost", post.getInt("postId"));
+        });
 
         HBox featureColumnHBox = makeVerticalFeatureLabel(post);
         VBox featureRowVBox = makeHorizontalFeatureLabel(post);
@@ -158,8 +162,8 @@ public class FullViewAds {
 
     protected VBox makeHorizontalFeatureLabel(JSONObject post){
 
-        JSONArray NameRowFeature = post.getJSONArray("columnName");
-        JSONArray ValueRowFeature = post.getJSONArray("columnValue");
+        JSONArray NameRowFeature = post.getJSONArray("rowName");
+        JSONArray ValueRowFeature = post.getJSONArray("rowValue");
 
         VBox featureVBox = new VBox();
         for(int i = 0; i < NameRowFeature.length(); i++){
@@ -186,8 +190,4 @@ public class FullViewAds {
         nodes.addAll(mainVBox.getChildrenUnmodifiable());
         return nodes;
     }
-//    protected Label setPrice(JSONObject post){
-//        Label price = new Label(post.getString("price"));
-//        return Label;
-//    }
 }
