@@ -11,6 +11,7 @@ import java.util.concurrent.Callable;
 
 public class GetInfo {
 
+    public static String phoneNumber;
 
     public static boolean confirmationCheck(String code) {
         boolean check = false;
@@ -438,8 +439,10 @@ public class GetInfo {
         return newPosts;
     }
 
-    public static ArrayList<String> chatCount(String phoneNumber){return null;}
+    public static String getChatCount(String phoneNumber){return null;}
 
-    public static String getMessage(String phoneNumber1 ,String phoneNumber2){return null;}
+    public static String getChat(String phoneNumber1 ,String phoneNumber2){return null;}
+
+    public static boolean isMessageExists(String user1 ,String user2){return false;}
 
 }

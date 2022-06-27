@@ -1,47 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" prefHeight="2000.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Dashboard.AddADSController">
+<VBox fx:id="mainVbox" alignment="TOP_CENTER" prefHeight="2000.0" prefWidth="600.0" style="-fx-background-color: f3f3f3;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Dashboard.AddADSController">
    <children>
-      <Label text="Add Ads">
+      <Label alignment="CENTER" minHeight="53.0" minWidth="140.0" prefHeight="54.0" prefWidth="603.0" styleClass="tilte" stylesheets="@../../../../Style/AddAdsSection.css" text="Add Ads">
          <font>
-            <Font size="21.0" />
+            <Font name="System Bold" size="25.0" />
          </font>
          <VBox.margin>
-            <Insets top="30.0" />
+            <Insets bottom="30.0" />
          </VBox.margin>
       </Label>
+      <JFXHamburger maxHeight="100.0" maxWidth="395.0" minHeight="0.0" prefHeight="100.0" prefWidth="395.0" />
       <Label alignment="CENTER" prefHeight="40.0" prefWidth="103.0" text="Categories :">
          <font>
             <Font size="18.0" />
          </font>
          <VBox.margin>
-            <Insets bottom="10.0" top="20.0" />
+            <Insets bottom="15.0" top="20.0" />
          </VBox.margin>
       </Label>
-      <ComboBox fx:id="MainBranchCategories" onAction="#MainBranchCategotiesFunction" prefHeight="34.0" prefWidth="400.0">
+      <ComboBox fx:id="MainBranchCategories" minHeight="38.0" onAction="#MainBranchCategotiesFunction" prefHeight="38.0" prefWidth="400.0" styleClass="combobox" stylesheets="@../../../../Style/AddAdsSection.css">
          <VBox.margin>
             <Insets bottom="20.0" />
          </VBox.margin>
       </ComboBox>
-      <ComboBox fx:id="branchTwoCategories" onAction="#branchTwoCategoriesFunction" prefHeight="34.0" prefWidth="400.0">
+      <ComboBox fx:id="branchTwoCategories" minHeight="38.0" onAction="#branchTwoCategoriesFunction" prefHeight="38.0" prefWidth="400.0" styleClass="combobox" stylesheets="@../../../../Style/AddAdsSection.css">
          <VBox.margin>
-            <Insets bottom="20.0" />
+            <Insets bottom="25.0" />
          </VBox.margin>
       </ComboBox>
-      <Line endX="218.0929412841797" endY="-162.39212036132812" startX="-190.704345703125" startY="-162.1850128173828" style="-fx-opacity: 0.3;" />
+      <Line endX="218.0929412841797" endY="-162.39212036132812" layoutX="297.0" layoutY="531.0" startX="-190.704345703125" startY="-162.1850128173828" style="-fx-opacity: 0.3;" />
       <Label alignment="CENTER" prefHeight="40.0" prefWidth="75.0" text="City : ">
          <VBox.margin>
             <Insets top="10.0" />
@@ -50,7 +54,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <ComboBox fx:id="selectCityComboBox" onAction="#selectCityComboBoxFunction" prefHeight="34.0" prefWidth="400.0">
+      <ComboBox fx:id="selectCityComboBox" minHeight="38.0" onAction="#selectCityComboBoxFunction" prefHeight="38.0" prefWidth="400.0" styleClass="combobox" stylesheets="@../../../../Style/AddAdsSection.css">
          <VBox.margin>
             <Insets top="10.0" />
          </VBox.margin>
@@ -65,10 +69,10 @@
             <Font size="18.0" />
          </font>
          <VBox.margin>
-            <Insets top="10.0" />
+            <Insets bottom="15.0" top="15.0" />
          </VBox.margin>
       </Label>
-      <TextField fx:id="addressTextFiled" maxWidth="400.0" minHeight="35.0" prefHeight="34.0" prefWidth="350.0" />
+      <TextField fx:id="addressTextFiled" maxWidth="400.0" minHeight="38.0" prefHeight="38.0" prefWidth="400.0" styleClass="combobox" stylesheets="@../../../../Style/AddAdsSection.css" />
       <Line endX="218.0929412841797" endY="-162.39212036132812" startX="-190.704345703125" startY="-162.1850128173828" style="-fx-opacity: 0.3;">
          <VBox.margin>
             <Insets top="30.0" />
@@ -82,7 +86,7 @@
             <Insets top="20.0" />
          </VBox.margin>
       </Label>
-      <TextField fx:id="nameTextFiled" maxWidth="400.0" minHeight="35.0" prefHeight="35.0" prefWidth="400.0">
+      <TextField fx:id="nameTextFiled" maxWidth="400.0" minHeight="35.0" prefHeight="35.0" prefWidth="400.0" styleClass="combobox" stylesheets="@../../../../Style/AddAdsSection.css">
          <VBox.margin>
             <Insets top="20.0" />
          </VBox.margin>
@@ -95,42 +99,76 @@
             <Insets bottom="20.0" top="20.0" />
          </VBox.margin>
       </Label>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
          <children>
-            <Button maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#addFeatureRow" prefHeight="30.0" prefWidth="30.0" text="+">
+            <Button maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#addFeatureRow" prefHeight="30.0" prefWidth="30.0" styleClass="plus-btn" stylesheets="@../../../../Style/AddAdsSection.css">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../image/addrow.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
-            <Button layoutX="283.0" layoutY="11.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#removeFeatureRow" prefHeight="30.0" prefWidth="30.0" text="-">
+            <Button layoutX="283.0" layoutY="11.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#removeFeatureRow" prefHeight="30.0" prefWidth="30.0" styleClass="plus-btn" stylesheets="@../../../../Style/AddAdsSection.css">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../image/minus.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
          </children>
          <VBox.margin>
-            <Insets bottom="20.0" />
+            <Insets bottom="10.0" />
          </VBox.margin>
       </HBox>
-      <VBox fx:id="featureRowVbox" prefHeight="200.0" prefWidth="100.0" />
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+      <VBox fx:id="featureRowVbox" prefHeight="10.0" prefWidth="600.0">
+         <VBox.margin>
+            <Insets bottom="20.0" />
+         </VBox.margin></VBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
          <children>
-            <Button maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#addFeatureColumn" prefHeight="30.0" prefWidth="30.0" text="+">
+            <Button maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#addFeatureColumn" prefHeight="30.0" prefWidth="30.0" styleClass="plus-btn" stylesheets="@../../../../Style/AddAdsSection.css">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="31.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../image/addrow.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
-            <Button layoutX="283.0" layoutY="11.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#removeFeatureColumn" prefHeight="30.0" prefWidth="30.0" text="-">
+            <Button layoutX="283.0" layoutY="11.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#removeFeatureColumn" prefHeight="30.0" prefWidth="30.0" styleClass="plus-btn" stylesheets="@../../../../Style/AddAdsSection.css">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../image/minus.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
          </children>
          <VBox.margin>
-            <Insets bottom="20.0" />
+            <Insets bottom="10.0" />
          </VBox.margin>
       </HBox>
-      <VBox fx:id="featureColumnVbox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" />
+      <VBox fx:id="featureColumnVbox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+         <VBox.margin>
+            <Insets bottom="20.0" />
+         </VBox.margin></VBox>
       <Label alignment="CENTER" prefHeight="40.0" prefWidth="161.0" text="description :">
          <font>
             <Font size="18.0" />
@@ -139,7 +177,7 @@
             <Insets bottom="20.0" top="30.0" />
          </VBox.margin>
       </Label>
-      <TextArea fx:id="postDescriptionFiled" maxHeight="400.0" maxWidth="400.0" minHeight="150.0" prefHeight="400.0" prefWidth="400.0" />
+      <TextArea fx:id="postDescriptionFiled" maxHeight="400.0" maxWidth="400.0" minHeight="150.0" prefHeight="400.0" prefWidth="400.0" styleClass="text-area" stylesheets="@../../../../Style/AddAdsSection.css" />
       <Label fx:id="priceLabel" alignment="CENTER" prefHeight="23.0" prefWidth="399.0" text="Price :">
          <font>
             <Font size="18.0" />
@@ -148,31 +186,21 @@
             <Insets top="10.0" />
          </VBox.margin>
       </Label>
-      <TextField fx:id="postPriceFiled" maxHeight="35.0" maxWidth="400.0" minHeight="35.0" prefHeight="34.0" prefWidth="400.0">
+      <TextField fx:id="postPriceFiled" maxHeight="35.0" maxWidth="400.0" minHeight="35.0" prefHeight="34.0" prefWidth="400.0" styleClass="combobox" stylesheets="@../../../../Style/AddAdsSection.css">
          <VBox.margin>
             <Insets top="10.0" />
          </VBox.margin>
       </TextField>
-      <Label fx:id="errorLabel" text="ERROR">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Label>
-      <CheckBox fx:id="agreedPriceCheckBox" mnemonicParsing="false" onAction="#agreedPriceCheckBoxFunction" text="Agreed price">
+      <VBox maxWidth="150.0" prefHeight="55.0" prefWidth="481.0" spacing="10.0">
+         <children>
+            <JFXCheckBox fx:id="agreedPriceCheckBox" checkedColor="#f1c40f" onAction="#agreedPriceCheckBoxFunction" text="Agreed price" />
+            <JFXCheckBox fx:id="auctionCheckBox" checkedColor="#f1c40f" onAction="#auctionCheckBoxFunction" text="I want to put it up for auction" />
+            <JFXCheckBox fx:id="exchangeCheckBox" checkedColor="#f1c40f" text="I want to exchange" />
+         </children>
          <VBox.margin>
-            <Insets left="-35.0" top="20.0" />
+            <Insets top="20.0" />
          </VBox.margin>
-      </CheckBox>
-      <CheckBox fx:id="auctionCheckBox" mnemonicParsing="false" onAction="#auctionCheckBoxFunction" text="I want to put it up for auction">
-         <VBox.margin>
-            <Insets left="55.0" top="10.0" />
-         </VBox.margin>
-      </CheckBox>
-      <CheckBox fx:id="exchangeCheckBox" mnemonicParsing="false" text="I want to exchange">
-         <VBox.margin>
-            <Insets top="10.0" />
-         </VBox.margin>
-      </CheckBox>
+      </VBox>
       <Line endX="218.0929412841797" endY="-162.39212036132812" startX="-190.704345703125" startY="-162.1850128173828" style="-fx-opacity: 0.3;">
          <VBox.margin>
             <Insets top="20.0" />
@@ -183,15 +211,19 @@
             <Font size="18.0" />
          </font>
          <VBox.margin>
-            <Insets top="10.0" />
+            <Insets bottom="20.0" top="10.0" />
          </VBox.margin>
       </Label>
-      <Button fx:id="uploadImage" mnemonicParsing="false" onAction="#uploadImageFunction" prefHeight="40.0" prefWidth="130.0" text="upload">
-         <VBox.margin>
-            <Insets top="10.0" />
-         </VBox.margin>
-      </Button>
-      <HBox prefHeight="150.0" prefWidth="541.0" spacing="30.0">
+      <JFXButton fx:id="uploadImage" minHeight="48.0" minWidth="53.0" onAction="#uploadImageFunction" prefHeight="48.0" prefWidth="56.0">
+         <graphic>
+            <ImageView fitHeight="47.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../image/pictureIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <HBox alignment="TOP_CENTER" prefHeight="150.0" prefWidth="541.0" spacing="30.0">
          <VBox.margin>
             <Insets bottom="20.0" top="30.0" />
          </VBox.margin>
@@ -200,7 +232,7 @@
          </padding>
          <children>
             <ImageView fx:id="img1" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="img2" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="img2" fitHeight="150.0" fitWidth="161.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="img3" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
                   <Insets right="10.0" />
@@ -208,7 +240,7 @@
             </ImageView>
          </children>
       </HBox>
-      <HBox prefHeight="150.0" prefWidth="541.0" spacing="30.0">
+      <HBox alignment="TOP_CENTER" prefHeight="150.0" prefWidth="541.0" spacing="30.0">
          <padding>
             <Insets left="30.0" />
          </padding>
@@ -225,7 +257,7 @@
             <Insets bottom="20.0" />
          </VBox.margin>
       </HBox>
-      <HBox prefHeight="150.0" prefWidth="541.0" spacing="30.0">
+      <HBox alignment="TOP_CENTER" prefHeight="150.0" prefWidth="541.0" spacing="30.0">
          <padding>
             <Insets left="30.0" />
          </padding>
@@ -242,10 +274,23 @@
             <Insets bottom="20.0" />
          </VBox.margin>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+      <Label fx:id="errorLabel" alignment="CENTER" prefHeight="38.0" prefWidth="463.0">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" prefHeight="46.0" prefWidth="600.0" spacing="30.0">
          <children>
-            <Button maxHeight="60.0" minHeight="40.0" mnemonicParsing="false" onAction="#addPost" prefHeight="40.0" prefWidth="223.0" text="Post" />
-            <Button maxHeight="60.0" minHeight="40.0" mnemonicParsing="false" onAction="#cancelPost" prefHeight="40.0" prefWidth="213.0" text="Cancle" />
+            <JFXButton minHeight="45.0" onAction="#addPost" prefHeight="45.0" prefWidth="220.0" styleClass="btn" stylesheets="@../../../../Style/AddAdsSection.css" text="Post">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </JFXButton>
+            <JFXButton minHeight="45.0" onAction="#cancelPost" prefHeight="45.0" prefWidth="220.0" styleClass="btn" stylesheets="@../../../../Style/AddAdsSection.css" text="Cancle">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </JFXButton>
          </children>
          <VBox.margin>
             <Insets bottom="20.0" top="20.0" />

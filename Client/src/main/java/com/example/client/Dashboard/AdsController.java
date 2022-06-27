@@ -3,6 +3,7 @@ package com.example.client.Dashboard;
 import com.example.client.Dashboard.Posts.NewPage;
 import com.example.client.socket.GetInfo;
 import javafx.animation.ScaleTransition;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,6 +20,7 @@ import org.json.JSONObject;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class AdsController {
     @FXML

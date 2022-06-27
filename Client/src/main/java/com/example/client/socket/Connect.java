@@ -9,12 +9,14 @@ import java.net.Socket;
 public class Connect {
 
     Socket socket;
+    Socket messageSocket;
     Socket imageSocket;
     public static DataOutputStream imageDOS;
     public static DataInputStream imageDIS;
     public static DataOutputStream DOS;
-
     public static DataInputStream DIS;
+    public static DataOutputStream messageDOS;
+    public static DataInputStream messageDIS;
 
     public static String getPhoneNumber() {
         return phoneNumber;
@@ -28,10 +30,13 @@ public class Connect {
             Notification n = new Notification("localhost", 5571, phoneNumber);
             n.start();
             imageSocket = new Socket(imageIP, 5572);
+            messageSocket = new Socket("localhost", 5576);
             imageDIS = new DataInputStream(new BufferedInputStream(imageSocket.getInputStream()));
             imageDOS = new DataOutputStream(new BufferedOutputStream(imageSocket.getOutputStream()));
             DOS = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
             DIS = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+            messageDOS = new DataOutputStream(new BufferedOutputStream(messageSocket.getOutputStream()));
+            messageDIS = new DataInputStream(new BufferedInputStream(messageSocket.getInputStream()));
             DOS.writeUTF(phoneNumber);
             DOS.flush();
         } catch (IOException e) {

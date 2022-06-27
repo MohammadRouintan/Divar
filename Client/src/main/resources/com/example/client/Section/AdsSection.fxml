@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Accordion?>
@@ -17,7 +18,24 @@
 
 <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1300.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Dashboard.AdsController">
     <children>
-      <HBox alignment="CENTER" prefHeight="99.0" prefWidth="570.0" spacing="50.0">
+      <HBox alignment="TOP_CENTER" prefHeight="112.0" prefWidth="570.0" styleClass="top-title" stylesheets="@../../../../Style/adsSection.css">
+         <children>
+            <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../image/home.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" prefHeight="43.0" prefWidth="58.0" text="Ads">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets top="10.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="133.0" prefWidth="570.0" spacing="50.0">
          <VBox.margin>
             <Insets />
          </VBox.margin>
@@ -29,7 +47,7 @@
                      <graphic>
                         <ImageView fitHeight="27.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../Icon/sreach-2.png" />
+                              <Image url="@../../image/sreach-2.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -41,7 +59,7 @@
       </HBox>
       <Accordion prefHeight="355.0" prefWidth="570.0">
         <panes>
-          <TitledPane animated="false" prefHeight="309.0" prefWidth="570.0" style="-fx-background-color: transparent;" stylesheets="@../../../../Style/adsSection.css" text="Filter">
+          <TitledPane animated="false" prefHeight="313.0" prefWidth="570.0" stylesheets="@../../../../Style/adsSection.css" text="Filter">
                <content>
                   <VBox prefHeight="338.0" prefWidth="569.0">
                      <children>
@@ -95,11 +113,12 @@
                         </HBox>
                         <HBox alignment="CENTER" minHeight="50.0" minWidth="60.0" prefHeight="50.0" prefWidth="570.0" spacing="50.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#applyButton" prefHeight="40.0" prefWidth="379.0" styleClass="apply-btn" stylesheets="@../../../../Style/adsSection.css" text="Apply">
+
+                              <JFXButton prefHeight="40.0" prefWidth="386.0" ripplerFill="WHITE" styleClass="apply-btn" stylesheets="@../../../../Style/adsSection.css" text="Apply">
                                  <font>
-                                    <Font name="System Bold" size="14.0" />
+                                    <Font name="System Bold" size="16.0" />
                                  </font>
-                              </Button>
+                              </JFXButton>
                            </children>
                            <padding>
                               <Insets left="40.0" />

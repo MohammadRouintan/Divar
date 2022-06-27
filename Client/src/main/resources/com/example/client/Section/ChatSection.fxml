@@ -13,13 +13,13 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Dashboard.ChatController">
+<BorderPane prefHeight="600.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Dashboard.ChatController">
    <left>
       <VBox prefHeight="658.0" prefWidth="194.0" style="-fx-background-color: #bdc3c7;" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER" maxHeight="80.0" minHeight="27.0" prefHeight="59.0" prefWidth="187.0" style="-fx-background-color: #f1c40f;">
                <children>
-                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="186.0" text="Users:">
+                  <Label fx:id="test" alignment="CENTER" prefHeight="30.0" prefWidth="186.0" text="Users:">
                      <font>
                         <Font size="18.0" />
                      </font>

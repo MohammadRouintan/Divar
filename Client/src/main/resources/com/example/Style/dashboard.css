@@ -1,0 +1,14 @@
+.left-menu {
+    -fx-background-radius: 50;
+    -fx-background-image: url("../image/background4.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+.left-menu-btn:hover{
+    -fx-background-color: #454545;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 20 0 20 0;
+}
+
+
