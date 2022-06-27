@@ -1,11 +1,13 @@
 package com.example.client.socket;
 
+import javafx.scene.chart.AreaChart;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.Callable;
 
 public class GetInfo {
 
@@ -102,16 +104,15 @@ public class GetInfo {
     }
 
 
-    public static ArrayList<String> getMarkedPost(int size){
+    public static ArrayList<String> getMarkedPost(int size, int index){
         ArrayList<String> result = new ArrayList<>();
         try {
             Connect.DOS.writeInt(7);
-            Connect.DOS.flush();
-
             Connect.DOS.writeInt(size);
-
+            Connect.DOS.writeInt(index);
             Connect.DOS.flush();
-            for (int i = 0; i < size; i++) {
+            int lastSize = Connect.DIS.readInt();
+            for (int i = 0; i < lastSize; i++) {
                 result.add(Connect.DIS.readUTF());
             }
         } catch (IOException e) {
@@ -137,16 +138,33 @@ public class GetInfo {
     }
 
 
-    public static String getPosts(int sizePosts ,String mainBranch){
-        String result = null;
+    public static ArrayList<String> getPosts(int sizePosts, int index, ArrayList<String> keys, ArrayList<Object> values){
+        ArrayList<String> result = new ArrayList<>();
         try {
             Connect.DOS.writeInt(9);
             Connect.DOS.writeInt(sizePosts);
             Connect.DOS.flush();
-
-            Connect.DOS.writeUTF(mainBranch);
+            Connect.DOS.writeInt(index);
             Connect.DOS.flush();
-            result = Connect.DIS.readUTF();
+            Connect.DOS.writeInt(keys.size());
+            Connect.DOS.flush();
+            for (String key : keys) {
+                Connect.DOS.writeUTF(key);
+                Connect.DOS.flush();
+            }
+
+            JSONObject jsonObject = new JSONObject();
+            for (int i = 0; i < keys.size(); i++) {
+                jsonObject.put(keys.get(i), values.get(i));
+            }
+
+            Connect.DOS.writeUTF(jsonObject.toString());
+            Connect.DOS.flush();
+
+            int size = Connect.DIS.readInt();
+            for (int i = 0; i < size; i++) {
+                result.add(Connect.DIS.readUTF());
+            }
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
@@ -196,12 +214,17 @@ public class GetInfo {
     }
 
 
-    public static String getLastSeenPost(){
-        String result = null;
+    public static ArrayList<String> getLastSeenPost(int size, int index){
+        ArrayList<String> result = new ArrayList<>();
         try {
             Connect.DOS.writeInt(13);
+            Connect.DOS.writeInt(size);
+            Connect.DOS.writeInt(index);
             Connect.DOS.flush();
-            result = Connect.DIS.readUTF();
+            int lastSize = Connect.DIS.readInt();
+            for (int i = 0; i < lastSize; i++) {
+                result.add(Connect.DIS.readUTF());
+            }
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
@@ -209,15 +232,57 @@ public class GetInfo {
     }
 
 
-    public static ArrayList<String> getUserPosts() {
+    public static ArrayList<String> getUserPosts(int size, int index) {
         ArrayList<String> result = new ArrayList<>();
         try {
             Connect.DOS.writeInt(14);
+            Connect.DOS.writeInt(size);
+            Connect.DOS.writeInt(index);
             Connect.DOS.flush();
-            int size = Connect.DIS.readInt();
-            for (int i = 0; i < size; i++) {
+            int lastSize = Connect.DIS.readInt();
+            for (int i = 0; i < lastSize; i++) {
                 result.add(Connect.DIS.readUTF());
             }
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return result;
+    }
+
+    public static int getSizeOfArray(String name) {
+        int result = 0;
+        try {
+            Connect.DOS.writeInt(19);
+            Connect.DOS.writeUTF(name);
+            Connect.DOS.flush();
+            result = Connect.DIS.readInt();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return result;
+    }
+
+    public static int getSizeOfPosts(ArrayList<String> keys, ArrayList<Object> values) {
+        int result = 0;
+        try {
+            Connect.DOS.writeInt(20);
+            Connect.DOS.flush();
+            Connect.DOS.writeInt(keys.size());
+            Connect.DOS.flush();
+            for (String key : keys) {
+                Connect.DOS.writeUTF(key);
+                Connect.DOS.flush();
+            }
+
+            JSONObject jsonObject = new JSONObject();
+            for (int i = 0; i < keys.size(); i++) {
+                jsonObject.put(keys.get(i), values.get(i));
+            }
+
+            Connect.DOS.writeUTF(jsonObject.toString());
+            Connect.DOS.flush();
+
+            result = Connect.DIS.readInt();
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
@@ -288,9 +353,23 @@ public class GetInfo {
 
     }
 
+    public static boolean updateUserArrays(String key, Object value) {
+        try {
+            Connect.DOS.writeInt(18);
+            Connect.DOS.flush();
+
+            JSONObject json = new JSONObject();
+            json.put("arrayName", key);
+            json.put("number", value);
+            Connect.DOS.writeUTF(json.toString());
+            Connect.DOS.flush();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return false;
+    }
 
     public static boolean sendFile(String url, String fileName){
-
         try {
             Connect.imageDOS.writeInt(2);
             Connect.imageDOS.flush();
@@ -316,8 +395,47 @@ public class GetInfo {
         return false;
     }
 
-    public static void getProfile(String fileName){
+    public static void receiveProfile(String fileName){
 
+    }
+
+    public static String getUserCity() {
+        String city = "";
+        try {
+            Connect.DOS.writeInt(21);
+            Connect.DOS.flush();
+            city = Connect.DIS.readUTF();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return city;
+    }
+
+    public static ArrayList<String> priceFilter(long priceFrom, long priceTo, ArrayList<String> posts) {
+        ArrayList<String> newPosts = new ArrayList<>();
+        try {
+            Connect.DOS.writeInt(22);
+            Connect.DOS.flush();
+            Connect.DOS.writeLong(priceFrom);
+            Connect.DOS.writeLong(priceTo);
+            Connect.DOS.flush();
+            Connect.DOS.writeInt(posts.size());
+            Connect.DOS.flush();
+            for (String post : posts) {
+                Connect.DOS.writeUTF(post);
+                Connect.DOS.flush();
+            }
+
+            int lastSize = Connect.DIS.readInt();
+            for (int i = 0; i < lastSize; i++) {
+                newPosts.add(Connect.DIS.readUTF());
+            }
+
+
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return newPosts;
     }
 
     public static ArrayList<String> chatCount(String phoneNumber){return null;}

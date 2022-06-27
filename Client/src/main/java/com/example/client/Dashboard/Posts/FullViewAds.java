@@ -1,5 +1,6 @@
 package com.example.client.Dashboard.Posts;
 
+import com.example.client.socket.GetInfo;
 import com.example.client.socket.ImageController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -24,15 +25,17 @@ public class FullViewAds {
     private JSONObject post;
     private Parent parent;
     protected Pagination pagination;
+    protected ArrayList<Node> nodesOfMainVbox;
     protected VBox mainVBox;
     String paneName;
 
     public FullViewAds(Parent parent, JSONObject post, String paneName){
         this.post = post;
         this.parent = parent;
-        this.pagination = (Pagination)parent;
         this.paneName = paneName;
         this.mainVBox = (VBox)this.parent.getParent();
+        this.nodesOfMainVbox = getAllChildren(this.mainVBox);
+        mainVBox.getChildren();
         AddBox(parent,post);
     }
 
@@ -55,7 +58,10 @@ public class FullViewAds {
            @Override
             public void handle(ActionEvent event) {
                mainVBox.getChildren().clear();
-               mainVBox.getChildren().add(pagination);
+               for(Node node : nodesOfMainVbox){
+                   mainVBox.getChildren().add(node);
+               }
+
             }
         });
 
@@ -71,7 +77,7 @@ public class FullViewAds {
         if (post.getBoolean("agreement")) {
             price = new Label("agreement");
         } else {
-            price = new Label(post.getString("price"));
+            price = new Label(String.valueOf(post.getLong("price")));
         }
 
         if (post.getBoolean("exchange")) {
@@ -84,6 +90,9 @@ public class FullViewAds {
         buttons.setAlignment(Pos.CENTER);
         buttons.setSpacing(20);
         buttons.getChildren().addAll(bookmarked, chat);
+        bookmarked.setOnAction(event -> {
+            GetInfo.updateUserArrays("bookmarkPost", post.getInt("postId"));
+        });
 
         HBox featureColumnHBox = makeVerticalFeatureLabel(post);
         VBox featureRowVBox = makeHorizontalFeatureLabel(post);
@@ -107,12 +116,6 @@ public class FullViewAds {
         //post.getJSONArray("rowName").length();
         //post.getJSONArray("columnName").length();
 
-    }
-
-
-    protected void BackButton(Pagination pagination){
-        VBox mainVbox = (VBox) parent.getParent();
-        mainVbox.getChildren().add(new Label("helllo"));
     }
 
 
@@ -159,8 +162,8 @@ public class FullViewAds {
 
     protected VBox makeHorizontalFeatureLabel(JSONObject post){
 
-        JSONArray NameRowFeature = post.getJSONArray("columnName");
-        JSONArray ValueRowFeature = post.getJSONArray("columnValue");
+        JSONArray NameRowFeature = post.getJSONArray("rowName");
+        JSONArray ValueRowFeature = post.getJSONArray("rowValue");
 
         VBox featureVBox = new VBox();
         for(int i = 0; i < NameRowFeature.length(); i++){
@@ -173,6 +176,7 @@ public class FullViewAds {
 
         return featureVBox;
     }
+
     public ArrayList<String> getStringArray (JSONArray JArray) {
         ArrayList<String> list = new ArrayList<>();
         for (int i = 0; i < JArray.length(); i++) {
@@ -180,8 +184,10 @@ public class FullViewAds {
         }
         return list;
     }
-//    protected Label setPrice(JSONObject post){
-//        Label price = new Label(post.getString("price"));
-//        return Label;
-//    }
+
+    protected ArrayList<Node> getAllChildren(VBox mainVBox) {
+        ArrayList<Node> nodes = new ArrayList<>();
+        nodes.addAll(mainVBox.getChildrenUnmodifiable());
+        return nodes;
+    }
 }

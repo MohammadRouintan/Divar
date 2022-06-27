@@ -1,0 +1,13 @@
+.user{
+    -fx-background-color: #fff;
+}
+.user:hover{
+    -fx-background-color: #d4d4d4;
+}
+
+.counter{
+    -fx-background-color: #c0392b;
+    -fx-background-radius: 50;
+    -fx-text-fill: #fff;
+    -fx-font-weight: bold;
+}

@@ -50,7 +50,7 @@ public class ImageController extends Thread{
             DOS.flush();
             DOS.writeUTF(imageID);
             DOS.flush();
-            File file = new File("../Client/src/main/resources/post/" + imageID + ".png");
+            file = new File("../Client/src/main/resources/post/" + imageID + ".png");
             FileOutputStream fileOutputStream = new FileOutputStream(file);
             long size = DIS.readLong();
             byte[] buffer = new byte[4 * 1024];
@@ -58,7 +58,6 @@ public class ImageController extends Thread{
                 fileOutputStream.write(buffer, 0, bytes);
                 size -= bytes;
             }
-            absolutePath = file.getAbsolutePath();
             fileOutputStream.close();
 
         }catch(IOException e){
@@ -66,10 +65,10 @@ public class ImageController extends Thread{
         }
 
     }
-    String absolutePath;
+    File file;
 
     public String getPath(){
-        return this.absolutePath;
+        return this.file.toURI().toString();
     }
 
     public void sendFile(String filePath, String imageID){
@@ -99,7 +98,7 @@ public class ImageController extends Thread{
             DOS.flush();
             DOS.writeUTF(imageID);
             DOS.flush();
-            File file = new File("../Client/src/main/resources/profile/" + imageID + ".png");
+            file = new File("../Client/src/main/resources/profile/" + imageID + ".png");
             FileOutputStream fileOutputStream = new FileOutputStream(file);
             long size = DIS.readLong();
             byte[] buffer = new byte[4 * 1024];
@@ -107,7 +106,6 @@ public class ImageController extends Thread{
                 fileOutputStream.write(buffer, 0, bytes);
                 size -= bytes;
             }
-            absolutePath = file.getAbsolutePath();
             fileOutputStream.close();
 
         }catch(IOException e){

@@ -50,9 +50,6 @@ public class AddADSController {
             vBox.setId("featureColumnTextField0");
             featureColumnVbox.getChildren().add(vBox);
 
-
-            setMainCategories();
-            setCity();
             numberOFUploadedImage = 0;
             imagesName = new ArrayList<>();
             imagesPath = new ArrayList<>();
@@ -90,9 +87,6 @@ public class AddADSController {
 
         @FXML
         private CheckBox auctionCheckBox;
-
-        @FXML
-        private ComboBox<?> branchThreeCategories;
 
         @FXML
         private ComboBox<String> branchTwoCategories;
@@ -210,12 +204,15 @@ public class AddADSController {
             String address = addressTextFiled.getText();
             String name = nameTextFiled.getText();
             String description = postDescriptionFiled.getText();
-            String price = postPriceFiled.getText();
+            long price = 0;
+            if (!agreedPriceCheckBox.isSelected()) {
+                price = Long.parseLong(postPriceFiled.getText());
+            }
 
             Pattern pattern = Pattern.compile("[0-9]+");
-            Matcher matcher = pattern.matcher(price);
+            Matcher matcher = pattern.matcher(String.valueOf(price));
 
-            if(!matcher.matches()){
+            if(price == 0 && !matcher.matches()){
                 createErrorMassage("Price is invalid !!");
             }else if (mainBranch == null){
                 createErrorMassage("Please select MainBranch !!");
@@ -505,6 +502,7 @@ public class AddADSController {
 
             branchTwoCategories.setItems(branchTwo);
         }
+
         private HBox makeNewHBox(int counter){
             HBox hBox = new HBox();
             hBox.setPadding(new Insets(10, 0, 10, 0));

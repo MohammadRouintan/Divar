@@ -1,5 +1,6 @@
 package com.example.client.Dashboard.Posts;
 
+import com.example.client.socket.GetInfo;
 import com.example.client.socket.ImageController;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -77,14 +78,17 @@ public class NewPage {
             System.err.println(e.getMessage());
         }
 
-        ImageView imageView = new ImageView();
-        File file = new File(imageController.getPath());
-        Image img = new Image(file.toURI().toString());
+
+        Image img = new Image(imageController.getPath());
+        ImageView imageView = new ImageView(img);
         imageView.setFitHeight(200);
         imageView.setFitWidth(280);
         imageView.setImage(img);
         Label titleLabel = new Label(post.getString("title"));
-        Label priceLabel = new Label(post.getString("price"));
+        Label priceLabel = new Label("Agreement");
+        if (post.has("price")) {
+            priceLabel = new Label(String.valueOf(post.getLong("price")));
+        }
         Label timeLabel = new Label(post.getString("time"));
         titleLabel.setAlignment(Pos.CENTER);
         priceLabel.setAlignment(Pos.CENTER);
@@ -94,7 +98,11 @@ public class NewPage {
         vBox.setStyle("-fx-background-color: #e74c3c");
         vBox.setAlignment(Pos.TOP_CENTER);
         vBox.getChildren().addAll(imageView,titleLabel,priceLabel,timeLabel);
-        vBox.setOnMouseClicked(event -> ShowAds(vBox, post));
+        vBox.setOnMouseClicked(event -> {
+            ShowAds(vBox, post);
+            if (!this.paneName.equals("MyAds") && !this.paneName.equals("LastSeenAds"))
+                GetInfo.updateUserArrays("lastSeenPost", post.getInt("postId"));
+        });
         return vBox;
     }
 
@@ -117,5 +125,4 @@ public class NewPage {
         }
         return list;
     }
-
 }

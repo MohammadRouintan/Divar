@@ -29,9 +29,7 @@ public class ProfileController {
             firstNameLabel.setText(firstName);
             lastNameLabel.setText(lastName);
             cityLabel.setText(city);
-//            GetInfo.getProfile(json.getString("profileNameImage"));
-//            profileImage.setImage(new Image("../Client/profile/" + json.getString("profileNameImage") + ".png"));
-        }catch (Exception e){
+        } catch (Exception e){
             firstNameLabel.setText("null");
             lastNameLabel.setText("null");
             cityLabel.setText("null");
@@ -73,11 +71,11 @@ public class ProfileController {
 
         if(city == null){
             setErrorMessage("");
-        }else if(firstName == null){
+        } else if(firstName == null){
             setErrorMessage("");
-        }else if (lastName == null){
+        } else if (lastName == null){
             setErrorMessage("");
-        }else{
+        } else {
             ArrayList<String> updateUserKeys = new ArrayList<>();
             ArrayList<Object> updateUserValues = new ArrayList<>();
             updateUserKeys.add("city");

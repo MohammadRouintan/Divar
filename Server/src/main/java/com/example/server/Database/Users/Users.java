@@ -29,26 +29,6 @@ public class Users extends Database {
         this.filterDocument = filterDocument;
     }
 
-    public void setNumberForMarkedPost(int numberForMarkedPost) {
-        this.numberForMarkedPost = numberForMarkedPost;
-    }
-
-    public int getNumberForMarkedPost() {
-        return numberForMarkedPost;
-    }
-
-    private int numberForUsersPost = 0;
-
-    private int numberForMarkedPost = 0;
-
-    public void setNumberForUsersPost(int numberForUsersPost) {
-        this.numberForUsersPost = numberForUsersPost;
-    }
-
-    public int getNumberForUsersPost() {
-        return numberForUsersPost;
-    }
-
     public Users(String phoneNumber) {
         document = new Document();
         document.append("phoneNumber", phoneNumber);

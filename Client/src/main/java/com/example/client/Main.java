@@ -22,9 +22,6 @@ public class Main extends Application {
         stage.show();
     }
     public static void main(String[] args) {
-        MyAdsController.isPageReceived = new ArrayList<>();
-        MyAdsController.posts = new ArrayList<>();
-
         launch();
     }
 }
