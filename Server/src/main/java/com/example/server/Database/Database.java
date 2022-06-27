@@ -225,11 +225,11 @@ public class Database {
         return posts;
     }
 
-    public static ArrayList<String> search(int size, int index, String key, Object value, String search) {
+    public static ArrayList<String> search(int size, int index, Document filter, String search) {
         connect();
         collection = database.getCollection("Posts");
         ArrayList<String> posts = new ArrayList<>();
-        FindIterable<Document> post = collection.find(new Document(key, value)).sort(new Document("postId", -1));
+        FindIterable<Document> post = collection.find(filter).sort(new Document("postId", -1));
         if (post.cursor().hasNext()) {
             for (Document document : post.skip(index * size).limit(size)) {
                 String title = document.getString("title");
@@ -240,6 +240,18 @@ public class Database {
         }
         disconnect();
         return posts;
+    }
+
+    public static ArrayList<String> priceFilter(long priceFrom, long priceTo, ArrayList<String> posts) {
+        ArrayList<String> newPost = new ArrayList<>();
+        JSONObject jsonObject;
+        for (int i = 0; i < posts.size(); i++) {
+            jsonObject = new JSONObject(posts.get(i));
+            if (jsonObject.has("price") && jsonObject.getLong("price") >= priceFrom && jsonObject.getLong("price") <= priceTo) {
+                newPost.add(posts.get(i));
+            }
+        }
+        return newPost;
     }
 
     public static ArrayList<String> lastSeenPost(int size, int index, Users users) {
@@ -406,6 +418,16 @@ public class Database {
         return counter;
     }
 
+    public static String getUserCity(Users user) {
+        String city = "Tehran";
+        String usr = getUser(user.getDocument());
+        JSONObject jsonObject = new JSONObject(usr);
+        if (jsonObject.has("city")) {
+            city = jsonObject.getString("city");
+        }
+        return city;
+    }
+
     public static ArrayList<Integer> getIntegerArray(JSONArray JArray) {
         ArrayList<Integer> list = new ArrayList<>();
         for (int i = 0; i < JArray.length(); i++) {
@@ -413,5 +435,6 @@ public class Database {
         }
         return list;
     }
+
 
 }

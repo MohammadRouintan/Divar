@@ -14,7 +14,7 @@ public class Post {
     private Document filterDocument;
     private Document updateDocument;
 
-    public Post(int lastPostID,String bio, String title, ArrayList<String> imageName, String address, String price, String city, String time, String phoneNumber, boolean accept, boolean auction, boolean exchange, boolean agreement, ArrayList<String> rowName, ArrayList<String> rowValue, ArrayList<String> columnName, ArrayList<String> columnValue, String branchMain, String branch1) {
+    public Post(int lastPostID,String bio, String title, ArrayList<String> imageName, String address, long price, String city, String time, String phoneNumber, boolean accept, boolean auction, boolean exchange, boolean agreement, ArrayList<String> rowName, ArrayList<String> rowValue, ArrayList<String> columnName, ArrayList<String> columnValue, String branchMain, String branch1) {
         document = new Document();
         document.append("postId", lastPostID);
         document.append("title" , title);
@@ -30,7 +30,7 @@ public class Post {
         document.append("exchange" ,exchange);
         document.append("agreement" ,agreement);
         document.append("auction" ,auction);
-        if (!price.equals(""))
+        if (price != 0)
             document.append("price" ,price);
         if (rowName != null)
             document.append("rowName" , rowName);

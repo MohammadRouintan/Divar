@@ -135,7 +135,7 @@ public class Client extends Thread {
                         JSONObject json = new JSONObject(DIS.readUTF());
                         Post post = new Post(Database.lastPostId() + 1, json.getString("bio"), json.getString("title"),
                                 getStringArray(json.getJSONArray("imageName")), json.getString("address"),
-                                json.getString("price"), json.getString("city"), json.getString("time"),
+                                json.getLong("price"), json.getString("city"), json.getString("time"),
                                 json.getString("phoneNumber"), json.getBoolean("accept"), json.getBoolean("auction"),
                                 json.getBoolean("exchange"), json.getBoolean("agreement"),
                                 getStringArray(json.getJSONArray("RowName")), getStringArray(json.getJSONArray("RowValue")),
@@ -203,6 +203,25 @@ public class Client extends Thread {
                         int sizeOfPosts = Database.getSizeOfPosts(document);
                         DOS.writeInt(sizeOfPosts);
                         DOS.flush();
+                    } else if (task == 21) {
+                        String city = Database.getUserCity(users);
+                        DOS.writeUTF(city);
+                        DOS.flush();
+                    } else if (task == 22) {
+                        long priceFrom = DIS.readLong();
+                        long priceTo = DIS.readLong();
+                        int arraySize = DIS.readInt();
+                        ArrayList<String> posts = new ArrayList<>();
+                        for (int i = 0; i < arraySize; i++) {
+                            posts.add(DIS.readUTF());
+                        }
+
+                        ArrayList<String> newPosts = Database.priceFilter(priceFrom, priceTo, posts);
+                        DOS.writeInt(newPosts.size());
+                        for (String newPost : newPosts) {
+                            DOS.writeUTF(newPost);
+                            DOS.flush();
+                        }
                     } else if (task == -1) {
                         closeSocket();
                         break;
