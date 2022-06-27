@@ -488,4 +488,6 @@ public class GetInfo {
         return flag;
     }
 
+    public static void sendMessage(String user2 ,String message){}
+
 }

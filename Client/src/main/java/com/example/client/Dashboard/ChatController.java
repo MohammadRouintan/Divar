@@ -93,14 +93,6 @@ public class ChatController {
 
         JSONObject json1 = new JSONObject(chats);
 
-//            ArrayList<Integer> size1 = getIntArray(json.getJSONArray("size"));
-//            ArrayList<String> user = getStringArray(json.getJSONArray("partner"));
-//            ArrayList<String> imgs1 = getStringArray(json.getJSONArray("imageName"));
-//
-//            for
-//
-//            AddUsers(user ,imgs1 ,size1);
-
         new Thread(() -> {
             while(true) {
                 try {
@@ -129,7 +121,9 @@ public class ChatController {
 
     @FXML
     private void sendButton(){
-
+        HBox hBox1 = makeMassageHbox(0,false,textBox.getText());
+        chatBox.getChildren().addAll(hBox1);
+        GetInfo.sendMessage(currentNumber ,textBox.getText());
     }
 
     private HBox AddUsers(String phoneNumber ,String imgName ,int newMessageCount){
