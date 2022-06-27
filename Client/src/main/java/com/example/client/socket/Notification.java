@@ -1,5 +1,6 @@
 package com.example.client.socket;
 
+import java.awt.*;
 import java.io.*;
 import java.net.Socket;
 
@@ -27,19 +28,26 @@ public class Notification extends Thread{
                 String message = DIS.readUTF();
                 String number = DIS.readUTF();
                 showNotification(message, number);
-            } catch (IOException e) {
+            } catch (IOException | AWTException e) {
                 System.err.println(e.getMessage());
             }
         }
     }
 
-    /**
-     *
-     * @param message message text
-     * @param number senders number
-     * TODO show notification when function called
-     */
-    public void showNotification (String message, String number) {
 
+    public void showNotification (String message, String number) throws AWTException {
+        if (SystemTray.isSupported()) {
+            SystemTray tray = SystemTray.getSystemTray();
+            Image image = Toolkit.getDefaultToolkit().createImage("icon.png");
+            TrayIcon trayIcon = new TrayIcon(image, "Tray Demo");
+            trayIcon.setImageAutoSize(true);
+            trayIcon.setToolTip("System tray icon demo");
+            tray.add(trayIcon);
+
+            trayIcon.displayMessage(number, message, TrayIcon.MessageType.INFO);
+        } else {
+            System.err.println("System tray not supported!");
+        }
     }
+
 }

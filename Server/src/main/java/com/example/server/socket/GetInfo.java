@@ -5,26 +5,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 public class GetInfo {
-    /**
-     *
-     * @param number to specialize posts for user
-     * @return a json of posts
-     * TODO get json of posts from database
-     */
-    public static String getJson (String number) {
-        return null;
-    }
-
-    /**
-     *
-     * @param number of user who added a post
-     * @param json post information
-     * TODO save the json in database
-     */
-    public static void newPost (String number, String json) {
-
-    }
-
 
     /**
      *
@@ -37,12 +17,14 @@ public class GetInfo {
         try {
             for (int i = 0; i < AcceptClients.numbers.size(); i++) {
                 if (AcceptClients.numbers.get(i).equals(messageReceiver)) {
-                    DataOutputStream DOSNotification = new DataOutputStream(new BufferedOutputStream(AcceptClients.notificationSockets.get(i).getOutputStream()));
-                    DOSNotification.writeUTF(messageText);
-                    DOSNotification.flush();
-                    DOSNotification.writeUTF(senderNumber);
-                    DOSNotification.flush();
-                    DOSNotification.close();
+                    AcceptClients.DOSNotification.get(i).writeUTF(messageText);
+                    AcceptClients.DOSNotification.get(i).flush();
+                    AcceptClients.DOSNotification.get(i).writeUTF(senderNumber);
+                    AcceptClients.DOSNotification.get(i).flush();
+                    AcceptClients.DOSMessage.get(i).writeUTF(messageText);
+                    AcceptClients.DOSMessage.get(i).flush();
+                    AcceptClients.DOSMessage.get(i).writeUTF(senderNumber);
+                    AcceptClients.DOSMessage.get(i).flush();
                 }
             }
         } catch (IOException e) {
@@ -71,8 +53,5 @@ public class GetInfo {
         return token;
     }
 
-    public static String getImageID(){
-        return null;
-    }
 
 }

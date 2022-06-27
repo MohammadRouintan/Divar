@@ -1,5 +1,6 @@
 package com.example.client.Dashboard;
 
+import com.example.client.socket.Connect;
 import com.example.client.socket.GetInfo;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -22,6 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
@@ -87,13 +89,9 @@ public class ChatController {
             HBox hBox = AddUsers(user2.get(i) ,imgs.get(i) ,size.get(i));
             Users.getChildren().add(hBox);
         }
+        String chats1 = GetInfo.getChatCount(GetInfo.phoneNumber);
 
-        Runnable run = () -> {
-
-
-            String chats1 = GetInfo.getChatCount(GetInfo.phoneNumber);
-
-            JSONObject json1 = new JSONObject(chats);
+        JSONObject json1 = new JSONObject(chats);
 
 //            ArrayList<Integer> size1 = getIntArray(json.getJSONArray("size"));
 //            ArrayList<String> user = getStringArray(json.getJSONArray("partner"));
@@ -103,18 +101,29 @@ public class ChatController {
 //
 //            AddUsers(user ,imgs1 ,size1);
 
-        };
-        Thread thread = new Thread(run);
-        thread.start();
         new Thread(() -> {
-            while(!flag) {
+            while(true) {
                 try {
-                    Thread.sleep(1000);
-                }catch (InterruptedException e){
+                    String message = Connect.messageDIS.readUTF();
+                    String senderNumber = Connect.messageDIS.readUTF();
+                    if(currentNumber.equals(senderNumber)){
+                        makeMassageHbox(0, true, message);
+                    } else {
+                        boolean isOldUser = false;
+                        for (int i = 0; i < user2.size(); i++) {
+                            if(user2.get(i).equals(senderNumber)){
+                                isOldUser = true;
+                                AddUsers(senderNumber, imgs.get(i), size.get(i) + 1);
+                            }
+                        }
+                        if(!isOldUser){
+                            AddUsers(senderNumber, "", 1);
+                        }
+                    }
+                } catch (IOException e) {
                     System.err.println(e.getMessage());
                 }
             }
-            thread.stop();
         }).start();
     }
 
@@ -163,10 +172,10 @@ public class ChatController {
         userHBox.setOnMouseClicked(event -> ShowMassages(phoneNumber));
         return userHBox;
     }
-
+    private static String currentNumber;
 
     private void ShowMassages(String phoneNumber){
-
+        currentNumber = phoneNumber;
         JSONObject json = new JSONObject(GetInfo.getChat(GetInfo.phoneNumber ,phoneNumber));
 
         ArrayList<String> Messages = getStringArray(json.getJSONArray("messages"));

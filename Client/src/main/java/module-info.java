@@ -3,6 +3,7 @@ module com.example.client {
     requires javafx.fxml;
     requires org.json;
     requires com.jfoenix;
+    requires java.desktop;
 
     opens com.example.client to javafx.fxml;
     exports com.example.client;

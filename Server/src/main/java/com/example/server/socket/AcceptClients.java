@@ -9,9 +9,12 @@ import java.util.List;
 public class AcceptClients{
     public static List <Socket> clientSockets = new ArrayList<>();
     public static List <Socket> notificationSockets = new ArrayList<>();
+    public static List <DataOutputStream> DOSNotification = new ArrayList<>();
+    public static List <DataOutputStream> DOSMessage = new ArrayList<>();
     public static List <String> numbers = new ArrayList<>();
     private DataInputStream DIS;
     private ServerSocket serverSocket;
+    private ServerSocket messageServerSocket;
     private ServerSocket serverNotificationSocket;
     private ServerSocket serverSMSSocket;
     private Socket SMSSocket;
@@ -23,6 +26,7 @@ public class AcceptClients{
             try {
                 serverSocket = new ServerSocket(5570);
                 serverNotificationSocket = new ServerSocket(5571);
+                messageServerSocket = new ServerSocket(5576);
 //                serverSMSSocket = new ServerSocket(5573);
 //                SMSSocket = serverSMSSocket.accept();
 //                SMSDIS = new DataInputStream(new BufferedInputStream(SMSSocket.getInputStream()));
@@ -44,7 +48,10 @@ public class AcceptClients{
             try {
                 Socket socket = serverSocket.accept();
                 Socket notificationSocket = serverNotificationSocket.accept();
+                Socket messageSocket = messageServerSocket.accept();
                 notificationSockets.add(notificationSocket);
+                DOSNotification.add(new DataOutputStream(new BufferedOutputStream(notificationSocket.getOutputStream())));
+                DOSMessage.add(new DataOutputStream(new BufferedOutputStream(messageSocket.getOutputStream())));
                 clientSockets.add(socket);
                 numbers.add(null);
                 int count = numbers.size() - 1;

@@ -19,6 +19,15 @@ public class Client extends Thread {
     private DataOutputStream DOS;
     String number;
     int count;
+    private int getCount(){
+        int num = 0;
+        for (int i = 0; i < AcceptClients.numbers.size(); i++) {
+            if(AcceptClients.numbers.get(i).equals(number)){
+                num = i;
+            }
+        }
+        return num;
+    }
 
     public Client(int count) {
         this.count = count;
@@ -147,15 +156,11 @@ public class Client extends Thread {
     }
 
     private void closeSocket() {
-        try {
-            DOS.close();
-            DIS.close();
-            AcceptClients.clientSockets.get(count).close();
-            AcceptClients.clientSockets.remove(count);
-            AcceptClients.numbers.remove(count);
-        }catch (IOException e) {
-            System.err.println(e.getMessage());
-        }
+        AcceptClients.clientSockets.remove(getCount());
+        AcceptClients.numbers.remove(getCount());
+        AcceptClients.DOSMessage.remove(getCount());
+        AcceptClients.DOSNotification.remove(getCount());
+        AcceptClients.notificationSockets.remove(getCount());
     }
 
 
