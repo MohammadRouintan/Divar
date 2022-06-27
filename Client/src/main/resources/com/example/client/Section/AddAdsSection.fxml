@@ -223,7 +223,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <HBox prefHeight="150.0" prefWidth="541.0" spacing="30.0">
+      <HBox alignment="TOP_CENTER" prefHeight="150.0" prefWidth="541.0" spacing="30.0">
          <VBox.margin>
             <Insets bottom="20.0" top="30.0" />
          </VBox.margin>
@@ -232,7 +232,7 @@
          </padding>
          <children>
             <ImageView fx:id="img1" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="img2" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="img2" fitHeight="150.0" fitWidth="161.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="img3" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
                   <Insets right="10.0" />
@@ -240,7 +240,7 @@
             </ImageView>
          </children>
       </HBox>
-      <HBox prefHeight="150.0" prefWidth="541.0" spacing="30.0">
+      <HBox alignment="TOP_CENTER" prefHeight="150.0" prefWidth="541.0" spacing="30.0">
          <padding>
             <Insets left="30.0" />
          </padding>
@@ -257,7 +257,7 @@
             <Insets bottom="20.0" />
          </VBox.margin>
       </HBox>
-      <HBox prefHeight="150.0" prefWidth="541.0" spacing="30.0">
+      <HBox alignment="TOP_CENTER" prefHeight="150.0" prefWidth="541.0" spacing="30.0">
          <padding>
             <Insets left="30.0" />
          </padding>
@@ -279,10 +279,18 @@
             <Font size="26.0" />
          </font>
       </Label>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+      <HBox alignment="CENTER" prefHeight="46.0" prefWidth="600.0" spacing="30.0">
          <children>
-            <Button maxHeight="60.0" minHeight="40.0" mnemonicParsing="false" onAction="#addPost" prefHeight="40.0" prefWidth="223.0" text="Post" />
-            <Button maxHeight="60.0" minHeight="40.0" mnemonicParsing="false" onAction="#cancelPost" prefHeight="40.0" prefWidth="213.0" text="Cancle" />
+            <JFXButton minHeight="45.0" onAction="#addPost" prefHeight="45.0" prefWidth="220.0" styleClass="btn" stylesheets="@../../../../Style/AddAdsSection.css" text="Post">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </JFXButton>
+            <JFXButton minHeight="45.0" onAction="#cancelPost" prefHeight="45.0" prefWidth="220.0" styleClass="btn" stylesheets="@../../../../Style/AddAdsSection.css" text="Cancle">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </JFXButton>
          </children>
          <VBox.margin>
             <Insets bottom="20.0" top="20.0" />

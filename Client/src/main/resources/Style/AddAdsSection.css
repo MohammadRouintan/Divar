@@ -26,3 +26,11 @@
 .plus-btn{
     -fx-background-color: transparent;
 }
+.btn{
+    -fx-background-color: #f1c40f;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+.btn:hover{
+    -fx-background-color: #454545;
+}
