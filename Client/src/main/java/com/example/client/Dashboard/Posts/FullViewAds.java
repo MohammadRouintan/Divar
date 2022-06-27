@@ -77,7 +77,7 @@ public class FullViewAds {
         if (post.getBoolean("agreement")) {
             price = new Label("agreement");
         } else {
-            price = new Label(post.getString("price"));
+            price = new Label(String.valueOf(post.getLong("price")));
         }
 
         if (post.getBoolean("exchange")) {

@@ -370,7 +370,6 @@ public class GetInfo {
     }
 
     public static boolean sendFile(String url, String fileName){
-
         try {
             Connect.imageDOS.writeInt(2);
             Connect.imageDOS.flush();
@@ -398,6 +397,45 @@ public class GetInfo {
 
     public static void receiveProfile(String fileName){
 
+    }
+
+    public static String getUserCity() {
+        String city = "";
+        try {
+            Connect.DOS.writeInt(21);
+            Connect.DOS.flush();
+            city = Connect.DIS.readUTF();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return city;
+    }
+
+    public static ArrayList<String> priceFilter(long priceFrom, long priceTo, ArrayList<String> posts) {
+        ArrayList<String> newPosts = new ArrayList<>();
+        try {
+            Connect.DOS.writeInt(22);
+            Connect.DOS.flush();
+            Connect.DOS.writeLong(priceFrom);
+            Connect.DOS.writeLong(priceTo);
+            Connect.DOS.flush();
+            Connect.DOS.writeInt(posts.size());
+            Connect.DOS.flush();
+            for (String post : posts) {
+                Connect.DOS.writeUTF(post);
+                Connect.DOS.flush();
+            }
+
+            int lastSize = Connect.DIS.readInt();
+            for (int i = 0; i < lastSize; i++) {
+                newPosts.add(Connect.DIS.readUTF());
+            }
+
+
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return newPosts;
     }
 
     public static ArrayList<String> chatCount(String phoneNumber){return null;}

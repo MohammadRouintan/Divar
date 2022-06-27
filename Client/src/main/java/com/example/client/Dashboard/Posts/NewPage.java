@@ -86,7 +86,7 @@ public class NewPage {
         Label titleLabel = new Label(post.getString("title"));
         Label priceLabel = new Label("Agreement");
         if (post.has("price")) {
-            priceLabel = new Label(post.getString("price"));
+            priceLabel = new Label(String.valueOf(post.getLong("price")));
         }
         Label timeLabel = new Label(post.getString("time"));
         titleLabel.setAlignment(Pos.CENTER);
