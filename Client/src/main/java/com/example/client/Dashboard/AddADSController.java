@@ -469,10 +469,10 @@ public class AddADSController {
                 case "Vehicles":
                     branchTwo.addAll(vehicles);
                     break;
-                case "Digital Commodity":
+                case "Digital Goods":
                     branchTwo.addAll(digitalCommodity);
                     break;
-                case "Home Commodity":
+                case "Home Goods":
                     branchTwo.addAll(homeCommodity);
                     break;
                 case "Services":
