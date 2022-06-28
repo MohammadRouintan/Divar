@@ -445,4 +445,17 @@ public class GetInfo {
 
     public static boolean isMessageExists(String user1 ,String user2){return false;}
 
+    public static int getProfileID(String userPhone) {
+        int res = 0;
+        try {
+            Connect.DOS.writeInt(22);
+            Connect.DOS.flush();
+            Connect.DOS.writeUTF(userPhone);
+            Connect.DOS.flush();
+            res = Connect.DIS.readInt();
+        } catch (IOException e){
+            System.err.println(e.getMessage());
+        }
+        return res;
+    }
 }

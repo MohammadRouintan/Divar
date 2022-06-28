@@ -231,7 +231,15 @@ public class Client extends Thread {
                             DOS.writeUTF(newPost);
                             DOS.flush();
                         }
-                    } else if (task == -1) {
+                    } else if(task == 27){
+                        try {
+                            String number = DIS.readUTF();
+                            DOS.writeInt(1);
+                            DOS.flush();
+                        }catch (IOException e){
+                            System.err.println(e.getMessage());
+                        }
+                    }else if (task == -1) {
                         closeSocket();
                         break;
                     }
