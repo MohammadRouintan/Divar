@@ -9,6 +9,40 @@ import java.util.ArrayList;
 public class Users extends Database {
 
     private Document document;
+    private Document filterDocument;
+    private Document updateDocument;
+    private String phoneNumber;
+    private String city;
+    private String lastName;
+    private String firstName;
+    private ArrayList<String> bookMarkedPost;
+    private ArrayList<String> usersPosts;
+    private ArrayList<String> lastSeenPost;
+
+    public Users(String phoneNumber, String city, String lastName, String firstName, ArrayList<String> bookMarkedPost, ArrayList<String> usersPosts, ArrayList<String> lastSeenPost) {
+        this.phoneNumber = phoneNumber;
+        this.city = city;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.bookMarkedPost = bookMarkedPost;
+        this.usersPosts = usersPosts;
+        this.lastSeenPost = lastSeenPost;
+    }
+
+    public Users setValues(Document document){
+        return new Users(document.getString("phoneNumber") ,document.getString("city") ,document.getString("lastName") ,document.getString("firstName") ,(ArrayList<String>) document.get("bookMarkedPost") ,(ArrayList<String>) document.get("usersPosts") ,(ArrayList<String>) document.get("lastSeenPost"));
+    }
+
+    public Users(Document filterDocument) {
+        this.filterDocument = filterDocument;
+    }
+
+    public Users(String phoneNumber) {
+        document = new Document();
+        document.append("phoneNumber", phoneNumber);
+        document.append("profileNameImage", 0);
+        this.filterDocument = new Document("phoneNumber", phoneNumber);
+    }
 
     public void setDocument(Document document) {
         this.document = document;
@@ -20,20 +54,6 @@ public class Users extends Database {
 
     public void setUpdateDocument(Document updateDocument) {
         this.updateDocument = updateDocument;
-    }
-
-    private Document filterDocument;
-    private Document updateDocument;
-
-    public Users(Document filterDocument) {
-        this.filterDocument = filterDocument;
-    }
-
-    public Users(String phoneNumber) {
-        document = new Document();
-        document.append("phoneNumber", phoneNumber);
-        document.append("profileNameImage", 0);
-        this.filterDocument = new Document("phoneNumber", phoneNumber);
     }
 
     public Document getDocument() {
@@ -103,26 +123,4 @@ public class Users extends Database {
     public Document getUpdateDocument() {
         return updateDocument;
     }
-
-    public Users(String phoneNumber, String city, String lastName, String firstName, ArrayList<String> bookMarkedPost, ArrayList<String> usersPosts, ArrayList<String> lastSeenPost) {
-        this.phoneNumber = phoneNumber;
-        this.city = city;
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.bookMarkedPost = bookMarkedPost;
-        this.usersPosts = usersPosts;
-        this.lastSeenPost = lastSeenPost;
-    }
-
-    public Users setValues(Document document){
-        return new Users(document.getString("phoneNumber") ,document.getString("city") ,document.getString("lastName") ,document.getString("firstName") ,(ArrayList<String>) document.get("bookMarkedPost") ,(ArrayList<String>) document.get("usersPosts") ,(ArrayList<String>) document.get("lastSeenPost"));
-    }
-
-    private String phoneNumber;
-    private String city;
-    private String lastName;
-    private String firstName;
-    private ArrayList<String> bookMarkedPost;
-    private ArrayList<String> usersPosts;
-    private ArrayList<String> lastSeenPost;
 }

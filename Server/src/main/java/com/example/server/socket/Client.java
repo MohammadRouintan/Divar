@@ -129,8 +129,8 @@ public class Client extends Thread {
                     } else if (task == 10) {
                         JSONObject json = new JSONObject(DIS.readUTF());
 
-                        ArrayList<String> key = getStringArray(json.getJSONArray("updateKeys"));
-                        ArrayList<Object> value = getObjectArray(json.getJSONArray("updateValues"));
+                        ArrayList<String> key = getStringArray(json.getJSONArray("keys"));
+                        ArrayList<Object> value = getObjectArray(json.getJSONArray("values"));
 
                         Post post1 = new Post(new Document("postId", json.getInt("postId")));
 

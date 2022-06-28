@@ -113,7 +113,6 @@
                         </HBox>
                         <HBox alignment="CENTER" minHeight="50.0" minWidth="60.0" prefHeight="50.0" prefWidth="570.0" spacing="50.0">
                            <children>
-
                               <JFXButton prefHeight="40.0" prefWidth="386.0" ripplerFill="WHITE" styleClass="apply-btn" stylesheets="@../../../../Style/adsSection.css" text="Apply">
                                  <font>
                                     <Font name="System Bold" size="16.0" />

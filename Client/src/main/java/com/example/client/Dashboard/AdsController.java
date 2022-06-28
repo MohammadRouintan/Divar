@@ -55,9 +55,9 @@ public class AdsController {
         keys.add("city");
         values.add(city);
         int size = (int) Math.ceil((double) GetInfo.getSizeOfPosts(keys, values) / 8);
-            pagination.setPageCount(size);
-            pagination.setMaxPageIndicatorCount(2);
-            pagination.setPageFactory(this::CreatePage);
+        pagination.setPageCount(size);
+        pagination.setMaxPageIndicatorCount(2);
+        pagination.setPageFactory(this::CreatePage);
     }
 
     private Node CreatePage(int pageIndex) {
@@ -193,11 +193,9 @@ public class AdsController {
 
 
         int size = (int) Math.ceil((double) GetInfo.getSizeOfPosts(keys, values) / 8);
-
         pagination.setPageCount(size);
         pagination.setMaxPageIndicatorCount(2);
         pagination.setPageFactory(this::CreatePage);
-
     }
 
     @FXML
@@ -210,9 +208,9 @@ public class AdsController {
         searchTextbox.clear();
 
         int size = (int) Math.ceil((double) GetInfo.getSizeOfPosts(keys, values) / 8);
-            pagination.setPageCount(size);
-            pagination.setMaxPageIndicatorCount(2);
-            pagination.setPageFactory(this::CreatePage);
+        pagination.setPageCount(size);
+        pagination.setMaxPageIndicatorCount(2);
+        pagination.setPageFactory(this::CreatePage);
     }
 
     private void priceFilter() {

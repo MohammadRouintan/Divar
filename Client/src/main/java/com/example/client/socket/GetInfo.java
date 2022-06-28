@@ -173,12 +173,13 @@ public class GetInfo {
     }
 
 
-    public static void updatePost(ArrayList<String> keys, ArrayList<Object> values) {
+    public static void updatePost(int postId, ArrayList<String> keys, ArrayList<Object> values) {
         try {
             Connect.DOS.writeInt(10);
             Connect.DOS.flush();
 
             JSONObject json = new JSONObject();
+            json.put("postId", postId);
             json.put("keys", keys);
             json.put("values", values);
             Connect.DOS.writeUTF(json.toString());
@@ -521,14 +522,5 @@ public class GetInfo {
             System.err.println(e.getMessage());
         }
         return result;
-    }
-
-    public static void disconnect() {
-        try {
-            Connect.DOS.writeInt(-1);
-            Connect.DOS.flush();
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
-        }
     }
 }

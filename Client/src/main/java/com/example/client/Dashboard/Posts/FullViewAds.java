@@ -74,6 +74,18 @@ public class FullViewAds {
         priceField.setAlignment(Pos.CENTER);
         priceField.setMaxWidth(300);
         Label exchange = new Label();
+        auction.setOnAction(event -> {
+            try {
+                Long newPrice = Long.parseLong(priceField.getText());
+                ArrayList<String> keys = new ArrayList<>();
+                ArrayList<Object> values = new ArrayList<>();
+                keys.add("price");
+                values.add(newPrice);
+                GetInfo.updatePost(post.getInt("postId"), keys, values);
+            } catch (Exception e) {
+
+            }
+        });
 
         if (post.getBoolean("agreement")) {
             price = new Label("agreement");
@@ -109,8 +121,8 @@ public class FullViewAds {
 
         AdsVBox.setPrefWidth(1200);
         AdsVBox.setPrefHeight(570);
-        if (post.getBoolean("auction") && !this.paneName.equals("MyAds")) {
-            mainVBox.getChildren().addAll(hBox,slideShow,title,time,priceField,featureColumnHBox,featureRowVBox,descriptionVBox, buttons);
+        if (post.getBoolean("auction") && !this.paneName.equals("MyAds") && !post.getString("phoneNumber").equals(GetInfo.phoneNumber)) {
+            mainVBox.getChildren().addAll(hBox,slideShow,title,time,priceField,auction,featureColumnHBox,featureRowVBox,descriptionVBox, buttons);
         } else if (!this.paneName.equals("MyAds")){
             mainVBox.getChildren().addAll(hBox,slideShow,title,time,price,exchange,featureColumnHBox,featureRowVBox,descriptionVBox, buttons);
         } else {
