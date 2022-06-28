@@ -18,14 +18,14 @@
 
 <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1300.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Dashboard.AdsController">
     <children>
-      <HBox alignment="TOP_CENTER" prefHeight="112.0" prefWidth="570.0" styleClass="top-title" stylesheets="@../../../../Style/adsSection.css">
+      <HBox alignment="TOP_CENTER" minHeight="55.0" prefHeight="55.0" prefWidth="570.0" styleClass="top-title" stylesheets="@../../../../Style/adsSection.css">
          <children>
-            <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="30.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../image/home.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" prefHeight="43.0" prefWidth="58.0" text="Ads">
+            <Label alignment="CENTER" minHeight="30.0" prefHeight="21.0" prefWidth="58.0" text="Ads">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>

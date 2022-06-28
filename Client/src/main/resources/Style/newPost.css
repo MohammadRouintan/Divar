@@ -1,0 +1,10 @@
+.post {
+    -fx-background-color: #fff;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 8, 0, 0, 0);
+}
+
+.post:hover{
+    -fx-effect:null ;
+}
