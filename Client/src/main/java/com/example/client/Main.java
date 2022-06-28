@@ -1,6 +1,7 @@
 package com.example.client;
 
 import com.example.client.Dashboard.MyDivarPages.MyAdsController;
+import com.example.client.socket.GetInfo;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

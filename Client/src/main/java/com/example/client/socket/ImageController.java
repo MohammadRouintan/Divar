@@ -43,6 +43,7 @@ public class ImageController extends Thread{
             System.err.println(e.getMessage());
         }
     }
+
     private void receiveFile (String imageID) {
         int bytes = 0;
         try {

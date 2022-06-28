@@ -1,9 +1,11 @@
 package com.example.client.Dashboard.Posts;
 
+import com.example.client.Main;
 import com.example.client.socket.GetInfo;
 import com.example.client.socket.ImageController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -14,10 +16,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class FullViewAds {
@@ -65,6 +69,7 @@ public class FullViewAds {
         Label time = new Label(post.getString("time"));
         Label price;
         TextField priceField = new TextField();
+        Button auction = new Button("OK");
         priceField.setPromptText("NewPrice");
         priceField.setAlignment(Pos.CENTER);
         priceField.setMaxWidth(300);

@@ -514,4 +514,13 @@ public class GetInfo {
         }
         return result;
     }
+
+    public static void disconnect() {
+        try {
+            Connect.DOS.writeInt(-1);
+            Connect.DOS.flush();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
 }

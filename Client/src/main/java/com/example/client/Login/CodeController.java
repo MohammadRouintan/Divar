@@ -51,6 +51,7 @@ public class CodeController {
         timeline.stop();
     }
 
+    public static String phoneNumber;
     /*
     **TODO
      */
@@ -62,7 +63,7 @@ public class CodeController {
             code = inputPhoneNumberCodeID.getText();
             if ((counter > 0) && GetInfo.confirmationCheck(code)){
                 GetInfo.addUser();
-                GetInfo.phoneNumber = code;
+                GetInfo.phoneNumber = phoneNumber;
                 Parent layout = FXMLLoader.load(Main.class.getResource("dashboard.fxml"));
                 Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
                 Scene scene = new Scene(layout,800,600);
@@ -82,7 +83,7 @@ public class CodeController {
 
     @FXML
     private void ReCodePhoneCode(){
-        new Connect("localhost" ,"localhost", Connect.getPhoneNumber());
+        new Connect("172.20.177.139" ,"172.20.177.139", Connect.getPhoneNumber());
         ReCodeButtonID.setVisible(false);
         counterID.setVisible(true);
         timeline.setCycleCount(Timeline.INDEFINITE);

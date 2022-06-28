@@ -28,6 +28,7 @@ public class LoginController {
     @FXML
     private void loginOnFirstPage(ActionEvent e){
         try {
+            CodeController.phoneNumber = phoneNumber;
             Parent layout = FXMLLoader.load(Main.class.getResource("Login/logIn.fxml"));
             Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
             Scene scene = new Scene(layout,800,600);
@@ -72,7 +73,7 @@ public class LoginController {
         if(matcher.matches()){
 
             phoneNumber = inputPhoneNumberIDField.getText();
-            new Connect("localhost" ,"localhost", phoneNumber);
+            new Connect("192.168.141.113" ,"192.168.141.113", phoneNumber);
 
             try{
 
