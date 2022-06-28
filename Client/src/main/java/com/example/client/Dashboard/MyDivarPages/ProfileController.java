@@ -100,10 +100,10 @@ public class ProfileController {
     void uploadImageProfile(ActionEvent event) {
         file = chooser.showOpenDialog(null);
         if(file != null) {
-            try{
-                JSONObject json = new JSONObject(user);
+            JSONObject json = new JSONObject(user);
+            if (json.getInt("profileNameImage") != 0) {
                 profileName = json.getInt("profileNameImage");
-            }catch (Exception e){
+            } else {
                 profileName = GetInfo.getLastNameProfileImage();
             }
             Image img = new Image(file.toURI().toString());

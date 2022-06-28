@@ -54,16 +54,12 @@ public class FullViewAds {
         Button backButton = new Button("Back");
         hBox.getChildren().add(backButton);
 
-        backButton.setOnAction(new EventHandler<ActionEvent>() {
-           @Override
-            public void handle(ActionEvent event) {
-               mainVBox.getChildren().clear();
-               for(Node node : nodesOfMainVbox){
-                   mainVBox.getChildren().add(node);
-               }
-
+        backButton.setOnAction(event -> {
+            mainVBox.getChildren().clear();
+            for(Node node : nodesOfMainVbox){
+                mainVBox.getChildren().add(node);
             }
-        });
+         });
 
         Label title = new Label(post.getString("title"));
         Label time = new Label(post.getString("time"));
@@ -86,12 +82,14 @@ public class FullViewAds {
 
         Button bookmarked = new Button("Bookmark");
         Button chat = new Button("Chat");
+        Button delete = new Button("Delete");
         HBox buttons = new HBox();
         buttons.setAlignment(Pos.CENTER);
         buttons.setSpacing(20);
         buttons.getChildren().addAll(bookmarked, chat);
-        bookmarked.setOnAction(event -> {
-            GetInfo.updateUserArrays("bookmarkPost", post.getInt("postId"));
+        bookmarked.setOnAction(event -> GetInfo.updateUserArrays("bookmarkPost", post.getInt("postId")));
+        delete.setOnAction(event -> {
+            GetInfo.deletePost(post.getInt("postId"));
         });
 
         HBox featureColumnHBox = makeVerticalFeatureLabel(post);
@@ -111,11 +109,8 @@ public class FullViewAds {
         } else if (!this.paneName.equals("MyAds")){
             mainVBox.getChildren().addAll(hBox,slideShow,title,time,price,exchange,featureColumnHBox,featureRowVBox,descriptionVBox, buttons);
         } else {
-            mainVBox.getChildren().addAll(hBox,slideShow,title,time,price,exchange,featureColumnHBox,featureRowVBox,descriptionVBox);
+            mainVBox.getChildren().addAll(hBox,slideShow,title,time,price,exchange,featureColumnHBox,featureRowVBox,descriptionVBox, delete);
         }
-        //post.getJSONArray("rowName").length();
-        //post.getJSONArray("columnName").length();
-
     }
 
 

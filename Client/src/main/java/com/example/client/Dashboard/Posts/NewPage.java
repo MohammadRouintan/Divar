@@ -97,6 +97,7 @@ public class NewPage {
 
         Image img = new Image(imageController.getPath());
         ImageView imageView = new ImageView(img);
+        imageView.setFitWidth(270);
         imageView.setFitHeight(200);
         imageView.setImage(img);
         Label titleLabel = new Label(post.getString("title"));
