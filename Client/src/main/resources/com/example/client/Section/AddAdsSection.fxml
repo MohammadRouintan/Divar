@@ -18,7 +18,7 @@
 
 <VBox fx:id="mainVbox" alignment="TOP_CENTER" prefHeight="2000.0" prefWidth="600.0" style="-fx-background-color: f3f3f3;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Dashboard.AddADSController">
    <children>
-      <Label alignment="CENTER" minHeight="53.0" minWidth="140.0" prefHeight="54.0" prefWidth="603.0" styleClass="tilte" stylesheets="@../../../../Style/AddAdsSection.css" text="Add Ads">
+      <Label alignment="CENTER" minHeight="55.0" minWidth="140.0" prefHeight="55.0" prefWidth="603.0" styleClass="tilte" stylesheets="@../../../../Style/AddAdsSection.css" text="Add Ads">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>

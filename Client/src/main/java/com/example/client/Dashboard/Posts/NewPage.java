@@ -1,6 +1,8 @@
 package com.example.client.Dashboard.Posts;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
@@ -8,8 +10,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class NewPage {
@@ -49,34 +54,58 @@ public class NewPage {
         HBox rowHBox = new HBox();
         VBox vBox1 = makeNewVBox(post1);
         VBox vBox2 = makeNewVBox(post2);
+        rowHBox.setPadding(new Insets(8));
         rowHBox.getChildren().addAll(vBox1,vBox2);
+        rowHBox.setMargin(vBox1,new Insets(5,5,5,5));
+        rowHBox.setMargin(vBox2,new Insets(5,5,5,5));
         return rowHBox;
     }
 
     private HBox makeNewHBox(JSONObject post1) {
         HBox rowHBox = new HBox();
+        rowHBox.setPadding(new Insets(8));
         VBox vBox1 = makeNewVBox(post1);
         rowHBox.getChildren().add(vBox1);
         return rowHBox;
     }
 
     private VBox makeNewVBox(JSONObject post){
+        File file = new File("../Client/src/main/resources/Style/newPost.css");
         VBox vBox = new VBox();
         ImageView imageView = new ImageView();
         Image img = new Image(post.getString("image1"));
+        imageView.setFitWidth(260);
         imageView.setFitHeight(200);
-        imageView.setFitWidth(280);
         imageView.setImage(img);
         Label titleLabel = new Label(post.getString("title"));
-        Label priceLabel = new Label(post.getString("price"));
+        Label priceLabel = new Label("Price :"+post.getString("price"));
         Label timeLabel = new Label(post.getString("time"));
+
         titleLabel.setAlignment(Pos.CENTER);
+        titleLabel.setFont(new Font(17));
+        titleLabel.setStyle("-fx-font-weight: bold");
+
         priceLabel.setAlignment(Pos.CENTER);
+        priceLabel.setFont(new Font(16));
+        priceLabel.setTextFill(Color.web("#bdc3c7"));
+        priceLabel.setStyle("-fx-font-weight: bold");
+
         timeLabel.setAlignment(Pos.CENTER);
-        vBox.setPrefWidth(290);
-        vBox.setPrefHeight(280);
-        vBox.setStyle("-fx-background-color: #e74c3c");
+        timeLabel.setFont(new Font(15));
+        timeLabel.setTextFill(Color.web("#bdc3c7"));
+
+        vBox.setPrefWidth(270);
+        vBox.setMinWidth(270);
+        vBox.setPrefHeight(330);
+        vBox.setMinHeight(330);
+        vBox.setSpacing(8);
+        vBox.setMargin(imageView,new Insets(5,10,5,10));
+        vBox.getStylesheets().add(file.toURI().toString());
+        vBox.getStyleClass().add("post");
+
         vBox.setAlignment(Pos.TOP_CENTER);
+        vBox.setCursor(Cursor.HAND);
+        vBox.setPadding(new Insets(10,0,5,0));
         vBox.getChildren().addAll(imageView,titleLabel,priceLabel,timeLabel);
         vBox.setOnMouseClicked(event -> ShowAds(vBox, post));
         return vBox;

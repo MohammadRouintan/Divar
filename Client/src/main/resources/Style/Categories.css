@@ -3,6 +3,10 @@
     -fx-background-radius: 0 30 30 0 ;
     -fx-border-radius: 0 30 30 0;
 }
+.btn:hover{
+    -fx-background-color: #454545;
+    -fx-text-fill: #fff;
+}
 .tilte{
     -fx-background-color: #f1c40f ;
     -fx-border-radius: 20;

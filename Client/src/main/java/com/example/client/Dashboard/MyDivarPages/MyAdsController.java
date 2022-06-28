@@ -61,7 +61,7 @@ public class MyAdsController {
             post1.put("title", "salam");
             post1.put("price", "14000");
             post1.put("time", "5");
-            post1.put("image1", "/postImage/1.jpg");
+            post1.put("image1", "/postImage/3.jpg");
             post1.put("imageName",imageName);
             post1.put("columnName",columnName);
             post1.put("columnValue",columnValue);
@@ -101,7 +101,7 @@ public class MyAdsController {
             post1.put("title", "salam");
             post1.put("price", "14000");
             post1.put("time", "5");
-            post1.put("image1", "/postImage/1.jpg");
+            post1.put("image1", "/postImage/3.jpg");
             post1.put("imageName",imageName);
             post1.put("columnName",columnName);
             post1.put("columnValue",columnValue);
