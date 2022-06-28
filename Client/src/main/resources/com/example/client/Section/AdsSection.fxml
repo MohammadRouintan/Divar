@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1300.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Dashboard.AdsController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="570.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Dashboard.AdsController">
     <children>
       <HBox alignment="TOP_CENTER" minHeight="55.0" prefHeight="55.0" prefWidth="570.0" styleClass="top-title" stylesheets="@../../../../Style/adsSection.css">
          <children>
@@ -35,7 +35,7 @@
             <Insets top="10.0" />
          </padding>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="133.0" prefWidth="570.0" spacing="50.0">
+      <HBox alignment="CENTER" minHeight="130.0" prefHeight="133.0" prefWidth="570.0" spacing="50.0">
          <VBox.margin>
             <Insets />
          </VBox.margin>
@@ -57,7 +57,7 @@
             </HBox>
          </children>
       </HBox>
-      <Accordion prefHeight="355.0" prefWidth="570.0">
+      <Accordion prefWidth="570.0">
         <panes>
           <TitledPane animated="false" prefHeight="313.0" prefWidth="570.0" stylesheets="@../../../../Style/adsSection.css" text="Filter">
                <content>
@@ -113,8 +113,7 @@
                         </HBox>
                         <HBox alignment="CENTER" minHeight="50.0" minWidth="60.0" prefHeight="50.0" prefWidth="570.0" spacing="50.0">
                            <children>
-
-                              <JFXButton prefHeight="40.0" prefWidth="386.0" ripplerFill="WHITE" styleClass="apply-btn" stylesheets="@../../../../Style/adsSection.css" text="Apply">
+                              <JFXButton onAction="#applyButton" prefHeight="40.0" prefWidth="386.0" ripplerFill="WHITE" styleClass="apply-btn" stylesheets="@../../../../Style/adsSection.css" text="Apply">
                                  <font>
                                     <Font name="System Bold" size="16.0" />
                                  </font>
@@ -139,6 +138,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Accordion>
-      <Pagination fx:id="pagination" pageCount="10" prefHeight="865.0" prefWidth="570.0" />
+      <Pagination fx:id="pagination" pageCount="10" prefWidth="570.0" />
     </children>
 </VBox>
