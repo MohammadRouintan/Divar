@@ -6,6 +6,7 @@ import com.example.client.socket.ImageController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -22,6 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.File;
 import java.util.ArrayList;
 
 public class FullViewAds {
@@ -55,8 +57,17 @@ public class FullViewAds {
 
         //set Back button
         HBox hBox = new HBox();
-        Button backButton = new Button("Back");
+        Button backButton = new Button("");
         hBox.getChildren().add(backButton);
+        File imageUrl = new File("../Client/src/main/resources/Icon/previous.png");
+        Image img = new Image(imageUrl.toURI().toString());
+        ImageView backIcon = new ImageView(img);
+        backIcon.setFitWidth(40);
+        backIcon.setFitHeight(40);
+        backButton.setGraphic(backIcon);
+        backButton.setStyle("-fx-background-color: transparent");
+        hBox.getChildren().add(backButton);
+        hBox.setMargin(backButton,new Insets(10 ,0 ,20,0));
 
         backButton.setOnAction(event -> {
             mainVBox.getChildren().clear();
@@ -104,6 +115,7 @@ public class FullViewAds {
         buttons.setAlignment(Pos.CENTER);
         buttons.setSpacing(20);
         buttons.getChildren().addAll(bookmarked, chat);
+
         bookmarked.setOnAction(event -> GetInfo.updateUserArrays("bookmarkPost", post.getInt("postId")));
         delete.setOnAction(event -> {
             GetInfo.deletePost(post.getInt("postId"));

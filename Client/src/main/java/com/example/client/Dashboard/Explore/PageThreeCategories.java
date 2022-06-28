@@ -12,7 +12,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.json.JSONObject;
-
+import javafx.scene.image.Image;
+import javax.swing.text.html.ImageView;
+import java.awt.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,11 +57,10 @@ public class PageThreeCategories {
 
     private void addPagination(){
         this.mainVBox.getChildren().clear();
-        VBox threeCategories = new VBox();
-        Label TitleLabel = new Label(this.branch1);
-        Button back = new Button("Back");
-        HBox tophBox = new HBox();
 
+        Label TitleLabel = new Label(this.branch1);
+        HBox tophBox = new HBox();
+        Button back = new Button("back");
         Pagination pagination = new Pagination();
         pagination.setPrefWidth(550);
         pagination.setPrefHeight(1200);
