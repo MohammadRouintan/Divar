@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 
 public class Main extends Application {
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Login/entrance.fxml"));
@@ -20,6 +21,10 @@ public class Main extends Application {
         stage.setMinWidth(800);
         stage.setTitle("Divar");
         stage.setScene(scene);
+//        stage.setOnCloseRequest(event -> {
+//            GetInfo.disconnect();
+//
+//        });
         stage.show();
     }
     public static void main(String[] args) {

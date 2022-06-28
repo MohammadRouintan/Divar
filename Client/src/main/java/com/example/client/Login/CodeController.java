@@ -52,9 +52,6 @@ public class CodeController {
     }
 
     public static String phoneNumber;
-    /*
-    **TODO
-     */
     @FXML
     private void loginButtonOnCodeFile(ActionEvent e){
         String code;

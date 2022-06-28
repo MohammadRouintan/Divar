@@ -73,8 +73,8 @@ public class LoginController {
         if(matcher.matches()){
 
             phoneNumber = inputPhoneNumberIDField.getText();
-            new Connect("192.168.141.113" ,"192.168.141.113", phoneNumber);
-
+            CodeController.phoneNumber = phoneNumber;
+            new Connect("localhost" ,"localhost", phoneNumber);
             try{
 
                 Parent layout = FXMLLoader.load(Main.class.getResource("Login/Code.fxml"));

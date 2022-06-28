@@ -49,7 +49,7 @@ public class Client extends Thread {
             if (!confirmed) {
                 closeSocket();
             } else {
-                AcceptClients.numbers.add(number);
+                AcceptClients.numbers.set(count, number);
                 Users users = new Users(number);
                 // 1 : send post to client | 2 : get post from client | 3 : new message from user
                 // 4 : update user | 5 : check user exists | 6 : get user info
@@ -272,11 +272,12 @@ public class Client extends Thread {
     }
 
     private void closeSocket() {
-        AcceptClients.clientSockets.remove(getCount());
-        AcceptClients.numbers.remove(getCount());
-        AcceptClients.DOSMessage.remove(getCount());
-        AcceptClients.DOSNotification.remove(getCount());
-        AcceptClients.notificationSockets.remove(getCount());
+        int c = getCount();
+        AcceptClients.clientSockets.remove(c);
+        AcceptClients.numbers.remove(c);
+        AcceptClients.DOSMessage.remove(c);
+        AcceptClients.DOSNotification.remove(c);
+        AcceptClients.notificationSockets.remove(c);
     }
 
 
