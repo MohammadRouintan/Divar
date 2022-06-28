@@ -488,6 +488,17 @@ public class GetInfo {
         return flag;
     }
 
-    public static void sendMessage(String user2 ,String message){}
+    public static void sendMessage(String phoneNumber2, String message){
+        try {
+            Connect.DOS.writeInt(26);
+            Connect.DOS.flush();
+            Connect.DOS.writeUTF(phoneNumber2);
+            Connect.DOS.flush();
+            Connect.DOS.writeUTF(message);
+            Connect.DOS.flush();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
 
 }
