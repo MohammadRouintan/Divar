@@ -16,7 +16,7 @@ public class ImageController extends Thread{
         this.imageID = imageID;
         this.work = work;
         try {
-            socket = new Socket("172.20.10.10", 5572);
+            socket = new Socket("localhost", 5572);
             DOS = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
             DIS = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
         } catch (IOException e){

@@ -82,6 +82,7 @@ public class FullViewAds {
 
         Button bookmarked = new Button("Bookmark");
         Button chat = new Button("Chat");
+        chat.setOnAction(event -> );
         Button delete = new Button("Delete");
         HBox buttons = new HBox();
         buttons.setAlignment(Pos.CENTER);
