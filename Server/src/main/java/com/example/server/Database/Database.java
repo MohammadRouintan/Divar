@@ -287,6 +287,11 @@ public class Database {
         return bookmarkPost;
     }
 
+    public synchronized static int getProfileImageID(String phoneNumber) {
+        String user = getUser(new Document("phoneNumber", phoneNumber));
+        JSONObject jsonObject = new JSONObject(user);
+        return jsonObject.getInt("profileNameImage");
+    }
 
     public static ArrayList<String> getUsersPosts(int size, int index, Users user){
         String temp = getUser(user.getDocument());
