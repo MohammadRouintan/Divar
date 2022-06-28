@@ -1,6 +1,7 @@
 package com.example.server.socket;
 
 import com.example.server.Database.Database;
+import com.example.server.Database.Messages.Messages;
 import com.example.server.Database.Posts.Post;
 import com.example.server.Database.Users.Users;
 import org.bson.Document;
@@ -239,7 +240,29 @@ public class Client extends Thread {
                         }catch (IOException e){
                             System.err.println(e.getMessage());
                         }
-                    }else if (task == -1) {
+                    } else if (task == 23) {
+                        String phoneNumber = DIS.readUTF();
+                        String jsonString = Database.getChatCount(phoneNumber);
+                        DOS.writeUTF(jsonString);
+                        DOS.flush();
+                    } else if (task == 24) {
+                        String phoneNumber1 = DIS.readUTF();
+                        String phoneNumber2 = DIS.readUTF();
+                        String chat = Database.findChat(phoneNumber1, phoneNumber2);
+                        DOS.writeUTF(chat);
+                        DOS.flush();
+                    } else if (task == 25) {
+                        String phoneNumber1 = DIS.readUTF();
+                        String phoneNumber2 = DIS.readUTF();
+                        boolean isMessageExist = Database.isMessageExist(phoneNumber1, phoneNumber2);
+                        DOS.writeBoolean(isMessageExist);
+                        DOS.flush();
+                    } else if (task == 26) {
+                        String phoneNumber2 = DIS.readUTF();
+                        String message = DIS.readUTF();
+                        Messages messages = new Messages(new Document("user1", number).append("user2", phoneNumber2));
+                        Database.sendMessage(messages, message);
+                    } else if (task == -1) {
                         closeSocket();
                         break;
                     }

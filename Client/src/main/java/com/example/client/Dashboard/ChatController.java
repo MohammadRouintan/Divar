@@ -93,14 +93,6 @@ public class ChatController {
 
         JSONObject json1 = new JSONObject(chats);
 
-//            ArrayList<Integer> size1 = getIntArray(json.getJSONArray("size"));
-//            ArrayList<String> user = getStringArray(json.getJSONArray("partner"));
-//            ArrayList<String> imgs1 = getStringArray(json.getJSONArray("imageName"));
-//
-//            for
-//
-//            AddUsers(user ,imgs1 ,size1);
-
         new Thread(() -> {
             while(true) {
                 try {
@@ -129,12 +121,15 @@ public class ChatController {
 
     @FXML
     private void sendButton(){
-
+        HBox hBox1 = makeMassageHbox(0,false,textBox.getText());
+        chatBox.getChildren().addAll(hBox1);
+        GetInfo.sendMessage(currentNumber ,textBox.getText());
     }
 
     private HBox AddUsers(String phoneNumber ,String imgName ,int newMessageCount){
 
         HBox userHBox = null;
+        Label counterOfMassages = new Label();
         if(GetInfo.isMessageExists(GetInfo.phoneNumber ,phoneNumber)) {
 
             userHBox = new HBox();
@@ -155,21 +150,24 @@ public class ChatController {
             userName.setAlignment(Pos.CENTER);
             userName.setPrefWidth(114);
             userName.setPrefHeight(52);
-            Label counterOfMassages = new Label();
-
-            if(newMessageCount != 0) {
-                counterOfMassages.setText(String.valueOf(newMessageCount));
-                counterOfMassages.setTextFill(Color.web("#ff0000"));
-                counterOfMassages.setAlignment(Pos.CENTER);
-                counterOfMassages.setPrefWidth(25);
-                counterOfMassages.setPrefHeight(52);
-            }else{
-                counterOfMassages.setVisible(false);
-            }
 
             userHBox.getChildren().addAll(userImg, userName, counterOfMassages);
         }
+
+        if(newMessageCount != 0) {
+            counterOfMassages.setVisible(true);
+            counterOfMassages.setText(String.valueOf(newMessageCount));
+            counterOfMassages.setTextFill(Color.web("#ff0000"));
+            counterOfMassages.setAlignment(Pos.CENTER);
+            counterOfMassages.setPrefWidth(25);
+            counterOfMassages.setPrefHeight(52);
+        }else{
+            counterOfMassages.setVisible(false);
+        }
+
+        userHBox.getChildren().add(counterOfMassages);
         userHBox.setOnMouseClicked(event -> ShowMassages(phoneNumber));
+
         return userHBox;
     }
     private static String currentNumber;
@@ -183,12 +181,14 @@ public class ChatController {
         ArrayList<Boolean> seen =  getBooleanArray(json.getJSONArray("seenMessage"));
 
         for (int i = 0; i < Messages.size() ; i++) {
+
            int sender1 = 0;
             if(sender.get(i).equals(phoneNumber)){
                 sender1 = 1;
             }else{
                 sender1 = 0;
             }
+
             HBox hBox1 = makeMassageHbox(sender1,seen.get(i),Messages.get(i));
             chatBox.getChildren().addAll(hBox1,hBox1);
         }
