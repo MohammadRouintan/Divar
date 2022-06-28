@@ -33,6 +33,7 @@ public class Users extends Database {
         document = new Document();
         document.append("phoneNumber", phoneNumber);
         document.append("profileNameImage", 0);
+        this.filterDocument = new Document("phoneNumber", phoneNumber);
     }
 
     public Document getDocument() {

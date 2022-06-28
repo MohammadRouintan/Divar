@@ -46,7 +46,7 @@ public class Database {
     public synchronized static void addUser(Users users) {
         connect();
         collection = database.getCollection("Users");
-        if (!collection.find(users.getDocument()).cursor().hasNext()) {
+        if (!collection.find(users.getFilterDocument()).cursor().hasNext()) {
             collection.insertOne(users.getDocument());
         }
         disconnect();
@@ -63,9 +63,9 @@ public class Database {
         connect();
         collection = database.getCollection("Users");
         if (typeOfUpdate.equals("set")) {
-            collection.updateOne(users.getDocument() ,new Document("$set" ,new Document(key ,value)));
+            collection.updateOne(users.getFilterDocument() ,new Document("$set" ,new Document(key ,value)));
         } else if (typeOfUpdate.equals("unset")) {
-            collection.updateOne(users.getDocument() ,new Document("$unset" ,new Document(key ,value)));
+            collection.updateOne(users.getFilterDocument() ,new Document("$unset" ,new Document(key ,value)));
         }
         disconnect();
     }
@@ -112,8 +112,8 @@ public class Database {
     public synchronized static void deleteUser(Users users) {
         connect();
         collection = database.getCollection("Users");
-        if (collection.find(users.getDocument()).cursor().hasNext()) {
-            collection.deleteOne(users.getDocument());
+        if (collection.find(users.getFilterDocument()).cursor().hasNext()) {
+            collection.deleteOne(users.getFilterDocument());
         }
         disconnect();
     }
@@ -129,7 +129,7 @@ public class Database {
     public static boolean isUserExits(Users users){
         connect();
         collection = database.getCollection("Users");
-        boolean flag = collection.find(users.getDocument()).cursor().hasNext();
+        boolean flag = collection.find(users.getFilterDocument()).cursor().hasNext();
         disconnect();
         return flag;
     }
@@ -179,19 +179,19 @@ public class Database {
     }
 
     public static int lastImageIdOfPosts() {
+        int lastPostId = lastPostId();
         connect();
         collection = database.getCollection("Posts");
         int lastId = 0;
-        List<Document> documents = new ArrayList<>();
-        documents.add(new Document("$project", new Document("imageName", 1)));
-        documents.add(new Document("$sort", new Document("imageName", -1)));
-        if (collection.aggregate(documents).cursor().hasNext()) {
-            String jsonString = collection.aggregate(documents).cursor().next().toJson();
-            JSONObject post = new JSONObject(jsonString);
-            JSONArray imageName = post.getJSONArray("imageName");
-            int temp = imageName.getInt(imageName.length() - 1);
-            if (temp > lastId) {
-                lastId = temp;
+        for (int i = lastPostId; i > 0; i--) {
+            if (collection.find(new Document("postId", i)).cursor().hasNext()) {
+                String jsonString = collection.find(new Document("postId", i)).cursor().next().toJson();
+                JSONObject post = new JSONObject(jsonString);
+                JSONArray imageName = post.getJSONArray("imageName");
+                int temp = imageName.getInt(imageName.length() - 1);
+                if (temp > lastId) {
+                    lastId = temp;
+                }
             }
         }
         disconnect();
@@ -256,7 +256,7 @@ public class Database {
     }
 
     public static ArrayList<String> lastSeenPost(int size, int index, Users users) {
-        String user = getUser(users.getDocument());
+        String user = getUser(users.getFilterDocument());
         JSONObject jsonObject = new JSONObject(user);
         ArrayList<Integer> jsonArray = getIntegerArray(jsonObject.getJSONArray("lastSeenPost"));
         ArrayList<String> lastSeen = new ArrayList<>();
@@ -277,7 +277,7 @@ public class Database {
     }
 
     public static ArrayList<String> getMarkedPosts(int size, int index, Users user){
-        String temp = getUser(user.getDocument());
+        String temp = getUser(user.getFilterDocument());
         JSONObject object = new JSONObject(temp);
         ArrayList<Integer> jsonArray = getIntegerArray(object.getJSONArray("bookmarkPost"));
         ArrayList<String> bookmarkPost = new ArrayList<>();
@@ -294,7 +294,7 @@ public class Database {
     }
 
     public static ArrayList<String> getUsersPosts(int size, int index, Users user){
-        String temp = getUser(user.getDocument());
+        String temp = getUser(user.getFilterDocument());
         JSONObject object = new JSONObject(temp);
         ArrayList<Integer> jsonArray = getIntegerArray(object.getJSONArray("userPosts"));
         ArrayList<String> usersPost = new ArrayList<>();
@@ -305,7 +305,7 @@ public class Database {
     }
 
     public static int getSizeOfArrays(String name, Users users) {
-        String temp = getUser(users.getDocument());
+        String temp = getUser(users.getFilterDocument());
         JSONObject object = new JSONObject(temp);
         if (object.has(name)) {
             ArrayList<Integer> jsonArray = getIntegerArray(object.getJSONArray(name));
@@ -408,11 +408,13 @@ public class Database {
         connect();
         collection = database.getCollection("Users");
         int lastId = 0;
-        List<Document> documents = new ArrayList<>();
-        documents.add(new Document("$match", new Document("profileNameImage", 1)));
-        documents.add(new Document("$sort", new Document("phoneNumber", -1)));
-        if (collection.aggregate(documents).cursor().hasNext()) {
-            lastId = collection.aggregate(documents).cursor().next().getInteger("profileNameImage");
+        if (collection.find().cursor().hasNext()) {
+            for (Document document : collection.find()) {
+                int temp = document.getInteger("profileNameImage");
+                if (temp > lastId) {
+                    lastId = temp;
+                }
+            }
         }
         disconnect();
         return lastId;
