@@ -500,6 +500,14 @@ public class GetInfo {
             System.err.println(e.getMessage());
         }
     }
+    public static void disconnect() {
+        try {
+            Connect.DOS.writeInt(-1);
+            Connect.DOS.flush();
+        } catch (IOException e){
+            System.err.println(e.getMessage());
+        }
+    }
 
     public static int getProfileID(String userPhone) {
         int result = 0;

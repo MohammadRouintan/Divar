@@ -22,9 +22,9 @@ public class Client extends Thread{
             }else if(input == 2){
                 receiveFile(name);
             }else if(input == 3) {
-                receiveProfile(name);
-            }else if (input == 4){
                 sendProfile(name);
+            }else if (input == 4){
+                receiveProfile(name);
             }
             DIS.close();
             DOS.close();

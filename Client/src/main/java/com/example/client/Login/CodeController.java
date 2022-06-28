@@ -51,9 +51,7 @@ public class CodeController {
         timeline.stop();
     }
 
-    /*
-    **TODO
-     */
+    public static String phoneNumber;
     @FXML
     private void loginButtonOnCodeFile(ActionEvent e){
         String code;

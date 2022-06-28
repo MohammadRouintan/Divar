@@ -72,6 +72,7 @@ public class LoginController {
         if(matcher.matches()){
 
             phoneNumber = inputPhoneNumberIDField.getText();
+            CodeController.phoneNumber = phoneNumber;
             new Connect("localhost" ,"localhost", phoneNumber);
 
             try{
