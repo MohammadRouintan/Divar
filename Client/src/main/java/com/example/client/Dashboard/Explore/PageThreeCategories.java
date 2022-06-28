@@ -9,11 +9,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import org.json.JSONObject;
-import javafx.scene.image.Image;
-import javax.swing.text.html.ImageView;
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
@@ -59,11 +60,21 @@ public class PageThreeCategories {
         this.mainVBox.getChildren().clear();
 
         Label TitleLabel = new Label(this.branch1);
+        TitleLabel.setFont(new Font(18));
+        TitleLabel.setStyle("-fx-font-weight: bold");
+
         HBox tophBox = new HBox();
-        Button back = new Button("back");
+        //Button back = new Button("back");
+        File imageUrl = new File("../Client/src/main/resources/com.example/image/previous.png");
+        Image img = new Image(imageUrl.toURI().toString());
+        ImageView backIcon = new ImageView(img);
+        Button back = new Button("");
+        back.setStyle("-fx-background-color: transparent");
+        back.setGraphic(backIcon);
+
         Pagination pagination = new Pagination();
         pagination.setPrefWidth(550);
-        pagination.setPrefHeight(1200);
+       // pagination.setPrefHeight(1200);
         ArrayList<String> keys = new ArrayList<>();
         ArrayList<Object> values = new ArrayList<>();
         if (this.branch1.equals("ShowAll")) {
