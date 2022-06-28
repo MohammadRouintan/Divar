@@ -1,18 +1,24 @@
 package com.example.client.Dashboard.Explore;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+
+import java.io.File;
+import java.util.ArrayList;
 
 public class PageTwoCategories {
     private String nameCat;
     private VBox mainVbox;
     private VBox vBox;
-
+    private ArrayList<Node> nodesOfMainVbox;
     public PageTwoCategories(Parent parent, String nameCat) {
         this.mainVbox = (VBox)parent;
-        this.vBox = (VBox)mainVbox.getChildren().get(0);
+        this.nodesOfMainVbox = getAllChildren(this.mainVbox);
         this.nameCat = nameCat;
         addBox();
     }
@@ -26,7 +32,9 @@ public class PageTwoCategories {
         this.mainVbox.getChildren().add(twoCategories);
         back.setOnAction(event -> {
             mainVbox.getChildren().clear();
-            mainVbox.getChildren().add(vBox);
+            for(Node node : nodesOfMainVbox){
+                mainVbox.getChildren().add(node);
+            }
         });
     }
 
@@ -220,12 +228,24 @@ public class PageTwoCategories {
     }
 
     private Button makeButton(String Name) {
+        File file = new File("../Client/src/main/resources/Style/Categories.css");
         Button button = new Button(Name);
         button.setPrefWidth(500);
-        button.setPrefHeight(44);
+        button.setPrefHeight(40);
+        button.setFont(new Font(18));
+        button.setAlignment(Pos.BASELINE_LEFT);
+        button.setPadding(new Insets(0,0,0,30));
+        button.getStylesheets().add(file.toURI().toString());
+        button.getStyleClass().add("btn");
         button.setOnAction(event -> {
             PageThreeCategories pageThreeCategories = new PageThreeCategories(mainVbox, this.nameCat, Name);
         });
         return button;
+    }
+
+    protected ArrayList<Node> getAllChildren (VBox mainVBox){
+        ArrayList<Node> nodes = new ArrayList<>();
+        nodes.addAll(mainVBox.getChildrenUnmodifiable());
+        return nodes;
     }
 }
