@@ -316,11 +316,19 @@ public class Database {
         disconnect();
     }
 
-    public static void updateMessage(Messages messages ,String key ,Object value){
+    public synchronized static void updateMessage(Messages messages ,String key ,Object value){
         connect();
         collection = database.getCollection("Chats");
         collection.updateOne(messages.getFilterDocument() ,new Document("$set" ,new Document(key ,value)));
         disconnect();
+    }
+
+    public synchronized static void sendMessage(Messages messages, String message) {
+        String oldMessage = findMessage(messages.getFilterDocument()).toJson();
+        JSONObject jsonObject = new JSONObject(oldMessage);
+        ArrayList<String> newMessages = getStringArray(jsonObject.getJSONArray("messages"));
+        newMessages.add(message);
+        updateMessage(messages, "messages", newMessages);
     }
 
     public synchronized static void deleteMessage(Messages messages) {
@@ -492,6 +500,14 @@ public class Database {
         }
         disconnect();
         return flag;
+    }
+
+    public static ArrayList<String> getStringArray (JSONArray JArray) {
+        ArrayList<String> list = new ArrayList<>();
+        for (int i = 0; i < JArray.length(); i++) {
+            list.add(JArray.getString(i));
+        }
+        return list;
     }
 
 }
