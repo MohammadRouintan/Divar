@@ -26,11 +26,11 @@ public class Connect {
     public Connect(String imageIP, String IP, String phoneNumber) {
         this.phoneNumber = phoneNumber;
         try {
-            socket = new Socket("172.20.10.10", 5570);
-            Notification n = new Notification("172.20.10.10", 5571, phoneNumber);
+            socket = new Socket("localhost", 5570);
+            Notification n = new Notification("localhost", 5571, phoneNumber);
             n.start();
-            imageSocket = new Socket("172.20.10.10", 5572);
-            messageSocket = new Socket("172.20.10.10", 5576);
+            imageSocket = new Socket("localhost", 5572);
+            messageSocket = new Socket("localhost", 5576);
             imageDIS = new DataInputStream(new BufferedInputStream(imageSocket.getInputStream()));
             imageDOS = new DataOutputStream(new BufferedOutputStream(imageSocket.getOutputStream()));
             DOS = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
