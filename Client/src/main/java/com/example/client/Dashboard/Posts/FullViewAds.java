@@ -59,7 +59,7 @@ public class FullViewAds {
         HBox hBox = new HBox();
         Button backButton = new Button("");
         hBox.getChildren().add(backButton);
-        File imageUrl = new File("../Client/src/main/resources/Icon/previous.png");
+        File imageUrl = new File("../Client/src/main/resources/com.example/image/previous.png");
         Image img = new Image(imageUrl.toURI().toString());
         ImageView backIcon = new ImageView(img);
         backIcon.setFitWidth(40);
@@ -67,6 +67,7 @@ public class FullViewAds {
         backButton.setGraphic(backIcon);
         backButton.setStyle("-fx-background-color: transparent");
         hBox.getChildren().add(backButton);
+
         hBox.setMargin(backButton,new Insets(10 ,0 ,20,0));
 
         backButton.setOnAction(event -> {
