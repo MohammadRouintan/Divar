@@ -2,7 +2,6 @@ package com.example.client.Dashboard;
 
 import com.example.client.Dashboard.Posts.NewPage;
 import com.example.client.socket.GetInfo;
-import javafx.animation.ScaleTransition;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

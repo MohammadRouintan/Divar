@@ -230,11 +230,7 @@ public class AddADSController {
                 createErrorMassage("Please write name correctly !!");
             }else if(description.equals("")){
                 createErrorMassage("Please write description correctly !!");
-//            }//else if(RowName0.getText().equals("") || RowValue0.getText().equals("")){
-//                createErrorMassage("");
-//            }//else if(ColumnName0.getText().equals("") || ColumnValue0.getText().equals("")){
-//                createErrorMassage("");
-            }else {
+            } else {
                 ArrayList<String> RowName = new ArrayList<>();
                 ArrayList<String> RowValue = new ArrayList<>();
                 ArrayList<String> ColumnName = new ArrayList<>();

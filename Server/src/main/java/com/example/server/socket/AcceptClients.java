@@ -22,16 +22,10 @@ public class AcceptClients{
     public static DataOutputStream SMSDOS;
 
     public AcceptClients () {
-
             try {
                 serverSocket = new ServerSocket(5570);
                 serverNotificationSocket = new ServerSocket(5571);
                 messageServerSocket = new ServerSocket(5576);
-//                serverSMSSocket = new ServerSocket(5573);
-//                SMSSocket = serverSMSSocket.accept();
-//                SMSDIS = new DataInputStream(new BufferedInputStream(SMSSocket.getInputStream()));
-//                SMSDOS = new DataOutputStream(new BufferedOutputStream(SMSSocket.getOutputStream()));
-
             }catch(IOException e){
                 System.err.println(e.getMessage());
             }

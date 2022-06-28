@@ -33,4 +33,5 @@
 }
 .btn:hover{
     -fx-background-color: #454545;
+    -fx-text-fill: #fff;
 }

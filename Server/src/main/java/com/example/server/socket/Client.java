@@ -232,14 +232,6 @@ public class Client extends Thread {
                             DOS.writeUTF(newPost);
                             DOS.flush();
                         }
-                    } else if(task == 27){
-                        try {
-                            String number = DIS.readUTF();
-                            DOS.writeInt(1);
-                            DOS.flush();
-                        }catch (IOException e){
-                            System.err.println(e.getMessage());
-                        }
                     } else if (task == 23) {
                         String phoneNumber = DIS.readUTF();
                         String jsonString = Database.getChatCount(phoneNumber);
@@ -262,6 +254,11 @@ public class Client extends Thread {
                         String message = DIS.readUTF();
                         Messages messages = new Messages(new Document("user1", number).append("user2", phoneNumber2));
                         Database.sendMessage(messages, message);
+                    }  else if (task == 27) {
+                        String number = DIS.readUTF();
+                        int id = Database.getProfileImageID(number);
+                        DOS.writeInt(id);
+                        DOS.flush();
                     } else if (task == -1) {
                         closeSocket();
                         break;

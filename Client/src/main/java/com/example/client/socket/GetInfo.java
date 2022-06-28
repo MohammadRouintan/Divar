@@ -26,7 +26,7 @@ public class GetInfo {
     }
 
 
-    public static void updateUser(ArrayList<String> keys ,ArrayList<Object> values){
+    public static void updateUser(ArrayList<String> keys, ArrayList<Object> values) {
         try {
             Connect.DOS.writeInt(4);
             Connect.DOS.flush();
@@ -67,7 +67,7 @@ public class GetInfo {
     }
 
 
-    public static boolean isUserExists(String phoneNumber){
+    public static boolean isUserExists(String phoneNumber) {
         try {
             Connect.DOS.writeInt(6);
             Connect.DOS.flush();
@@ -79,7 +79,7 @@ public class GetInfo {
     }
 
 
-    public static boolean isUserExists(){
+    public static boolean isUserExists() {
         boolean result = false;
         try {
             Connect.DOS.writeInt(5);
@@ -92,7 +92,7 @@ public class GetInfo {
     }
 
 
-    public static String getUser(){
+    public static String getUser() {
         String result = null;
         try {
             Connect.DOS.writeInt(6);
@@ -105,7 +105,7 @@ public class GetInfo {
     }
 
 
-    public static ArrayList<String> getMarkedPost(int size, int index){
+    public static ArrayList<String> getMarkedPost(int size, int index) {
         ArrayList<String> result = new ArrayList<>();
         try {
             Connect.DOS.writeInt(7);
@@ -123,7 +123,7 @@ public class GetInfo {
     }
 
 
-    public static String getPost(int postID){
+    public static String getPost(int postID) {
         String result = null;
         try {
             Connect.DOS.writeInt(8);
@@ -139,7 +139,7 @@ public class GetInfo {
     }
 
 
-    public static ArrayList<String> getPosts(int sizePosts, int index, ArrayList<String> keys, ArrayList<Object> values){
+    public static ArrayList<String> getPosts(int sizePosts, int index, ArrayList<String> keys, ArrayList<Object> values) {
         ArrayList<String> result = new ArrayList<>();
         try {
             Connect.DOS.writeInt(9);
@@ -173,7 +173,7 @@ public class GetInfo {
     }
 
 
-    public static void updatePost(ArrayList<String> keys ,ArrayList<Object> values){
+    public static void updatePost(ArrayList<String> keys, ArrayList<Object> values) {
         try {
             Connect.DOS.writeInt(10);
             Connect.DOS.flush();
@@ -189,7 +189,7 @@ public class GetInfo {
     }
 
 
-    public static void deletePost(int postID){
+    public static void deletePost(int postID) {
         try {
             Connect.DOS.writeInt(11);
             Connect.DOS.flush();
@@ -202,7 +202,7 @@ public class GetInfo {
     }
 
 
-    public static void addPost(JSONObject data){
+    public static void addPost(JSONObject data) {
         try {
             Connect.DOS.writeInt(12);
             Connect.DOS.flush();
@@ -215,7 +215,7 @@ public class GetInfo {
     }
 
 
-    public static ArrayList<String> getLastSeenPost(int size, int index){
+    public static ArrayList<String> getLastSeenPost(int size, int index) {
         ArrayList<String> result = new ArrayList<>();
         try {
             Connect.DOS.writeInt(13);
@@ -291,7 +291,7 @@ public class GetInfo {
     }
 
 
-    public static void addUser(){
+    public static void addUser() {
         try {
             Connect.DOS.writeInt(15);
             Connect.DOS.flush();
@@ -314,7 +314,7 @@ public class GetInfo {
     }
 
 
-    public static int getLastNameProfileImage(){
+    public static int getLastNameProfileImage() {
         int result = 0;
         try {
             Connect.DOS.writeInt(17);
@@ -327,7 +327,7 @@ public class GetInfo {
     }
 
 
-    public static boolean sendProfile(String url, String fileName){
+    public static boolean sendProfile(String url, String fileName) {
         try {
             Connect.imageDOS.writeInt(3);
             Connect.imageDOS.flush();
@@ -370,7 +370,7 @@ public class GetInfo {
         return false;
     }
 
-    public static boolean sendFile(String url, String fileName){
+    public static boolean sendFile(String url, String fileName) {
         try {
             Connect.imageDOS.writeInt(2);
             Connect.imageDOS.flush();
@@ -396,7 +396,7 @@ public class GetInfo {
         return false;
     }
 
-    public static void receiveProfile(String fileName){
+    public static void receiveProfile(String fileName) {
 
     }
 
@@ -454,7 +454,7 @@ public class GetInfo {
         return result;
     }
 
-    public static String getChat(String phoneNumber1 ,String phoneNumber2) {
+    public static String getChat(String phoneNumber1, String phoneNumber2) {
         String result = "";
         try {
             Connect.DOS.writeInt(24);
@@ -471,7 +471,7 @@ public class GetInfo {
         return result;
     }
 
-    public static boolean isMessageExists(String phoneNumber1 ,String phoneNumber2) {
+    public static boolean isMessageExists(String phoneNumber1, String phoneNumber2) {
         boolean flag = false;
         try {
             Connect.DOS.writeInt(25);
@@ -488,7 +488,7 @@ public class GetInfo {
         return flag;
     }
 
-    public static void sendMessage(String phoneNumber2, String message){
+    public static void sendMessage(String phoneNumber2, String message) {
         try {
             Connect.DOS.writeInt(26);
             Connect.DOS.flush();
@@ -502,16 +502,16 @@ public class GetInfo {
     }
 
     public static int getProfileID(String userPhone) {
-        int res = 0;
+        int result = 0;
         try {
-            Connect.DOS.writeInt(22);
+            Connect.DOS.writeInt(27);
             Connect.DOS.flush();
             Connect.DOS.writeUTF(userPhone);
             Connect.DOS.flush();
-            res = Connect.DIS.readInt();
-        } catch (IOException e){
+            result = Connect.DIS.readInt();
+        } catch (IOException e) {
             System.err.println(e.getMessage());
         }
-        return res;
+        return result;
     }
 }
