@@ -419,6 +419,7 @@ public class GetInfo {
             Connect.DOS.writeInt(22);
             Connect.DOS.flush();
             Connect.DOS.writeLong(priceFrom);
+            Connect.DOS.flush();
             Connect.DOS.writeLong(priceTo);
             Connect.DOS.flush();
             Connect.DOS.writeInt(posts.size());
@@ -429,7 +430,7 @@ public class GetInfo {
             }
 
             int lastSize = Connect.DIS.readInt();
-            for (int i = 0; i < lastSize; i++) {
+            for (int i = 0; i <= lastSize - 1; i++) {
                 newPosts.add(Connect.DIS.readUTF());
             }
 

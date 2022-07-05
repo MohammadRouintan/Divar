@@ -228,6 +228,7 @@ public class Client extends Thread {
 
                             ArrayList<String> newPosts = Database.priceFilter(priceFrom, priceTo, posts);
                             DOS.writeInt(newPosts.size());
+                            DOS.flush();
                             for (String newPost : newPosts) {
                                 DOS.writeUTF(newPost);
                                 DOS.flush();
