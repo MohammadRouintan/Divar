@@ -19,7 +19,7 @@ public class ProfileController {
 
     @FXML
     public void initialize() {
-
+        user = GetInfo.getUser();
     }
 
     private int profileName;

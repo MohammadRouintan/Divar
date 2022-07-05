@@ -155,6 +155,8 @@ public class AdsController {
         values.clear();
         keys.add("city");
         values.add(City.getValue());
+        priceFrom.clear();
+        priceTo.clear();
         int size = (int) Math.ceil((double) GetInfo.getSizeOfPosts(keys, values) / 8);
             pagination.setPageCount(size);
             pagination.setMaxPageIndicatorCount(2);

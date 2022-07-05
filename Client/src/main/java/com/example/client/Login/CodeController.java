@@ -80,7 +80,7 @@ public class CodeController {
 
     @FXML
     private void ReCodePhoneCode(){
-        new Connect("172.20.177.139" ,"172.20.177.139", Connect.getPhoneNumber());
+        new Connect("localhost" ,"localhost", Connect.getPhoneNumber());
         ReCodeButtonID.setVisible(false);
         counterID.setVisible(true);
         timeline.setCycleCount(Timeline.INDEFINITE);

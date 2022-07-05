@@ -46,28 +46,23 @@ public class FullViewAds {
     }
 
     protected void AddBox(Parent parent,JSONObject post){
-
-
         mainVBox.getChildren().clear();
-
-
         VBox AdsVBox = new VBox();
-
         Pagination slideShow = makeSlideShow(post);
 
         //set Back button
         HBox hBox = new HBox();
-        Button backButton = new Button("");
-        hBox.getChildren().add(backButton);
+        Button backButton = new Button("Back");
         File imageUrl = new File("../Client/src/main/resources/Icon/previous.png");
         Image img = new Image(imageUrl.toURI().toString());
         ImageView backIcon = new ImageView(img);
-        backIcon.setFitWidth(40);
-        backIcon.setFitHeight(40);
-        backButton.setGraphic(backIcon);
-        backButton.setStyle("-fx-background-color: transparent");
+//        backIcon.setFitWidth(40);
+//        backIcon.setFitHeight(40);
+//        backButton.setGraphic(backIcon);
+       // backButton.set
+        //backButton.setStyle("-fx-background-color: transparent");
         hBox.getChildren().add(backButton);
-        hBox.setMargin(backButton,new Insets(10 ,0 ,20,0));
+        HBox.setMargin(backButton,new Insets(10 ,0 ,20,30));
 
         backButton.setOnAction(event -> {
             mainVBox.getChildren().clear();
@@ -124,21 +119,23 @@ public class FullViewAds {
         HBox featureColumnHBox = makeVerticalFeatureLabel(post);
         VBox featureRowVBox = makeHorizontalFeatureLabel(post);
 
-        Label descriptionLable = new Label("Description");
+        Label descriptionLabel = new Label("Description");
         Label descriptionText = new Label(post.getString("bio"));
+        descriptionText.setAlignment(Pos.CENTER);
         descriptionText.setPrefWidth(300);
         descriptionText.setWrapText(true);
         VBox descriptionVBox = new VBox();
-        descriptionVBox.getChildren().addAll(descriptionLable,descriptionText);
+        descriptionVBox.getChildren().addAll(descriptionLabel,descriptionText);
+        descriptionVBox.setAlignment(Pos.CENTER);
 
         AdsVBox.setPrefWidth(1200);
         AdsVBox.setPrefHeight(570);
         if (post.getBoolean("auction") && !this.paneName.equals("MyAds") && !post.getString("phoneNumber").equals(GetInfo.phoneNumber)) {
-            mainVBox.getChildren().addAll(hBox,slideShow,title,time,priceField,auction,featureColumnHBox,featureRowVBox,descriptionVBox, buttons);
-        } else if (!this.paneName.equals("MyAds")){
-            mainVBox.getChildren().addAll(hBox,slideShow,title,time,price,exchange,featureColumnHBox,featureRowVBox,descriptionVBox, buttons);
+            mainVBox.getChildren().addAll(hBox,slideShow,title,time,priceField,auction,featureRowVBox,featureColumnHBox,descriptionVBox, buttons);
+        } else if (!this.paneName.equals("MyAds") && !post.getString("phoneNumber").equals(GetInfo.phoneNumber)){
+            mainVBox.getChildren().addAll(hBox,slideShow,title,time,price,exchange,featureRowVBox,featureColumnHBox,descriptionVBox, buttons);
         } else {
-            mainVBox.getChildren().addAll(hBox,slideShow,title,time,price,exchange,featureColumnHBox,featureRowVBox,descriptionVBox, delete);
+            mainVBox.getChildren().addAll(hBox,slideShow,title,time,price,exchange,featureRowVBox,featureColumnHBox,descriptionVBox, delete);
         }
     }
 
@@ -178,8 +175,10 @@ public class FullViewAds {
             VBox vBox = new VBox();
             Label NameLabel = new Label(NameColumnFeature.getString(i));
             Label ValueLabel = new Label(ValueColumnFeature.getString(i));
+            vBox.setSpacing(5);
             vBox.getChildren().addAll(NameLabel,ValueLabel);
             featureHbox.getChildren().add(vBox);
+            featureHbox.setAlignment(Pos.CENTER);
         }
         return featureHbox;
     }
@@ -194,8 +193,11 @@ public class FullViewAds {
             HBox hBox = new HBox();
             Label NameLabel = new Label(NameRowFeature.getString(i));
             Label ValueLabel = new Label(ValueRowFeature.getString(i));
+            hBox.setSpacing(10);
+            hBox.setAlignment(Pos.CENTER);
             hBox.getChildren().addAll(NameLabel,ValueLabel);
             featureVBox.getChildren().add(hBox);
+            featureVBox.setAlignment(Pos.CENTER);
         }
 
         return featureVBox;

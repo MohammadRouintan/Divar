@@ -21,10 +21,6 @@ public class Main extends Application {
         stage.setMinWidth(800);
         stage.setTitle("Divar");
         stage.setScene(scene);
-//        stage.setOnCloseRequest(event -> {
-//            GetInfo.disconnect();
-//
-//        });
         stage.show();
     }
     public static void main(String[] args) {
