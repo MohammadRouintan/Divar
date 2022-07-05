@@ -8,6 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.scene.control.skin.TabPaneSkin.TabControlButtons?>
 <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
       prefWidth="570.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.example.client.Dashboard.AdsController">
@@ -27,14 +28,14 @@
          </font>
       </Label>
    </HBox>
-   <TabPane prefWidth="570.0" tabClosingPolicy="UNAVAILABLE">
-      <Tab text="Home">
+   <TabPane prefWidth="570.0" tabClosingPolicy="UNAVAILABLE" >
+      <Tab fx:id="home" text="Home" onSelectionChanged="#homeButton">
          <VBox prefHeight="200.0" prefWidth="100.0">
             <HBox alignment="CENTER" minHeight="110.0" prefHeight="110.0" prefWidth="570.0" spacing="50.0">
                <VBox.margin>
                   <Insets/>
                </VBox.margin>
-               <ComboBox fx:id="City" prefHeight="36.0" prefWidth="240.0" promptText="City" styleClass="box"
+               <ComboBox fx:id="homeTabCity" prefHeight="36.0" prefWidth="240.0" promptText="City" styleClass="box"
                          stylesheets="@../../../../Style/adsSection.css"/>
                <HBox fx:id="searchHbox" alignment="CENTER" maxHeight="35.0" prefHeight="35.0"
                      prefWidth="240.0" styleClass="box" stylesheets="@../../../../Style/adsSection.css">
@@ -50,7 +51,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <TextField fx:id="searchTextbox" prefHeight="34.0" prefWidth="195.0"
+                  <TextField fx:id="searchText" prefHeight="34.0" prefWidth="195.0"
                              styleClass="search-btn" stylesheets="@../../../../Style/adsSection.css"/>
                </HBox>
             </HBox>
@@ -69,7 +70,7 @@
                         </Label>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="546.0">
                            <ComboBox fx:id="mainBranchCategories" minHeight="36.0"
-                                     onAction="#MainBranchCategotiesFunction" prefHeight="36.0"
+                                     onAction="#MainBranchCategoriesFunction" prefHeight="36.0"
                                      prefWidth="380.0" styleClass="box"
                                      stylesheets="@../../../../Style/adsSection.css">
                               <HBox.margin>
@@ -143,16 +144,16 @@
                   <Cursor fx:constant="HAND"/>
                </cursor>
             </Accordion>
-            <Pagination fx:id="pagination" pageCount="10" prefWidth="570.0"/>
+            <Pagination fx:id="homePagination" pageCount="10" prefWidth="570.0"/>
          </VBox>
       </Tab>
-      <Tab text="Recommended">
+      <Tab fx:id="recommended" text="Recommended" onSelectionChanged="#recommendedButton">
          <VBox prefHeight="200.0" prefWidth="100.0">
             <HBox alignment="CENTER" minHeight="110.0" prefHeight="110.0" prefWidth="570.0" spacing="50.0">
-               <ComboBox fx:id="City1" prefHeight="36.0" prefWidth="240.0" promptText="City"
+               <ComboBox fx:id="recommendedTabCity" prefHeight="36.0" prefWidth="240.0" promptText="City"
                          styleClass="box" stylesheets="@../../../../Style/adsSection.css"/>
             </HBox>
-            <Pagination fx:id="pagination1" pageCount="10" prefWidth="570.0"/>
+            <Pagination fx:id="recommendedPagination" pageCount="10" prefWidth="570.0"/>
          </VBox>
       </Tab>
    </TabPane>
