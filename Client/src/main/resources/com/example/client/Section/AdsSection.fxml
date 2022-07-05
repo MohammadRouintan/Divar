@@ -149,7 +149,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Accordion>
-                        <Pagination fx:id="pagination" pageCount="10" prefWidth="570.0" />
+                        <Pagination fx:id="pagination" pageCount="10" prefWidth="570.0" stylesheets="@../../Style/pagination.css" />
                      </children>
                   </VBox>
                </content>
@@ -177,7 +177,7 @@
                               </HBox>
                            </children>
                         </HBox>
-                        <Pagination fx:id="pagination1" pageCount="10" prefWidth="570.0" />
+                        <Pagination fx:id="pagination1" pageCount="10" prefWidth="570.0" stylesheets="@../../Style/pagination.css" />
                      </children>
                   </VBox>
                </content>

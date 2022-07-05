@@ -5,6 +5,6 @@
 
 <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="570.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Dashboard.MyDivarPages.BookmarkedAdsController">
     <children>
-        <Pagination fx:id="pagination" pageCount="2" prefWidth="570.0" style="-fx-background-color: #f0f0f0;" />
+        <Pagination fx:id="pagination" pageCount="2" prefWidth="570.0" style="-fx-background-color: #f0f0f0;" stylesheets="@../../Style/pagination.css" />
     </children>
 </VBox>

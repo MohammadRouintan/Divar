@@ -54,7 +54,8 @@ public class PageThreeCategories {
         tophBox.setAlignment(Pos.CENTER_LEFT);
         //Pagination
         Pagination pagination = new Pagination();
-
+        File file1 = new File("../Client/src/main/resources/com/example/Style/pagination.css");
+        pagination.getStylesheets().add(file1.toURI().toString());
         //test the show of post
 
         ArrayList<JSONObject> post = new ArrayList<>();
