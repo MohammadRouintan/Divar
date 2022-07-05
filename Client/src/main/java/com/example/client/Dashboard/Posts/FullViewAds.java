@@ -1,7 +1,9 @@
 package com.example.client.Dashboard.Posts;
 
+import com.example.client.Main;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -12,10 +14,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class FullViewAds {
@@ -38,7 +42,7 @@ public class FullViewAds {
     }
 
     protected void AddBox(Parent parent,JSONObject post){
-
+        File cssFile = new File("../Client/src/main/resources/Style/FullViewAds.css");
 
         mainVBox.getChildren().clear();
 
@@ -82,11 +86,18 @@ public class FullViewAds {
             exchange.setText("I want to exchange");
         }
 
-        Button bookmarked = new Button("Bookmark");
-        Button chat = new Button("Chat");
         HBox buttons = new HBox();
         buttons.setAlignment(Pos.CENTER);
         buttons.setSpacing(20);
+        //bookmark button
+        Button bookmarked = new Button("Bookmark");
+        //chat button
+        Button chat = new Button("Chat");
+        chat.getStylesheets().add(cssFile.toURI().toString());
+        chat.getStyleClass().add("chat-btn");
+        chat.setOnAction(event -> chatButtonFunc(post));
+
+
         buttons.getChildren().addAll(bookmarked, chat);
 
         HBox featureColumnHBox = makeVerticalFeatureLabel(post);
@@ -173,4 +184,15 @@ public class FullViewAds {
 //        Label price = new Label(post.getString("price"));
 //        return Label;
 //    }
+
+    protected void chatButtonFunc(JSONObject post){
+        if(mainVBox.getParent().)
+        try {
+            Pane pane = FXMLLoader.load(Main.class.getResource("Section/ChatSection.fxml"));
+            mainVBox.getChildren().clear();
+            mainVBox.getChildren().add(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }
