@@ -330,4 +330,21 @@ public class GetInfo {
 
     public static boolean isMessageExists(String user1 ,String user2){return false;}
 
+    public static ArrayList<String> getPosts(int sizePosts, int index){
+        ArrayList<String> result = new ArrayList<>();
+        try {
+            Connect.DOS.writeInt(24);
+            Connect.DOS.writeInt(sizePosts);
+            Connect.DOS.flush();
+            Connect.DOS.writeInt(index);
+            Connect.DOS.flush();
+            int size = Connect.DIS.readInt();
+            for (int i = 0; i <= size - 1; i++) {
+                result.add( Connect.DIS.readUTF());
+            }
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return result;
+    }
 }

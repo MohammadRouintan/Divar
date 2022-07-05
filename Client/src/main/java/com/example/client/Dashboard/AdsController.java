@@ -1,6 +1,7 @@
 package com.example.client.Dashboard;
 
 import com.example.client.Dashboard.Posts.NewPage;
+import com.example.client.socket.GetInfo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -49,6 +50,7 @@ public class AdsController {
     private List<VBox> PagesList = new ArrayList<>();
     private ArrayList<String> keys = new ArrayList<>();
     private ArrayList<Object> values =  new ArrayList<>();
+    private ArrayList<String> list = new ArrayList<>();
 
     @FXML
     public void initialize(String tab) {
