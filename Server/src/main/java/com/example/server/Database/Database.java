@@ -480,7 +480,7 @@ public class Database {
             String user = getUser(new Document("phoneNumber", partner));
             JSONObject jsonObject = new JSONObject(user);
             if (jsonObject.has("profileNameImage")) {
-                imageName.add(jsonObject.getString("profileNameImage"));
+                imageName.add(String.valueOf(jsonObject.getInt("profileNameImage")));
             }
         }
         return imageName;

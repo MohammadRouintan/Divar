@@ -44,11 +44,11 @@ public class GetInfo {
 //            AcceptClients.SMSDOS.writeUTF(number);
 //            AcceptClients.SMSDOS.flush();
 //            token = AcceptClients.SMSDIS.readUTF();
-////            token = "00000";
+//            token = "00000";
 //        } catch (IOException e) {
 //            System.err.println(e.getMessage());
 //        }
-        token = "00000";
+       token = "13811";
 
         return token;
     }
