@@ -1,16 +1,21 @@
 package com.example.client.Dashboard.Explore;
 
 import com.example.client.Dashboard.Posts.NewPage;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,13 +35,26 @@ public class PageThreeCategories {
     private void addPagination(){
         this.mainVBox.getChildren().clear();
         VBox threeCategories = new VBox();
-        Label TitleLabel = new Label(nameCat);
-        Button back = new Button("Back");
-        HBox tophBox = new HBox();
 
+        //title and back button
+        HBox tophBox = new HBox();
+        Button back = new Button("");
+        File file = new File("../Client/src/main/resources/com/example/image/previous.png");
+        Image img = new Image(file.toURI().toString());
+        ImageView imageView = new ImageView(img);
+        imageView.setFitHeight(35);
+        imageView.setFitWidth(35);
+        back.setGraphic(imageView);
+        back.setStyle("-fx-background-color: transparent");
+        Label TitleLabel = new Label(nameCat);
+        TitleLabel.setStyle("-fx-font-size: 20;" +
+                "-fx-font-weight: bold");
+        tophBox.setPadding(new Insets(0,0,0,20));
+        tophBox.setSpacing(30);
+        tophBox.setAlignment(Pos.CENTER_LEFT);
+        //Pagination
         Pagination pagination = new Pagination();
-        pagination.setPrefWidth(550);
-        pagination.setPrefHeight(1200);
+
         //test the show of post
 
         ArrayList<JSONObject> post = new ArrayList<>();
@@ -75,6 +93,7 @@ public class PageThreeCategories {
         pagination.setPageFactory(this::CreatePage);
 
         tophBox.getChildren().addAll(back,TitleLabel);
+
         this.mainVBox.getChildren().addAll(tophBox,pagination);
 
         back.setOnAction(event -> {
