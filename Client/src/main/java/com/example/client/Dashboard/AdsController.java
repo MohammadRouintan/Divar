@@ -267,7 +267,7 @@ public class AdsController {
 
     private void priceFilter() {
         if (!priceFrom.getText().equals("") && !priceTo.getText().equals("")) {
-            list = GetInfo.priceFilter(Long.parseLong(priceFrom.getText()), Long.parseLong(priceTo.getText()), list);
+            //list = GetInfo.priceFilter(Long.parseLong(priceFrom.getText()), Long.parseLong(priceTo.getText()), list);
         }
     }
 
