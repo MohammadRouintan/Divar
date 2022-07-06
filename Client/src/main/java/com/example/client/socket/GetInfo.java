@@ -330,7 +330,7 @@ public class GetInfo {
 
     public static boolean isMessageExists(String user1 ,String user2){return false;}
 
-    public static ArrayList<String> getPosts(int sizePosts, int index){
+    public static ArrayList<String> getRecommendedPost(int sizePosts, int index){
         ArrayList<String> result = new ArrayList<>();
         try {
             Connect.DOS.writeInt(24);
