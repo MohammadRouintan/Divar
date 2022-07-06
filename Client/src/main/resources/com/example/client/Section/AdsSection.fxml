@@ -45,7 +45,7 @@
                      <children>
                         <HBox alignment="CENTER" minHeight="110.0" prefHeight="110.0" prefWidth="570.0" spacing="50.0">
                            <children>
-                              <ComboBox fx:id="homeTabCity" prefHeight="36.0" prefWidth="240.0" promptText="City" styleClass="box" stylesheets="@../../../../Style/adsSection.css" />
+                              <ComboBox fx:id="homeTabCity" prefHeight="36.0" prefWidth="240.0" promptText="City" styleClass="box" stylesheets="@../../../../Style/adsSection.css" onAction="#homeCityBox"/>
                               <HBox fx:id="searchHbox" alignment="CENTER" maxHeight="35.0" prefHeight="35.0" prefWidth="240.0" styleClass="box" stylesheets="@../../../../Style/adsSection.css">
                                  <children>
                                     <Button alignment="CENTER" contentDisplay="CENTER" minHeight="33.0" minWidth="33.0" mnemonicParsing="false" onAction="#searchButton" prefHeight="34.0" prefWidth="43.0" style="-fx-background-color: transparent;" textAlignment="CENTER">
@@ -138,7 +138,7 @@
                <content>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <ComboBox fx:id="recommendedTabCity" prefHeight="36.0" prefWidth="240.0" promptText="City" styleClass="box" stylesheets="@../../../../Style/adsSection.css" />
+                        <ComboBox fx:id="recommendedTabCity" prefHeight="36.0" prefWidth="240.0" promptText="City" styleClass="box" stylesheets="@../../../../Style/adsSection.css" onAction="#recommendedCityBox"/>
                         <Pagination fx:id="recommendedPagination" pageCount="10" prefWidth="570.0" stylesheets="@../../Style/pagination.css" />
                      </children>
                   </VBox>

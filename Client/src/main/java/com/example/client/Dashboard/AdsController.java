@@ -110,10 +110,10 @@ public class AdsController {
         ObservableList<String> temp = FXCollections.observableArrayList();
         temp.addAll(cities);
 
-        if (city.equals("homeTabCity")) {
+        if (city.equals("homeTabCity") && homeTabCity.getItems().isEmpty()) {
             this.homeTabCity.setItems(temp);
             this.homeTabCity.getSelectionModel().select(0);
-        } else if (city.equals("recommendedTabCity")) {
+        } else if (city.equals("recommendedTabCity") && recommendedTabCity.getItems().isEmpty()) {
             recommendedTabCity.setItems(temp);
             recommendedTabCity.getSelectionModel().select(0);
         }
@@ -234,7 +234,7 @@ public class AdsController {
     }
 
     @FXML
-    void cityBox(ActionEvent event) {
+    void homeCityBox(ActionEvent event) {
         PagesList.clear();
         keys.clear();
         values.clear();
@@ -246,6 +246,20 @@ public class AdsController {
         homePagination.setPageCount(size);
         homePagination.setMaxPageIndicatorCount(2);
         homePagination.setPageFactory(this::CreatePage);
+    }
+
+    @FXML
+    void recommendedCityBox(ActionEvent event) {
+        PagesList.clear();
+        keys.clear();
+        values.clear();
+        keys.add("city");
+        values.add(recommendedTabCity.getValue());
+
+        int size = (int) Math.ceil((double) GetInfo.getSizeOfPosts(keys, values) / 8);
+        recommendedPagination.setPageCount(size);
+        recommendedPagination.setMaxPageIndicatorCount(2);
+        recommendedPagination.setPageFactory(this::CreatePage);
     }
 
     private void priceFilter() {
@@ -273,6 +287,9 @@ public class AdsController {
             initialize("recommended");
         }
     }
+
+
+
 }
 
 
