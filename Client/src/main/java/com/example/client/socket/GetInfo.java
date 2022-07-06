@@ -524,4 +524,22 @@ public class GetInfo {
         }
         return result;
     }
+
+    public static ArrayList<String> getRecommendedPost(int sizePosts, int index){
+        ArrayList<String> result = new ArrayList<>();
+        try {
+            Connect.DOS.writeInt(28);
+            Connect.DOS.writeInt(sizePosts);
+            Connect.DOS.flush();
+            Connect.DOS.writeInt(index);
+            Connect.DOS.flush();
+            int size = Connect.DIS.readInt();
+            for (int i = 0; i <= size - 1; i++) {
+                result.add( Connect.DIS.readUTF());
+            }
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return result;
+    }
 }

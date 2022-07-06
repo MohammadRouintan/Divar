@@ -5,6 +5,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
@@ -26,8 +29,22 @@ public class PageTwoCategories {
     private void addBox() {
         this.mainVbox.getChildren().clear();
         VBox twoCategories = new VBox();
-        Button back = new Button("Back");
-        twoCategories.getChildren().add(back);
+
+
+        //back button
+        HBox backHBox = new HBox();
+        backHBox.setPadding(new Insets(0 , 0 ,0 ,20));
+        Button back = new Button("");
+        File file = new File("../Client/src/main/resources/com/example/image/previous.png");
+        Image img = new Image(file.toURI().toString());
+        ImageView imageView = new ImageView(img);
+        imageView.setFitHeight(35);
+        imageView.setFitWidth(35);
+        back.setGraphic(imageView);
+        back.setStyle("-fx-background-color: transparent");
+        backHBox.getChildren().add(back);
+
+        twoCategories.getChildren().add(backHBox);
         setButtons(this.nameCat, twoCategories);
         this.mainVbox.getChildren().add(twoCategories);
         back.setOnAction(event -> {

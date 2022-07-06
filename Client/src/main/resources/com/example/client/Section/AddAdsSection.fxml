@@ -16,15 +16,22 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="mainVbox" alignment="TOP_CENTER" prefHeight="2000.0" prefWidth="600.0" style="-fx-background-color: f3f3f3;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Dashboard.AddADSController">
+<VBox fx:id="mainVbox" alignment="TOP_CENTER" prefHeight="2000.0" prefWidth="570.0" style="-fx-background-color: f3f3f3;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Dashboard.AddADSController">
    <children>
-      <Label alignment="CENTER" minHeight="55.0" minWidth="140.0" prefHeight="55.0" prefWidth="603.0" styleClass="tilte" stylesheets="@../../../../Style/AddAdsSection.css" text="Add Ads">
+      <Label alignment="CENTER" minHeight="46.0" minWidth="570.0" prefHeight="46.0" prefWidth="570.0" styleClass="tilte" stylesheets="@../../../../Style/AddAdsSection.css" text="Add Ads">
          <font>
-            <Font name="System Bold" size="25.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
          <VBox.margin>
             <Insets bottom="30.0" />
          </VBox.margin>
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../image/addAddsIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Label>
       <JFXHamburger maxHeight="100.0" maxWidth="395.0" minHeight="0.0" prefHeight="100.0" prefWidth="395.0" />
       <Label alignment="CENTER" prefHeight="40.0" prefWidth="103.0" text="Categories :">

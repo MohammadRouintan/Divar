@@ -1,0 +1,9 @@
+.chat-btn{
+    -fx-background-color: #f1c40f;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+.chat-btn:hover{
+    -fx-background-color: #454545;
+    -fx-text-fill: #fff;
+}

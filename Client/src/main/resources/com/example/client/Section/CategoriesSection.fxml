@@ -9,16 +9,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="mainVbox" alignment="TOP_CENTER" prefHeight="626.0" prefWidth="600.0" spacing="10.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Dashboard.Explore.CategoriesController">
+<VBox fx:id="mainVbox" alignment="TOP_CENTER" prefHeight="626.0" prefWidth="570.0" spacing="10.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Dashboard.Explore.CategoriesController">
    <children>
-      <HBox alignment="CENTER" prefHeight="55.0" prefWidth="600.0" styleClass="tilte" stylesheets="@../../../../Style/Categories.css">
+      <HBox alignment="CENTER" minWidth="570.0" prefHeight="55.0" prefWidth="570.0" styleClass="tilte" stylesheets="@../../../../Style/Categories.css">
          <children>
-            <ImageView fitHeight="41.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="28.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../Icon/categori.png" />
+                  <Image url="@../../image/categoriIcon.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" prefHeight="46.0" prefWidth="123.0" text="Categoris">
+            <Label prefHeight="46.0" prefWidth="123.0" text="Categoris">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>

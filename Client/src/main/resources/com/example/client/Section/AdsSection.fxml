@@ -8,6 +8,8 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.image.Image?>
@@ -17,17 +19,17 @@
 <?import javafx.scene.text.Font?>
 
 <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="570.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Dashboard.AdsController">
-    <children>
-      <HBox alignment="TOP_CENTER" minHeight="55.0" prefHeight="55.0" prefWidth="570.0" styleClass="top-title" stylesheets="@../../../../Style/adsSection.css">
+   <children>
+      <HBox alignment="TOP_CENTER" minHeight="47.0" prefHeight="47.0" prefWidth="570.0" styleClass="top-title" stylesheets="@../../../../Style/adsSection.css">
          <children>
-            <ImageView fitHeight="30.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="34.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../image/home.png" />
                </image>
             </ImageView>
             <Label alignment="CENTER" minHeight="30.0" prefHeight="21.0" prefWidth="58.0" text="Ads">
                <font>
-                  <Font name="System Bold" size="25.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Label>
          </children>
@@ -35,109 +37,115 @@
             <Insets top="10.0" />
          </padding>
       </HBox>
-      <HBox alignment="CENTER" minHeight="130.0" prefHeight="133.0" prefWidth="570.0" spacing="50.0">
-         <VBox.margin>
-            <Insets />
-         </VBox.margin>
-         <children>
-            <ComboBox fx:id="City" onAction="#cityBox" prefHeight="36.0" prefWidth="240.0" promptText="City" styleClass="box" stylesheets="@../../../../Style/adsSection.css" />
-            <HBox fx:id="searchHbox" alignment="CENTER" maxHeight="35.0" prefHeight="35.0" prefWidth="240.0" styleClass="box" stylesheets="@../../../../Style/adsSection.css">
-               <children>
-                  <Button alignment="CENTER" contentDisplay="CENTER" minHeight="33.0" minWidth="33.0" mnemonicParsing="false" onAction="#searchButton" prefHeight="34.0" prefWidth="43.0" style="-fx-background-color: transparent;" textAlignment="CENTER">
-                     <graphic>
-                        <ImageView fitHeight="27.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../image/sreach-2.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <TextField fx:id="searchTextbox" prefHeight="34.0" prefWidth="195.0" styleClass="search-btn" stylesheets="@../../../../Style/adsSection.css" />
-               </children>
-            </HBox>
-         </children>
-      </HBox>
-      <Accordion prefWidth="570.0">
-        <panes>
-          <TitledPane animated="false" prefHeight="313.0" prefWidth="570.0" stylesheets="@../../../../Style/adsSection.css" text="Filter">
+      <TabPane prefWidth="570.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="home" text="Home" onSelectionChanged="#homeButton">
                <content>
-                  <VBox prefHeight="338.0" prefWidth="569.0">
+                  <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Label prefHeight="27.0" prefWidth="104.0" text="Categories:">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="546.0">
+                        <HBox alignment="CENTER" minHeight="110.0" prefHeight="110.0" prefWidth="570.0" spacing="50.0">
                            <children>
-                              <ComboBox fx:id="mainBranchCategories" onAction="#MainBranchCategotiesFunction" prefHeight="36.0" prefWidth="380.0" styleClass="box" stylesheets="@../../../../Style/adsSection.css">
-                                 <HBox.margin>
-                                    <Insets left="30.0" />
-                                 </HBox.margin>
-                              </ComboBox>
+                              <ComboBox fx:id="homeTabCity" prefHeight="36.0" prefWidth="240.0" promptText="City" styleClass="box" stylesheets="@../../../../Style/adsSection.css" />
+                              <HBox fx:id="searchHbox" alignment="CENTER" maxHeight="35.0" prefHeight="35.0" prefWidth="240.0" styleClass="box" stylesheets="@../../../../Style/adsSection.css">
+                                 <children>
+                                    <Button alignment="CENTER" contentDisplay="CENTER" minHeight="33.0" minWidth="33.0" mnemonicParsing="false" onAction="#searchButton" prefHeight="34.0" prefWidth="43.0" style="-fx-background-color: transparent;" textAlignment="CENTER">
+                                       <graphic>
+                                          <ImageView fitHeight="27.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../image/sreach-2.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <TextField fx:id="searchText" prefHeight="34.0" prefWidth="195.0" styleClass="search-btn" stylesheets="@../../../../Style/adsSection.css" />
+                                 </children>
+                              </HBox>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" layoutX="21.0" layoutY="42.0" prefHeight="100.0" prefWidth="546.0">
-                           <children>
-                              <ComboBox fx:id="branchTwoCategories" prefHeight="36.0" prefWidth="380.0" styleClass="box" stylesheets="@../../../../Style/adsSection.css">
-                                 <HBox.margin>
-                                    <Insets left="30.0" />
-                                 </HBox.margin>
-                              </ComboBox>
-                           </children>
-                        </HBox>
-                        <Label layoutX="21.0" layoutY="21.0" prefHeight="27.0" prefWidth="104.0" text="Price Range :">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                        <HBox alignment="CENTER" layoutX="21.0" layoutY="48.0" prefHeight="58.0" prefWidth="508.0">
-                           <children>
-                              <Label prefHeight="26.0" prefWidth="42.0" text="from:">
+                        <Accordion prefWidth="570.0">
+                           <panes>
+                              <TitledPane animated="false" prefHeight="313.0" prefWidth="570.0" stylesheets="@../../../../Style/adsSection.css" text="Filter">
+                                 <content>
+                                    <VBox prefHeight="338.0" prefWidth="569.0">
+                                       <children>
+                                          <Label prefHeight="27.0" prefWidth="104.0" text="Categories:">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="546.0">
+                                             <children>
+                                                <ComboBox fx:id="mainBranchCategories" minHeight="36.0" onAction="#MainBranchCategoriesFunction" prefHeight="36.0" prefWidth="380.0" styleClass="box" stylesheets="@../../../../Style/adsSection.css" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="21.0" layoutY="42.0" prefHeight="100.0" prefWidth="546.0">
+                                             <children>
+                                                <ComboBox fx:id="branchTwoCategories" minHeight="36.0" prefHeight="36.0" prefWidth="380.0" styleClass="box" stylesheets="@../../../../Style/adsSection.css"/>
+                                             </children>
+                                          </HBox>
+                                          <Label layoutX="21.0" layoutY="21.0" prefHeight="27.0" prefWidth="104.0" text="Price Range :">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <HBox alignment="CENTER" layoutX="21.0" layoutY="48.0" prefHeight="58.0" prefWidth="508.0">
+                                             <children>
+                                                <Label prefHeight="26.0" prefWidth="42.0" text="from:">
+                                                   <font>
+                                                      <Font name="Segoe UI" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="priceFrom" minHeight="36.0" prefHeight="36.0" prefWidth="160.0" styleClass="box" stylesheets="@../../../../Style/adsSection.css">
+                                                </TextField>
+                                                <Label layoutX="180.0" layoutY="35.0" prefHeight="26.0" prefWidth="26.0" text="to:">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="priceTo" layoutX="201.0" layoutY="18.0" minHeight="36.0" prefHeight="36.0" prefWidth="160.0" styleClass="box" stylesheets="@../../../../Style/adsSection.css" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" minHeight="50.0" minWidth="60.0" prefHeight="50.0" prefWidth="570.0" spacing="50.0">
+                                             <children>
+                                                <JFXButton minHeight="40.0" onAction="#applyButton" prefHeight="40.0" prefWidth="386.0" ripplerFill="WHITE" styleClass="apply-btn" stylesheets="@../../../../Style/adsSection.css" text="Apply">
+                                                   <font>
+                                                      <Font name="System Bold" size="16.0" />
+                                                   </font>
+                                                </JFXButton>
+                                             </children>
+                                             <padding>
+                                                <Insets left="40.0" />
+                                             </padding>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </content>
                                  <font>
-                                    <Font name="Segoe UI" size="14.0" />
+                                    <Font name="System Bold" size="14.0" />
                                  </font>
-                              </Label>
-                              <TextField fx:id="priceFrom" prefHeight="36.0" prefWidth="160.0" styleClass="box" stylesheets="@../../../../Style/adsSection.css">
-                                 <HBox.margin>
-                                    <Insets right="20.0" />
-                                 </HBox.margin>
-                              </TextField>
-                              <Label layoutX="180.0" layoutY="35.0" prefHeight="26.0" prefWidth="26.0" text="to:">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <TextField fx:id="priceTo" layoutX="201.0" layoutY="18.0" prefHeight="36.0" prefWidth="160.0" styleClass="box" stylesheets="@../../../../Style/adsSection.css" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" minHeight="50.0" minWidth="60.0" prefHeight="50.0" prefWidth="570.0" spacing="50.0">
-                           <children>
-                              <JFXButton onAction="#applyButton" prefHeight="40.0" prefWidth="386.0" ripplerFill="WHITE" styleClass="apply-btn" stylesheets="@../../../../Style/adsSection.css" text="Apply">
-                                 <font>
-                                    <Font name="System Bold" size="16.0" />
-                                 </font>
-                              </JFXButton>
-                           </children>
-                           <padding>
-                              <Insets left="40.0" />
-                           </padding>
-                           <VBox.margin>
-                              <Insets top="30.0" />
-                           </VBox.margin>
-                        </HBox>
+                              </TitledPane>
+                           </panes>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Accordion>
+                        <Pagination fx:id="homePagination" pageCount="10" prefWidth="570.0" stylesheets="@../../Style/pagination.css" />
                      </children>
                   </VBox>
                </content>
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-          </TitledPane>
-        </panes>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Accordion>
-      <Pagination fx:id="pagination" pageCount="10" prefWidth="570.0" />
-    </children>
+            </Tab>
+            <Tab fx:id="recommended" text="Recommended" onSelectionChanged="#recommendedButton">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <ComboBox fx:id="recommendedTabCity" prefHeight="36.0" prefWidth="240.0" promptText="City" styleClass="box" stylesheets="@../../../../Style/adsSection.css" />
+                        <Pagination fx:id="recommendedPagination" pageCount="10" prefWidth="570.0" stylesheets="@../../Style/pagination.css" />
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </children>
 </VBox>
+
