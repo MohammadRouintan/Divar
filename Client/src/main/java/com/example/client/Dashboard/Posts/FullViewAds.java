@@ -51,6 +51,7 @@ public class FullViewAds {
 
     protected void AddBox(Parent parent,JSONObject post){
         File cssFile = new File("../Client/src/main/resources/Style/FullViewAds.css");
+
         mainVBox.getChildren().clear();
         VBox AdsVBox = new VBox();
         Pagination slideShow = makeSlideShow(post);
@@ -116,8 +117,6 @@ public class FullViewAds {
         Button bookmarked = new Button("Bookmark");
         //chat button
         Button chat = new Button("Chat");
-        chat.getStylesheets().add(cssFile.toURI().toString());
-        chat.getStyleClass().add("chat-btn");
         chat.setOnAction(event -> chatButtonFunc(post));
 
 
@@ -234,11 +233,18 @@ public class FullViewAds {
 //    }
 
     protected void chatButtonFunc(JSONObject post){
-        //if(mainVBox.getParent().)
+        Pane pane ;
+
+        if(mainVBox.getParent().getParent().getTypeSelector().equals("Pane")){
+            pane = (Pane) mainVBox.getParent().getParent();
+        }else {
+            pane = (Pane) mainVBox.getParent().getParent().getParent();
+        }
+
         try {
-            Pane pane = FXMLLoader.load(Main.class.getResource("Section/ChatSection.fxml"));
-            mainVBox.getChildren().clear();
-            mainVBox.getChildren().add(pane);
+            Pane chatPane = FXMLLoader.load(Main.class.getResource("Section/ChatSection.fxml"));
+            pane.getChildren().clear();
+            pane.getChildren().add(chatPane);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
