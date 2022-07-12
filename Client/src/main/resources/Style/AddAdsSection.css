@@ -35,3 +35,7 @@
     -fx-background-color: #454545;
     -fx-text-fill: #fff;
 }
+.error{
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+}

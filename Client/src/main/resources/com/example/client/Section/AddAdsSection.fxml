@@ -281,9 +281,9 @@
             <Insets bottom="20.0" />
          </VBox.margin>
       </HBox>
-      <Label fx:id="errorLabel" alignment="CENTER" prefHeight="38.0" prefWidth="463.0">
+      <Label fx:id="errorLabel" alignment="CENTER" prefHeight="38.0" prefWidth="463.0" styleClass="error" stylesheets="@../../../../Style/AddAdsSection.css" textFill="WHITE" visible="false">
          <font>
-            <Font size="26.0" />
+            <Font size="20.0" />
          </font>
       </Label>
       <HBox alignment="CENTER" prefHeight="46.0" prefWidth="600.0" spacing="30.0">

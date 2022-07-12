@@ -99,6 +99,7 @@ public class NewPage {
         ImageView imageView = new ImageView(img);
         imageView.setFitWidth(270);
         imageView.setFitHeight(200);
+        imageView.setPreserveRatio(true);
         imageView.setImage(img);
         Label titleLabel = new Label(post.getString("title"));
         Label priceLabel = new Label("Agreement");

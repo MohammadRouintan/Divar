@@ -101,11 +101,12 @@ public class AddADSController {
     @FXML
     private VBox mainVbox;
 
-    private static int numberOFUploadedImage;
+    @FXML
+    private Label errorLabel;
+
+
     @FXML
     public void initialize() {
-
-        MainDashboardController.nightMode.setOnAction(event -> setNightMode());
 
         setMainCategories();
         setCity();
@@ -201,7 +202,8 @@ public class AddADSController {
         Pattern pattern = Pattern.compile("[0-9]+");
         Matcher matcher = pattern.matcher(String.valueOf(price));
 
-        if(price == 0 && !matcher.matches()){
+
+        if(price == 0 || !matcher.matches()){
             createErrorMassage("Price is invalid !!");
         }else if (mainBranch == null){
             createErrorMassage("Please select MainBranch !!");
@@ -215,7 +217,8 @@ public class AddADSController {
             createErrorMassage("Please write name correctly !!");
         }else if(description.equals("")){
             createErrorMassage("Please write description correctly !!");
-        } else {
+        }
+        else {
             ArrayList<String> RowName = new ArrayList<>();
             ArrayList<String> RowValue = new ArrayList<>();
             ArrayList<String> ColumnName = new ArrayList<>();
@@ -410,7 +413,7 @@ public class AddADSController {
     private File file = null;
     private ArrayList<String> imagesName;
     private ArrayList<String> imagesPath;
-
+    private static int numberOFUploadedImage = 0;
     @FXML
     void uploadImageFunction (ActionEvent event) throws IOException {
         file = chooser.showOpenDialog(null);
@@ -418,7 +421,7 @@ public class AddADSController {
             // GetInfo.sendFile(String.valueOf(Integer.parseInt(GetInfo.getLastNameImage()) + 1));
             imagesName.add(String.valueOf(GetInfo.getLastImageName()));
             imagesPath.add(file.getPath().toString());
-            priceLabel.setText(file.getPath());
+            //priceLabel.setText(file.getPath());
             numberOFUploadedImage++;
             Image img;
             switch (numberOFUploadedImage) {
@@ -462,12 +465,22 @@ public class AddADSController {
         }
         System.out.println("a");
     }
-    @FXML
-    private Label errorLabel;
+
 
     public void createErrorMassage(String message){
-        errorLabel.setText(message);
+        if(message.equals("Posted successfully")){
+            errorLabel.setVisible(true);
+            errorLabel.setText(message);
+            errorLabel.setStyle("-fx-background-color: #2ecc71");
+
+        }else {
+            errorLabel.setVisible(true);
+            errorLabel.setText(message);
+            errorLabel.setStyle("-fx-background-color: #e74c3c");
+        }
+
     }
+
     public void setBranchTwoCategories() {
         ObservableList<String> branchTwo = FXCollections.observableArrayList();
         String[] estate = {"ResidentialSales", "ResidentialRent", "OfficeSales", "OfficeRent", "ShortTermRent", "ConstructionProject"};
@@ -519,6 +532,7 @@ public class AddADSController {
 
         branchTwoCategories.setItems(branchTwo);
     }
+
     private HBox makeNewHBox(int counter){
         File file = new File("../Client/src/main/resources/Style/AddAdsSection.css");
         HBox hBox = new HBox();
@@ -545,6 +559,7 @@ public class AddADSController {
         hBox.getChildren().add(detailsTxt);
         return hBox;
     }
+
     private VBox makeNewVBox(int counter){
         File file = new File("../Client/src/main/resources/Style/AddAdsSection.css");
         VBox vBox = new VBox();
@@ -592,7 +607,5 @@ public class AddADSController {
         return textField;
     }
 
-    void setNightMode(){
-    }
 }
 
