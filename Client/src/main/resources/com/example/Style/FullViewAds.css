@@ -1,0 +1,69 @@
+
+.title{
+    -fx-background-radius: 15;
+    -fx-background-color: #f1c40f;
+    -fx-alignment: center;
+    -fx-padding: 8 30 8 30;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.city{
+    -fx-background-radius: 15;
+    -fx-background-color: #e74c3c;
+    -fx-alignment: center;
+    -fx-padding: 5 10 5 10;
+    -fx-text-fill: #fff;
+    -fx-font-size: 15;
+}
+
+.time{
+    -fx-alignment: center;
+    -fx-padding: 5 10 5 10;
+    -fx-text-fill: #595959;
+    -fx-font-size: 14px;
+}
+.pirce{
+    -fx-background-radius: 20;
+    -fx-background-color: #e1e1e1;
+    -fx-alignment: center;
+    -fx-padding: 5 20 5 20;
+    -fx-text-fill: #000;
+    -fx-font-size: 15px;
+}
+.priceField{
+    -fx-background-color: #fff;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-border-color: #f1c40f;
+    -fx-font-size: 14px;
+}
+.btn{
+    -fx-background-color: #f1c40f;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+
+}
+.btn:hover{
+    -fx-background-color: #454545;
+    -fx-text-fill: #fff;
+}
+
+.name{
+    -fx-alignment: center;
+    -fx-padding: 10 20 10 20;
+    -fx-text-fill: #595959;
+    -fx-font-size: 15px;
+    -fx-background-color:#e1e1e1;
+    -fx-background-radius: 15;
+}
+.value{
+    -fx-alignment: center;
+    -fx-padding: 10 20 10 20;
+    -fx-text-fill: #000;
+    -fx-font-size: 15px;
+    -fx-background-color:#efefef;
+    -fx-background-radius: 15;
+}

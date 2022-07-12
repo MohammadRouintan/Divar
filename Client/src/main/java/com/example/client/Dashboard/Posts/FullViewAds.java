@@ -22,6 +22,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.IOException;
@@ -45,46 +47,66 @@ public class FullViewAds {
         this.paneName = paneName;
         this.mainVBox = (VBox)this.parent.getParent();
         this.nodesOfMainVbox = getAllChildren(this.mainVBox);
-        mainVBox.getChildren();
         AddBox(parent,post);
     }
-
     protected void AddBox(Parent parent,JSONObject post){
-        File cssFile = new File("../Client/src/main/resources/Style/FullViewAds.css");
+        File cssFile = new File("../Client/src/main/resources/com/example/Style/FullViewAds.css");
+        File imageSliderCss = new File("../Client/src/main/resources/com/example/Style/ImageSlider.css");
 
         mainVBox.getChildren().clear();
-        VBox AdsVBox = new VBox();
+        mainVBox.setSpacing(18);
+
         Pagination slideShow = makeSlideShow(post);
+        slideShow.getStylesheets().add(imageSliderCss.toURI().toString());
 
         //set Back button
         HBox hBox = new HBox();
         Button backButton = new Button("");
-        File imageUrl = new File("../Client/src/main/resources/Icon/previous.png");
+        File imageUrl = new File("../Client/src/main/resources/com/example/image/previous.png");
         Image img = new Image(imageUrl.toURI().toString());
         ImageView backIcon = new ImageView(img);
-//        backIcon.setFitWidth(40);
-//        backIcon.setFitHeight(40);
-//        backButton.setGraphic(backIcon);
-       // backButton.set
-        //backButton.setStyle("-fx-background-color: transparent");
+        backIcon.setFitWidth(40);
+        backIcon.setFitHeight(40);
+        backButton.setGraphic(backIcon);
+        backButton.setStyle("-fx-background-color: transparent");
         hBox.getChildren().add(backButton);
-        HBox.setMargin(backButton,new Insets(10 ,0 ,20,30));
+        hBox.setMargin(backButton,new Insets(10 ,0 ,20,30));
         backButton.setOnAction(event -> {
             mainVBox.getChildren().clear();
             for(Node node : nodesOfMainVbox){
                 mainVBox.getChildren().add(node);
             }
          });
-
+        //set Tilte label
         Label title = new Label(post.getString("title"));
+        title.getStylesheets().add(cssFile.toURI().toString());
+        title.getStyleClass().add("title");
+        //city and catergoi Label
+        Label cityAndCat = new Label(post.getString("city") +" | "+ post.getString("branch1"));
+        cityAndCat.getStylesheets().add(cssFile.toURI().toString());
+        cityAndCat.getStyleClass().add("city");
+        //set Time label
         Label time = new Label(post.getString("time"));
-        Label price;
+        time.getStylesheets().add(cssFile.toURI().toString());
+        time.getStyleClass().add("time");
+        //set price Lable
+        Label price = new Label();
+        price.getStylesheets().add(cssFile.toURI().toString());
+        price.getStyleClass().add("pirce");
+        //set priceField for auction
         TextField priceField = new TextField();
-        Button auction = new Button("OK");
         priceField.setPromptText("NewPrice");
-        priceField.setAlignment(Pos.CENTER);
-        priceField.setMaxWidth(300);
-        Label exchange = new Label();
+        priceField.getStylesheets().add(cssFile.toURI().toString());
+        priceField.getStyleClass().add("priceField");
+        priceField.setMaxWidth(350);
+        priceField.setPrefHeight(45);
+        //set OK Button for set new price
+        Button auction = new Button("OK");
+        auction.getStylesheets().add(cssFile.toURI().toString());
+        auction.getStyleClass().add("btn");
+        auction.setPrefWidth(350);
+        auction.setPrefHeight(45);
+
         auction.setOnAction(event -> {
             try {
                 Long newPrice = Long.parseLong(priceField.getText());
@@ -93,60 +115,74 @@ public class FullViewAds {
                 keys.add("price");
                 values.add(newPrice);
                 GetInfo.updatePost(post.getInt("postId"), keys, values);
+                price.setText(newPrice.toString());
+                priceField.setText("");
             } catch (Exception e) {
 
             }
         });
 
-        if (post.getBoolean("agreement")) {
-            price = new Label("agreement");
-        } else {
-            price = new Label(String.valueOf(post.getLong("price")));
-        }
-
+        //exchange Lable
+        Label exchange = new Label();
         if (post.getBoolean("exchange")) {
             exchange.setText("I want to exchange");
+            exchange.getStylesheets().add(cssFile.toURI().toString());
+            exchange.getStyleClass().add("pirce");
         }
 
-        Button delete = new Button("Delete");
+        //agreement price
+        if (post.getBoolean("agreement")) {
+            price.setText("Agreement");
+        } else {
+            price.setText(String.valueOf(post.getLong("price")));
+        }
 
+        //Delete Button
+        Button delete = new Button("Delete");
+        delete.getStylesheets().add(cssFile.toURI().toString());
+        delete.getStyleClass().add("btn");
+        delete.setPrefWidth(185);
+        delete.setPrefHeight(45);
+        delete.setOnAction(event -> {
+            GetInfo.deletePost(post.getInt("postId"));
+        });
+
+        //button Hbox
         HBox buttons = new HBox();
         buttons.setAlignment(Pos.CENTER);
         buttons.setSpacing(20);
         //bookmark button
-        Button bookmarked = new Button("Bookmark");
+        Button bookmarked = new Button("");
+        bookmarked.setOnAction(event -> GetInfo.updateUserArrays("bookmarkPost", post.getInt("postId")));
+
         //chat button
         Button chat = new Button("Chat");
+        chat.getStylesheets().add(cssFile.toURI().toString());
+        chat.getStyleClass().add("btn");
+        chat.setPrefHeight(46);
+        chat.setPrefWidth(180);
+
         chat.setOnAction(event -> chatButtonFunc(post));
-
-
         buttons.getChildren().addAll(bookmarked, chat);
-
-        bookmarked.setOnAction(event -> GetInfo.updateUserArrays("bookmarkPost", post.getInt("postId")));
-        delete.setOnAction(event -> {
-            GetInfo.deletePost(post.getInt("postId"));
-        });
 
         HBox featureColumnHBox = makeVerticalFeatureLabel(post);
         VBox featureRowVBox = makeHorizontalFeatureLabel(post);
 
         Label descriptionLabel = new Label("Description");
-        Label descriptionText = new Label(post.getString("bio"));
-        descriptionText.setAlignment(Pos.CENTER);
-        descriptionText.setPrefWidth(300);
-        descriptionText.setWrapText(true);
+        Text descriptionText = new Text(post.getString("bio"));
+        descriptionText.setTextAlignment(TextAlignment.JUSTIFY);
+        descriptionText.setWrappingWidth(460);
+
         VBox descriptionVBox = new VBox();
         descriptionVBox.getChildren().addAll(descriptionLabel,descriptionText);
         descriptionVBox.setAlignment(Pos.CENTER);
 
-        AdsVBox.setPrefWidth(1200);
-        AdsVBox.setPrefHeight(570);
         if (post.getBoolean("auction") && !this.paneName.equals("MyAds") && !post.getString("phoneNumber").equals(GetInfo.phoneNumber)) {
-            mainVBox.getChildren().addAll(hBox,slideShow,title,time,priceField,auction,featureRowVBox,featureColumnHBox,descriptionVBox, buttons);
+            mainVBox.getChildren().addAll(hBox,slideShow,title,cityAndCat,time,price,priceField,auction,featureColumnHBox,featureRowVBox,descriptionVBox, buttons);
         } else if (!this.paneName.equals("MyAds") && !post.getString("phoneNumber").equals(GetInfo.phoneNumber)){
-            mainVBox.getChildren().addAll(hBox,slideShow,title,time,price,exchange,featureRowVBox,featureColumnHBox,descriptionVBox, buttons);
+            mainVBox.getChildren().addAll(hBox,slideShow,title,cityAndCat,time,price,exchange,featureColumnHBox,featureRowVBox,descriptionVBox, buttons);
         } else {
-            mainVBox.getChildren().addAll(hBox,slideShow,title,time,price,exchange,featureRowVBox,featureColumnHBox,descriptionVBox, delete);
+            mainVBox.getChildren().addAll(hBox,slideShow,title,cityAndCat,time,price,exchange,featureColumnHBox,featureRowVBox,descriptionVBox, delete);
         }
     }
 
@@ -180,16 +216,26 @@ public class FullViewAds {
 
         JSONArray NameColumnFeature = post.getJSONArray("columnName");
         JSONArray ValueColumnFeature = post.getJSONArray("columnValue");
-
+        File cssFile = new File("../Client/src/main/resources/com/example/Style/FullViewAds.css");
         HBox featureHbox = new HBox();
+        featureHbox.setAlignment(Pos.CENTER);
+        featureHbox.setSpacing(10);
         for(int i = 0; i < NameColumnFeature.length(); i++){
             VBox vBox = new VBox();
             Label NameLabel = new Label(NameColumnFeature.getString(i));
+            NameLabel.getStylesheets().add(cssFile.toURI().toString());
+            NameLabel.getStyleClass().add("name");
+            NameLabel.setPrefWidth(130);
+            NameLabel.setPrefHeight(50);
             Label ValueLabel = new Label(ValueColumnFeature.getString(i));
+            ValueLabel.getStylesheets().add(cssFile.toURI().toString());
+            ValueLabel.getStyleClass().add("value");
+            ValueLabel.setPrefWidth(130);
+            ValueLabel.setPrefHeight(50);
             vBox.setSpacing(5);
+            vBox.setAlignment(Pos.CENTER);
             vBox.getChildren().addAll(NameLabel,ValueLabel);
             featureHbox.getChildren().add(vBox);
-            featureHbox.setAlignment(Pos.CENTER);
         }
         return featureHbox;
     }
@@ -198,17 +244,29 @@ public class FullViewAds {
 
         JSONArray NameRowFeature = post.getJSONArray("rowName");
         JSONArray ValueRowFeature = post.getJSONArray("rowValue");
+        File cssFile = new File("../Client/src/main/resources/com/example/Style/FullViewAds.css");
 
         VBox featureVBox = new VBox();
+        featureVBox.setSpacing(10);
+        featureVBox.setAlignment(Pos.CENTER);
         for(int i = 0; i < NameRowFeature.length(); i++){
             HBox hBox = new HBox();
             Label NameLabel = new Label(NameRowFeature.getString(i));
+            NameLabel.getStylesheets().add(cssFile.toURI().toString());
+            NameLabel.getStyleClass().add("name");
+            NameLabel.setPrefWidth(150);
+            NameLabel.setPrefHeight(50);
+
             Label ValueLabel = new Label(ValueRowFeature.getString(i));
+            ValueLabel.getStylesheets().add(cssFile.toURI().toString());
+            ValueLabel.getStyleClass().add("value");
+            ValueLabel.setPrefWidth(315);
+            ValueLabel.setPrefHeight(50);
+
             hBox.setSpacing(10);
             hBox.setAlignment(Pos.CENTER);
             hBox.getChildren().addAll(NameLabel,ValueLabel);
             featureVBox.getChildren().add(hBox);
-            featureVBox.setAlignment(Pos.CENTER);
         }
 
         return featureVBox;
@@ -234,13 +292,7 @@ public class FullViewAds {
 
     protected void chatButtonFunc(JSONObject post){
         Pane pane ;
-
-        if(mainVBox.getParent().getParent().getTypeSelector().equals("Pane")){
-            pane = (Pane) mainVBox.getParent().getParent();
-        }else {
-            pane = (Pane) mainVBox.getParent().getParent().getParent();
-        }
-
+        pane = (Pane) mainVBox.getParent();
         try {
             Pane chatPane = FXMLLoader.load(Main.class.getResource("Section/ChatSection.fxml"));
             pane.getChildren().clear();

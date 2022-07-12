@@ -143,7 +143,15 @@ public class NewPage {
     }
 
     void ShowAds(VBox vBox,JSONObject post){
-        Parent parent = vBox.getParent().getParent().getParent().getParent();
+        Parent parent;
+
+        if(vBox.getParent().getParent().getParent().getParent().getParent().getParent().getParent().getTypeSelector().equals("TabPane")){
+            parent = vBox.getParent().getParent().getParent().getParent().getParent().getParent().getParent();
+        }
+        else {
+            parent = vBox.getParent().getParent().getParent().getParent();
+        }
+
         FullViewAds fullViewAds = new FullViewAds(parent,post, this.paneName);
     }
 
