@@ -1,8 +1,11 @@
 package com.example.client.Dashboard.MyDivarPages;
 
 import com.example.client.socket.GetInfo;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -19,6 +22,7 @@ public class ProfileController {
 
     @FXML
     public void initialize() {
+        setCity();
         user = GetInfo.getUser();
     }
 
@@ -28,39 +32,29 @@ public class ProfileController {
     private ImageView profileImage;
 
     @FXML
-    private TextField textFiledCity;
-
-    @FXML
     private TextField textFiledFirstName;
 
     @FXML
     private TextField textFiledLastName;
 
     @FXML
-    private Label errorMessage;
-
+    private ComboBox cityComboBox;
     @FXML
-    private Label lastNameLabel;
-
-    @FXML
-    private Label firstNameLabel;
-
-    @FXML
-    private Label cityLabel;
+    private Label errorLabel;
 
     @FXML
     void uploadData(ActionEvent event) {
 
-        String city = textFiledCity.getText();
+        String city = (String) cityComboBox.getValue();
         String firstName = textFiledFirstName.getText();
         String lastName = textFiledLastName.getText();
 
         if(city == null){
-            setErrorMessage("");
+            setErrorMessage("Please set a City");
         } else if(firstName == null){
-            setErrorMessage("");
+            setErrorMessage("Please enter your first name");
         } else if (lastName == null){
-            setErrorMessage("");
+            setErrorMessage("Please enter your last name");
         } else {
             ArrayList<String> updateUserKeys = new ArrayList<>();
             ArrayList<Object> updateUserValues = new ArrayList<>();
@@ -72,9 +66,9 @@ public class ProfileController {
             updateUserValues.add(firstName);
             updateUserValues.add(lastName);
             updateUserValues.add(profileName);
-
             GetInfo.updateUser(updateUserKeys ,updateUserValues);
             GetInfo.sendProfile(file.getPath().toString() ,String.valueOf(profileName));
+            setErrorMessage("Edited successfully");
         }
 
     }
@@ -97,8 +91,28 @@ public class ProfileController {
         }
     }
 
+
     public void setErrorMessage(String message){
-        errorMessage.setText(message);
+        if(message.equals("Edited successfully")){
+            errorLabel.setVisible(true);
+            errorLabel.setText(message);
+            errorLabel.setStyle("-fx-background-color: #2ecc71");
+
+        }else {
+            errorLabel.setVisible(true);
+            errorLabel.setText(message);
+            errorLabel.setStyle("-fx-background-color: #e74c3c");
+        }
+
     }
 
+    private void setCity() {
+        String[] cities = {"","Tehran", "Shiraz", "Mashhad", "Arak", "Ardabil", "Orumieh", "Esfahan", "Ahwaz", "Ilam", " Bojnord",
+                "Bandar Abbas", "Bushehr", "Birjand", "Tabriz", "Khorramabad", "Rasht", "Zahedan", "Zanjan", "Sari", "Semnan",
+                "Sanandaj", "Shahr e Kord", "Qazvin", "Qom", "Karaj", "Kerman", "Kermanshah", "Gorgan", "Hamedan", "Yasuj", "Yazd"};
+
+        ObservableList<String> temp = FXCollections.observableArrayList();
+        temp.addAll(cities);
+        cityComboBox.setItems(temp);
+    }
 }

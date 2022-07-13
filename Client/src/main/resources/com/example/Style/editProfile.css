@@ -1,0 +1,36 @@
+.combobox{
+    -fx-background-color: #fff;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-border-color: #f1c40f;
+}
+
+.text-field{
+    -fx-background-color: #fff;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-border-color: #f1c40f;
+}
+.background{
+    -fx-background-image: url(../image/background.jpg);
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+}
+.img-pro{
+    -fx-border-color: #f1c40f;
+    -fx-border-width: 5;
+}
+.btn{
+    -fx-background-color: #f1c40f;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+}
+.btn:hover{
+    -fx-background-color: #454545;
+    -fx-text-fill: #fff;
+}
+
+.error{
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+}
