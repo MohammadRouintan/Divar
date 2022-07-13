@@ -11,3 +11,6 @@
     -fx-text-fill: #fff;
     -fx-font-weight: bold;
 }
+.background{
+    -fx-background-image: url(/Client/src/main/resources/com/example/image/Wallpaper.jpg);
+}

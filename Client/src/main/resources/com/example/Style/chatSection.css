@@ -1,0 +1,25 @@
+.user{
+    -fx-background-color: #fff;
+}
+.user:hover{
+    -fx-background-color: #d4d4d4;
+}
+
+.counter{
+    -fx-background-color: #c0392b;
+    -fx-background-radius: 50;
+    -fx-text-fill: #fff;
+    -fx-font-weight: bold;
+}
+
+.background{
+    -fx-background-image: url(../image/Wallpaper.jpg);
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+}
+.text-field{
+    -fx-border-color: #ffc000;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-prompt-text-fill:#d1d1d1;
+}

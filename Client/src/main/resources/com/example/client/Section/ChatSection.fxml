@@ -6,6 +6,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorInput?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -13,7 +16,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Dashboard.ChatController">
+<BorderPane prefHeight="600.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.Dashboard.ChatController">
    <left>
       <VBox prefHeight="658.0" prefWidth="194.0" style="-fx-background-color: #bdc3c7;" BorderPane.alignment="CENTER">
          <children>
@@ -35,7 +38,7 @@
       </VBox>
    </left>
    <center>
-      <AnchorPane prefHeight="600.0" prefWidth="378.0" style="-fx-background-color: #ecf0f1;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="600.0" prefWidth="378.0" styleClass="background" stylesheets="@../../Style/chatSection.css" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="378.0" style="-fx-background-color: #f1be0f;" AnchorPane.topAnchor="0.0">
                <children>
@@ -56,19 +59,19 @@
                   <Insets left="10.0" />
                </padding>
             </HBox>
-            <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="10.0" layoutY="69.0" prefHeight="466.0" prefWidth="363.0" style="-fx-background-color: #ecf0f1;" vbarPolicy="NEVER" AnchorPane.leftAnchor="0.0">
+            <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="10.0" layoutY="69.0" prefHeight="466.0" prefWidth="370.0" vbarPolicy="NEVER" AnchorPane.leftAnchor="0.0">
                <content>
-                  <VBox fx:id="chatBox" prefHeight="485.0" prefWidth="363.0" style="-fx-background-color: #ecf0f1;" />
+                  <VBox fx:id="chatBox" prefHeight="482.0" prefWidth="368.0" style="-fx-background-color: transparent;" />
                </content>
+               <effect>
+                  <ColorInput />
+               </effect>
             </ScrollPane>
             <HBox alignment="CENTER_LEFT" layoutX="-2.0" layoutY="500.0" prefHeight="59.0" prefWidth="379.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0">
                <children>
-                  <TextField fx:id="textBox" focusTraversable="false" maxHeight="41.0" maxWidth="350.0" minHeight="20.0" minWidth="300.0" prefHeight="41.0" prefWidth="308.0" styleClass="text-field" stylesheets="@../../Style/code.css">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
+                  <TextField fx:id="textBox" focusTraversable="false" maxHeight="41.0" maxWidth="350.0" minHeight="20.0" minWidth="300.0" prefHeight="41.0" prefWidth="308.0" promptText="Massage" styleClass="text-field" stylesheets="@../../../../Style/chatSection.css">
                      <padding>
-                        <Insets left="5.0" />
+                        <Insets left="10.0" />
                      </padding>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -77,7 +80,23 @@
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                      </opaqueInsets>
                   </TextField>
-                  <Button fx:id="sendButton" mnemonicParsing="false" onAction="#sendButton" prefHeight="43.0" prefWidth="46.0" text="send" />
+                  <Button fx:id="sendButton" alignment="CENTER" mnemonicParsing="false" onAction="#sendButton" prefHeight="45.0" prefWidth="48.0" style="-fx-background-color: transparent;">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <graphic>
+                        <ImageView fitHeight="37.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../image/send.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                </children>
                <padding>
                   <Insets left="10.0" />
