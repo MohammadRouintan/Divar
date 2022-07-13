@@ -39,3 +39,8 @@
     -fx-background-radius: 20;
     -fx-border-radius: 20;
 }
+.background{
+    -fx-background-image: url(../com/example/image/background.jpg);
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+}

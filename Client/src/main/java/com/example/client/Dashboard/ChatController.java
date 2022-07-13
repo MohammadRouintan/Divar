@@ -234,12 +234,12 @@ public class ChatController {
         tickImage.setFitHeight(20);
 
         if(!seen){
-            File file1 = new File("../Client/src/main/resources/Icon/tick.png");
+            File file1 = new File("../Client/src/main/resources/com/example/image/tick.png");
             Image img1 = new Image(file1.toURI().toString());
             tickImage.setImage(img1);
         }
         else {
-            File file2 = new File("../Client/src/main/resources/Icon/twotick.png");
+            File file2 = new File("../Client/src/main/resources/com/example/image/twotick.png");
             Image img2 = new Image(file2.toURI().toString());
             tickImage.setImage(img2);
         }
